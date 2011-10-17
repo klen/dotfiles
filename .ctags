@@ -1,0 +1,25 @@
+--python-kinds=-iv
+
+--langdef=xslt
+--langmap=xslt:.xsl
+--regex-xslt=/template +match="([^"]+)"( +mode="([^"]+)")?/\1 \2/m,match/
+--regex-xslt=/template +name="([^"]+)"( +mode="([^"]+)")?/\1 \2/n,name/
+--regex-xslt=/apply-templates +select="([^"]{2,})"( +mode="([^"]+)")?/\1 \2/a,apply/
+--regex-xslt=/call-templates +select="([^"]+)"( +mode="([^"]+)")?/\1 \2/c,call/
+
+--langdef=markdown
+--langmap=markdown:.md.markdown.mdown.mkd.mkdn
+--regex-markdown=/^#[ \t]+(.*)/\1/h,heading1/
+--regex-markdown=/^##[ \t]+(.*)/\1/h,heading2/
+--regex-markdown=/^###[ \t]+(.*)/\1/h,heading3/
+
+--langdef=js
+--langmap=js:.js
+--regex-JavaScript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*new[ \t]+Object\(/\1/o,object/
+--regex-JavaScript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\{/\1/o,object/
+--regex-JavaScript=/([A-Za-z0-9._$()]+)[ \t]*[:=][ \t]*function[ \t]*\(/\1/f,function/
+--regex-JavaScript=/function[ \t]+([A-Za-z0-9._$]+)[ \t]*\([^\]\)]*\)/\1/f,function/
+--regex-JavaScript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*new[ \t]+Array\(/\1/a,array/
+--regex-JavaScript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\[/\1/a,array/
+--regex-JavaScript=/([^= ]+)[ \t]*=[ \t]*[^""]'[^'']*/\1/s,string/
+--regex-JavaScript=/([^= ]+)[ \t]*=[ \t]*[^'']"[^""]*/\1/s,string/
