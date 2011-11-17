@@ -13,6 +13,7 @@ alias hsync='rsync -lrtvpC .'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias calc='bc -l'
 # mkdir
 alias mkdir='mkdir -p'
 # scroller

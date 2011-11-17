@@ -266,14 +266,6 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
 fi
 
 
-# ===============================
-# Makesite complete and functions
-if [ -f /usr/local/bin/makesitewrapper.sh ]; then
-    export SITES_HOME=/sites
-    source /usr/local/bin/makesitewrapper.sh
-fi
-
-
 # =======================
 # Git complete and promt
 if [ -f /usr/bin/git ]; then
@@ -291,10 +283,15 @@ fi
 # Most usable pip
 _pip () {
     if [ ! -z "$VIRTUAL_ENV" ]; then
-        sudo pip -E $VIRTUAL_ENV $1 $2
+        sudo pip -E $VIRTUAL_ENV $@
     fi
 }
 alias spip=_pip
+
+# Makesite integration 
+# ==================== 
+export MAKESITE_HOME=/var/www
+source $(python -c "import makesite, os.path;print os.path.dirname(makesite.__file__)")/shell.sh
 
 # ==========
 # End promt
