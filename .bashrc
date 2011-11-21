@@ -296,8 +296,16 @@
     }
 
     # Makesite integration 
-    export MAKESITE_HOME=/var/www
-    source $(python -c "import makesite, os.path;print os.path.dirname(makesite.__file__)")/shell.sh
+    python -c "import makesite" && {
+        export MAKESITE_HOME=/var/www
+        source $(python -c "import makesite, os.path;print os.path.dirname(makesite.__file__)")/shell.sh
+    }
+
+    # Zeta integration 
+    # ==================== 
+    python -c "import zetalibrary" && {
+        source $(python -c "import zetalibrary, os.path;print os.path.dirname(zetalibrary.__file__)")/shell.sh
+    }
 
 # }}}
 
@@ -319,8 +327,4 @@
 
 # Close promt
 PS1="${PS1}\n\$ "
-
-# Zeta integration 
-# ==================== 
-source /usr/local/lib/python2.7/dist-packages/zetalibrary/shell.sh
 
