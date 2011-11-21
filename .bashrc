@@ -233,22 +233,29 @@
         fi
     }
 
-    _service () {
+    _sservice () {
         daemon=$1
         action="$2 $3"
         if [ -f /etc/init.d/$daemon ]; then
             for a in $action; do
-                sudo /etc/init.d/$daemon $a
+                sudo /etc/init.d/$daemon $action
             done
         else
             echo "Service '$daemon' not found."
         fi
     }
 
-    start () { _service $1 start ; }
-    stop () { _service $1 stop ; }
-    restart () { _service $1 stop start; }
+    start () {
+        _sservice $1 start
+    }
 
+    stop () {
+        _sservice $1 stop
+    }
+
+    restart () {
+        _sservice $1 stop start
+    }
 #}}}
 
 
@@ -312,3 +319,8 @@
 
 # Close promt
 PS1="${PS1}\n\$ "
+
+# Zeta integration 
+# ==================== 
+source /usr/local/lib/python2.7/dist-packages/zetalibrary/shell.sh
+
