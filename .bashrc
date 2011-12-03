@@ -296,14 +296,14 @@
     }
 
     # Makesite integration 
-    python -c "import makesite" && {
+    python -c "import makesite" 2>/dev/null && {
         export MAKESITE_HOME=/var/www
         source $(python -c "import makesite, os.path;print os.path.dirname(makesite.__file__)")/shell.sh
     }
 
     # Zeta integration 
     # ==================== 
-    python -c "import zetalibrary" && {
+    python -c "import zetalibrary" 2>/dev/null && {
         source $(python -c "import zetalibrary, os.path;print os.path.dirname(zetalibrary.__file__)")/shell.sh
     }
 
