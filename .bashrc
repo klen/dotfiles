@@ -238,7 +238,7 @@
         action="$2 $3"
         if [ -f /etc/init.d/$daemon ]; then
             for a in $action; do
-                sudo /etc/init.d/$daemon $action
+                sudo /etc/init.d/$daemon $a
             done
         else
             echo "Service '$daemon' not found."
