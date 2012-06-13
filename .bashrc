@@ -102,8 +102,14 @@
 # Functions {{{
 # =============
 
+    # Auto virtualenv activation
+    cd () {
+        builtin cd $@
+        [ -f env/bin/activate ] && . env/bin/activate 2> /dev/null
+    }
+
     # Show help
-    function hh () {
+    hh () {
         echo "Avalible commands:"
         echo "ff FILENAME                   find file by FILENAME"
         echo "fe FILENAME COMMAND           find file by FILENAME and execute COMMAND"
@@ -277,17 +283,6 @@
     }
     complete -o default -F _pip_completion pip
 
-    # Git complete and promt
-    if [ -f /usr/bin/git ]; then
-        source ~/bin/git-completion.bash
-        PS1=$PS1$GREEN'$(__git_ps1 " (%s)"):'$NC
-    fi
-
-    # Android SDK tools
-    if [ -d $HOME/android-sdk-linux_x86 ]; then
-        PATH="$HOME/android-sdk-linux_x86/tools:$HOME/android-sdk-linux_x86/platform-tools:$PATH"
-    fi
-
     # Most usable pip
     spip () {
         if [ ! -z "$VIRTUAL_ENV" ]; then
@@ -306,6 +301,24 @@
     python -c "import zetalibrary" 2>/dev/null && {
         source $(python -c "import zetalibrary, os.path;print os.path.dirname(zetalibrary.__file__)")/shell.sh
     }
+
+    # NodeJS integration
+    # ==================
+    if [ -d $HOME/node_modules/.bin ]; then
+        PATH="$HOME/node_modules/.bin:$PATH"
+    fi
+
+    # Git complete and promt
+    if [ -f /usr/bin/git ]; then
+        source ~/bin/git-completion.bash
+        source ~/bin/git-flow-completion.bash
+        PS1=$PS1$GREEN'$(__git_ps1 " (%s)"):'$NC
+    fi
+
+    # Android SDK tools
+    if [ -d $HOME/Desktop/android-sdk-linux ]; then
+        PATH="$HOME/Desktop/android-sdk-linux/tools:$HOME/Desktop/android-sdk-linux/platform-tools:$PATH"
+    fi
 
 # }}}
 
