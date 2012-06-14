@@ -37,6 +37,9 @@
     hist = log --pretty=format:'%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]' --graph --date=short
     mg = merge --no-ff
     ph = push --tags
+    hotfix = flow hotfix
+    feature = flow feature
+    release = flow release
 
 [push]
     default = matching
