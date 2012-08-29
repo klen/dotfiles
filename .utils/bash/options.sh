@@ -13,9 +13,9 @@ export LC_TIME="ru_RU.UTF-8"
 
 export EDITOR=vim
 export PAGER=less
-export HISTSIZE=1000
-export HISTIGNORE="&:cd:ls:[bf]g:exit:bash:[cxh]:a\ "
-export HISTCONTROL=ignoredups
+export HISTSIZE=10000
+export HISTIGNORE="&:cd:ls:[bf]g:exit:bash:la"
+export HISTCONTROL=erasedups:ignorespace
 
 shopt -s checkwinsize
 shopt -s cdspell

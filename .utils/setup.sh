@@ -25,7 +25,7 @@ update_system () {
 
 install_dev_tools () {
     print 'Install dev tools.'
-    sudo apt-get install -y build-essential python-dev libxml2-dev git-core exuberant-ctags python-software-properties subversion supervisor postgresql python-psycopg2 vim-nox python-setuptools nodejs
+    sudo apt-get install -y build-essential python-dev libxml2-dev git-core exuberant-ctags python-software-properties subversion supervisor postgresql python-psycopg2 vim-nox python-setuptools nodejs screen cmatrix
 }
 
 install_python_modules () {

@@ -22,6 +22,7 @@ hh () {
 cd () {
     builtin cd $@
     [ -f env/bin/activate ] && . env/bin/activate 2> /dev/null
+    [ -f .env/bin/activate ] && . .env/bin/activate 2> /dev/null
 }
 
 # find file by template
