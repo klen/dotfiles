@@ -1,5 +1,6 @@
 # Mercurial configuration file
 
+[ui]
 username = Kirill Klenov
 email = horneds@gmail.com
 

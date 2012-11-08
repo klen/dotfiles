@@ -38,6 +38,9 @@ UTILSDIR=$SOURCEDIR/.utils
 # Completion
 . $UTILSDIR/bash/completion_pip.sh
 . $UTILSDIR/bash/completion_makesite.sh
+. $UTILSDIR/bash/completion_vagrant.sh
+. $UTILSDIR/bash/completion_knife.sh
+. $UTILSDIR/bash/completion_cap.sh
 
 # Git support
 . $UTILSDIR/bash/git.sh
@@ -87,3 +90,5 @@ UTILSDIR=$SOURCEDIR/.utils
 # Close promt
 PS1="${PS1}\n\$ "
 
+export DEBUFULLNAME=Kirill Klenov
+export DEBEMAIL=horneds@gmail.com
