@@ -36,7 +36,7 @@ $(HOME)/.vim:
 
 
 .PHONY: clean_vim
-clean_vim: $(HOME)/.vim $(HOME)/.vimrc
+clean_vim:
 	@echo
 	@echo " Clean VIM files."
 	rm -rf $(HOME)/.vim
