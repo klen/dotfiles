@@ -25,7 +25,7 @@ install: uninstall vim ssh
 	ln -s $(CURDIR)/.pip $(HOME)/.
 
 .PHONY: vim
-# target: install - Install my vim files
+# target: vim - Install my vim files
 vim: $(HOME)/.vim $(HOME)/.vimrc
 
 $(HOME)/.vim:
