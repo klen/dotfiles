@@ -3,27 +3,14 @@
 BINDIR=$(CURDIR)/bin
 UTILSDIR=$(CURDIR)/utils
 
-all: help
-
-
-# Show help  {{{
-# ---------
-
 .PHONY: help
+# target: help - Display callable targets
 help:
-	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  install      to install config files"
-	@echo "  setup        setup developer utilites"
-	@echo "  clean        to clean config files"
-
-#  }}}
-
-
-# Install config  {{{
-# --------------
+	@egrep "^# target:" [Mm]akefile
 
 .PHONY: install
-install: clean vim ssh
+# target: install - Install my dot files
+install: uninstall vim ssh
 	@echo
 	@echo "Install config files"
 	ln -s $(CURDIR)/.bash_profile $(HOME)/.
@@ -37,35 +24,26 @@ install: clean vim ssh
 	ln -s $(CURDIR)/bin $(HOME)/.
 	ln -s $(CURDIR)/.pip $(HOME)/.
 
-#  }}}
-
-
-# Install VIM  {{{
-# -----------
-
 .PHONY: vim
+# target: install - Install my vim files
 vim: $(HOME)/.vim $(HOME)/.vimrc
 
 $(HOME)/.vim:
 	@echo
 	@echo " Install VIM files."
 	git clone --recursive git://github.com/klen/.vim.git $(HOME)/.vim
-	echo 'source $HOME/.vim/rc.vim' > ~/.vimrc
+	echo 'source $$HOME/.vim/rc.vim' > ~/.vimrc
 
 
-clean_vim:
+.PHONY: clean_vim
+clean_vim: $(HOME)/.vim $(HOME)/.vimrc
 	@echo
 	@echo " Clean VIM files."
 	rm -rf $(HOME)/.vim
 	rm -rf $(HOME)/.vimrc
 
-#  }}}
-
-
-# Setup SSH  {{{
-# ---------
-
 .PHONY: ssh
+# target: ssh - Append my authorized_keys
 ssh: $(HOME)/.ssh $(HOME)/.ssh/authorized_keys
 
 $(HOME)/.ssh:
@@ -81,16 +59,15 @@ clean_ssh:
 	@echo " Clean SSH files."
 	rm -rf $(HOME)/.ssh/authorized_keys
 
-#  }}}
-
-
-# Setup dev tools
-# ---------------
+.PHONY: setup
+# target: setup - Setup dev tools
 setup: $(UTILSDIR)/setup.sh
 	$(UTILSDIR)/setup.sh
 
 
-clean: clean_vim clean_ssh
+.PHONY: uninstall
+# target: uninstall - Clean installation
+uninstall: clean_vim clean_ssh
 	@echo
 	@echo "Clean your HOME directory"
 	rm -rf $(HOME)/.bash_aliases
