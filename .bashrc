@@ -16,9 +16,11 @@
 # if not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Define dirs
+# Define options
 SOURCEDIR=$HOME/.home
 UTILSDIR=$SOURCEDIR/.utils
+PROJECTDIR=$HOME/Dropbox/projects/
+WORKDIR=$HOME/Dropbox/work/
 
 # Options
 . $UTILSDIR/bash/options.sh
@@ -48,15 +50,20 @@ UTILSDIR=$SOURCEDIR/.utils
 
 # Utitities support {{{
 # =====================
-
-    # Fast project navigation
-    PROJECT_DIR=~/Projects/
+    
     _cdp_completion() {
         local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=( $(compgen -W "`find $PROJECT_DIR -maxdepth 1 -type d -not -empty`" -- ${cur}) )
+        COMPREPLY=( $(compgen -W "`find $PROJECTDIR -maxdepth 1 -type d -not -empty`" -- ${cur}) )
     }
     cdp () { cd $1; }
     complete -o default -o nospace -F _cdp_completion cdp
+
+    _cdw_completion() {
+        local cur="${COMP_WORDS[COMP_CWORD]}"
+        COMPREPLY=( $(compgen -W "`find $WORKDIR -maxdepth 1 -type d`" -- ${cur}) )
+    }
+    cdw () { cd $1; }
+    complete -o default -o nospace -F _cdw_completion cdw
 
     # NodeJS integration
     # ==================

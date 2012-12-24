@@ -20,9 +20,15 @@ hh () {
 
 # Auto virtualenv activation
 cd () {
-    builtin cd $@
-    [ -f env/bin/activate ] && . env/bin/activate 2> /dev/null
-    [ -f .env/bin/activate ] && . .env/bin/activate 2> /dev/null
+    builtin cd "$@"
+    envs=".env env"
+    for e in $envs; do
+        if [ -f "$e/bin/activate" ]; then
+            if [ "$VIRTUAL_ENV" != "$(pwd -P)/$e" ]; then
+                source $e/bin/activate 2> /dev/null && echo Activate virtualenv \"$VIRTUAL_ENV\" && break
+            fi
+        fi
+    done
 }
 
 # find file by template
