@@ -42,7 +42,6 @@ alias vi='vim'
 alias sim='sudo vim'
 alias up='vcs_update.py'
 alias lvim='vim -S "~/.data/sessions/last.session"'
-alias ssitegen='sudo sitegen -p /sites'
 
 # ---------------
 # Color ls
