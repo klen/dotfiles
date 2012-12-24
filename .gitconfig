@@ -28,21 +28,32 @@
     sharedRepository=group
 
 [alias]
+    ; Show aliases
+    alias = !git config --get-regexp alias | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\t => \\2/' | sort
+
+    ; Common abbr
     co = checkout
     ci = commit
-    up = remote update
     st = status -sb
     br = branch
-    df = diff
-    hist = log --pretty=format:'%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]' --graph --date=short
     mg = merge --no-ff
     ph = push --tags
+
+    ; View logs and diff
+    hist = log --pretty=format:'%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]' --graph --date=short
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    diff = diff --word-diff
+    dc = diff --cached
+
+    ; Git flow support
     hotfix = flow hotfix
     feature = flow feature
     release = flow release
-	diff = diff --word-diff
-	amend = commit --amend -C HEAD
-	undo = reset --soft HEAD^
+
+    ; Undo
+    amend = commit --amend -C HEAD
+    undo = reset --soft HEAD^
 
 [push]
     default = matching
