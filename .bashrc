@@ -97,5 +97,7 @@ WORKDIR=$HOME/Dropbox/work/
 # Close promt
 PS1="${PS1}\n\$ "
 
+# FIXME: Move to local
 export DEBUFULLNAME=Kirill Klenov
 export DEBEMAIL=horneds@gmail.com
+cowsay -f girl "Let's Go!" 
