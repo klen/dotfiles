@@ -4,10 +4,15 @@
 unset PROMPT_COMMAND
 
 # current processes pid, number jobs, history number
-PS1="\n${GREEN}${SHLVL}${GRAY}.$$:$PPID \j:\!${GRAY}"
+PS1="\n${GREEN}${SHLVL}.$$:$PPID"
 
 # current user and domain
-dns=$(dnsdomainname)
+command -v dnsdomainname > /dev/null && {
+    DNS=.$(dnsdomainname)
+} || {
+    DNS=""
+}
+
 if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_CLIENT2" ]; then
     host=$BLUE
 else
@@ -19,10 +24,11 @@ case `id -u` in
     *) user=$GREEN ;;
 esac
 
-PS1="${PS1} ${user}\u${NC}@${host}\H.${dns}:"
+PS1="${PS1} ${user}\u${NC}@${host}\H${DNS}:"
 
 # current path
 PS1="${PS1} ${WHITE}\w${white}"
 
 # new line for command
 PS1="${PS1} ${NC}"
+

@@ -40,7 +40,6 @@ alias debupdate='sudo apt-get update && sudo apt-get upgrade'
 # others
 alias vi='vim'
 alias sim='sudo vim'
-alias up='vcs_update.py'
 alias lvim='vim -S "~/.data/sessions/last.session"'
 
 # ---------------

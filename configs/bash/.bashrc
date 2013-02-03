@@ -18,34 +18,35 @@
 
 # Define options
 SOURCEDIR=$HOME/.home
-UTILSDIR=$SOURCEDIR/.utils
+UTILSDIR=$SOURCEDIR/configs/bash
 PROJECTDIR=$HOME/Dropbox/projects/
 WORKDIR=$HOME/Dropbox/work/
+OS=$(uname -s)
 
 # Options
-. $UTILSDIR/bash/options.sh
+. $UTILSDIR/include/options.sh
 
 # Colors
-. $UTILSDIR/bash/colors.sh
+. $UTILSDIR/include/colors.sh
 
 # Login screen
-. $UTILSDIR/bash/login.sh
+. $UTILSDIR/include/login.sh
 
 # Base promt settings
-. $UTILSDIR/bash/ps_base.sh
+. $UTILSDIR/include/ps.sh
 
 # Functions
-. $UTILSDIR/bash/functions.sh
+. $UTILSDIR/include/functions.sh
 
 # Completion
-. $UTILSDIR/bash/completion_pip.sh
-. $UTILSDIR/bash/completion_makesite.sh
-. $UTILSDIR/bash/completion_vagrant.sh
-. $UTILSDIR/bash/completion_knife.sh
-. $UTILSDIR/bash/completion_cap.sh
+. $UTILSDIR/completion/pip.sh
+. $UTILSDIR/completion/makesite.sh
+. $UTILSDIR/completion/vagrant.sh
+. $UTILSDIR/completion/knife.sh
+. $UTILSDIR/completion/cap.sh
 
 # Git support
-. $UTILSDIR/bash/git.sh
+. $UTILSDIR/include/git.sh
 
 
 # Utitities support {{{
@@ -97,7 +98,6 @@ WORKDIR=$HOME/Dropbox/work/
 # Close promt
 PS1="${PS1}\n\$ "
 
-# FIXME: Move to local
-export DEBUFULLNAME=Kirill Klenov
-export DEBEMAIL=horneds@gmail.com
-cowsay -f girl "Let's Go!" 
+command -v cowsay > /dev/null && {
+    fortune | cowsay -f $SOURCEDIR/stuff/girl.cow
+}

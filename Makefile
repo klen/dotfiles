@@ -13,16 +13,16 @@ help:
 install: uninstall vim ssh
 	@echo
 	@echo "Install config files"
-	ln -s $(CURDIR)/.bash_profile $(HOME)/.
-	ln -s $(CURDIR)/.bash_aliases $(HOME)/.
-	ln -s $(CURDIR)/.bashrc $(HOME)/.
-	ln -s $(CURDIR)/.ctags $(HOME)/.
-	ln -s $(CURDIR)/.gitconfig $(HOME)/.
-	ln -s $(CURDIR)/.hgrc $(HOME)/.
-	ln -s $(CURDIR)/.pylintrc $(HOME)/.
-	ln -s $(CURDIR)/.screenrc $(HOME)/.
+	ln -s $(CURDIR)/configs/bash/.bash_profile $(HOME)/.
+	ln -s $(CURDIR)/configs/bash/.bash_aliases $(HOME)/.
+	ln -s $(CURDIR)/configs/bash/.bashrc $(HOME)/.
+	ln -s $(CURDIR)/configs/.ctags $(HOME)/.
+	ln -s $(CURDIR)/configs/.gitconfig $(HOME)/.
+	ln -s $(CURDIR)/configs/.hgrc $(HOME)/.
+	ln -s $(CURDIR)/configs/.pylintrc $(HOME)/.
+	ln -s $(CURDIR)/configs/.screenrc $(HOME)/.
+	ln -s $(CURDIR)/configs/.pip $(HOME)/.
 	ln -s $(CURDIR)/bin $(HOME)/.
-	ln -s $(CURDIR)/.pip $(HOME)/.
 
 .PHONY: vim
 # target: vim - Install my vim files
@@ -52,7 +52,7 @@ $(HOME)/.ssh:
 	mkdir -p $(HOME)/.ssh
 
 $(HOME)/.ssh/authorized_keys:
-	cp -f $(CURDIR)/.ssh/* $(HOME)/.ssh/.
+	cp -f $(CURDIR)/configs/.ssh/* $(HOME)/.ssh/.
 
 clean_ssh:
 	@echo
