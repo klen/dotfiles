@@ -7,9 +7,6 @@ export DEBEMAIL="horneds@gmail.com"
 
 # Common settings
 export LANG="en_US.UTF-8"
-export LC_PAPER="ru_RU.UTF-8"
-export LC_MEASUREMENT="ru_RU.UTF-8"
-export LC_TIME="ru_RU.UTF-8"
 
 export EDITOR=vim
 export PAGER=less

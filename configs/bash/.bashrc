@@ -8,7 +8,6 @@
 # ===============
 
     [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
-    [ -d "$HOME/.cabal/bin/" ] && PATH="$HOME/.cabal/bin:$PATH"
 
 # }}}
 
@@ -35,18 +34,36 @@ OS=$(uname -s)
 # Base promt settings
 . $UTILSDIR/include/ps.sh
 
-# Functions
-. $UTILSDIR/include/functions.sh
+# Patch PATH
+. $UTILSDIR/include/path.sh
 
 # Completion
-. $UTILSDIR/completion/pip.sh
+. /usr/local/etc/bash_completion 2>/dev/null
 . $UTILSDIR/completion/makesite.sh
 . $UTILSDIR/completion/vagrant.sh
 . $UTILSDIR/completion/knife.sh
 . $UTILSDIR/completion/cap.sh
+. $UTILSDIR/completion/gem.sh
 
 # Git support
 . $UTILSDIR/include/git.sh
+
+# Functions
+. $UTILSDIR/include/functions.sh
+
+# RVM support
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && {
+    source "$HOME/.rvm/scripts/rvm"
+    source "$HOME/.rvm/scripts/completion"
+}
+
+
+# Python PIP support
+# ==================
+export PIP_DOWNLOAD_CACHE=/tmp/.pip/$USER/cache
+export PIP_LOG_FILE=/tmp/.pip/$USER/pip.log
+
+. $UTILSDIR/completion/pip.sh
 
 
 # Utitities support {{{
@@ -65,17 +82,6 @@ OS=$(uname -s)
     }
     cdw () { cd $1; }
     complete -o default -o nospace -F _cdw_completion cdw
-
-    # NodeJS integration
-    # ==================
-    if [ -d $HOME/node_modules/.bin ]; then
-        PATH="$HOME/node_modules/.bin:$PATH"
-    fi
-
-    # Android SDK tools
-    if [ -d $HOME/Desktop/android-sdk-linux ]; then
-        PATH="$HOME/Desktop/android-sdk-linux/tools:$HOME/Desktop/android-sdk-linux/platform-tools:$PATH"
-    fi
 
 # }}}
 
@@ -99,5 +105,5 @@ OS=$(uname -s)
 PS1="${PS1}\n\$ "
 
 command -v cowsay > /dev/null && {
-    fortune | cowsay -f $SOURCEDIR/stuff/girl.cow
+    fortune -s | cowsay -f $SOURCEDIR/stuff/girl.cow
 }
