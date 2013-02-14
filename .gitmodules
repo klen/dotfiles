@@ -1,0 +1,3 @@
+[submodule "stuff/smartcd"]
+	path = stuff/smartcd
+	url = git://github.com/cxreg/smartcd.git
