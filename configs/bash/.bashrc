@@ -4,106 +4,69 @@
 # vim:ft=sh:fdm=marker
 
 
-# Path fixes {{{
-# ===============
-
-    [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
-
-# }}}
-
+# Update path
+[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
 
 # if not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Define options
-SOURCEDIR=$HOME/.home
-UTILSDIR=$SOURCEDIR/configs/bash
-PROJECTDIR=$HOME/Dropbox/projects/
-WORKDIR=$HOME/Dropbox/work/
-OS=$(uname -s)
-
-# Options
-. $UTILSDIR/include/options.sh
-
-# Colors
-. $UTILSDIR/include/colors.sh
-
-# Login screen
-. $UTILSDIR/include/login.sh
-
-# Base promt settings
-. $UTILSDIR/include/ps.sh
-
-# Patch PATH
-. $UTILSDIR/include/path.sh
-
-# Completion
-. /usr/local/etc/bash_completion 2>/dev/null
-. $UTILSDIR/completion/makesite.sh
-. $UTILSDIR/completion/vagrant.sh
-. $UTILSDIR/completion/knife.sh
-. $UTILSDIR/completion/cap.sh
-. $UTILSDIR/completion/gem.sh
-
-# Git support
-. $UTILSDIR/include/git.sh
-
-# Functions
-. $UTILSDIR/include/functions.sh
-
-# RVM support
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && {
-    source "$HOME/.rvm/scripts/rvm"
-    source "$HOME/.rvm/scripts/completion"
+__command () {
+    command -v $1 1>/dev/null
 }
 
+setup () {
 
-# Python PIP support
-# ==================
-export PIP_DOWNLOAD_CACHE=/tmp/.pip/$USER/cache
-export PIP_LOG_FILE=/tmp/.pip/$USER/pip.log
-
-. $UTILSDIR/completion/pip.sh
-
-
-# Utitities support {{{
-# =====================
+    local DOT_SOURCE=$HOME/.home
+    local DOT_INCLUDE=$DOT_SOURCE/configs/bash/include
+    local DOT_COMPLETION=$DOT_SOURCE/configs/bash/completion
+    local OS=$(uname -s)
     
-    _cdp_completion() {
-        local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=( $(compgen -W "`find $PROJECTDIR -maxdepth 1 -type d -not -empty`" -- ${cur}) )
-    }
-    cdp () { cd $1; }
-    complete -o default -o nospace -F _cdp_completion cdp
+    # Load options
+    source $DOT_INCLUDE/options.sh
+    source $DOT_INCLUDE/colors.sh
+    source $DOT_INCLUDE/path.sh
+    source $DOT_INCLUDE/ps.sh
 
-    _cdw_completion() {
-        local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=( $(compgen -W "`find $WORKDIR -maxdepth 1 -type d`" -- ${cur}) )
-    }
-    cdw () { cd $1; }
-    complete -o default -o nospace -F _cdw_completion cdw
+    # Functions
+    source $DOT_INCLUDE/functions.sh
 
-# }}}
+    # Setup completion
+    source /usr/local/etc/bash_completion 2>/dev/null || source /etc/bash_completion 2> /dev/null
+    source $DOT_COMPLETION/makesite.sh
+    source $DOT_COMPLETION/cd_.sh
 
+    # Setup tools
+    source $DOT_INCLUDE/ruby.sh
+    source $DOT_INCLUDE/python.sh
+    source $DOT_INCLUDE/git.sh
 
-# Additional sources {{{
-# =======================
+    # Smartcd
+    source $DOT_SOURCE/stuff/smartcd/lib/core/arrays
+    source $DOT_SOURCE/stuff/smartcd/lib/core/varstash
+    source $DOT_SOURCE/stuff/smartcd/lib/core/smartcd
+    smartcd setup cd
+    smartcd setup pushd
+    smartcd setup popd
+    smartcd setup completion
 
-    # bash aliases
-    [ -f ~/.bash_aliases ] && source ~/.bash_aliases
+    # Load aliases
+    source ~/.bash_aliases 2>/dev/null
 
-    # bash completion
-    [ -f /etc/bash_completion ] && source /etc/bash_completion
+    # Load local settings
+    source ~/.bash_local 2>/dev/null
 
-    # local bash settings
-    [ -f ~/.bash_local ] && source ~/.bash_local
+    # Show login screen
+    source $DOT_INCLUDE/login.sh
+}
 
-# }}}
+setup && unset setup
+
+# Define options
+__home=$HOME/.home
+UTILSDIR=$__home/configs/bash
+PROJECTDIR=$HOME/Dropbox/projects/
+WORKDIR=$HOME/Dropbox/work/
 
 
 # Close promt
 PS1="${PS1}\n\$ "
-
-command -v cowsay > /dev/null && {
-    fortune -s | cowsay -f $SOURCEDIR/stuff/girl.cow
-}

@@ -6,11 +6,3 @@
 
 # Android SDK tools
 [ -d $HOME/Desktop/android-sdk-linux ] && PATH="$HOME/Desktop/android-sdk-linux/tools:$HOME/Desktop/android-sdk-linux/platform-tools:$PATH"
-
-# RVM scripting
-[ -d $HOME/.rvm/bin ] && PATH=$PATH:$HOME/.rvm/bin
-
-# Brew
-if [ "$OS" = "Darwin" ]; then
-    PATH="/usr/local/share/python:$PATH"
-fi

@@ -13,9 +13,6 @@ hh () {
     echo "ii                            show system info"
     echo "ex filename                   unpack archive"
     echo "pk type filename              pack archive"
-    echo "start name                    start service"
-    echo "stop name                     stop service"
-    echo "restart name                  restart service"
 }
 
 # Auto virtualenv activation
@@ -143,28 +140,4 @@ pk () {
     else
         echo "'$1' is not a valid file"
     fi
-}
-
-_sservice () {
-    daemon=$1
-    action="$2 $3"
-    if [ -f /etc/init.d/$daemon ]; then
-        for a in $action; do
-            sudo /etc/init.d/$daemon $a
-        done
-    else
-        echo "Service '$daemon' not found."
-    fi
-}
-
-start () {
-    _sservice $1 start
-}
-
-stop () {
-    _sservice $1 stop
-}
-
-restart () {
-    _sservice $1 stop start
 }

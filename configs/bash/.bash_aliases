@@ -14,15 +14,11 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias calc='bc -l'
-# mkdir
-alias mkdir='mkdir -p'
 # scroller
 alias less='less -r'
 # delete
 function del () {
-    if [ ! -d /tmp/.Trash ]; then
-        mkdir /tmp/.Trash
-    fi
+    mkdir -p /tmp/.Trash
     mv -f $1 /tmp/.Trash/.
 }
 # dir list
