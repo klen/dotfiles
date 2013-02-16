@@ -40,6 +40,9 @@ setup () {
     source $DOT_INCLUDE/python.sh
     source $DOT_INCLUDE/git.sh
 
+    # Close promt
+    PS1="${PS1}\n\$ "
+
     # Smartcd
     source $DOT_SOURCE/stuff/smartcd/lib/core/arrays
     source $DOT_SOURCE/stuff/smartcd/lib/core/varstash
@@ -60,13 +63,3 @@ setup () {
 }
 
 setup && unset setup
-
-# Define options
-__home=$HOME/.home
-UTILSDIR=$__home/configs/bash
-PROJECTDIR=$HOME/Dropbox/projects/
-WORKDIR=$HOME/Dropbox/work/
-
-
-# Close promt
-PS1="${PS1}\n\$ "

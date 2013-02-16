@@ -1,23 +1,24 @@
 setup () {
-    local PROJECTDIR=$HOME/Dropbox/projects
-    local WORKDIR=$HOME/Dropbox/projects
+    _cd_prjdir=$HOME/Dropbox/projects
+    _cd_wrkdir=$HOME/Dropbox/work
 
-    [ -d $PROJECTDIR ] && {
+    [ -d $_cd_prjdir ] && {
     
         _cdp_completion() {
             local cur="${COMP_WORDS[COMP_CWORD]}"
-            COMPREPLY=( $(compgen -W "`find $PROJECTDIR -maxdepth 1 -type d -not -empty`" -- ${cur}) )
+            COMPREPLY=( $(compgen -W "`find $_cd_prjdir -maxdepth 1 -type d -not -empty`" -- ${cur}) )
         }
         cdp () { cd $1; }
         complete -o default -o nospace -F _cdp_completion cdp
 
     }
 
-    [ -d $WORKDIR ] && {
+    [ -d $_cd_wrkdir ] && {
     
         _cdw_completion() {
             local cur="${COMP_WORDS[COMP_CWORD]}"
-            COMPREPLY=( $(compgen -W "`find $WORKDIR -maxdepth 1 -type d`" -- ${cur}) )
+            local choices=$(find $_cd_wrkdir -maxdepth 1 -type d)
+            COMPREPLY=( $(compgen -W "$choices" -- ${cur}) )
         }
         cdw () { cd $1; }
         complete -o default -o nospace -F _cdw_completion cdw
