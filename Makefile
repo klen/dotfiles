@@ -13,6 +13,7 @@ help:
 install: uninstall vim ssh
 	@echo
 	@echo "Install config files"
+	git submodule init && git submodule update
 	ln -s $(CURDIR)/configs/bash/.bash_profile $(HOME)/.
 	ln -s $(CURDIR)/configs/bash/.bash_aliases $(HOME)/.
 	ln -s $(CURDIR)/configs/bash/.bashrc $(HOME)/.
