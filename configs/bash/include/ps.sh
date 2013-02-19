@@ -8,11 +8,14 @@ PS1="\n"
 
 # shell level
 if [ ! "$SHLVL" = "1" ]; then
-    PS1="${MAGENTA}[$SHLVL] "
+    PS1="\n${MAGENTA}[$SHLVL] "
 fi
 
+# time
+PS1="${PS1}${GRAY}\A "
+
 # parent and current pids
-PS1="${PS1}${GREEN}$PPID:$$ "
+PS1="${PS1}${GREEN}$$ "
 
 # current user
 case `id -u` in
