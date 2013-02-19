@@ -41,7 +41,7 @@ setup () {
     source $DOT_INCLUDE/git.sh
 
     # Close promt
-    PS1="${PS1}\n\A \$ "
+    PS1="${PS1}\n${GRAY}\A${NC} "
 
     # Smartcd
     [ -d $DOT_SOURCE/stuff/smartcd/lib ] && {

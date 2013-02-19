@@ -1,34 +1,35 @@
 # Base promt settings
 # ===================
 
+
 unset PROMPT_COMMAND
 
-# current processes pid, number jobs, history number
-PS1="\n${GREEN}${SHLVL}.$$:$PPID"
+PS1="\n"
 
-# current user and domain
-command -v dnsdomainname > /dev/null && {
-    DNS=.$(dnsdomainname)
-} || {
-    DNS=""
-}
-
-if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_CLIENT2" ]; then
-    host=$BLUE
-else
-    host=$RED
+# shell level
+if [ ! "$SHLVL" = "1" ]; then
+    PS1="${MAGENTA}[$SHLVL] "
 fi
 
+# parent and current pids
+PS1="${PS1}${GREEN}$PPID:$$ "
+
+# current user
 case `id -u` in
-    0) user=$RED ;;
-    *) user=$GREEN ;;
+    0) PS1="${PS1}$RED\u";;
+    *) PS1="${PS1}$BLUE\u" ;;
 esac
 
-PS1="${PS1} ${user}\u${NC}@${host}\H${DNS}:"
+# hostname
+__command hostname && {
+    if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_CLIENT2" ]; then
+        PS1="${PS1}@${BLUE}$(hostname -f)"
+    else
+        PS1="${PS1}@${RED}$(hostname -f)"
+    fi
+} || {
+    PS1="${PS1}@${BLUE}\H"
+}
 
 # current path
-PS1="${PS1} ${WHITE}\w${white}"
-
-# new line for command
-PS1="${PS1} ${NC}"
-
+PS1="${PS1} ${WHITE}\w"
