@@ -6,7 +6,8 @@ setup () {
     
         _cdp_completion() {
             local cur="${COMP_WORDS[COMP_CWORD]}"
-            COMPREPLY=( $(compgen -W "`find $_cd_prjdir -maxdepth 1 -type d -not -empty`" -- ${cur}) )
+            local choices=$(find $_cd_prjdir -maxdepth 1 -mindepth 1 -type d)
+            COMPREPLY=( $(compgen -W "$choices" -- ${cur}) )
         }
         cdp () { cd $1; }
         complete -o default -o nospace -F _cdp_completion cdp
@@ -17,7 +18,7 @@ setup () {
     
         _cdw_completion() {
             local cur="${COMP_WORDS[COMP_CWORD]}"
-            local choices=$(find $_cd_wrkdir -maxdepth 1 -type d)
+            local choices=$(find $_cd_wrkdir -maxdepth 1 -mindepth 1 -type d)
             COMPREPLY=( $(compgen -W "$choices" -- ${cur}) )
         }
         cdw () { cd $1; }

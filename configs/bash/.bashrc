@@ -41,16 +41,20 @@ setup () {
     source $DOT_INCLUDE/git.sh
 
     # Close promt
-    PS1="${PS1}\n\$ "
+    PS1="${PS1}\n\A \$ "
 
     # Smartcd
-    source $DOT_SOURCE/stuff/smartcd/lib/core/arrays
-    source $DOT_SOURCE/stuff/smartcd/lib/core/varstash
-    source $DOT_SOURCE/stuff/smartcd/lib/core/smartcd
-    smartcd setup cd
-    smartcd setup pushd
-    smartcd setup popd
-    smartcd setup completion
+    [ -d $DOT_SOURCE/stuff/smartcd/lib ] && {
+
+        source $DOT_SOURCE/stuff/smartcd/lib/core/arrays
+        source $DOT_SOURCE/stuff/smartcd/lib/core/varstash
+        source $DOT_SOURCE/stuff/smartcd/lib/core/smartcd
+        smartcd setup cd
+        smartcd setup pushd
+        smartcd setup popd
+        smartcd setup completion
+    
+    }
 
     # Load aliases
     source ~/.bash_aliases 2>/dev/null
