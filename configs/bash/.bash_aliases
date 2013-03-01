@@ -27,12 +27,8 @@ alias ll='ls -l'
 alias la='ll -A'
 alias l='ls -CF'
 # deb
-alias dch='dch --distributor=debian'
-alias debinstall='sudo apt-get install --reinstall'
-alias debclean='sudo apt-get autoremove && sudo apt-get autoclean'
-alias debremove='sudo apt-get remove --purge'
-alias debsearch='sudo apt-cache search'
-alias debupdate='sudo apt-get update && sudo apt-get upgrade'
+# alias dch='dch --vendor=debian'
+
 # others
 alias vi='vim'
 alias sim='sudo vim'
