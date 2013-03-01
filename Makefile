@@ -48,6 +48,7 @@ $(HOME)/.ssh/authorized_keys:
 
 $(HOME)/.gnupg:
 	cp -r $(CURDIR)/configs/.gnupg $(HOME)
+	chmod 700 $(HOME)/.gnupg
 
 $(HOME)/.bashrc:
 	ln -s $(CURDIR)/configs/bash/.bashrc $(HOME)/.
