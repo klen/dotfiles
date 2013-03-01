@@ -10,20 +10,11 @@ help:
 
 .PHONY: install
 # target: install - Install my dot files
-install: vim ssh $(HOME)/.gnupg
-	@echo
-	@echo "Install config files"
-	git submodule init && git submodule update
-	ln -s $(CURDIR)/configs/bash/.bash_profile $(HOME)/.
-	ln -s $(CURDIR)/configs/bash/.bash_aliases $(HOME)/.
-	ln -s $(CURDIR)/configs/bash/.bashrc $(HOME)/.
-	ln -s $(CURDIR)/configs/.ctags $(HOME)/.
-	ln -s $(CURDIR)/configs/.gitconfig $(HOME)/.
-	ln -s $(CURDIR)/configs/.hgrc $(HOME)/.
-	ln -s $(CURDIR)/configs/.pylintrc $(HOME)/.
-	ln -s $(CURDIR)/configs/.screenrc $(HOME)/.
-	ln -s $(CURDIR)/configs/.pip $(HOME)/.
-	ln -s $(CURDIR)/bin $(HOME)/.
+install: vim ssh $(HOME)/.gnupg $(HOME)/.bashrc $(HOME)/.bash_aliases $(HOME)/.bash_profile \
+    $(HOME)/.ctags $(HOME)/.gitconfig $(HOME)/.hgrc $(HOME)/.pylintrc $(HOME)/.screenrc \
+    $(HOME)/.pip $(HOME)/bin
+	@echo "Installed"
+	@git submodule init && git submodule update
 
 .PHONY: vim
 # target: vim - Install my vim files
@@ -58,6 +49,35 @@ $(HOME)/.ssh/authorized_keys:
 $(HOME)/.gnupg:
 	cp -r $(CURDIR)/configs/.gnupg $(HOME)
 
+$(HOME)/.bashrc:
+	ln -s $(CURDIR)/configs/bash/.bashrc $(HOME)/.
+
+$(HOME)/.bash_aliases:
+	ln -s $(CURDIR)/configs/bash/.bash_aliases $(HOME)/.
+
+$(HOME)/.bash_profile:
+	ln -s $(CURDIR)/configs/bash/.bash_profile $(HOME)/.
+
+$(HOME)/.ctags:
+	ln -s $(CURDIR)/configs/.ctags $(HOME)/.
+
+$(HOME)/.gitconfig:
+	ln -s $(CURDIR)/configs/.gitconfig $(HOME)/.
+
+$(HOME)/.hgrc:
+	ln -s $(CURDIR)/configs/.hgrc $(HOME)/.
+
+$(HOME)/.pylintrc:
+	ln -s $(CURDIR)/configs/.pylintrc $(HOME)/.
+
+$(HOME)/.screenrc:
+	ln -s $(CURDIR)/configs/.screenrc $(HOME)/.
+
+$(HOME)/.pip:
+	ln -s $(CURDIR)/configs/.pip $(HOME)/.
+
+$(HOME)/bin:
+	ln -s $(CURDIR)/bin $(HOME)/.
 
 clean_ssh:
 	@echo
