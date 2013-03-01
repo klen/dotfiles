@@ -5,6 +5,8 @@
 export DEBFULLNAME="Kirill Klenov"
 export DEBEMAIL="horneds@gmail.com"
 
+export GPGKEY=7000E266
+
 # Common settings
 export LANG="en_US.UTF-8"
 

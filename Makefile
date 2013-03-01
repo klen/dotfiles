@@ -10,7 +10,7 @@ help:
 
 .PHONY: install
 # target: install - Install my dot files
-install: uninstall vim ssh
+install: vim ssh $(HOME)/.gnupg
 	@echo
 	@echo "Install config files"
 	git submodule init && git submodule update
@@ -54,6 +54,10 @@ $(HOME)/.ssh:
 
 $(HOME)/.ssh/authorized_keys:
 	cp -f $(CURDIR)/configs/.ssh/* $(HOME)/.ssh/.
+
+$(HOME)/.gnupg:
+	cp -r $(CURDIR)/configs/.gnupg $(HOME)
+
 
 clean_ssh:
 	@echo
