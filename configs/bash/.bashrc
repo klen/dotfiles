@@ -21,11 +21,11 @@ setup () {
     local DOT_COMPLETION=$DOT_SOURCE/configs/bash/completion
     local OS=$(uname -s)
     
-    # Load options
     source $DOT_INCLUDE/options.sh
     source $DOT_INCLUDE/colors.sh
     source $DOT_INCLUDE/path.sh
     source $DOT_INCLUDE/ps.sh
+    source $DOT_INCLUDE/gpg.sh
 
     # Functions
     source $DOT_INCLUDE/functions.sh
