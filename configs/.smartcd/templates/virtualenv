@@ -15,7 +15,7 @@
 # Enter any bash_enter commands below here: (leave this line!)
 autostash VDIR=.env
 autostash VNAME=$(basename $PWD)
-autostash _PS=$PS1
+__PS=$PS1
 
 # Create virtualenv
 [[ -s requirements.txt ]] && [[ ! -d $VDIR ]] && {
@@ -24,7 +24,7 @@ autostash _PS=$PS1
 }
 
 source $VDIR/bin/activate 2>/dev/null && echo "Activate virtualenv $VDIR"
-PS1="$magenta($VNAME) $_PS"
+PS1="$magenta($VNAME) $__PS"
 
 
 # Enter any bash_leave commands below here: (leave this line!)
