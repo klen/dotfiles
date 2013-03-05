@@ -12,7 +12,7 @@ help:
 # target: install - Install my dot files
 install: vim ssh $(HOME)/.gnupg $(HOME)/.bashrc $(HOME)/.bash_aliases $(HOME)/.bash_profile \
     $(HOME)/.ctags $(HOME)/.gitconfig $(HOME)/.hgrc $(HOME)/.pylintrc $(HOME)/.screenrc \
-    $(HOME)/.pip $(HOME)/bin
+    $(HOME)/.pip $(HOME)/bin $(HOME)/.smartcd
 	@echo "Installed"
 	@git submodule init && git submodule update
 
@@ -77,6 +77,9 @@ $(HOME)/.screenrc:
 $(HOME)/.pip:
 	ln -s $(CURDIR)/configs/.pip $(HOME)/.
 
+$(HOME)/.smartcd:
+	cp -r $(CURDIR)/configs/.smartcd $(HOME)/.
+
 $(HOME)/bin:
 	ln -s $(CURDIR)/bin $(HOME)/.
 
@@ -106,6 +109,7 @@ uninstall: clean_vim clean_ssh
 	rm -rf $(HOME)/bin
 	rm -rf $(HOME)/.pip
 	rm -rf $(HOME)/.pylintrc
+	rm -rf $(HOME)/.smartcd
 
 
 # vim: fdm=marker:fdl=0

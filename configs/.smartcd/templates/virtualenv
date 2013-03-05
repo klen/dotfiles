@@ -1,0 +1,33 @@
+########################################################################
+# This is a smartcd template.  Edit this file to create a named
+# configuration you can copy to any number of directories.  This is
+# useful if you often use the same settings in different directories
+# but with minor differences.
+#
+# The string __PATH__ will be replaced with the directory being
+# configured when this template is installed, so you can set variables:
+#
+#    autostash PATH=__PATH__/bin:$PATH
+#
+# This template is named 'virtualenv'
+########################################################################
+
+# Enter any bash_enter commands below here: (leave this line!)
+autostash VDIR=.env
+autostash VNAME=$(basename $PWD)
+autostash _PS=$PS1
+
+# Create virtualenv
+[[ -s requirements.txt ]] && [[ ! -d $VDIR ]] && {
+    echo "Virtualenv doesnt found. Attempt to create."
+    virtualenv --no-site-packages $VDIR && $VDIR/bin/pip install -r requirements.txt
+}
+
+source $VDIR/bin/activate 2>/dev/null && echo "Activate virtualenv $VDIR"
+PS1="$magenta($VNAME) $_PS"
+
+
+# Enter any bash_leave commands below here: (leave this line!)
+echo "Deactivate virtualenv $VDIR"
+deactivate
+
