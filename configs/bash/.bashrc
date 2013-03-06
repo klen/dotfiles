@@ -27,9 +27,6 @@ setup () {
     source $DOT_INCLUDE/ps.sh
     source $DOT_INCLUDE/gpg.sh
 
-    # Functions
-    source $DOT_INCLUDE/functions.sh
-
     # Setup completion
     source /usr/local/etc/bash_completion 2>/dev/null || source /etc/bash_completion 2> /dev/null
     source $DOT_COMPLETION/makesite.sh
@@ -40,6 +37,9 @@ setup () {
     source $DOT_INCLUDE/ruby.sh
     source $DOT_INCLUDE/python.sh
     source $DOT_INCLUDE/git.sh
+
+    # Functions
+    source $DOT_INCLUDE/functions.sh
 
     # Close promt
     PS1="${PS1}\n$ "

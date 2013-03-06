@@ -13,6 +13,7 @@ hh () {
     echo "ii                            show system info"
     echo "ex filename                   unpack archive"
     echo "pk type filename              pack archive"
+    echo "update_repo                   update from repository"
 }
 
 # find file by template
@@ -128,3 +129,14 @@ pk () {
         echo "'$1' is not a valid file"
     fi
 }
+
+update_repo() {
+    sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/$1" \
+    -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"    
+}
+_sources_lists(){
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+
+    COMPREPLY=( $( find /etc/apt/sources.list.d/ -name "*$cur*.list" -exec basename {} \; 2> /dev/null ) )
+} &&
+complete -F _sources_lists update_repo
