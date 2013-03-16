@@ -1,4 +1,4 @@
-[ -d "/usr/local/sbin" ] && PATH="$/usr/local/sbin:$PATH"
+[ -d "/usr/local/sbin" ] && PATH="/usr/local/sbin:$PATH"
 
 # Haskel cabal
 [ -d "$HOME/.cabal/bin/" ] && PATH="$HOME/.cabal/bin:$PATH"
