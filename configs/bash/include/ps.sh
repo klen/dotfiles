@@ -11,6 +11,11 @@ if [ ! "$SHLVL" = "1" ]; then
     PS1="\n${MAGENTA}[$SHLVL] "
 fi
 
+# support screen
+if [ ! -z "$WINDOW" ]; then
+    PS1="\n${YELLOW}<$WINDOW> "
+fi
+
 # time
 PS1="${PS1}${GRAY}\A "
 
