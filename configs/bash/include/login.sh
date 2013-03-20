@@ -9,7 +9,7 @@ date
 __command cowsay && fortune -s | cowsay -f $DOT_SOURCE/stuff/girl.cow 2>/dev/null
 
 setup () {
-    if [ ! -z "$WINDOW" ]; then
+    if [ ! -z "$WINDOW" -a ! "$SHOWED_SCREEN_MESSAGE" = "true" ]; then
         local detached_screens=`screen -list | grep Detached`
         echo -e $YELLOW
         if [ ! -z "$detached_screens" ]; then
@@ -21,6 +21,7 @@ setup () {
             echo "[ screen is activated ]"
         fi
         echo -e $NC
+        export SHOWED_SCREEN_MESSAGE="true"
     fi
 }
 
