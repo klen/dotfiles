@@ -69,7 +69,7 @@ setup () {
     # Auto run screen on remote servers
     __command screen && {
         if [ ! -z "$SSH_CLIENT" ] && [ -z $WINDOW ]; then
-            screen
+            exec screen
         fi
     }
 }
