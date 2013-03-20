@@ -1,6 +1,9 @@
 # enable UTF-8
 defutf8 on 
 
+# rebind scren prefix
+escape ^|^|
+
 # настройка режим управления потоком окна.
 defflow on  
 
