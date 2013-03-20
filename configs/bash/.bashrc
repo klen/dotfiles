@@ -65,6 +65,13 @@ setup () {
 
     # Show login screen
     source $DOT_INCLUDE/login.sh
+
+    # Auto run screen on remote servers
+    __command screen && {
+        if [ ! -z "$SSH_CLIENT" ] && [ -z $WINDOW ]; then
+            screen
+        fi
+    }
 }
 
 setup && unset setup

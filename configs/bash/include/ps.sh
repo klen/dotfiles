@@ -13,7 +13,7 @@ fi
 
 # support screen
 if [ ! -z "$WINDOW" ]; then
-    PS1="\n${YELLOW}<$WINDOW> "
+    PS1="$PS1${YELLOW}<$WINDOW> "
 fi
 
 # time
