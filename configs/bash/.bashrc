@@ -4,9 +4,6 @@
 # vim:ft=sh:fdm=marker
 
 
-# Update path
-[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
-
 # if not running interactively, don't do anything
 [ -z "$PS1" ] && return
 

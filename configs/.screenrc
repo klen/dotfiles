@@ -15,13 +15,13 @@ deflogin on
 hardstatus off
 
 # Enable visual bell
-vbell on
-vbell_msg "vbell %n" 
+# vbell on
+# vbell_msg "vbell %n" 
 
 # Disable activity monitor
 defmonitor off
 
-# количество сохраненных строк
+# Scrollback history
 defscrollback 10000
 
 # при копировании строки будут разделяться символами CR — LF	

@@ -3,7 +3,7 @@
     email = horneds@gmail.com
 
 [color]
-	ui = 1
+    ui = 1
 
 [color "branch"]
     current = yellow reverse
