@@ -19,6 +19,9 @@ export HISTSIZE=10000
 export HISTIGNORE="&:cd:ls:[bf]g:exit:bash:la"
 export HISTCONTROL=erasedups:ignorespace
 
+export CLICOLOR=1
+export LSCOLORS=Hxfxcxdxbxegedabagacad
+
 # for the love of god don't offer to autocomplete this shit
 export FIGNORE="#:~:DS_Store:.pyc:.swp:.swo"
 
