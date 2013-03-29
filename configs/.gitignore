@@ -1,9 +1,14 @@
 *.bak
+*.egg
 *.log
 *.old
-*.pyc
+*.py[co]
 *~
 .DS_Store
+._
+.env
 .pip/cache
 .ropeproject
+.tags
+.tox
 __pycache__
