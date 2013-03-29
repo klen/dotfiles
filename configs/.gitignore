@@ -1,3 +1,9 @@
+*.bak
 *.log
+*.old
+*.pyc
+*~
+.DS_Store
 .pip/cache
 .ropeproject
+__pycache__
