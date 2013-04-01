@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo -e $RED"Resize images." $NC
+
+for image in ./*.[jJ][pP][gG]; do
+    test -r $image && {
+        echo -e ${YELLOW}Convert $image $NC
+        convert "$image" -geometry x1200 -quality 85 "$image"
+    }
+done
