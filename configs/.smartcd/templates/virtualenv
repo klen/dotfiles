@@ -13,14 +13,24 @@
 ########################################################################
 
 # Enter any bash_enter commands below here: (leave this line!)
-autostash VDIR=.env
+autostash SMDIR=$HOME/.smartcd
 autostash VNAME=$(basename $PWD)
+autostash VDIR=$SMDIR/virtualenvs${PWD}/.env
+autostash TOXDIR=$SMDIR/virtualenvs${PWD}/.tox
+
 __PS=$PS1
 
 # Create virtualenv
 [[ -s requirements.txt ]] && [[ ! -d $VDIR ]] && {
-    echo "Virtualenv doesnt found. Attempt to create."
+    echo -e ${RED}"Virtualenv doesnt found. Attempt to create $VDIR" $NC
     virtualenv --no-site-packages $VDIR && $VDIR/bin/pip install -r requirements.txt
+}
+
+# Create toxdir
+[[ -s tox.ini ]] && [[ ! -e $PWD/.tox ]] && {
+    echo -e ${YELLOW}"Toxdir doesnt found. Attempt to create $TOXDIR" $NC
+    mkdir -p $TOXDIR
+    ln -s $TOXDIR
 }
 
 source $VDIR/bin/activate 2>/dev/null && echo "Activate virtualenv $VDIR"
