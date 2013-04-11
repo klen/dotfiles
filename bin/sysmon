@@ -1,0 +1,73 @@
+#!/bin/bash
+
+#settings:
+netspeed=true
+ram=true
+cpu=true
+#-------------------------------------------------------
+
+
+#---------------- initialize ---------------------------
+rm /tmp/.sysmon > /dev/null 2>&1
+dstat --net --mem --cpu --output=/tmp/.sysmon 1 1 > /dev/null 2>&1
+
+#----------- up/down speed -----------------------------
+if [ $netspeed = true ]; then
+
+upspeed=$(echo $(cat /tmp/.sysmon | tail -1 | cut -d ',' -f2)/1024 | bc)
+
+upkbmb=$(if [ $upspeed -gt 1024 ]; then 
+		up1=$(echo $(cat /tmp/.sysmon | tail -1 | cut -d ',' -f2)/1024/1024 | bc -l)
+		echo $up1 | head -c 4
+	else 
+		echo $upspeed | head -c 3
+	fi)
+upkbmb=$(printf '%03d' $upkbmb)
+
+downspeed=$(echo $(cat /tmp/.sysmon | tail -1 | cut -d ',' -f1)/1024 | bc)
+
+downkbmb=$(if [ $downspeed -gt 1024 ]; then 
+		down1=$(echo $(cat /tmp/.sysmon | tail -1 | cut -d ',' -f1)/1024/1024 | bc -l)
+		echo $down1 | head -c 4
+	else 
+		echo $downspeed | head -c 3
+	fi)
+downkbmb=$(printf '%03d' $downkbmb)
+
+#---------------- up/down speed unit --------------------
+upunit=$(if [ $upspeed -gt 1024 ]; then echo "M"; else echo "K"; fi)
+downunit=$(if [ $downspeed -gt 1024 ]; then echo "M"; else echo "K"; fi)
+
+fi
+
+
+
+#------------------- CPU % used -------------------------
+if [ $cpu = true ]; then
+
+cpufree=$(cat /tmp/.sysmon | tail -1 | cut -d ',' -f9)
+cpuused=$(echo 100-$cpufree | bc | sed -e 's/\..*//')
+cpuused=$(printf '%02d' $cpuused)
+
+fi
+
+
+
+#------------------- RAM % used --------------------------
+if [ $ram = true ]; then
+
+memused=$(free -m | grep buffers/cache | tr -s ' ' | cut -d' ' -f 3)
+memfree=$(free -m | grep buffers/cache | tr -s ' ' | cut -d' ' -f 4)
+memtotal=$(echo $memused+$memfree | bc -l)
+
+memusedpercent=$(echo 100-100*$memfree/$memtotal | bc)
+memusedpercent=$(printf '%02d' $memusedpercent)
+
+fi
+
+
+#------------------ The Indicator Sysmonitor actual output -
+echo \
+    $(if [ $cpu = true ]; then echo C: $cpuused% \|; fi) \
+    $(if [ $ram = true ]; then echo M: $memusedpercent% \|; fi) \
+    $(if [ $netspeed = true ]; then echo ↑$upkbmb $upunit ↓$downkbmb $downunit; fi)
