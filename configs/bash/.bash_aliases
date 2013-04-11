@@ -18,7 +18,7 @@ alias less='less -r'
 # dir list
 alias ls='ls -FG' 
 alias ll='ls -l'
-alias la='ll -A'
+alias la='ll -A --color'
 alias l='ls -CF'
 
 # others
