@@ -41,3 +41,6 @@ __command hostname && {
 
 # current path
 PS1="${PS1} ${WHITE}\w"
+
+# set teminal title
+PS1=${PS1}'$(title $USER@$PWD)'

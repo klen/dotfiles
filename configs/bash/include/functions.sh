@@ -140,3 +140,8 @@ _sources_lists(){
     COMPREPLY=( $( find /etc/apt/sources.list.d/ -name "*$cur*.list" -exec basename {} \; 2> /dev/null ) )
 } &&
 complete -F _sources_lists update_repo
+
+
+function title {
+    echo -en "\033]2;$1\007"
+}

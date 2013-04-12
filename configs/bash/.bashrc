@@ -21,6 +21,7 @@ setup () {
     source $DOT_INCLUDE/options.sh
     source $DOT_INCLUDE/colors.sh
     source $DOT_INCLUDE/path.sh
+    source $DOT_INCLUDE/functions.sh
     source $DOT_INCLUDE/ps.sh
     source $DOT_INCLUDE/gpg.sh
 
@@ -34,9 +35,6 @@ setup () {
     source $DOT_INCLUDE/ruby.sh
     source $DOT_INCLUDE/python.sh
     source $DOT_INCLUDE/git.sh
-
-    # Functions
-    source $DOT_INCLUDE/functions.sh
 
     # Close promt
     PS1="${PS1}\n$ "
