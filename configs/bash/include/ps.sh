@@ -32,8 +32,15 @@ esac
 __command hostname && {
     if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_CLIENT2" ]; then
         PS1="${PS1}@${BLUE}$(hostname -f)"
+
+        # set teminal title
+        PS1=${PS1}'$(title $USER@$PWD)'
+
     else
         PS1="${PS1}@${RED}$(hostname -f)"
+
+        # set teminal title
+        PS1=${PS1}'$(title >$USER@$PWD)'
     fi
 } || {
     PS1="${PS1}@${BLUE}\H"
@@ -41,6 +48,3 @@ __command hostname && {
 
 # current path
 PS1="${PS1} ${WHITE}\w"
-
-# set teminal title
-PS1=${PS1}'$(title $USER@$PWD)'
