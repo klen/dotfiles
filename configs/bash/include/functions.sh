@@ -142,6 +142,13 @@ _sources_lists(){
 complete -F _sources_lists update_repo
 
 
-function title {
+# Set terminal title
+title () {
     echo -en "\033]2;$1\007"
+}
+
+# tailf wrapper
+log () {
+    title $1
+    tailf -n ${2:-100} $1
 }
