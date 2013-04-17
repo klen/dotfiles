@@ -40,7 +40,7 @@ __command hostname && {
         PS1="${PS1}@${RED}$(hostname -f)"
 
         # set teminal title
-        PS1=${PS1}'$(title \>\ $USER@$PWD)'
+        PS1=${PS1}'$(title $USER@$(hostname)$PWD)'
     fi
 } || {
     PS1="${PS1}@${BLUE}\H"
