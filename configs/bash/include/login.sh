@@ -1,12 +1,12 @@
 # Login screen
 # ============
 
-echo    -e ${yellow}------------------------------ $NC
 echo    -e ${CYAN}This is BASH ${RED}${BASH_VERSION%.*}${CYAN} - DISPLAY on ${RED}$DISPLAY${NC}
 uname   -a
-__command cowsay && fortune -s | cowsay -f $DOT_SOURCE/stuff/girl.cow 2>/dev/null
+__command cowsay && __command fortune &&  fortune -s | cowsay -f $DOT_SOURCE/stuff/girl.cow 2>/dev/null
 
 setup () {
+
     # Information about screens
     if [ ! -z "$WINDOW" -a ! "$SHOWED_SCREEN_MESSAGE" = "true" ]; then
         local detached_screens=`screen -list | grep Detached`
