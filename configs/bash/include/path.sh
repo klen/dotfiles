@@ -17,4 +17,4 @@
 [ -d $HOME/Desktop/android-sdk-linux ] && PATH=$HOME/Desktop/android-sdk-linux/tools:$HOME/Desktop/android-sdk-linux/platform-tools:$PATH
 
 # Homebrew coreutils
-[ -d /usr/local/opt/coreutils/libexec/gnubin/ ] && PATH=/usr/local/opt/coreutils/libexec/gnubin/:$PATH
+[ -d /usr/local/opt/coreutils/libexec/gnubin/ ] && PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
