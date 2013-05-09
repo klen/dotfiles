@@ -1,5 +1,6 @@
 *.bak
 *.egg
+*.egg-info
 *.log
 *.old
 *.py[co]
