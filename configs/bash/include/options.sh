@@ -26,7 +26,8 @@ export LSCOLORS=Hxfxcxdxbxegedabagacad
 export FIGNORE="#:~:DS_Store:.pyc:.swp:.swo"
 
 shopt -s checkwinsize
-shopt -s cdspell
+shopt -s cdspell # Spelling correction of directory names
+
 shopt -s histappend
 shopt -s dotglob
 
