@@ -14,15 +14,10 @@
 
 # Enter any bash_enter commands below here: (leave this line!)
 # Create virtualenv
-command -v vagrant && [ -s Vagrantfile ] && {
-    echo -e ${RED}"Vagrantfile has been found." $NC
-    vagrant up
+command -v vagrant &>/dev/null && [ -s Vagrantfile ] && {
+    smartcd inform "Vagrantfile has been found."
+    smartcd inform "---------------------------"
+    vagrant up --no-provision
 }
-
 
 # Enter any bash_leave commands below here: (leave this line!)
-command -v vagrant && [ -s Vagrantfile ] && {
-    echo -e ${GREEN}"Stop VM" $NC
-    vagrant halt
-}
-

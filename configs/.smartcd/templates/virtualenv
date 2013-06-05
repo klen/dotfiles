@@ -21,22 +21,27 @@ autostash TOXDIR=$SMDIR/virtualenvs${PWD}/.tox
 __PS=$PS1
 
 # Create virtualenv
-command -v virtualenv && [ -s requirements.txt ] && [ ! -d $VDIR ] && {
-    echo -e ${RED}"Virtualenv doesnt found. Attempt to create $VDIR" $NC
+command -v virtualenv &>/dev/null && [ -s requirements.txt ] && [ ! -d $VDIR ] && {
+    smartcd inform "Virtualenv doesnt found. Attempt to create $VDIR"
+    smartcd inform "------------------------------------------------"
     virtualenv --no-site-packages $VDIR && $VDIR/bin/pip install -r requirements.txt
 }
 
 # Create toxdir
 [ -s tox.ini ] && [ ! -e $PWD/.tox ] && {
-    echo -e ${YELLOW}"Toxdir doesnt found. Attempt to create $TOXDIR" $NC
-    mkdir -p $TOXDIR
-    ln -s $TOXDIR
+    smartcd inform "Toxdir doesnt found. Attempt to create $TOXDIR"
+    smartcd inform "----------------------------------------------"
+    mkdir -p $TOXDIR && ln -s $TOXDIR
 }
 
-source $VDIR/bin/activate 2>/dev/null && echo "Activate virtualenv $VDIR"
+source $VDIR/bin/activate 2>/dev/null && {
+    smartcd inform "Activate virtualenv $VDIR"  
+    smartcd inform "-------------------------"  
+}
 PS1="$magenta($VNAME) $__PS"
 
 
 # Enter any bash_leave commands below here: (leave this line!)
-echo "Deactivate virtualenv $VDIR"
+smartcd inform "Deactivate virtualenv $VDIR"
+smartcd inform "---------------------------"
 [ -z "$VIRTUAL_ENV" ] || deactivate
