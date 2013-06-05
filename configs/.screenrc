@@ -4,24 +4,21 @@ defutf8 on
 # rebind scren prefix
 escape ^|^|
 
-# настройка режим управления потоком окна.
+# control a window flow
 defflow on  
 
-# включает login-режим (для обновления /var/run/utmp)
+# add the entry in the utmp database file for the current window
 deflogin on 
 
-# выключает использование или эмуляцию hardstatus-строки терминала
-# хотя можно использовать вместо caption
 hardstatus off
 
-# Enable visual bell
-# vbell on
-# vbell_msg "vbell %n" 
+# disable Woof-Woof
+vbell off
 
-# Disable activity monitor
+# disable activity monitor
 defmonitor off
 
-# Scrollback history
+# set scrollback history
 defscrollback 10000
 
 # при копировании строки будут разделяться символами CR — LF	
