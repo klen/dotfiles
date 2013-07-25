@@ -61,7 +61,7 @@
     ; View logs and diff
     hist = log --pretty=format:'%Cred%h%Creset %ad | %Cgreen%s%d%Creset [%an]' --graph --date=short
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --stat
     diff = diff --word-diff
     dc = diff --cached
 
@@ -73,6 +73,7 @@
     ; Undo
     amend = commit --amend -C HEAD
     undo = reset --soft HEAD^
+    unstage = reset HEAD
 
 [github]
     user = klen

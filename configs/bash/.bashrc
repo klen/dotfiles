@@ -67,6 +67,9 @@ setup () {
             exec screen
         fi
     }
+
+    # Changing the terminal title to the last shell command
+    trap 'echo -e "\e]0;$BASH_COMMAND\007"' DEBUG
 }
 
 setup && unset setup
