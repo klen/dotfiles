@@ -12,7 +12,7 @@ setup () {
 
     local commands="knife vagrant cap gem"
     for n in $commands; do
-        __command $n && source $DOT_COMPLETION/${n}.sh
+        __command $n && source $CMPDIR/${n}.sh
     done
 }
 

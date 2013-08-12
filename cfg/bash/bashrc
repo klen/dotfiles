@@ -13,38 +13,52 @@ __command () {
 
 setup () {
 
-    local DOT_SOURCE=$HOME/.home
-    local DOT_INCLUDE=$DOT_SOURCE/configs/bash/include
-    local DOT_COMPLETION=$DOT_SOURCE/configs/bash/completion
-    local OS=$(uname -s)
+    local SRCDIR=$HOME/.home
+    local CFGDIR=$SRCDIR/cfg
+    local LIBDIR=$SRCDIR/lib
+
+    local INCDIR=$CFGDIR/bash/include
+    local CMPDIR=$CFGDIR/bash/completion
+    local OS_VERSION=$(uname -s)
     
-    source $DOT_INCLUDE/options.sh
-    source $DOT_INCLUDE/colors.sh
-    source $DOT_INCLUDE/path.sh
-    source $DOT_INCLUDE/functions.sh
-    source $DOT_INCLUDE/ps.sh
-    source $DOT_INCLUDE/gpg.sh
+    # Load options
+    source $INCDIR/options.sh
+
+    # Load colors
+    source $INCDIR/colors.sh
+
+    # Load path
+    source $INCDIR/path.sh
+
+    # Load functions
+    source $INCDIR/functions.sh
+
+    # Setup PS
+    source $INCDIR/ps.sh
+
+    # Setup gpg
+    source $INCDIR/gpg.sh
 
     # Setup completion
     source /usr/local/etc/bash_completion 2>/dev/null || source /etc/bash_completion 2> /dev/null
-    source $DOT_COMPLETION/makesite.sh
-    source $DOT_COMPLETION/cd_.sh
-    source $DOT_COMPLETION/rmqadmin.sh
+    source $CMPDIR/makesite.sh
+    source $CMPDIR/cd_.sh
+    source $CMPDIR/rmqadmin.sh
 
     # Setup tools
-    source $DOT_INCLUDE/ruby.sh
-    source $DOT_INCLUDE/python.sh
-    source $DOT_INCLUDE/git.sh
+    source $INCDIR/ruby.sh
+    source $INCDIR/python.sh
+    source $INCDIR/git.sh
 
     # Close promt
     PS1="${PS1}\n$ "
 
     # Smartcd
-    [ -d $DOT_SOURCE/stuff/smartcd/lib ] && {
+    [ -d $LIBDIR/smartcd/lib ] && {
 
-        source $DOT_SOURCE/stuff/smartcd/lib/core/arrays
-        source $DOT_SOURCE/stuff/smartcd/lib/core/varstash
-        source $DOT_SOURCE/stuff/smartcd/lib/core/smartcd
+        source $LIBDIR/smartcd/lib/core/arrays
+        source $LIBDIR/smartcd/lib/core/varstash
+        source $LIBDIR/smartcd/lib/core/smartcd
         smartcd setup cd
         smartcd setup pushd
         smartcd setup popd
@@ -59,7 +73,7 @@ setup () {
     source ~/.bash_local 2>/dev/null
 
     # Show login screen
-    source $DOT_INCLUDE/login.sh
+    source $INCDIR/login.sh
 
     # Auto run screen on remote servers
     __command screen && {

@@ -1,7 +1,7 @@
 __command git && {
 
-    source $DOT_COMPLETION/git.sh
-    source $DOT_COMPLETION/git-flow.sh
+    source $CMPDIR/git.sh
+    source $CMPDIR/git-flow.sh
 
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWSTASHSTATE=1

@@ -1,6 +1,6 @@
 __command gpg && {
 
-    source $DOT_COMPLETION/gpg.sh
+    source $CMPDIR/gpg.sh
 
     [ ! -r $HOME/.gnupg/pubring.gpg  ] && {
     
