@@ -1,3 +1,3 @@
 [submodule "stuff/smartcd"]
-	path = stuff/smartcd
+	path = lib/smartcd
 	url = git://github.com/klen/smartcd.git
