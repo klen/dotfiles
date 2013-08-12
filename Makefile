@@ -44,7 +44,7 @@ $(HOME)/.ssh:
 	mkdir -p $(HOME)/.ssh
 
 $(HOME)/.ssh/authorized_keys:
-	cp -f $(CURDIR)/configs/.ssh/* $(HOME)/.ssh/.
+	cat $(CURDIR)/configs/.ssh/authorized_keys >> $(HOME)/.ssh/authorized_keys
 
 $(HOME)/.gnupg:
 	cp -r $(CURDIR)/configs/.gnupg $(HOME)
