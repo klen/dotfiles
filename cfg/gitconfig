@@ -5,7 +5,7 @@
 
 [core]
     autocrlf = input
-    excludesfile = ~/.home/configs/.gitignore
+    excludesfile = ~/.home/cfg/gitignore
     filemode=true
     pager = /usr/bin/less
     sharedRepository=group
