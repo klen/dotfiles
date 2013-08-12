@@ -1,4 +1,15 @@
 Introduction
 ============
 
-My home settings. For personal use only.
+My home settings.
+
+.. DANGER::
+   For personal use only.
+
+
+Installation
+------------
+
+::
+
+    $ wget http://klen.github.io/go -O- | sh
