@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Ubuntu sysmon tray support
+
 #settings:
 netspeed=true
 ram=true
