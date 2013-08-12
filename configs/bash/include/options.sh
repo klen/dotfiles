@@ -15,9 +15,10 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
 
-export HISTSIZE=10000
-export HISTIGNORE="&:cd:ls:[bf]g:exit:bash:la"
-export HISTCONTROL=erasedups:ignorespace
+export HISTSIZE=
+export HISTFILESIZE=
+export HISTIGNORE="&:cd:ls:[bf]g:exit:bash:la:git st:git pull:git push:deactivate:tox:detox:history"
+export HISTCONTROL=ignoreboth:erasedups
 
 export CLICOLOR=1
 export LSCOLORS=Hxfxcxdxbxegedabagacad
