@@ -50,7 +50,7 @@ clean_ctags:
 
 $(HOME)/.gnupg:
 	@echo "Setup gnupg configuration"
-	cp -r $(CFGDIR)/gnupg $(HOME)
+	cp -r $(CFGDIR)/gnupg $(HOME)/.gnupg
 	chmod 700 $(HOME)/.gnupg
 
 clean_gnupg:
