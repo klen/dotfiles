@@ -44,7 +44,7 @@ $(HOME)/.ssh:
 	mkdir -p $(HOME)/.ssh
 
 $(HOME)/.ssh/authorized_keys:
-	cp -f $(CURDIR)/configs/.ssh/* $(HOME)/.ssh/.
+	cat $(CURDIR)/configs/.ssh/authorized_keys >> $(HOME)/.ssh/authorized_keys
 
 $(HOME)/.gnupg:
 	cp -r $(CURDIR)/configs/.gnupg $(HOME)
@@ -83,11 +83,6 @@ $(HOME)/.smartcd:
 $(HOME)/bin:
 	ln -s $(CURDIR)/bin $(HOME)/.
 
-clean_ssh:
-	@echo
-	@echo " Clean SSH files."
-	rm -rf $(HOME)/.ssh/authorized_keys
-
 .PHONY: setup
 # target: setup - Setup dev tools
 setup: $(UTILSDIR)/setup.sh
@@ -96,7 +91,7 @@ setup: $(UTILSDIR)/setup.sh
 
 .PHONY: uninstall
 # target: uninstall - Clean installation
-uninstall: clean_vim clean_ssh
+uninstall: clean_vim
 	@echo
 	@echo "Clean your HOME directory"
 	rm -rf $(HOME)/.bash_aliases
