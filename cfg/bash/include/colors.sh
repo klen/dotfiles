@@ -2,7 +2,6 @@
 # ======================
 
 if [ ! -t 1 ] || [ $(tput colors) -lt 8 ]; then
-
     export red=''
     export RED=''
     export GREEN=''
@@ -19,9 +18,7 @@ if [ ! -t 1 ] || [ $(tput colors) -lt 8 ]; then
     export white=''
     export GRAY=''
     export NC=''
-
 else
-
     export red='\033[0;31m'
     export RED='\033[1;31m'
     export GREEN='\033[0;32m'
@@ -38,6 +35,5 @@ else
     export white='\033[0;37m'
     export GRAY='\033[1;30m'
     export NC='\033[0m'
-
 fi
 

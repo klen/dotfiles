@@ -84,6 +84,11 @@ setup () {
 
     # Changing the terminal title to the last shell command
     trap 'echo -e "\e]0;$BASH_COMMAND\007"' DEBUG
+
+    if [ "$TERM" != "dumb" ]; then
+        export LS_OPTIONS='--color=auto --group-directories-first'
+        eval `dircolors $CFGDIR/dir_colors`
+    fi
 }
 
 setup && unset setup
