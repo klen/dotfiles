@@ -6,6 +6,6 @@ __command pip && {
 }
 
 # Brew support
-if [ "$OS" = "Darwin" ]; then
+if [ "$OS_VERSION" = "Darwin" ]; then
     PATH="/usr/local/share/python:$PATH"
 fi
