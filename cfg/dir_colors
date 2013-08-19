@@ -415,19 +415,22 @@ EXEC 01;31  # Unix
 
 # The brightmagenta (Solarized: purple) color is free for you to use for your
 # custom file type
-*Makefile       1;36
-*Vagrantfile    1;36
-.3des           1;36
-.aes            1;36
-.asc            1;36
-.coveragerc     1;36
-.enc            1;36
-.gitignore      1;36
-.gitmodules     1;36
-.gpg            1;36
-.gpg            1;36
-.in             1;36
-.ini            1;36
-.pgp            1;36
-.vimrc          1;36
-.yml            1;36
+*Makefile       31
+*Vagrantfile    31
+.3des           31
+.aes            31
+.asc            31
+.coveragerc     31
+.enc            31
+.gitignore      31
+.gitmodules     31
+.gpg            31
+.gpg            31
+.in             31
+.ini            31
+.pgp            31
+.vimrc          31
+.yml            31
+.gems           31
+.ruby-gemset    31
+.ruby-version   31

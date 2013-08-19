@@ -36,4 +36,3 @@ else
     export white='\033[0;37m'
     export yellow='\033[0;33m'
 fi
-

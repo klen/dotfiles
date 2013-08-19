@@ -14,6 +14,8 @@ hh () {
     echo "ex filename                   unpack archive"
     echo "pk type filename              pack archive"
     echo "update_repo                   update from repository"
+    echo "log                           tailf wrapper"
+    echo "colors                        show ansi colors table"
 }
 
 # find file by template
@@ -151,4 +153,12 @@ title () {
 log () {
     title $1
     tailf -n ${2:-100} $1
+}
+
+colors () {
+    for i in {30..37}; do
+        echo -e "\033[0;${i}m 0;${i} | \033[1;${i}m 1;${i}"
+        echo -e ""
+    done | column -c 80 -s ' ';
+   # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m" 
 }
