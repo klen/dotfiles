@@ -86,5 +86,9 @@
     remote = origin
     merge = refs/heads/develop
 
+[remote "origin"]
+    push = +refs/heads/*:refs/heads/*
+    push = +refs/tags/*:refs/tags/*
+
 [help]
     autocorrect = 1
