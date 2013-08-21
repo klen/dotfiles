@@ -48,7 +48,7 @@
 
 [alias]
     ; Show aliases
-    alias = !git config --get-regexp alias | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\t => \\2/' | sort
+    alias = !git config --get-regexp alias | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\t => \\2/' | sort
 
     ; Common abbr
     co = checkout
