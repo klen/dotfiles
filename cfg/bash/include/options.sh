@@ -17,8 +17,9 @@ export PAGER=less
 
 export HISTSIZE=
 export HISTFILESIZE=
-export HISTIGNORE="&:cd:ls:[bf]g:exit:bash:la:git st:git pull:git push:deactivate:tox:detox:history"
+export HISTIGNORE="&:cd:ls:[bf]g:exit:bash:la:deactivate:tox:detox:history"
 export HISTCONTROL=ignoreboth:erasedups
+shopt -s histappend
 
 export CLICOLOR=1
 export LSCOLORS=Hxfxcxdxbxegedabagacad
@@ -29,7 +30,6 @@ export FIGNORE="#:~:DS_Store:.pyc:.swp:.swo"
 shopt -s checkwinsize
 shopt -s cdspell # Spelling correction of directory names
 
-shopt -s histappend
 shopt -s dotglob
 
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"

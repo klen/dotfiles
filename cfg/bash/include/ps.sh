@@ -2,8 +2,6 @@
 # ===================
 
 
-unset PROMPT_COMMAND
-
 PS1="\n"
 
 # shell level
