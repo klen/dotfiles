@@ -107,6 +107,8 @@ clean_hgrc:
 $(HOME)/.vim:
 	@echo " Setup VIM configuration"
 	git clone --recursive git://github.com/klen/.vim.git $(HOME)/.vim
+
+$(HOME)/.vimrc: $(HOME)/.vim
 	echo 'source $$HOME/.vim/rc.vim' > ~/.vimrc
 
 .PHONY: clean_vim
