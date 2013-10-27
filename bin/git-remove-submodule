@@ -1,38 +1,30 @@
 #!/bin/sh
 #
-# Adam Sharp
-# Aug 21, 2013
+# Kirill Klenov 
+# Oct 27, 2013
 #
-# Usage: Add it to your PATH and `git remove-submodule path/to/submodule`.
-#
-# Does the inverse of `git submodule add`:
-#  1) `deinit` the submodule
-#  2) Remove the submodule from the index and working directory
-#  3) Clean up the .gitmodules file
-#  4) Remove .git/modules/<dir>
-#
+# Usage: Add it to your PATH and `git submodule-remove path/to/submodule`.
 
-module_path=$1
-submodule_name=$(echo "$1" | sed 's/\/$//'); shift
+ROOT=$(git rev-parse --show-toplevel)
+SUBMODULE_NAME=$(echo "$1" | sed 's/\/$//'); shift
+test -z "$SUBMODULE_NAME" && echo "You should define path to submodule." 1>&2 && exit 1
 
-exit_err() {
-  [ $# -gt 0 ] && echo "fatal: $*" 1>&2
-  exit 1
+git submodule status "$SUBMODULE_NAME" >/dev/null 2>&1 || {
+    echo "Submodule '$SUBMODULE_NAME' not found" 1>&2 && exit 1
+}
+test ! -f $ROOT/.gitmodules && echo "File .gitmodules not found" 1>&2 && exit 2
+
+git submodule deinit -f "$SUBMODULE_NAME" && git rm -f "$SUBMODULE_NAME" && {
+    SUBMODULE_PATt=$(python -c "import os.path; print os.path.relpath('$SUBMODULE_NAME','$ROOT')")
+    git config -f $ROOT/.gitmodules --remove-section "submodule.$SUBMODULE_PATH"
+    if [ -z "$(cat $ROOT/.gitmodules)" ]; then
+        git rm -f $ROOT/.gitmodules
+    else
+        git add $ROOT/.gitmodules
+    fi
+    if [ -d "$ROOT/.git/modules/$SUBMODULE_PATH" ]; then
+        echo "rm .git/modules/$SUBMODULE_PATH"
+        rm -rf "$ROOT/.git/modules/$SUBMODULE_PATH"
+    fi
 }
 
-if git submodule status "$submodule_name" >/dev/null 2>&1; then
-  git submodule deinit -f "$submodule_name"
-  git rm -f "$submodule_name"
-
-  git config -f .gitmodules --remove-section "submodule.$submodule_name"
-  if [ -z "$(cat .gitmodules)" ]; then
-    git rm -f .gitmodules
-  else
-    git add .gitmodules
-  fi
-  if [ -d ".git/modules/$module_path" ]; then
-        rm -rf ".git/modules/$module_path"
-  fi
-else
-  exit_err "Submodule '$submodule_name' not found"
-fi
