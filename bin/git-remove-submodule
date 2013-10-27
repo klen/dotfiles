@@ -15,7 +15,7 @@ git submodule status "$SUBMODULE_NAME" >/dev/null 2>&1 || {
 test ! -f $ROOT/.gitmodules && echo "File .gitmodules not found" 1>&2 && exit 2
 
 git submodule deinit -f "$SUBMODULE_NAME" && git rm -f "$SUBMODULE_NAME" && {
-    SUBMODULE_PATt=$(python -c "import os.path; print os.path.relpath('$SUBMODULE_NAME','$ROOT')")
+    SUBMODULE_PATH=$(python -c "import os.path; print os.path.relpath('$SUBMODULE_NAME','$ROOT')")
     git config -f $ROOT/.gitmodules --remove-section "submodule.$SUBMODULE_PATH"
     if [ -z "$(cat $ROOT/.gitmodules)" ]; then
         git rm -f $ROOT/.gitmodules
