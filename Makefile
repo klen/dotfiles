@@ -12,6 +12,7 @@ help:
 .PHONY: install
 # target: install - Install my dot files
 install: vim ssh git bash $(HOME)/.gnupg $(HOME)/.ctags $(HOME)/.hgrc $(HOME)/.pylintrc $(HOME)/.screenrc $(HOME)/.pip
+	@git pull
 	@git submodule init && git submodule update
 	@echo "All configurations has been installed"
 
@@ -28,6 +29,7 @@ git: $(HOME)/.gitconfig
 .PHONY: vim
 # target: vim - Install my vim files
 vim: $(HOME)/.vim $(HOME)/.vimrc
+	@cd $(HOME)/.vim && git pull
 
 .PHONY: bash
 # target: bash - Setup bash
