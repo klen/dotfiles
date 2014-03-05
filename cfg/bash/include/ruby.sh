@@ -14,6 +14,8 @@ setup () {
     for n in $commands; do
         __command $n && source $CMPDIR/${n}.sh
     done
+
+    [ -d /usr/local/opt/ruby/bin ] && PATH=/usr/local/opt/ruby/bin:$PATH
 }
 
 setup && unset setup

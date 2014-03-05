@@ -1,7 +1,7 @@
 # Brew support
-if [ "$OS_VERSION" = "Darwin" ]; then
-    PATH="/usr/local/share/python:$PATH"
-fi
+# if [ "$OS_VERSION" = "Darwin" ]; then
+    # PATH="/usr/local/share/python:$PATH"
+# fi
 
 __command pip && {
     export PIP_DOWNLOAD_CACHE=/tmp/.pip/$USER/cache

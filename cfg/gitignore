@@ -13,4 +13,5 @@
 .ropeproject
 .tags
 .tox
+.vagrant
 __pycache__
