@@ -45,3 +45,6 @@ set -o ignoreeof
 # History search
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+# Ansible
+export ANSIBLE_NOCOWS=1

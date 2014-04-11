@@ -49,6 +49,7 @@ setup () {
     source $INCDIR/ruby.sh
     source $INCDIR/python.sh
     source $INCDIR/git.sh
+    source $INCDIR/go.sh
 
     # Close promt
     PS1="${PS1}\n$ "
