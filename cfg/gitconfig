@@ -1,22 +1,22 @@
 [user]
-	name = Kirill Klenov
-	email = horneds@gmail.com
+    name = Kirill Klenov
+    email = horneds@gmail.com
     editor = vim
 
 [core]
     autocrlf = input
-	excludesfile = /Users/horneds/.home/cfg/gitignore
+    excludesfile = /Users/horneds/.home/cfg/gitignore
     filemode=true
     pager = /usr/bin/less
     sharedRepository=group
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [merge]
-    tool = lvimdiff
+    tool = vimdiff
+    conflictstyle = diff3
 
-[mergetool "lvimdiff"]
-    cmd = "vim -d -c 'wincmd J' $MERGED $LOCAL $BASE $REMOTE"
-    keepbackup = false
+[mergetool]
+    prompt = false
 
 [diff]
     tool = vimdiff
@@ -94,9 +94,3 @@
 
 [help]
     autocorrect = 1
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Volumes/SourceTree/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
