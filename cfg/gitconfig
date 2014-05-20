@@ -42,10 +42,6 @@
     untracked = red
     nobranch = red bold reverse
 
-[push]
-    default = current
-    ; default = matching
-
 [alias]
     ; Show aliases
     alias = !git config --get-regexp alias | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\t => \\2/' | sort
@@ -80,6 +76,10 @@
 [github]
     user = klen
 
+[push]
+    default = current
+    ; default = matching
+
 [branch "master"]
     remote = origin
     merge = refs/heads/master
@@ -87,10 +87,6 @@
 [branch "develop"]
     remote = origin
     merge = refs/heads/develop
-
-[remote "origin"]
-    push = +refs/heads/*:refs/heads/*
-    push = +refs/tags/*:refs/tags/*
 
 [help]
     autocorrect = 1
