@@ -34,7 +34,11 @@
       - screenrc
 
     - name: Setup smartcd - pt. 1
-      file: state=directory path=~{{home_user}}/.smartcd/virtualenvs owner={{home_user}}
+      file: state=directory path={{item}} owner={{home_user}}
+      with_items:
+      - "~{{home_user}}/.smartcd"
+      - "~{{home_user}}/.smartcd/virtualenvs"
+      - "~{{home_user}}/.smartcd/templates"
 
     - name: Setup smartcd - pt. 2
       file: state=link dest=~{{home_user}}/.smartcd/templates/{{item}} src={{inventory_dir}}/cfg/smartcd/templates/{{item}} force=yes

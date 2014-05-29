@@ -7,7 +7,6 @@
   - build-essential
   - htop
   - mercurial
-  - ncurses-dev
   - screen
   - vim
   - wget
