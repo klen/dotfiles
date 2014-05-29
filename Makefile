@@ -9,6 +9,9 @@ LIBDIR=$(CURDIR)/lib
 help:
 	@egrep "^# target:" [Mm]akefile
 
+ansible:
+	@ansible-playbook -i inventory playbook.yml -c local
+
 .PHONY: install
 # target: install - Install my dot files
 install: vim ssh git bash $(HOME)/.gnupg $(HOME)/.ctags $(HOME)/.hgrc $(HOME)/.pylintrc $(HOME)/.screenrc $(HOME)/.pip
