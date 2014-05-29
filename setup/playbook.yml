@@ -32,6 +32,7 @@
       - pip
       - pylintrc
       - screenrc
+      - vimrc
 
     - name: Setup smartcd - pt. 1
       file: state=directory path={{item}} owner={{home_user}}
@@ -74,3 +75,5 @@
 
     - name: Setup VIM - pt. 1
       git: repo=https://github.com/klen/.vim dest=~{{home_user}}/.vim
+      sudo: yes
+      sudo_user: "{{home_user}}"
