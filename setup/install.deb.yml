@@ -1,0 +1,14 @@
+---
+
+- apt: update_cache=yes cache_valid_time=2678400
+
+- apt: pkg={{item}}
+  with_items:
+  - build-essential
+  - htop
+  - mercurial
+  - ncurses-dev
+  - screen
+  - vim
+  - wget
+  - exuberant-ctags

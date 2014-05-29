@@ -1,4 +1,0 @@
----
-
-home_user: "{{ansible_ssh_user}}"
-home_remove: no

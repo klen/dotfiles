@@ -12,4 +12,4 @@ Installation
 
 ::
 
-    $ wget http://klen.github.io/go -O- | sh
+    $ curl klen.github.io/go | sh

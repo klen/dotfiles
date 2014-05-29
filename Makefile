@@ -10,7 +10,7 @@ help:
 	@egrep "^# target:" [Mm]akefile
 
 ansible:
-	@ansible-playbook -i inventory playbook.yml -c local
+	@ansible-playbook -i inventory setup/playbook.yml -c local
 
 .PHONY: install
 # target: install - Install my dot files
