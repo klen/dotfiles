@@ -6,6 +6,7 @@ uname   -a
 cat /etc/lsb-release 2&>/dev/null
 __command cowsay && __command fortune &&  fortune -s | cowsay -f $LIBDIR/girl.cow 2>/dev/null
 __command lastlog && lastlog -u $USER
+__command landscape-sysinfo && landscape-sysinfo
 
 setup () {
 
