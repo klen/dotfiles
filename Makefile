@@ -10,8 +10,9 @@ help:
 	@egrep "^# target:" [Mm]akefile
 
 ansible:
-	@sudo apt-get install ansible &1>/dev/null
-	@sudo ansible-playbook -i inventory setup/playbook.yml -c local
+	@sudo apt-get install ansible
+	@git submodule update --init
+	@ansible-playbook -i inventory setup/playbook.yml -c local -sK
 
 .PHONY: install
 # target: install - Install my dot files

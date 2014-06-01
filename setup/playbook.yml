@@ -7,73 +7,80 @@
 
   tasks:
 
-    - name: Update configuration
-      git: repo=https://github.com/klen/.home dest={{inventory_dir}}
+  - name: Update configuration
+    git: repo=https://github.com/klen/.home dest={{inventory_dir}}
 
-    - include: install.deb.yml
-      when: ansible_os_family == "Debian"
+  - include: install.deb.yml
+    when: ansible_os_family == "Debian"
 
-    - name: Setup bash - pt. 1
-      file: state=link dest=~{{home_user}}/.{{item}} src={{inventory_dir}}/cfg/bash/{{item}} force=yes
-      with_items:
-      - bashrc
-      - bash_aliases
-      - bash_profile
+  - name: Setup bash - pt. 1
+    file: state=link dest=~{{home_user}}/.{{item}} src={{inventory_dir}}/cfg/bash/{{item}} force=yes owner={{home_user}} group={{home_user}}
+    with_items:
+    - bashrc
+    - bash_aliases
+    - bash_profile
 
-    - name: Setup bash - pt. 2
-      file: state=link dest=~{{home_user}}/bin src={{inventory_dir}}/bin force=yes
+  - name: Setup bash - pt. 2
+    file: state=link dest=~{{home_user}}/bin src={{inventory_dir}}/bin force=yes owner={{home_user}} group={{home_user}}
 
-    - name: Setup utils
-      file: state=link dest=~{{home_user}}/.{{item}} src={{inventory_dir}}/cfg/{{item}} force=yes
-      with_items:
-      - ctags
-      - gitconfig
-      - hgrc
-      - pip
-      - pylintrc
-      - screenrc
-      - vimrc
+  - name: Setup utils
+    file: state=link dest=~{{home_user}}/.{{item}} src={{inventory_dir}}/cfg/{{item}} force=yes owner={{home_user}} group={{home_user}}
+    with_items:
+    - ctags
+    - gitconfig
+    - hgrc
+    - pylintrc
+    - screenrc
+    - vimrc
 
-    - name: Setup smartcd - pt. 1
-      file: state=directory path={{item}} owner={{home_user}}
-      with_items:
-      - "~{{home_user}}/.smartcd"
-      - "~{{home_user}}/.smartcd/virtualenvs"
-      - "~{{home_user}}/.smartcd/templates"
+  - name: Setup pip - pt. 1
+    file: state=directory dest=~{{home_user}}/.pip owner={{home_user}} group={{home_user}}
 
-    - name: Setup smartcd - pt. 2
-      file: state=link dest=~{{home_user}}/.smartcd/templates/{{item}} src={{inventory_dir}}/cfg/smartcd/templates/{{item}} force=yes
-      with_items:
-      - vagrant
-      - virtualenv
+  - name: Setup pip - pt. 2
+    file: state=link dest=~{{home_user}}/.pip/pip.conf src={{inventory_dir}}/cfg/pip/pip.conf force=yes owner={{home_user}} group={{home_user}}
 
-    - name: Setup cheat
-      file: state=link dest=~{{home_user}}/.cheat src={{inventory_dir}}/lib/cheat/data force=yes
+  - name: Setup smartcd - pt. 1
+    file: state=directory path={{item}} owner={{home_user}} group={{home_user}}
+    with_items:
+    - "~{{home_user}}/.smartcd"
+    - "~{{home_user}}/.smartcd/virtualenvs"
+    - "~{{home_user}}/.smartcd/templates"
 
-    - name: Setup ssh - pt. 1
-      file: state=directory dest=~{{home_user}}/.ssh owner={{home_user}}
+  - name: Setup smartcd - pt. 2
+    file: state=link dest=~{{home_user}}/.smartcd/templates/{{item}} src={{inventory_dir}}/cfg/smartcd/templates/{{item}} force=yes owner={{home_user}} group={{home_user}}
+    with_items:
+    - vagrant
+    - virtualenv
 
-    - name: Setup ssh - pt. 2
-      lineinfile: >
-        dest=~{{home_user}}/.ssh/authorized_keys
-        line="{{item}}"
-        create=yes
-      with_items: home_authorized_keys
+  - name: Setup cheat
+    file: state=link dest=~{{home_user}}/.cheat src={{inventory_dir}}/lib/cheat/data force=yes owner={{home_user}} group={{home_user}}
 
-    - name: Setup ssh - pt. 3
-      lineinfile: >
-        dest=~{{home_user}}/.ssh/known_hosts
-        line="{{item}}"
-        create=yes
-      with_items: home_fingerprints
+  - name: Setup ssh - pt. 1
+    file: state=directory dest=~{{home_user}}/.ssh owner={{home_user}} group={{home_user}}
 
-    - name: Setup gnupg - pt. 1
-      file: state=directory mode=0700 dest=~{{home_user}}/.gnupg owner={{home_user}}
+  - name: Setup ssh - pt. 2
+    lineinfile: >
+      dest=~{{home_user}}/.ssh/authorized_keys
+      line="{{item}}"
+      create=yes
+    with_items: home_authorized_keys
 
-    - name: Setup gnupg - pt. 2
-      copy: src={{inventory_dir}}/cfg/gnupg/horneds-pubkey.asc dest=~{{home_user}}/.gnupg/horneds-pubkey.asc owner={{home_user}}
+  - name: Setup ssh - pt. 3
+    lineinfile: >
+      dest=~{{home_user}}/.ssh/known_hosts
+      line="{{item}}"
+      create=yes
+    with_items: home_fingerprints
 
-    - name: Setup VIM - pt. 1
-      git: repo=https://github.com/klen/.vim dest=~{{home_user}}/.vim
-      sudo: yes
-      sudo_user: "{{home_user}}"
+  - name: Setup gnupg - pt. 1
+    file: state=directory mode=0700 dest=~{{home_user}}/.gnupg owner={{home_user}} group={{home_user}}
+
+  - name: Setup gnupg - pt. 2
+    copy: src={{inventory_dir}}/cfg/gnupg/horneds-pubkey.asc dest=~{{home_user}}/.gnupg/horneds-pubkey.asc owner={{home_user}} group={{home_user}}
+
+  - name: Setup VIM - pt. 1
+    git: repo=https://github.com/klen/.vim dest=~{{home_user}}/.vim depth=2
+    sudo: yes
+    sudo_user: "{{home_user}}"
+
+# vim:sw=2:ft=ansible
