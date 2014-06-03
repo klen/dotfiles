@@ -14,13 +14,17 @@ hh () {
     echo "ffs [-i] STRING [FILENAME]          find STRING in file"
     echo "ffr [-i] STRING1 STRING2 [FILENAME] replace STRING in file"
 
-    echo "colors                              show ansi colors table"
-    echo "ii                                  show system info"
     echo "killps [-SIGNAL] PROCNAME           kill process by PROCNAME"
     echo "mps                                 show my process"
     echo "mpst                                show my tree process"
 
     echo "taill                               tailf wrapper"
+
+    echo "ii                                  show system info"
+
+    echo "home                                Update user configurations"
+
+    echo "colors                              show ansi colors table"
 }
 
 # find file by template
@@ -59,10 +63,12 @@ ffr() {
 }
 
 # Show current user processes
-mps() { ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command ; }
+psm() { ps $@ -u $USER -o pid,user,%cpu,%mem,bsdtime,command ; }
+
+psa() { ps fax -o pid,user,%cpu,%mem,bsdtime,command ; } 
 
 # Show tree of current user processes
-mpst() { mps f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
+psmt() { mps f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
 
 # Kill process by template
 killps() {
@@ -161,6 +167,12 @@ colors () {
     done | column -c 80 -s ' ';
    # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m" 
 }
+
+home () {
+    test -d $HOME/.home || git clone https://github.com/klen/.home.git
+    cd $HOME/.home && make ansible
+}
+
 _ask () {
     echo "$* [y/n]?"
     read ans
@@ -175,3 +187,4 @@ _ask () {
     fi
 }
 
+# vim:fdm=indent
