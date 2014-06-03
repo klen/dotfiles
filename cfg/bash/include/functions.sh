@@ -15,10 +15,11 @@ hh () {
     echo "ffr [-i] STRING1 STRING2 [FILENAME] replace STRING in file"
 
     echo "killps [-SIGNAL] PROCNAME           kill process by PROCNAME"
-    echo "mps                                 show my process"
-    echo "mpst                                show my tree process"
+    echo "psm                                 show my processes"
+    echo "psa                                 show all processes"
+    echo "psmt                                show my tree process"
 
-    echo "taill                               tailf wrapper"
+    echo "log                                 tailf wrapper"
 
     echo "ii                                  show system info"
 
@@ -154,7 +155,7 @@ title () {
 }
 
 # tailf wrapper
-taill () {
+log () {
     title $1
     local CMD="tailf -n ${2:-200} $1"
     test -r $1 && $CMD || sudo $CMD
@@ -170,7 +171,10 @@ colors () {
 
 home () {
     test -d $HOME/.home || git clone https://github.com/klen/.home.git
-    cd $HOME/.home && make ansible && cd -
+    cd $HOME/.home
+    make ansible
+    cd -
+    . $HOME/.bashrc
 }
 
 _ask () {
