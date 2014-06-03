@@ -170,7 +170,7 @@ colors () {
 
 home () {
     test -d $HOME/.home || git clone https://github.com/klen/.home.git
-    cd $HOME/.home && make ansible
+    cd $HOME/.home && make ansible && cd -
 }
 
 _ask () {
