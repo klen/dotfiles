@@ -18,6 +18,7 @@ alias less='less -r'
 alias ls='ls $LS_OPTIONS -Fh' 
 alias ll='ls $LS_OPTIONS -A'
 alias la='ll $LS_OPTIONS -FhlA'
+alias pa='ps aux'
 
 # others
 alias vi='vim'

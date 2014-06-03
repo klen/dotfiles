@@ -5,9 +5,11 @@
 - apt: pkg={{item}}
   with_items:
   - build-essential
+  - exuberant-ctags
+  - git-flow
   - htop
   - mercurial
+  - python-pip
   - screen
   - vim
   - wget
-  - exuberant-ctags
