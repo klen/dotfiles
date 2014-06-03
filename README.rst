@@ -10,6 +10,10 @@ My home settings.
 Installation
 ------------
 
+Debian based systems:
+
 ::
 
-    $ curl klen.github.io/go | sh
+    $ git clone https://github.com/klen/.home.git --recursive ~/.home
+    $ sudo apt-get update
+    $ cd .home && make ansible

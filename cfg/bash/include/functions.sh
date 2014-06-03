@@ -4,28 +4,33 @@
 # Show help
 hh () {
     echo "Avalible commands:"
-    echo "ff FILENAME                   find file by FILENAME"
-    echo "fe FILENAME COMMAND           find file by FILENAME and execute COMMAND"
-    echo "fstr [-i] STRING [FILENAME]   find STRING in file"
-    echo "mps                           show my process"
-    echo "mpst                          show my tree process"
-    echo "killps [-SIGNAL] PROCNAME     kill process by PROCNAME"
-    echo "ii                            show system info"
-    echo "ex filename                   unpack archive"
-    echo "pk type filename              pack archive"
-    echo "update_repo                   update from repository"
-    echo "log                           tailf wrapper"
-    echo "colors                        show ansi colors table"
+    echo "apt_update                          update from repository"
+
+    echo "pk type filename                    pack archive"
+    echo "ex filename                         unpack archive"
+
+    echo "ff FILENAME                         find file by FILENAME"
+    echo "ffe FILENAME COMMAND                find file by FILENAME and execute COMMAND"
+    echo "ffs [-i] STRING [FILENAME]          find STRING in file"
+    echo "ffr [-i] STRING1 STRING2 [FILENAME] replace STRING in file"
+
+    echo "colors                              show ansi colors table"
+    echo "ii                                  show system info"
+    echo "killps [-SIGNAL] PROCNAME           kill process by PROCNAME"
+    echo "mps                                 show my process"
+    echo "mpst                                show my tree process"
+
+    echo "taill                               tailf wrapper"
 }
 
 # find file by template
 ff() { find . -type f -iname '*'$*'*' -ls ; }
 
 # find file by template and execute command
-fe() { find . -type f -iname '*'$1'*' -exec "${2:-file}" {} \;  ; }
+ffe() { find . -type f -iname '*'$1'*' -exec "${2:-file}" {} \;  ; }
 
 # find string in files
-fstr() {
+ffs() {
     OPTIND=1
     local case=""
     local usage="fstr: search string in files. Usage: fstr [-i] \"str template\" [\"filename template\"] "
@@ -43,8 +48,14 @@ fstr() {
     fi
     local SMSO=$(tput smso)
     local RMSO=$(tput rmso)
-    find . -type f -name "${2:-*}" -print0 | xargs -0 grep -sn ${case} "$1" 2>&- | \
-sed "s/$1/${SMSO}\0${RMSO}/gI" | more
+    find . -type f -name "${2:-*}" -print0 | xargs -0 grep -sn ${case} "$1" 2>&- | sed "s/$1/${SMSO}\0${RMSO}/gI" | more
+}
+
+# find and replace string in files
+ffr() {
+    local CMD=grep -rl $1 $3 | xargs sed -i "s/$1/$2/g"
+    echo $CMD
+    $CMD
 }
 
 # Show current user processes
@@ -63,24 +74,10 @@ killps() {
     if [ $# = 2 ]; then sig=$1 ; fi
     for pid in $(mps| awk '!/awk/ && $0~pat { print $1 }' pat=${!#} ) ; do
         pname=$(mps | awk '$1~var { print $5 }' var=$pid )
-        if ask "Send signal $sig to process $pid <$pname>?"
+        if _ask "Send signal $sig to process $pid <$pname>?"
             then kill $sig $pid
         fi
     done
-}
-
-ask () {
-    echo "$* [y/n]?"
-    read ans
-    if [ $ans = y -o $ans = Y -o $ans = yes -o $ans = Yes -o $ans = YES ]
-    then
-        return 0
-    fi
-
-    if [ $ans = n -o $ans = N -o $ans = no -o $ans = No -o $ans = NO ]
-    then
-        return 1
-    fi
 }
 
 # Show system information
@@ -90,6 +87,7 @@ ii() {
     echo -en "${RED}Uptime :$NC " ; uptime
     echo -e "\n${RED}System logged users:$NC " ;w -h
     echo -e "\n${RED}Free :$NC " ; free
+    command -v landscape-sysinfo && landscape-sysinfo
 }
 
 # unpack
@@ -132,7 +130,7 @@ pk () {
     fi
 }
 
-update_repo() {
+apt_update() {
     sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/$1" \
     -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"    
 }
@@ -141,7 +139,7 @@ _sources_lists(){
 
     COMPREPLY=( $( find /etc/apt/sources.list.d/ -name "*$cur*.list" -exec basename {} \; 2> /dev/null ) )
 } &&
-complete -F _sources_lists update_repo
+complete -F _sources_lists apt_update
 
 
 # Set terminal title
@@ -150,9 +148,10 @@ title () {
 }
 
 # tailf wrapper
-log () {
+taill () {
     title $1
-    tailf -n ${2:-100} $1
+    local CMD="tailf -n ${2:-200} $1"
+    test -r $1 && $CMD || sudo $CMD
 }
 
 colors () {
@@ -162,3 +161,17 @@ colors () {
     done | column -c 80 -s ' ';
    # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m" 
 }
+_ask () {
+    echo "$* [y/n]?"
+    read ans
+    if [ $ans = y -o $ans = Y -o $ans = yes -o $ans = Yes -o $ans = YES ]
+    then
+        return 0
+    fi
+
+    if [ $ans = n -o $ans = N -o $ans = no -o $ans = No -o $ans = NO ]
+    then
+        return 1
+    fi
+}
+
