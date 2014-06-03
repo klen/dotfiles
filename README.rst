@@ -16,4 +16,4 @@ Debian based systems:
 
     $ git clone https://github.com/klen/.home.git --recursive ~/.home
     $ sudo apt-get update
-    $ cd .home && make ansible
+    $ cd .home && make
