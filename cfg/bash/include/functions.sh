@@ -69,7 +69,7 @@ psm() { ps $@ -u $USER -o pid,user,%cpu,%mem,bsdtime,command ; }
 psa() { ps fax -o pid,user,%cpu,%mem,bsdtime,command ; } 
 
 # Show tree of current user processes
-psmt() { mps f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
+psmt() { psm f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
 
 # Kill process by template
 killps() {
