@@ -13,3 +13,7 @@ __command pip && {
 __command salt && {
     source $CMPDIR/salt.sh
 }
+
+__command pyenv && {
+    eval "$(pyenv init -)"
+}
