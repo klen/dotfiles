@@ -1,0 +1,13 @@
+---
+
+- homebrew: update_homebrew=yes
+
+- homebrew: name={{item}}
+  with_items:
+  - git
+  - git-flow
+  - htop-osx
+  - mercurial
+  - python
+  - vim
+  - wget

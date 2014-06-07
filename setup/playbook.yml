@@ -13,6 +13,9 @@
   - include: install.deb.yml
     when: ansible_os_family == "Debian"
 
+  - include: install.osx.yml
+    when: ansible_os_family == "Darwin"
+
   - name: Setup bash - pt. 1
     file: state=link dest=~{{home_user}}/.{{item}} src={{inventory_dir}}/cfg/bash/{{item}} force=yes owner={{home_user}} group={{home_user}}
     with_items:
