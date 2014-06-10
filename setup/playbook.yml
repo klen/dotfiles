@@ -37,7 +37,7 @@
     - vimrc
 
   - name: Setup gems
-    gem: name={{item}} user_install=no
+    command: bash -lc "gem install {{item}}"
     with_items:
       - git-up
       - rake
