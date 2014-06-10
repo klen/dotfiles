@@ -37,7 +37,10 @@
     - vimrc
 
   - name: Setup gems
-    gem: name=git-up
+    gem: name={{item}} user_install=no
+    with_items:
+      - git-up
+      - rake
 
   - name: Setup pip - pt. 1
     file: state=directory dest=~{{home_user}}/.pip owner={{home_user}}
