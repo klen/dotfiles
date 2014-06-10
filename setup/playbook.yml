@@ -36,6 +36,9 @@
     - screenrc
     - vimrc
 
+  - name: Setup gems
+    gem: name=git-up
+
   - name: Setup pip - pt. 1
     file: state=directory dest=~{{home_user}}/.pip owner={{home_user}}
 
