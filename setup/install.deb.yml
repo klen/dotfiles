@@ -11,6 +11,7 @@
   - mercurial
   - python-pip
   - ruby
+  - ruby-dev
   - screen
   - vim
   - wget
