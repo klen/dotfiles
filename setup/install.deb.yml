@@ -12,6 +12,7 @@
   - python-pip
   - ruby
   - ruby-dev
+  - rubygems
   - screen
   - vim
   - wget
