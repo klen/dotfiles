@@ -66,7 +66,7 @@ ffr() {
 # Show current user processes
 psm() { ps $@ -u $USER -o pid,user,%cpu,%mem,bsdtime,command ; }
 
-psa() { ps fax -o pid,user,%cpu,%mem,bsdtime,command ; } 
+psa() { ps fax -o pid,ppid,user,%cpu,%mem,bsdtime,command ; } 
 
 # Show tree of current user processes
 psmt() { psm f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
