@@ -48,6 +48,11 @@
   - name: Setup pip - pt. 2
     file: state=link dest=~{{home_user}}/.pip/pip.conf src={{inventory_dir}}/cfg/pip/pip.conf force=yes owner={{home_user}}
 
+  - name: Setup pip - pt. 3
+    pip: name={{item}}
+    with_items:
+      - atmark
+
   - name: Setup smartcd - pt. 1
     file: state=directory path={{item}} owner={{home_user}}
     with_items:
@@ -91,5 +96,7 @@
     git: repo=https://github.com/klen/.vim dest=~{{home_user}}/.vim depth=2
     sudo: yes
     sudo_user: "{{home_user}}"
+
+  - file: state=directory owner={{home_user}} recurse=yes path=~{{home_user}}/.home
 
 # vim:sw=2:ft=ansible

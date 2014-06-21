@@ -44,6 +44,7 @@ setup () {
     source $CMPDIR/makesite.sh
     source $CMPDIR/cd_.sh
     source $CMPDIR/rmqadmin.sh
+    __command @ &&  source $CMPDIR/atmark.sh
 
     # Setup tools
     source $INCDIR/ruby.sh

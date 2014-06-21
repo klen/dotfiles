@@ -56,7 +56,7 @@
 
     ; View logs and diff
     hist = log --graph --pretty="format:%C(yellow)%h%Cred%d\\ %Creset%s\\ %Cgreen[%an]" --all
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ls = log --pretty=format:"%C(yellow)%h\\ %Cblue[%cn]\\%Cred%d\\ %Creset%s" --decorate
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --stat
     diff = diff --word-diff
     dc = diff --cached
