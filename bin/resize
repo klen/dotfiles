@@ -2,11 +2,36 @@
 
 # Resize image in current directory
 
-echo -e $RED"Resize images." $NC
+help () {
+    echo -e "${GREEN}Resize all images in current folder. $NC"
+    echo
+    echo -e "${GREEN}Usage:$NC resize [SIZE] [FOLDER]"
+}
 
-for image in ./*.[jJ][pP][gG]; do
-    test -r $image && {
-        echo -e ${YELLOW}Convert $image $NC
-        convert "$image" -geometry x1200 -quality 85 "$image"
-    }
-done
+command -v convert || {
+    echo "Imagemagic is not found. Exiting."
+    exit 1
+}
+
+case $1 in
+    "-h")
+        help
+        exit 0
+    ;;
+    "--help")
+        help
+        exit 0
+    ;;
+    *)
+        SIZE=${1:-1200}
+        FOLDER=${2:-.}
+        for image in $FOLDER/*.[jJ][pP][gG]; do
+            test -r $image && {
+                echo -e ${YELLOW}Convert $image to x$SIZE $NC
+                convert "$image" -geometry x$SIZE -quality 85 "${image}"
+            }
+        done
+
+esac
+
+
