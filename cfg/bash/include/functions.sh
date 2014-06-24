@@ -157,7 +157,7 @@ title () {
 # tailf wrapper
 log () {
     title $1
-    local CMD="tailf -n ${2:-200} $1"
+    local CMD="tail -f -n ${2:-200} $1"
     test -r $1 && $CMD || sudo $CMD
 }
 
