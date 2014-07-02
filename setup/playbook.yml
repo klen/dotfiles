@@ -7,9 +7,6 @@
 
   tasks:
 
-  - name: Update configuration
-    git: repo=https://github.com/klen/.home dest={{inventory_dir}}
-
   - include: install.deb.yml
     when: ansible_os_family == "Debian"
 

@@ -11,5 +11,7 @@ help:
 # target: ansible - Setup the system with ansible
 ansible:
 	@sudo apt-get install ansible -y || echo "Skip ansible installation"
+	@git fetch origin
+	@git rebase origin/master
 	@git submodule update --init
 	@ansible-playbook -i inventory setup/playbook.yml -c local -sK
