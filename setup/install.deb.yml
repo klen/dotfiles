@@ -19,7 +19,7 @@
   - ruby-dev
   - rubygems
   - screen
-  - vim
+  - vim-nox
   - wget
 
 # vim:sw=2
