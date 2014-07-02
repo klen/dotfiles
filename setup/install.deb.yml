@@ -2,7 +2,10 @@
 
 - apt: update_cache=yes cache_valid_time=2678400
 
-- apt_repository: repo='ppa:git-core/ppa'
+- apt_repository: repo={{item}}
+  with_items:
+  - ppa:git-core/ppa
+  - ppa:vim-full/ppa
 
 - apt: pkg={{item}}
   with_items:
