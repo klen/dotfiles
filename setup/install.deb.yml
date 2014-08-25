@@ -13,6 +13,7 @@
   - exuberant-ctags
   - git-flow
   - htop
+  - libxml2-utils
   - mercurial
   - python-pip
   - ruby
