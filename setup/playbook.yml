@@ -49,6 +49,7 @@
     pip: name={{item}}
     with_items:
       - atmark
+      - httpie
 
   - name: Setup smartcd - pt. 1
     file: state=directory path={{item}} owner={{home_user}}

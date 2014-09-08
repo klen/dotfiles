@@ -28,7 +28,7 @@ case $1 in
         for image in $FOLDER/*.[jJ][pP][gG]; do
             test -r $image && {
                 echo -e ${YELLOW}Convert $image to x$SIZE $NC
-                convert "$image" -geometry x$SIZE -quality 85 "${image}"
+                convert "$image" -geometry x$SIZE -quality 85
             }
         done
 
