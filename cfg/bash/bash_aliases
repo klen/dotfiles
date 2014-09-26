@@ -10,6 +10,15 @@ alias hsync='rsync -lrtvpC .'
 
 # ---------------
 # Common
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+alias cd.='cd ..'
+alias cd..='cd ..'
+
 alias g='grep'
 alias rm='rm -i'
 alias cp='cp -i'
