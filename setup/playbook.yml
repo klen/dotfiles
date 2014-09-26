@@ -36,6 +36,7 @@
   - name: Setup gems
     command: bash -lc "gem list {{item}} -i || gem install {{item}}"
     with_items:
+      - curses
       - git-up
       - rake
 
