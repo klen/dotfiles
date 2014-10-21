@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-" Universal script to update the VCS. "
+
+""" Universal script to update the VCS. """
+
+from __future__ import print_function
 
 import os
 import sys
@@ -10,39 +13,44 @@ __version__ = '0.01'
 
 
 SCMS = {
-    '.svn' : 'svn update %s',
-    '.git' : 'cd %s && git checkout master && git pull -v',
-    '.bzr' : 'cd %s && bzr pull',
-    '.hg'  : 'cd %s && hg pull && hg update',
+    '.svn': 'svn update %(path)s',
+    '.git': 'cd %(path)s && git checkout %(branch)s && git pull -v',
+    '.bzr': 'cd %(path)s && bzr pull',
+    '.hg': 'cd %(path)s && hg pull && hg update',
 }
 
 
-def run(path):
-
+def run(path, **options):
+    """ Recursivly walk through repositories and update. """
     if os.path.isfile(path):
         return
 
     for item in os.listdir(path):
-        if SCMS.has_key(item):
-            print '\nFind: %s\n' % path, '$', SCMS[item] % path
-            os.system(SCMS[item] % path)
+        if item in SCMS:
+            options['path'] = path
+            print('\n# Find: %s\n' % path)
+            print('$ %s' % SCMS[item] % options)
+            os.system(SCMS[item] % options)
+            del options['path']
             if item == '.svn':
                 return
 
     for folder in os.listdir(path):
-        run(os.path.join(path, folder))
+        try:
+            run(os.path.join(path, folder), **options)
+        except OSError as e:
+            print(e)
 
 
-def main(*args):
-    p = optparse.OptionParser(
-        version=__version__,
-        usage="%prog [DIRNAME]",
-        description= '''"%prog is script to recursive update all SCMs (Bazaar, Darcs, Git, Git SVN, Mercurial, Subversion) directories.''')
+p = optparse.OptionParser(
+    version=__version__,
+    usage="%prog [DIRNAME]",
+    description= '''"%prog is script to recursive update all SCMs (Bazaar, Darcs, Git, Git SVN, Mercurial, Subversion) directories.''') # noqa
 
-    args = p.parse_args(list(args))[1]
-    path = args[0] if args else os.getcwd()
-    run(path)
+p.add_option(
+    '-b', '--branch',  default='master', dest='branch',
+    help='Set branch to update')
 
-
-if __name__ == '__main__':
-    main(*sys.argv[1:])
+options, args = p.parse_args(sys.argv[1:])
+path = args[0] if args else os.getcwd()
+run(path, branch=options.branch)
