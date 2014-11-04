@@ -2,6 +2,8 @@
 
 - apt: update_cache=yes cache_valid_time=2678400
 
+- apt: pkg=python-pycurl
+
 - apt_repository: repo={{item}}
   with_items:
   - ppa:git-core/ppa
@@ -16,8 +18,6 @@
   - libxml2-utils
   - mercurial
   - python-pip
-  - ruby
-  - ruby-dev
   - screen
   - unzip
   - vim-nox

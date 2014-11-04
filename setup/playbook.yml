@@ -3,7 +3,7 @@
 - hosts: all
 
   vars_files:
-    - vars.yml
+  - vars.yml
 
   tasks:
 
@@ -33,13 +33,6 @@
     - screenrc
     - vimrc
 
-  - name: Setup gems
-    command: bash -lc "gem list {{item}} -i || gem install {{item}}"
-    with_items:
-      - curses
-      - git-up
-      - rake
-
   - name: Setup pip - pt. 1
     file: state=directory dest=~{{home_user}}/.pip owner={{home_user}}
 
@@ -50,6 +43,7 @@
     pip: name={{item}}
     with_items:
       - atmark
+      - git-up
       - httpie
 
   - name: Setup smartcd - pt. 1

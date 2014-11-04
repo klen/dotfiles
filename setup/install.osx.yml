@@ -13,7 +13,6 @@
   - mercurial
   - pyenv
   - python
-  - ruby
+  - python3
   - unzip
-  - vim
   - wget
