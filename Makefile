@@ -17,5 +17,17 @@ update:
 .PHONY: ansible
 # target: ansible - Setup the system with ansible
 ansible:
-	@sudo apt-get install ansible -y || echo "Skip ansible installation"
+	@command -v ansible-playbook || make ansible-install
 	@ansible-playbook -i inventory setup/playbook.yml -c local -sK
+
+
+.PHONY: ansible-install
+ansible-install:
+	@command -v apt-get && sudo apt-get install ansible -y || true
+	@command -v yum && sudo yum install ansible || true
+
+
+.PHONY: epel
+epel:
+	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+	sudo rpm -Uvh epel-release-7*.rpm

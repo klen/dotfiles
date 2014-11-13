@@ -7,6 +7,9 @@
 
   tasks:
 
+  - include: install.yum.yml
+    when: ansible_os_family == "RedHat"
+
   - include: install.deb.yml
     when: ansible_os_family == "Debian"
 

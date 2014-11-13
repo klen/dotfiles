@@ -1,0 +1,13 @@
+---
+
+- yum: name={{item}}
+  with_items:
+  - ctags-etags
+  - gitflow
+  - htop
+  - mercurial
+  - python-pip
+  - screen
+  - unzip
+  - wget
+
