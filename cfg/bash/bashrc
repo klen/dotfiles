@@ -90,7 +90,7 @@ setup () {
 setup && unset setup
 
 # Changing the terminal title to the last shell command
-trap 'echo -e "\e]0;$BASH_COMMAND\007"' DEBUG
+# trap 'echo -e "\e]0;$BASH_COMMAND\007"' DEBUG
 
 # Load local settings
 source $HOME/.bash_local 2>/dev/null
