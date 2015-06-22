@@ -2,10 +2,13 @@
 
 - homebrew: update_homebrew=yes
 
+- shell: brew tap homebrew/dupes
+
 - homebrew: name={{item}}
   with_items:
   - bash
   - bash-completion
+  - coreutils
   - ctags
   - git
   - git-flow
@@ -16,3 +19,4 @@
   - python3
   - unzip
   - wget
+  sudo: no
