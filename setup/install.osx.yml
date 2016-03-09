@@ -10,13 +10,13 @@
   - bash-completion
   - coreutils
   - ctags
+  - docker
+  - docker-machine
   - git
   - git-flow
   - htop-osx
   - mercurial
   - pyenv
-  - python
-  - python3
   - unzip
   - wget
   sudo: no
