@@ -48,6 +48,7 @@
       - atmark
       - git-up
       - httpie
+      - virtualenv
 
   - name: Setup smartcd - pt. 1
     file: state=directory path={{item}} owner={{home_user}}
