@@ -18,13 +18,18 @@ update:
 # target: ansible - Setup the system with ansible
 ansible:
 	@command -v ansible-playbook || make ansible-install
-	@ansible-playbook -i inventory setup/playbook.yml -c local -sK
+	@ansible-playbook -i inventory setup/playbook.yml -c local
+
+desktop:
+	@command -v ansible-playbook || make ansible-install
+	@ansible-playbook -i inventory setup/desktop.yml -c local
 
 
 .PHONY: ansible-install
 ansible-install:
 	@command -v apt-get && sudo apt-get install ansible -y || true
 	@command -v yum && sudo yum install ansible || true
+	@command -v brew && brew install ansible || true
 
 
 .PHONY: epel
