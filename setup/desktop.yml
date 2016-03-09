@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  tasks:
+
+  - homebrew: name=caskroom/cask/brew-cask
+  - homebrew_cask: name={{item}}
+    with_items:
+    - 1password
+    - alfred
+    - ccleaner
+    - dropbox
+    - flux
+    - google-drive
+    - hyperdock
+    - istat-menus
+    - skype
+    - slack
+    - telegram
+    - transmission
+    - vagrant
+    - virtualbox
+    - vlc
+    environment:
+      HOMEBREW_CASK_OPTS: --appdir=/Applications
