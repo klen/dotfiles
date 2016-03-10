@@ -2,7 +2,6 @@
 
 - hosts: all
   tasks:
-
   - homebrew: name=caskroom/cask/brew-cask
   - homebrew_cask: name={{item}}
     with_items:

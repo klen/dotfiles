@@ -9,12 +9,15 @@
 
   - include: install.yum.yml
     when: ansible_os_family == "RedHat"
+    become: yes
 
   - include: install.deb.yml
     when: ansible_os_family == "Debian"
+    become: yes
 
   - include: install.osx.yml
     when: ansible_os_family == "Darwin"
+    become: yes
 
   - name: Setup bash - pt. 1
     file: state=link dest=~{{home_user}}/.{{item}} src={{inventory_dir}}/cfg/bash/{{item}} force=yes owner={{home_user}}
@@ -44,8 +47,8 @@
 
   - name: Setup pip - pt. 3
     pip: name={{item}}
+    become: yes
     with_items:
-      - atmark
       - git-up
       - httpie
       - virtualenv
@@ -74,14 +77,14 @@
       dest=~{{home_user}}/.ssh/authorized_keys
       line="{{item}}"
       create=yes
-    with_items: home_authorized_keys
+    with_items: "{{home_authorized_keys}}"
 
   - name: Setup ssh - pt. 3
     lineinfile: >
       dest=~{{home_user}}/.ssh/known_hosts
       line="{{item}}"
       create=yes
-    with_items: home_fingerprints
+    with_items: "{{home_fingerprints}}"
 
   - name: Setup gnupg - pt. 1
     file: state=directory mode=0700 dest=~{{home_user}}/.gnupg owner={{home_user}}
@@ -91,8 +94,7 @@
 
   - name: Setup VIM
     git: repo=https://github.com/klen/.vim dest=~{{home_user}}/.vim depth=2
-    sudo: yes
-    sudo_user: "{{home_user}}"
+    become_user: "{{home_user}}"
 
   - file: state=directory owner={{home_user}} recurse=yes path=~{{home_user}}/.home
 

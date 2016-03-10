@@ -1,6 +1,6 @@
 ---
 
-home_user: "{{ansible_ssh_user}}"
+home_user: "{{ansible_user_id}}"
 home_remove: no
 home_authorized_keys: 
 - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFQQNgbNB4TmtdflMyki2VTyHUPmWkZISnVZ45oyNzkjaq4Vu5TgOignXcWYpFNO8kt07gv7ouX+nDudsbKGNyfarqJHqujVzxYySN+QlBgSBH9mBoUFdb7OrRhNXhEyW3AxOdIZov14KUuTSILKulS/wIPp6CmKLxQ55dkxpWqz5vrubgj9ZeSr6XpNgzIS+ds/eALTf/wlXGB4uTF/YXTf1M3O4SqH18XJxNZpCnc3zRplnJZKQAhzqjZJs63D+VZlpaalIfD/uMIMaId90iutB4TH8QHECWkn+vPSC96fbxRI/jo4MB8tLSI8u6DexP8A9jrt+EQV28wACJVK4z horneds@gmail.com

@@ -19,4 +19,4 @@
   - pyenv
   - unzip
   - wget
-  sudo: no
+  become: no

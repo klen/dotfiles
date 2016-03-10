@@ -27,7 +27,7 @@ desktop:
 
 .PHONY: ansible-install
 ansible-install:
-	@command -v apt-get && sudo apt-get install ansible -y || true
+	@command -v apt-get && sudo apt-get install ansible -y --force-yes || true
 	@command -v yum && sudo yum install ansible || true
 	@command -v brew && brew install ansible || true
 
