@@ -86,12 +86,6 @@
       create=yes
     with_items: "{{home_fingerprints}}"
 
-  - name: Setup gnupg - pt. 1
-    file: state=directory mode=0700 dest=~{{home_user}}/.gnupg owner={{home_user}}
-
-  - name: Setup gnupg - pt. 2
-    copy: src={{inventory_dir}}/cfg/gnupg/horneds-pubkey.asc dest=~{{home_user}}/.gnupg/horneds-pubkey.asc owner={{home_user}}
-
   - name: Setup VIM
     git: repo=https://github.com/klen/.vim dest=~{{home_user}}/.vim depth=2
     become_user: "{{home_user}}"

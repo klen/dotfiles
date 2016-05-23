@@ -9,18 +9,12 @@
   - ppa:git-core/ppa
   - ppa:fcwu-tw/ppa
 
-- apt: pkg={{item}}
-  with_items:
-  - build-essential
-  - exuberant-ctags
-  - git-flow
-  - htop
-  - libxml2-utils
-  - mercurial
-  - python-pip
-  - screen
-  - unzip
-  - vim-nox
-  - wget
+- apt: name=build-essential
+- apt: name=exuberant-ctags
+- apt: name=htop
+- apt: name=python-pip
+- apt: name=screen
+- apt: name=unzip
+- apt: name=vim-nox
 
 # vim:sw=2
