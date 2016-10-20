@@ -79,3 +79,5 @@
 --regex-markdown=/^#[ \t]+(.*)/\1/h,Heading1/
 --regex-markdown=/^##[ \t]+(.*)/\1/i,Heading2/
 --regex-markdown=/^###[ \t]+(.*)/\1/k,Heading3/
+
+--langmap=C:.c.h
