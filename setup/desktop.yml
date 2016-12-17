@@ -7,18 +7,22 @@
     with_items:
     - 1password
     - alfred
+    - calibre
     - ccleaner
+    - docker
     - dropbox
     - flux
+    - google-chrome
     - google-drive
+    - google-play-music-desktop-player
     - hyperdock
     - istat-menus
+    - iterm2
     - skype
     - slack
     - telegram
     - transmission
-    - vagrant
-    - virtualbox
+    - tunnelblick
     - vlc
     environment:
       HOMEBREW_CASK_OPTS: --appdir=/Applications
