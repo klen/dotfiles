@@ -1,8 +1,10 @@
 ---
 
 - homebrew: update_homebrew=yes
+  become: no
 
 - shell: brew tap homebrew/dupes
+  become: no
 
 - homebrew: name={{item}}
   with_items:

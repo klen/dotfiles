@@ -18,7 +18,7 @@ update:
 # target: ansible - Setup the system with ansible
 ansible:
 	@command -v ansible-playbook || make ansible-install
-	@ansible-playbook -i inventory setup/playbook.yml -c local
+	@ansible-playbook -i inventory setup/playbook.yml -c local -k
 
 desktop:
 	@command -v ansible-playbook || make ansible-install
