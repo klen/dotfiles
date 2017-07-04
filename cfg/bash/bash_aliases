@@ -24,7 +24,6 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias less='less -r'
-alias dps='docker ps --format="table {{.Names}}\t{{.Status}}"'
 
 alias ls='ls $LS_OPTIONS -Fh' 
 alias ll='ls $LS_OPTIONS -A'

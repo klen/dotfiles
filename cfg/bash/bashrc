@@ -53,6 +53,7 @@ setup () {
     source $INCDIR/go.sh
     source $INCDIR/todo.sh
     source $INCDIR/js.sh
+    source $INCDIR/docker.sh
 
     # Close promt
     PS1="${PS1}\n$ "
