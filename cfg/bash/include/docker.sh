@@ -5,9 +5,12 @@ __command docker && {
         docker ps --format="table {{.Names}}\t{{.Status}}" $@
     }
 
-    dclean () {
-        docker volume ls -qf dangling=true | xargs docker volume rm 
-        docker rmi $(docker images | grep "none" | awk '/ / { print $3 }')
+    dlogs () {
+        docker logs -f --tail 1000 $@
+    }
+
+    dexec () {
+        docker exec -it $@
     }
 
 }

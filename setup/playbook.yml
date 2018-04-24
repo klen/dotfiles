@@ -47,11 +47,9 @@
 
   - name: Setup pip - pt. 3
     pip: name={{item}}
-    become: yes
     with_items:
-      - git-up
-      - httpie
-      - virtualenv
+    - httpie
+    - virtualenv
 
   - name: Setup smartcd - pt. 1
     file: state=directory path={{item}} owner={{home_user}}

@@ -13,11 +13,12 @@
   - coreutils
   - ctags
   - docker
-  - docker-machine
   - git
   - git-flow
   - htop-osx
   - mercurial
+  - node
+  - postgresql
   - pyenv
   - unzip
   - wget

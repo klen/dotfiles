@@ -16,9 +16,6 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
-alias cd.='cd ..'
-alias cd..='cd ..'
-
 alias g='grep'
 alias rm='rm -i'
 alias cp='cp -i'
@@ -29,9 +26,8 @@ alias ls='ls $LS_OPTIONS -Fh'
 alias ll='ls $LS_OPTIONS -A'
 alias la='ll $LS_OPTIONS -FhlA'
 
-# VIM like aliases
-alias :qa='exit'
-
 # others
 alias vi='vim'
 alias sim='sudo vim'
+
+alias myip='curl ifconfig.co'

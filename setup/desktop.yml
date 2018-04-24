@@ -2,29 +2,33 @@
 
 - hosts: all
   tasks:
-  - homebrew: name=caskroom/cask/brew-cask
+  # - homebrew: name=caskroom/cask/brew-cask
   - homebrew_cask: name={{item}}
     with_items:
     - 1password
     - alfred
     - calibre
     - ccleaner
+    - dash
     - docker
     - dropbox
-    - flux
+    # - flux
     - gimp
+    - google-backup-and-sync
     - google-chrome
-    - google-drive
-    - google-play-music-desktop-player
     - hyperdock
-    - istat-menus
+    # - istat-menus
     - iterm2
+    - marshallofsound-google-play-music-player
+    - opera
     - skype
     - slack
+    - steam
     - telegram
     - the-unarchiver
     - transmission
     - tunnelblick
     - vlc
+    - zoomus
     environment:
       HOMEBREW_CASK_OPTS: --appdir=/Applications
