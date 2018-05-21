@@ -7,7 +7,6 @@
 - apt_repository: repo={{item}}
   with_items:
   - ppa:git-core/ppa
-  - ppa:fcwu-tw/ppa
 
 - apt: name=build-essential
 - apt: name=exuberant-ctags
