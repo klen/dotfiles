@@ -47,6 +47,7 @@
 
   - name: Setup pip - pt. 3
     pip: name={{item}}
+    become: "{{ ansible_os_family != 'Darwin' }}"
     with_items:
     - httpie
     - virtualenv
