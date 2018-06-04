@@ -4,7 +4,7 @@ __command gpg && {
 
     [ ! -r $HOME/.gnupg/pubring.gpg  ] && {
     
-        gpg --import $HOME/cfg/gnupg/horneds-pubkey.asc
+        gpg --import $HOME/.home/cfg/gnupg/horneds-pubkey.asc
         gpg --list-keys
 
     }
