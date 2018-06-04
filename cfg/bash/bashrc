@@ -36,8 +36,8 @@ setup () {
     # Setup PS
     source $INCDIR/ps.sh
 
-    # Setup gpg
-    source $INCDIR/gpg.sh
+    # Setup gpg (disabled now)
+    # source $INCDIR/gpg.sh
 
     # Setup completion
     source /usr/local/etc/bash_completion 2>/dev/null || source /etc/bash_completion 2> /dev/null
@@ -97,7 +97,3 @@ setup && unset setup
 
 # Load local settings
 source $HOME/.bash_local 2>/dev/null
-
-# export C_INCLUDE_PATH=/usr/local/Cellar/libiomp/20150701/include/libiomp:$C_INCLUDE_PATH
-# export CPLUS_INCLUDE_PATH=/usr/local/Cellar/libiomp/20150701/include/libiomp:$CPLUS_INCLUDE_PATH
-# export LIBRARY_PATH=/usr/local/Cellar/libiomp/20150701/lib:$LIBRARY_PATH
