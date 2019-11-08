@@ -24,7 +24,7 @@ __PS=$PS1
 command -v virtualenv &>/dev/null && [ ! -d $VDIR ] && {
     smartcd inform "Virtualenv doesnt found. Attempt to create $VDIR"
     smartcd inform "------------------------------------------------"
-    virtualenv --no-site-packages $VDIR
+    virtualenv --python=python3 $VDIR
     [ -s requirements.txt ] && {
         $VDIR/bin/pip install -r requirements.txt
     }

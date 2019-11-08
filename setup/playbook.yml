@@ -46,11 +46,11 @@
     file: state=link dest=~{{home_user}}/.pip/pip.conf src={{inventory_dir}}/cfg/pip/pip.conf force=yes owner={{home_user}}
 
   - name: Setup pip - pt. 3
-    pip: name={{item}}
+    pip:
+      name:
+      - httpie
+      - virtualenv
     become: "{{ ansible_os_family != 'Darwin' }}"
-    with_items:
-    - httpie
-    - virtualenv
 
   - name: Setup smartcd - pt. 1
     file: state=directory path={{item}} owner={{home_user}}

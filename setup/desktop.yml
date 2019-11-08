@@ -5,23 +5,20 @@
   # - homebrew: name=caskroom/cask/brew-cask
   - homebrew_cask: name={{item}}
     with_items:
-    - 1password
     - alfred
     - calibre
     - ccleaner
     - dash
     - docker
     - dropbox
-    # - flux
     - gimp
-    - google-backup-and-sync
-    - google-chrome
+    # - google-backup-and-sync
+    # - google-chrome
     - hyperdock
     # - istat-menus
     - iterm2
     - marshallofsound-google-play-music-player
     - opera
-    - skype
     - slack
     - steam
     - telegram
