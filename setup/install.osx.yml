@@ -18,5 +18,7 @@
       - postgresql
       - pyenv
       - unzip
+      - vim
       - wget
+      - yarn
   become: no
