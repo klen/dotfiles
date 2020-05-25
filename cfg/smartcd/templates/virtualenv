@@ -13,10 +13,9 @@
 ########################################################################
 
 # Enter any bash_enter commands below here: (leave this line!)
-autostash SMDIR=$HOME/.smartcd
 autostash VNAME=$(basename $PWD)
-autostash VDIR=$SMDIR/virtualenvs${PWD}/.env
-autostash TOXDIR=$SMDIR/virtualenvs${PWD}/.tox
+autostash VDIR=env
+autostash TOXDIR=.tox
 
 __PS=$PS1
 

@@ -48,6 +48,7 @@
   - name: Setup pip - pt. 3
     pip:
       name:
+      - git-up
       - httpie
       - virtualenv
     become: "{{ ansible_os_family != 'Darwin' }}"

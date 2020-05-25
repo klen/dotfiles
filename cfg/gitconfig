@@ -53,7 +53,6 @@
     br = branch
     mg = merge --no-ff
     ph = push --tags
-    up = pull --all --rebase --autostash
 
     ; View logs and diff
     hist = log --graph --pretty="format:%C(yellow)%h%Cred%d\\ %Creset%s\\ %Cgreen[%an]" --all
