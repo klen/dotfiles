@@ -12,11 +12,12 @@
       - docker
       - git
       - git-flow
+      - golang
       - htop-osx
-      - mercurial
       - node
       - postgresql
       - pyenv
+      - terminal-notifier
       - unzip
       - vim
       - wget

@@ -6,26 +6,32 @@
   - homebrew_cask: name={{item}}
     with_items:
     - alfred
+    - blockblock
     - calibre
     - ccleaner
     - dash
     - docker
     - dropbox
+    - firefox
     - gimp
-    # - google-backup-and-sync
-    # - google-chrome
-    - hyperdock
-    # - istat-menus
-    - iterm2
-    - marshallofsound-google-play-music-player
-    - opera
-    - slack
-    - steam
-    - telegram
-    - the-unarchiver
-    - transmission
-    - tunnelblick
-    - vlc
-    - zoomus
+    - google-backup-and-sync
+    - google-chrome     # Browser
+    - hyperdock         # Manage windows
+    - iina              # Video player
+    - ilya-birman-typography-layout
+    - istat-menus       # Monitor
+    - iterm2            # Terminal
+    - lulu              # Firewall
+    - obs
+    - obs-virtualcam
+    - parallels15       # Virtualization
+    - slack             # Messenger
+    - spotify           # Media
+    - steam             # Games
+    - telegram          # Messenger
+    - the-unarchiver    # Archive manager
+    - transmission      # Torrent Client
+    - tunnelblick       # VPN manager
+    - zoomus            # Messenger
     environment:
       HOMEBREW_CASK_OPTS: --appdir=/Applications

@@ -1,4 +1,4 @@
-export PRJDIR=$HOME/Projects
+export PRJDIR=$HOME/projects
 
 [ ! -d $PRJDIR ] && [ -d $HOME/Dropbox ] && {
     export PRJDIR=$HOME/Dropbox/projects
