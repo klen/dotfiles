@@ -5,7 +5,7 @@
   # - homebrew: name=caskroom/cask/brew-cask
   - homebrew_cask: name={{item}}
     with_items:
-    - alfred
+    - alfred            # UI
     - blockblock
     - calibre
     - ccleaner
@@ -25,6 +25,7 @@
     - obs
     - obs-virtualcam
     - parallels15       # Virtualization
+    - postman           # Development
     - slack             # Messenger
     - spotify           # Media
     - steam             # Games

@@ -3,6 +3,8 @@
     # PATH="/usr/local/share/python:$PATH"
 # fi
 
+export PYTHONBREAKPOINT=ipdb.set_trace
+
 __command pip && {
     export PIP_DOWNLOAD_CACHE=/tmp/.pip/$USER/cache
     export PIP_LOG_FILE=/tmp/.pip/$USER/pip.log

@@ -11,7 +11,7 @@
 - apt: name=build-essential
 - apt: name=exuberant-ctags
 - apt: name=htop
-- apt: name=python-pip
+- apt: name=python3-pip
 - apt: name=screen
 - apt: name=unzip
 - apt: name=vim-nox
