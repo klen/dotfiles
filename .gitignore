@@ -3,10 +3,7 @@
 *.egg-info
 *.log
 *.old
-*.py[co]
 *~
-.DS_Store
-._
 .coverage
 .env
 .pip/cache
@@ -14,4 +11,19 @@
 .tags
 .tox
 .vagrant
+
+# Compiled Python files
+*.py[co]
 __pycache__
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
