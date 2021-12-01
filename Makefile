@@ -1,6 +1,6 @@
 # Makefile for home config
 
-all: update ansible
+all: update ansible stow
 
 .PHONY: help
 # target: help - Display callable targets
@@ -36,3 +36,11 @@ ansible-install:
 epel:
 	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
 	sudo rpm -Uvh epel-release-7*.rpm
+
+.PHONY: stow
+stow:
+	@stow -v -t $(HOME) .
+
+.PHONY: unstow
+unstow:
+	@stow -v -D -t $(HOME) .

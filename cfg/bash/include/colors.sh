@@ -4,7 +4,6 @@
 if [ ! -t 1 ] || [ $(tput colors) -lt 8 ]; then
     export BLUE=''
     export CYAN=''
-    export GRAY=''
     export GREEN=''
     export MAGENTA=''
     export NC=''
@@ -21,7 +20,6 @@ if [ ! -t 1 ] || [ $(tput colors) -lt 8 ]; then
 else
     export BLUE='\033[1;34m'
     export CYAN='\033[1;36m'
-    export GRAY='\033[1;30m'
     export GREEN='\033[0;32m'
     export MAGENTA='\033[1;35m'
     export NC='\033[0m'

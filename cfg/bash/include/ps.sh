@@ -15,10 +15,10 @@ if [ ! -z "$WINDOW" ]; then
 fi
 
 # time
-PS1="${PS1}${GRAY}\A "
+PS1="${PS1}${CYAN}\A "
 
 # parent and current pids
-PS1="${PS1}${GREEN}$$ "
+PS1="${PS1}${YELLOW}$$ "
 
 # current user
 case `id -u` in

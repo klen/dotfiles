@@ -13,6 +13,7 @@
 - apt: name=htop
 - apt: name=python3-pip
 - apt: name=screen
+- apt: name=stow
 - apt: name=unzip
 - apt: name=vim-nox
 

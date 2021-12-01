@@ -1,0 +1,11 @@
+\.git
+\.gitmodules
+/cfg
+/lib
+/setup
+/stow
+/test
+/inventory
+/Google Drive
+/README.rst
+/Makefile

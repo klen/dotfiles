@@ -14,9 +14,11 @@
       - git-flow
       - golang
       - htop-osx
+      - neovim
       - node
       - postgresql
       - pyenv
+      - stow
       - terminal-notifier
       - unzip
       - vim

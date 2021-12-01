@@ -1,0 +1,54 @@
+{
+    "coc.preferences.colorSupport": true,
+    "coc.preferences.formatOnSaveFiletypes": ["rust", "Markdown", "java", "sh", "js", "ts", "css"],
+    "coc.preferences.useQuickfixForLocations": true,
+    "coc.preferences.rootPatterns": [ ".git" ],
+    "coc.source.file.priority": 60,
+    "coc.source.buffer.priority": 50,
+
+    // "diagnostic.enable": false,
+    "diagnostic.errorSign": "EE",
+    "diagnostic.warningSign": "WW",
+    "diagnostic.infoSign": "II",
+    "diagnostic.hintSign": "HH",
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.level": "information",
+    "diagnostic.enableMessage": "jump",
+
+    "suggest.enablePreview": true,
+    "suggest.autoTrigger":  "trigger",
+    "suggest.minTriggerInputLength": 3,
+    "suggest.triggerCompletionWait": 30,
+
+    "suggest.removeDuplicateItems": true,
+    "suggest.preferCompleteThanJumpPlaceholder": true,
+    "suggest.defaultSortMethod": "alphabetical",
+    "suggest.detailField": "menu",
+    "suggest.enablePreselect": true,
+    "suggest.noselect": false,
+
+    "pyright.organizeimports.provider": "isort",
+    "python.analysis.diagnosticMode": "openFilesOnly",
+    "python.analysis.typeCheckingMode": "off",
+    "python.formatting.provider": "black",
+    "python.linting.mypyEnabled": true,
+
+    "typescript.autoClosingTags": true,
+    "javascript.autoClosingTags": true,
+
+    "eslint.packageManager": "yarn",
+    "eslint.autoFixOnSave": true,
+    "eslint.format.enable": true,
+
+    "list.source.files.command": "ag",
+    "list.source.files.args": ["--nocolor", "-l"],
+    "list.source.files.excludePatterns": [
+        "**/.git/**", "**/env/**", "**/node_modules/**", "**/.tox/**"],
+
+    "snippets.priority": 1,
+    "snippets.autoTrigger": true,
+    "snippets.ultisnips.enable": true,
+    "snippets.ultisnips.usePythonx": true,
+    "snippets.ultisnips.directories": ["UltiSnips"]
+
+}
