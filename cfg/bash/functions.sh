@@ -172,7 +172,7 @@ colors () {
 home () {
     test -d $HOME/.home || git clone https://github.com/klen/.home.git
     cd $HOME/.home
-    make ansible
+    make
     cd -
     . $HOME/.bashrc
 }
@@ -189,6 +189,22 @@ _ask () {
     then
         return 1
     fi
+}
+
+# Setup editors
+vim-conf () {
+    cd $HOME/.home/.vim
+    vim init.vim
+}
+
+nvim-conf () {
+    cd $HOME/.home/.config/nvim
+    nvim init.lua
+}
+
+config () {
+    cd $HOME/.home
+    nvim
 }
 
 # vim:fdm=indent

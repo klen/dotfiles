@@ -31,7 +31,7 @@ setup () {
     source $CFGDIR/bash/path.sh
 
     # Load functions
-    source $INCDIR/functions.sh
+    source $CFGDIR/bash/functions.sh
 
     # Setup PS
     source $CFGDIR/bash/ps.sh
