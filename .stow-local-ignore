@@ -1,11 +1,10 @@
 \.git
 \.gitmodules
+/.gitignore
 /cfg
-/lib
 /setup
-/stow
-/test
 /inventory
 /Google Drive
 /README.rst
 /Makefile
+/todo\.txt

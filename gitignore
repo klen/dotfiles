@@ -1,0 +1,29 @@
+*.bak
+*.egg
+*.egg-info
+*.log
+*.old
+*~
+.coverage
+.env
+.pip/cache
+.ropeproject
+.tags
+.tox
+.vagrant
+
+# Compiled Python files
+*.py[co]
+__pycache__
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
