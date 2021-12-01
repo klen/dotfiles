@@ -7,6 +7,9 @@ export DEBEMAIL="horneds@gmail.com"
 
 export GPGKEY=7000E266
 
+# Mac OS (silence zsh warning message)
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # Common settings
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"

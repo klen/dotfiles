@@ -1,6 +1,3 @@
 [submodule "stuff/smartcd"]
-	path = lib/smartcd
+	path = cfg/smartcd
 	url = git://github.com/klen/smartcd.git
-[submodule "lib/cheat"]
-	path = lib/cheat
-	url = https://github.com/jahendrie/cheat.git

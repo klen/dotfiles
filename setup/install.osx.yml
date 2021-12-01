@@ -5,23 +5,25 @@
 
 - homebrew:
     name:
-      - bash
-      - bash-completion
-      - coreutils
-      - ctags
-      - docker
-      - git
-      - git-flow
-      - golang
-      - htop-osx
-      - neovim
-      - node
-      - postgresql
-      - pyenv
-      - stow
-      - terminal-notifier
-      - unzip
-      - vim
-      - wget
-      - yarn
+    - bash
+    - bash-completion
+    - coreutils
+    - cowsay
+    - ctags
+    - docker
+    - fortune
+    - git
+    - git-flow
+    - golang
+    - htop-osx
+    - neovim
+    - node
+    - postgresql
+    - pyenv
+    - stow
+    - terminal-notifier
+    - unzip
+    - vim
+    - wget
+    - yarn
   become: no

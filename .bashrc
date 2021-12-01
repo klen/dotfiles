@@ -20,21 +20,21 @@ setup () {
     local INCDIR=$CFGDIR/bash/include
     local CMPDIR=$CFGDIR/bash/completion
     local OS_VERSION=$(uname -s)
-    
+
     # Load options
-    source $INCDIR/options.sh
+    source $CFGDIR/bash/options.sh
 
     # Load colors
     source $INCDIR/colors.sh
 
     # Load path
-    source $INCDIR/path.sh
+    source $CFGDIR/bash/path.sh
 
     # Load functions
     source $INCDIR/functions.sh
 
     # Setup PS
-    source $INCDIR/ps.sh
+    source $CFGDIR/bash/ps.sh
 
     # Setup gpg (disabled now)
     # source $INCDIR/gpg.sh
@@ -59,23 +59,13 @@ setup () {
     PS1="${PS1}\n$ "
 
     # Smartcd
-    [ -d $LIBDIR/smartcd/lib ] && {
-
-        source $LIBDIR/smartcd/lib/core/arrays
-        source $LIBDIR/smartcd/lib/core/varstash
-        source $LIBDIR/smartcd/lib/core/smartcd
-        smartcd setup cd
-        smartcd setup pushd
-        smartcd setup popd
-        smartcd setup completion
-    
-    }
+    source $CFGDIR/smartcd.sh
 
     # Load aliases
     source ~/.bash_aliases 2>/dev/null
 
     # Show login screen
-    source $INCDIR/login.sh
+    source $CFGDIR/bash/login.sh
 
     # Auto run screen on remote servers
     __command screen && {
