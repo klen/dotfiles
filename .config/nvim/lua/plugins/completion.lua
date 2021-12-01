@@ -7,7 +7,6 @@ return {
   },
   {
     "hrsh7th/nvim-cmp", -- Auto complete
-    after = "friendly-snippets",
     requires = { "hrsh7th/cmp-nvim-lsp" },
     config = function()
       require "configs/cmp"
