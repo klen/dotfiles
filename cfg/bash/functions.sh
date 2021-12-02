@@ -202,6 +202,11 @@ nvim-conf () {
     nvim init.lua
 }
 
+kitty-conf () {
+    cd $HOME/.home/.config/kitty
+    nvim kitty.conf
+}
+
 config () {
     cd $HOME/.home
     nvim

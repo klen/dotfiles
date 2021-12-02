@@ -47,6 +47,27 @@ return require("packer").startup(function(use)
       require "configs/mini"
     end,
   }
+  use {
+    "simrat39/symbols-outline.nvim",
+    config = require "configs/symbols-outline",
+    cmd = {
+      "SymbolsOutline",
+      "SymbolsOutlineOpen",
+      "SymbolsOutlineClose",
+    },
+  }
+  use {
+    "wfxr/minimap.vim",
+    config = require "configs/minimap",
+    -- cmd = {
+    --   "Minimap",
+    --   "MinimapClose",
+    --   "MinimapToggle",
+    --   "MinimapRefresh",
+    --   "MinimapUpdateHighlight",
+    -- },
+    run = "cargo install --locked code-minimap",
+  }
 
   -- Statusline.
   -- use {

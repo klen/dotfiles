@@ -12,8 +12,8 @@ au!
   au InsertLeave * silent! set nopaste
 
   " Reload and compile plugins
-  autocmd BufWritePost ~/.config/nvim/lua/plugins/*.lua source <afile> | PackerCompile
-  autocmd BufWritePost ~/.config/nvim/lua/configs/*.lua source <afile> | PackerCompile
+  autocmd BufWritePost **/nvim/lua/plugins/*.lua source <afile> | PackerCompile
+  autocmd BufWritePost **/nvim/lua/configs/*.lua source <afile> | PackerCompile
 
   " Terminal
   autocmd TermOpen * startinsert
@@ -26,6 +26,5 @@ augroup END
 fun! auto#restore_cursor() "{{{
     if line("'\"") <= line("$")
         normal! g`"
-        return 1
     endif
 endfunction "}}}

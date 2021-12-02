@@ -62,7 +62,10 @@ starter.setup {
     local day_part = ({ "evening", "morning", "afternoon", "evening" })[part_id]
     return ("Good %s, Kirill"):format(day_part)
   end,
-  footer = "Loaded " .. plugins_count .. " plugins",
+  footer = ("Loaded " .. plugins_count .. " plugins. " .. "Load time: " .. fn.printf(
+    "%.3f",
+    fn.reltimefloat(fn.reltime(g.start_time))
+  ) .. " seconds."),
 }
 
 api.nvim_exec(

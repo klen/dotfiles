@@ -21,12 +21,12 @@ return function(client, bufnr)
       "Show line error",
     },
     -- ['[d'] = "<cmd>lua lsp.diagnostic.goto_prev()<cr>",
-    ["[d"] = {
+    ["<C-p>"] = {
       "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<cr>",
       "Jump to the previous error",
     },
     -- ['[d'] = "<cmd>lua lsp.diagnostic.goto_next()<cr>",
-    ["]d"] = {
+    ["<C-n>"] = {
       "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<cr>",
       "Jump to the next error",
     },

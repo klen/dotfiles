@@ -1,3 +1,13 @@
+-- Init Neovim
+vim.g.start_time = vim.fn.reltime()
+
+-- Disable these for very fast startup time
+vim.cmd [[
+  syntax off
+  filetype off
+  filetype plugin indent off
+]]
+
 -- Speed up Neovim
 pcall(require, "impatient")
 

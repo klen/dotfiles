@@ -16,6 +16,10 @@ u.nmap("p", "p`]")
 u.vmap("p", "p`]")
 u.vmap("y", "y`]")
 
+-- Move lines
+u.nmap("<C-j>", ":m .+1<CR>==")
+u.nmap("<C-k>", ":m .-2<CR>==")
+
 -- Not jump on star, only highlight
 u.nmap("*", "*N")
 
@@ -63,23 +67,25 @@ end
 
 wk.register {
 
-  -- File operations (telescope, nvim-tree)
-  ["<leader>f"] = { name = "+file" },
+  -- Find something
+  ["<leader>f"] = { name = "+find" },
   ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find File" },
   ["<leader>fp"] = { "<cmd>Telescope projects<cr>", "Open projects" },
   ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-  ["<leader>fw"] = { "<cmd>Telescope live_grep<cr>", "Find Word" },
+  ["<leader>fs"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Search document symbols" },
+  ["<leader>fS"] = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Search workspace symbols" },
   ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
+  ["<leader>fd"] = { "<cmd>Dash<cr>", "Search in dash" },
+  ["<leader>fD"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
 
   ["<leader>d"] = { name = "+explore" },
   ["<leader>dd"] = { "<cmd>NvimTreeFocus<cr>", "Open/focus Explorer" },
   ["<leader>df"] = { "<cmd>NvimTreeFindFile<cr>", "Locate File" },
-  ["<leader>db"] = { "<cmd>Telescope buffers<cr>", "Open dashboard" },
-  ["<leader>ds"] = { "<cmd>Dash<cr>", "Search in dash" },
-  ["<leader>dw"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
+  ["<leader>db"] = { "<cmd>Telescope buffers<cr>", "Explore buffers" },
   ["<leader>dt"] = { "<cmd>vsplit | terminal<cr>", "Open terminal" },
   ["<leader>dl"] = { "<cmd>lopen<cr>", "Open loclist" },
   ["<leader>dq"] = { "<cmd>copen<cr>", "Open quickfix" },
+  ["<leader>ds"] = { "<cmd>SymbolsOutline<cr>", "Explore symbols" },
 
   -- Git (fugitive)
   ["<leader>g"] = { name = "+git" },
@@ -92,6 +98,14 @@ wk.register {
   ["<leader>gc"] = { "<cmd>Git commit %<cr>", "Git commit" },
   ["<leader>gl"] = { "<cmd>Telescope git_bcommits<cr>", "Git log file" },
   ["<leader>gL"] = { "<cmd>Telescope git_commits<cr>", "Git log" },
+
+  -- Plugins
+  ["<leader>p"] = { name = "+plugins" },
+  ["<leader>pS"] = { "<cmd>PackerStatus<cr>", "Plugins Status" },
+  ["<leader>ps"] = { "<cmd>PackerSync<cr>", "Sync your plugins" },
+  ["<leader>pc"] = { "<cmd>PackerClean<cr>", "Clean unused plugins" },
+  ["<leader>pC"] = { "<cmd>PackerCompile<cr>", "Compile your plugins changes" },
+  ["<leader>pi"] = { "<cmd>PackerInstall<cr>", "Install missing plugins" },
 
   -- Comments
   ["gc"] = { "+comments" },
@@ -108,6 +122,11 @@ wk.register {
   ["<leader>ck"] = { "<cmd>wincmd k<cr><cmd>close<cr>", "Close the up window" },
   ["<leader>cl"] = { "<cmd>wincmd l<cr>close<cr>", "Close the right window" },
   ["<leader>cc"] = { "<cmd>close<cr>", "Close the current window" },
+  ["<leader>r"] = { "+resize window" },
+  ["<leader>rk"] = { "<cmd>resize -5<cr>", "Expand window up" },
+  ["<leader>rj"] = { "<cmd>resize +5<cr>", "Expand window bellow" },
+  ["<leader>rl"] = { "<C-W>5>", "Expand window right" },
+  ["<leader>rh"] = { "<C-W>5<", "Expand window left" },
 
   -- Tests (vim-test)
   ["<leader>t"] = { "+tests" },
@@ -121,6 +140,8 @@ wk.register {
   ["<leader>b"] = { "+buffers" },
   ["<leader>bd"] = { "<cmd>bdelete<cr>", "Delete the current buffer" },
   ["<leader>bn"] = { "<cmd>bnext<cr>", "Go to the next buffer" },
+  ["<Tab>"] = { "<cmd>bnext<cr>", "Go to the next buffer" },
+  ["<S-Tab>"] = { "<cmd>bnext<cr>", "Go to the next buffer" },
   ["<leader>bp"] = { "<cmd>bprev<cr>", "Go to the previous buffer" },
 
   -- Options
@@ -132,6 +153,8 @@ wk.register {
   ["<leader>os"] = { "<cmd>set invhlsearch<cr>", "Toggle highlight for search results" },
 
   -- Other
+  ["<leader>/"] = { "<cmd>Telescope live_grep<cr>", "Search a word" },
+  ["<leader>:"] = { "<cmd>Telescope command_history<cr>", "Command history" },
   ["gw"] = { "<cmd>lua require'utils.tools'.vimgrep()<cr>", "Grep current word" },
   ["gI"] = { "`.", "Go to the last edit" },
   ["gk"] = { "k", "Up" },

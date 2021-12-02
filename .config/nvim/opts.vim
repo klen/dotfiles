@@ -50,6 +50,7 @@ set shiftround                      " Drop unused spaces
 set ignorecase                      " Ignore case in search patterns
 set infercase                       " Enable case-sensetive search for non lower-case string
 set smartcase                       " Override the 'ignorecase' option if the search pattern contains upper case characters
+set path=**
 
 " Insert mode
 set virtualedit=all                 " Allow virtualedit for all modes

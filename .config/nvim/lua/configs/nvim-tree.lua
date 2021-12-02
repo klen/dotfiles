@@ -5,6 +5,18 @@ g.nvim_tree_git_hl = 0 -- Will enable file highlight for git attributes
 g.nvim_tree_indent_markers = 0 -- This option shows indent markers when folders are open.
 g.nvim_tree_disable_window_picker = 0
 g.nvim_tree_window_picker_chars = "KJABCDEFGHILMNOPQRSTUVWXYZ1234567890J"
+vim.g.nvim_tree_window_picker_exclude = {
+  filetype = {
+    "notify",
+    "packer",
+    "qf",
+    "minimap",
+    "Outline",
+  },
+  buftype = {
+    "terminal",
+  },
+}
 
 cmd [[ hi def link NvimTreeSpecialFile Conceal ]]
 
