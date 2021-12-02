@@ -8,6 +8,11 @@ source $HOME/.vim/plugins/coc.vim
 source $HOME/.vim/plugins/nerd.vim
 Plug 'tpope/vim-commentary'
 
+Plug 'wfxr/minimap.vim'
+let g:minimap_width = 10
+let g:minimap_auto_start = 1
+let g:minimap_auto_start_win_enter = 1
+
 " Status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
