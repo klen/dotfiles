@@ -36,6 +36,16 @@ return require("packer").startup(function(use)
   -- Completion / Snippets
   use(require "plugins/completion")
 
+  -- Local plugins
+  use {
+    "~/.config/nvim/lua/plugins/local/runner",
+    config = function()
+      require("runner").setup()
+    end,
+  }
+
+  -- use(require "plugins/local")
+
   -- Dashboard, comments, pairs, statusline, cursorword
   use {
     "ahmedkhalf/project.nvim",

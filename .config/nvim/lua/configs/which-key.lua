@@ -5,6 +5,7 @@ return function()
     operators = {
       gc = "Comments",
       ys = "Surround",
+      Q = "Format",
     },
   }
 end

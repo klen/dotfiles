@@ -47,6 +47,9 @@ u.cmap("<C-E>", "<End>", { silent = false })
 -- Paste relaces visual selection do not copy it
 u.vmap("p", '"_dP')
 
+-- Disable ex mode (format lines insted)
+u.nmap("Q", "gq")
+
 -- Terminal mode
 u.tmap("<C-[>", "<C-\\><C-n>")
 
@@ -108,7 +111,6 @@ wk.register {
   ["<leader>pi"] = { "<cmd>PackerInstall<cr>", "Install missing plugins" },
 
   -- Comments
-  ["gc"] = { "+comments" },
   ["gcc"] = { "Comment/uncomment line" },
 
   -- Windows
@@ -151,6 +153,11 @@ wk.register {
   ["<leader>ow"] = { "<cmd>set wrap! wrap?<cr>", "Toggle &wrap" },
   ["<leader>on"] = { "<cmd>lua require('utils.tools').toggle_number()<cr>", "Toggle &number" },
   ["<leader>os"] = { "<cmd>set invhlsearch<cr>", "Toggle highlight for search results" },
+
+  -- Operators
+  ["Q"] = { name = "+format" },
+  ["ys"] = { name = "+surroud" },
+  ["gc"] = { name = "+comments" },
 
   -- Other
   ["<leader>/"] = { "<cmd>Telescope live_grep<cr>", "Search a word" },
