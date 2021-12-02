@@ -19,10 +19,6 @@
     when: ansible_os_family == "Darwin"
     become: yes
 
-  - name: Setup VIM
-    git: repo=https://github.com/klen/.vim dest=~{{home_user}}/.vim depth=2
-    become_user: "{{home_user}}"
-
   - file: state=directory owner={{home_user}} recurse=yes path=~{{home_user}}/.home
 
   - name: Setup pip
