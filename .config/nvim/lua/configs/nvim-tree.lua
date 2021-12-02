@@ -18,8 +18,6 @@ vim.g.nvim_tree_window_picker_exclude = {
   },
 }
 
-cmd [[ hi def link NvimTreeSpecialFile Conceal ]]
-
 local present, nvimtree = pcall(require, "nvim-tree")
 if not present then
   return
@@ -68,3 +66,9 @@ nvimtree.setup {
     },
   },
 }
+
+cmd [[ hi! link NvimTreeSpecialFile Special ]]
+cmd [[ hi! link NvimTreeRootFolder Statement ]]
+cmd [[ hi! link NvimTreeFolderName Directory ]]
+cmd [[ hi! link NvimTreeSymlink Macro ]]
+cmd [[ hi! link NvimTreeOpenedFolderName Search ]]

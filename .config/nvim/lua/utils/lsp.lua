@@ -25,13 +25,16 @@ function M.process(err, result, ctx, cb)
 end
 
 -- item = { col, lnum, filename, text }
-function M.processLocations(err, result, ctx, _)
+function M.processLocations(err, result, ctx, cfg)
   M.process(err, result, ctx, function()
     local win = api.nvim_get_current_win()
     local items = lsp.util.locations_to_items(result)
     local ranges = vim.tbl_map(function(loc)
       return loc.range
     end, result)
+    if cfg and cfg.jump and #items == 1 then
+      return M.jumpLocation(items[1])
+    end
     -- lsp.util.set_loclist(items, win)
     fn.setloclist(
       win,
@@ -41,6 +44,10 @@ function M.processLocations(err, result, ctx, _)
     )
     cmd "abo lope"
   end)
+end
+
+function M.gotoDefinition(err, result, ctx, _)
+  M.processLocations(err, result, ctx, { jump = true })
 end
 
 function M.processSymbols(err, result, ctx, _)
@@ -89,6 +96,12 @@ function M.formatOnSave()
   if vim.o.modified then
     vim.lsp.buf.formatting_sync({}, 1000)
   end
+end
+
+function M.jumpLocation(item)
+  local win = vim.api.nvim_get_current_win
+  vim.cmd("edit " .. item.filename)
+  vim.api.nvim_win_set_cursor(win, { item.lnum, item.col })
 end
 
 -- TODO
