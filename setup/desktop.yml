@@ -19,11 +19,11 @@
     - ilya-birman-typography-layout
     - istat-menus       # Monitor
     - iterm2            # Terminal
+    - kitty             # Terminal
     - lulu              # Firewall
     - obs
     - obs-virtualcam
-    - parallels15       # Virtualization
-    - postman           # Development
+    - parallels         # Virtualization
     - slack             # Messenger
     - spotify           # Media
     - steam             # Games
