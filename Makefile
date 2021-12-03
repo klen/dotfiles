@@ -23,7 +23,7 @@ ansible:
 desktop:
 	@command -v ansible-playbook || make ansible-install
 	@ansible-playbook -i inventory setup/desktop.yml -c local
-
+	@brew install homebrew/cask-fonts/font-fira-code-nerd-font font-ubuntu-nerd-font font-jetbrains-mono-nerd-font font-roboto-mono-nerd-font
 
 .PHONY: ansible-install
 ansible-install:

@@ -14,19 +14,29 @@
     - fortune
     - git
     - git-flow
-    - golang
     - htop-osx
     - httpie
-    - neovim
-    - node
     - postgresql
-    - pyenv
     - rsc_2fa
-    - rust
     - stow
     - terminal-notifier
     - unzip
-    - vim
     - wget
+  become: no
+
+- name: Install editors
+  homebrew:
+    name:
+    - vim
+    - neovim
+  become: no
+
+- name: Install languages / packages
+  homebrew:
+    name:
+    - golang
+    - node
+    - pyenv
+    - rust
     - yarn
   become: no
