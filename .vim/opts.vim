@@ -132,3 +132,4 @@ set undodir=/tmp/vim/undo           " Where to put undo files
 if finddir(&undodir) == ''
     silent call mkdir(&undodir, "p")
 endif
+set mouse=              " Disable mouse
