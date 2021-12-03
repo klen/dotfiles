@@ -8,7 +8,7 @@ source $HOME/.vim/plugins/coc.vim
 source $HOME/.vim/plugins/nerd.vim
 Plug 'tpope/vim-commentary'
 
-Plug 'wfxr/minimap.vim'
+Plug 'wfxr/minimap.vim', { 'do': ':!cargo install --locked code-minimap' }
 let g:minimap_width = 10
 let g:minimap_auto_start = 1
 let g:minimap_auto_start_win_enter = 1

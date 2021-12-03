@@ -16,10 +16,12 @@
     - git-flow
     - golang
     - htop-osx
+    - httpie
     - neovim
     - node
     - postgresql
     - pyenv
+    - rust
     - stow
     - terminal-notifier
     - unzip
