@@ -3,10 +3,21 @@ if not ok then
   return
 end
 local u = require "utils"
+local actions = require "telescope.actions"
 
 local config = {
-  path_display = { shorten = 5 },
-  set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+
+  defaults = {
+    path_display = { shorten = 5 },
+    set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+    mappings = {
+      i = {
+        ["<C-l>"] = actions.send_to_loclist + actions.open_loclist,
+        ["<esc>"] = actions.close,
+      },
+    },
+  },
+
   pickers = {
     find_files = { theme = "dropdown" },
     oldfiles = { theme = "dropdown" },
@@ -19,6 +30,7 @@ local config = {
       enable_preview = true,
     },
   },
+
   extensions = {
     fzf = {
       fuzzy = true,

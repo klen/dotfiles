@@ -25,7 +25,8 @@ export HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
 
 export CLICOLOR=1
-export LSCOLORS=Hxfxcxdxbxegedabagacad
+export LS_OPTIONS=--color
+# export LSCOLORS=Hxfxcxdxbxegedabagacad
 
 # for the love of god don't offer to autocomplete this shit
 export FIGNORE="#:~:DS_Store:.pyc:.swp:.swo"

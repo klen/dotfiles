@@ -22,7 +22,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias less='less -r'
 
-alias ls='ls $LS_OPTIONS -Fh' 
+alias ls='ls $LS_OPTIONS -Fh'
 alias ll='ls $LS_OPTIONS -A'
 alias la='ll $LS_OPTIONS -FhlA'
 

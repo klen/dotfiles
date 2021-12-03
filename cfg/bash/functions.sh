@@ -209,7 +209,7 @@ kitty-conf () {
 
 config () {
     cd $HOME/.home
-    nvim
+    nvim Makefile
 }
 
 # vim:fdm=indent
