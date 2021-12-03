@@ -104,8 +104,8 @@ wk.register {
 
   -- Plugins
   ["<leader>p"] = { name = "+plugins" },
-  ["<leader>pS"] = { "<cmd>PackerStatus<cr>", "Plugins Status" },
-  ["<leader>ps"] = { "<cmd>PackerSync<cr>", "Sync your plugins" },
+  ["<leader>ps"] = { "<cmd>PackerStatus<cr>", "Plugins Status" },
+  ["<leader>pu"] = { "<cmd>PackerSync<cr>", "Update your plugins" },
   ["<leader>pc"] = { "<cmd>PackerClean<cr>", "Clean unused plugins" },
   ["<leader>pC"] = { "<cmd>PackerCompile<cr>", "Compile your plugins changes" },
   ["<leader>pi"] = { "<cmd>PackerInstall<cr>", "Install missing plugins" },

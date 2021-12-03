@@ -67,16 +67,8 @@ return require("packer").startup(function(use)
     },
   }
   use {
-    "wfxr/minimap.vim",
-    config = require "configs/minimap",
-    -- cmd = {
-    --   "Minimap",
-    --   "MinimapClose",
-    --   "MinimapToggle",
-    --   "MinimapRefresh",
-    --   "MinimapUpdateHighlight",
-    -- },
-    run = "cargo install --locked code-minimap",
+    "dstein64/nvim-scrollview",
+    config = require "configs/scrollview",
   }
 
   -- Statusline.
