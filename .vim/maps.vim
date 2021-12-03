@@ -62,6 +62,14 @@ nnoremap <silent> <leader>cc :close<CR>
 noremap <silent> <leader>bd :bd<CR>
 noremap <silent> <leader>bn :bn<CR>
 noremap <silent> <leader>bp :bp<CR>
+noremap <silent> <Tab> :bn<CR>
+noremap <silent> <S-Tab> :bp<CR>
+
+" Plugins
+noremap <silent> <leader>ps :PlugStatus<CR>
+noremap <silent> <leader>pu :PlugUpdate<CR>
+noremap <silent> <leader>pc :PlugClean<CR>
+noremap <silent> <leader>pi :PlugInstall<CR>
 
 " Options
 nnoremap <silent> <leader>op :set paste! paste?<CR>
