@@ -14,6 +14,7 @@
     - firefox
     - gimp
     - google-chrome     # Browser
+    - google-drive
     - hyperdock         # Manage windows
     - iina              # Video player
     - ilya-birman-typography-layout

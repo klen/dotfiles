@@ -21,6 +21,7 @@
     - node
     - postgresql
     - pyenv
+    - rsc_2fa
     - rust
     - stow
     - terminal-notifier
