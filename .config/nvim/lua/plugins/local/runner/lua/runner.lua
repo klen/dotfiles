@@ -16,7 +16,6 @@ M.config = {
     ruby = "ruby",
     typescript = "ts-node",
   },
-
 }
 
 -- open new terminal
@@ -64,13 +63,9 @@ end
 
 -- Setup the plugin
 function M.setup(cfg)
-
   -- Update config
   if cfg ~= nil then
-    M.config = vim.tbl_extend("force", M.config, cfg)
-    if cfg.languages ~= nil then
-      M.config.languages = vim.tbl_extend("force", M.config, cfg.languages)
-    end
+    M.config = vim.tbl_deep_extend("force", M.config, cfg)
   end
 
   -- Setup mapping
@@ -79,7 +74,6 @@ function M.setup(cfg)
       vim.cmd("au FileType " .. lang .. " lua require('runner').map_keys()")
     end
   end
-
 end
 
 return M

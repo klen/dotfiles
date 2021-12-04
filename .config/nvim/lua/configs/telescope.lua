@@ -44,7 +44,8 @@ local config = {
   },
 }
 telescope.load_extension "fzf"
-telescope.load_extension "projects"
+-- projects.nvim
+-- telescope.load_extension "projects"
 telescope.setup(config)
 
 u.nmap("<C-Space>", ":Telescope<CR>")

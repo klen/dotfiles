@@ -8,6 +8,7 @@ else
 end
 
 ---@diagnostic disable: undefined-global
+-- Intergrate projects.nvim
 local projects = function()
   local history = require "project_nvim.utils.history"
   local project = require "project_nvim.project"
@@ -41,7 +42,7 @@ starter.setup {
     starter.sections.recent_files(10, true),
     -- starter.sections.sessions(5, true),
 
-    projects,
+    -- projects,
 
     -- Custom actions
     { name = "Find files", action = "Telescope find_files", section = "Actions" },

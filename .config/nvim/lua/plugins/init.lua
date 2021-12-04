@@ -44,27 +44,15 @@ return require("packer").startup(function(use)
     end,
   }
 
-  -- use(require "plugins/local")
+  -- Explore files/symbols/buffers/etc
+  use(require "plugins/explore")
 
   -- Dashboard, comments, pairs, statusline, cursorword
-  use {
-    "ahmedkhalf/project.nvim",
-    config = require "configs/project",
-  }
   use {
     "echasnovski/mini.nvim",
     config = function()
       require "configs/mini"
     end,
-  }
-  use {
-    "simrat39/symbols-outline.nvim",
-    config = require "configs/symbols-outline",
-    cmd = {
-      "SymbolsOutline",
-      "SymbolsOutlineOpen",
-      "SymbolsOutlineClose",
-    },
   }
   use {
     "dstein64/nvim-scrollview",
@@ -83,38 +71,6 @@ return require("packer").startup(function(use)
   use {
     "vim-test/vim-test",
     config = require "configs/vim-test",
-  }
-
-  -- Fuzzy finder and it requirments.
-  use {
-    "nvim-telescope/telescope.nvim",
-    config = function()
-      require "configs/telescope"
-    end,
-  }
-  use {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    run = "make",
-    requires = { "nvim-lua/plenary.nvim" },
-  }
-  use "artart222/telescope_find_directories"
-  use {
-    "mrjones2014/dash.nvim",
-    run = "make install",
-  }
-
-  -- File explorer tree.
-  use {
-    "kyazdani42/nvim-tree.lua",
-    cmd = {
-      "NvimTreeOpen",
-      "NvimTreeFocus",
-      "NvimTreeToggle",
-      "NvimTreeFindFile",
-    },
-    config = function()
-      require "configs/nvim-tree"
-    end,
   }
 
   -- Languages Support
