@@ -40,7 +40,7 @@ end
 starter.setup {
   items = {
     starter.sections.recent_files(10, true),
-    -- starter.sections.sessions(5, true),
+    starter.sections.sessions(5, true),
 
     -- projects,
 
