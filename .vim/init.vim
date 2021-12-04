@@ -21,7 +21,7 @@ source $HOME/.vim/auto.vim
 source $HOME/.vim/maps.vim
 
 " Plugins
-source $HOME/.vim/plugins.vim
+source $HOME/.vim/plugins/init.vim
 
 " Color theme
 if !exists('g:colors_name')
