@@ -50,7 +50,7 @@ end
 
 vim.defer_fn(function()
   -- require('mini.bufremove').setup()
-  require("mini.comment").setup()
+  -- require("mini.comment").setup()
   -- require('mini.cursorword').setup()
   -- require("mini.jump").setup()
   -- require('mini.misc').setup()
