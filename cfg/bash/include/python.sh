@@ -5,18 +5,18 @@
 
 export PYTHONBREAKPOINT=ipdb.set_trace
 
-__command pip && {
+__is_cmd_exist pip && {
     export PIP_DOWNLOAD_CACHE=/tmp/.pip/$USER/cache
     export PIP_LOG_FILE=/tmp/.pip/$USER/pip.log
 
     source $CMPDIR/pip.sh
 }
 
-__command salt && {
+__is_cmd_exist salt && {
     source $CMPDIR/salt.sh
 }
 
-__command pyenv && {
+__is_cmd_exist pyenv && {
     # export PYENV_ROOT="$HOME/.pyenv"
     # export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init --path)"

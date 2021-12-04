@@ -1,4 +1,4 @@
-__command git && {
+__is_cmd_exist git && {
 
     source $CMPDIR/git.sh
     source $CMPDIR/git-flow.sh

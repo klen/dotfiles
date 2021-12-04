@@ -4,9 +4,9 @@
 # echo    -e ${CYAN}This is BASH ${RED}${BASH_VERSION%.*}${CYAN} - DISPLAY on ${RED}$DISPLAY${NC}
 # uname   -a
 # cat /etc/lsb-release 2&>/dev/null
-__command cowsay && __command fortune &&  fortune -s | cowsay -f $CFGDIR/girl.cow 2>/dev/null
-# __command landscape-sysinfo && landscape-sysinfo
-__command lastlog && lastlog -u $USER
+__is_cmd_exist cowsay && __is_cmd_exist fortune &&  fortune -s | cowsay -f $CFGDIR/girl.cow 2>/dev/null
+# __is_cmd_exist landscape-sysinfo && landscape-sysinfo
+__is_cmd_exist lastlog && lastlog -u $USER
 
 setup () {
 

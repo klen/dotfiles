@@ -7,7 +7,7 @@
 # if not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-__command () {
+__is_cmd_exist () {
     command -v $1 1>/dev/null
 }
 
@@ -25,7 +25,7 @@ setup () {
     source $CFGDIR/bash/options.sh
 
     # Load colors
-    source $INCDIR/colors.sh
+    source $CFGDIR/bash/colors.sh
 
     # Load path
     source $CFGDIR/bash/path.sh
@@ -44,7 +44,7 @@ setup () {
     source $CMPDIR/makesite.sh
     source $CMPDIR/cd_.sh
     source $CMPDIR/rmqadmin.sh
-    __command @ &&  source $CMPDIR/atmark.sh
+    __is_cmd_exist @ &&  source $CMPDIR/atmark.sh
 
     # Setup tools
     source $INCDIR/ruby.sh
@@ -54,6 +54,7 @@ setup () {
     source $INCDIR/todo.sh
     source $INCDIR/js.sh
     source $INCDIR/docker.sh
+    source $INCDIR/android.sh
 
     # Close promt
     PS1="${PS1}\n$ "
@@ -68,7 +69,7 @@ setup () {
     source $CFGDIR/bash/login.sh
 
     # Auto run screen on remote servers
-    __command screen && {
+    __is_cmd_exist screen && {
         if [ ! -z "$SSH_CLIENT" ] && [ -z $WINDOW ]; then
             exec screen
         fi
