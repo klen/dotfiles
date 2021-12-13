@@ -80,6 +80,7 @@ wk.register {
   ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
   ["<leader>fd"] = { "<cmd>Dash<cr>", "Search in dash" },
   ["<leader>fD"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
+  ["<leader>fw"] = { "<cmd>Telescope live_grep<cr>", "Find a word" },
 
   ["<leader>d"] = { name = "+explore" },
   ["<leader>dd"] = { "<cmd>NvimTreeFocus<cr>", "Open/focus Explorer" },
@@ -160,7 +161,6 @@ wk.register {
   ["gc"] = { name = "+comments" },
 
   -- Other
-  ["<leader>/"] = { "<cmd>Telescope live_grep<cr>", "Search a word" },
   ["<leader>:"] = { "<cmd>Telescope command_history<cr>", "Command history" },
   ["gw"] = { "<cmd>lua require'utils.tools'.vimgrep()<cr>", "Grep current word" },
   ["gI"] = { "`.", "Go to the last edit" },

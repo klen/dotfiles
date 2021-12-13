@@ -19,13 +19,14 @@ return {
     requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   },
 
-  -- Refactoing (only nvim >= 0.6.0)
+  -- Refactoring (TODO: temporary disabled)
   -- {
   --   "ThePrimeagen/refactoring.nvim",
   --   requires = {
-  --     {"nvim-lua/plenary.nvim"},
-  --     {"nvim-treesitter/nvim-treesitter"}
-  --   }
+  --     { "nvim-lua/plenary.nvim" },
+  --     { "nvim-treesitter/nvim-treesitter" },
+  --   },
+  --   config = require "configs/refactoring",
   -- },
 
   -- Support LSP colors
@@ -41,12 +42,6 @@ return {
   {
     "folke/lua-dev.nvim",
     module = "lua-dev",
-  },
-
-  -- Better UI
-  {
-    "rinx/lspsaga.nvim",
-    config = require "configs.lspsaga",
   },
 
   {

@@ -4,13 +4,16 @@ local M = {}
 function M.diagnostics(mode) -- document|all
   local diagnostics
   if mode == "all" then
-    diagnostics = lsp.diagnostic.get_all()
+    diagnostics = vim.diagnostic.get_all()
   else
     local buf = api.nvim_get_current_buf()
-    diagnostics = { [buf] = lsp.diagnostic.get(buf) }
+    diagnostics = { [buf] = vim.diagnostic.get(buf) }
   end
-  local ret = lsp.util.diagnostics_to_items(diagnostics)
-  lsp.util.set_qflist(ret)
+  local items = lsp.util.diagnostics_to_items(diagnostics)
+  vim.fn.setqflist({}, " ", {
+    title = "Language Server",
+    items = items,
+  })
 end
 
 function M.process(err, result, ctx, cb)

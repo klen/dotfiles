@@ -1,4 +1,3 @@
-set hidden                            " Edit multiple unsaved files at the same time
 set confirm                           " Prompt to save unsaved changes when exiting
 set backup                            " Make backup file and leave it around
 set backupdir=/tmp/nvim/backup        " Where to put backup files
@@ -6,10 +5,6 @@ set directory=/tmp/nvim/swap          " Where to put swap files
 let g:SESSION_DIR='/tmp/nvim/session' " where to keep sessions
 
 " Create directories
-if finddir(&backupdir) == ''
-    silent call mkdir(&backupdir, "p")
-endif
-
 if finddir(&directory) == ''
     silent call mkdir(&directory, "p")
 endif

@@ -21,6 +21,7 @@ return function(defaults)
           return message.severity < 4
         end, result.diagnostics)
 
+        -- TODO: support nvim 0.6.0
         lsp.diagnostic.on_publish_diagnostics(err, result, ctx, {
           signs = true, -- Place Signs
           underline = false, -- Underline errors

@@ -1,8 +1,9 @@
 return function()
   local null_ls = require "null-ls"
 
-  null_ls.config {
+  null_ls.setup {
     debug = true,
+    on_attach = require "configs/lsp/on_attach",
 
     diagnostics_format = "#{c} #{m} (#{s})",
     sources = {
@@ -24,16 +25,14 @@ return function()
       },
       -- pip install pylama
       null_ls.builtins.diagnostics.pylama,
+      -- null_ls.builtins.diagnostics.pylint,
 
       -- Lua
       -- cargo install stylua
       null_ls.builtins.formatting.stylua,
-    },
-  }
 
-  require("lspconfig")["null-ls"].setup {
-    on_attach = require "configs/lsp/on_attach",
-    capabilities = require "configs/lsp/capabilities",
-    handlers = require "configs/lsp/handlers",
+      -- Actions
+      null_ls.builtins.code_actions.refactoring,
+    },
   }
 end

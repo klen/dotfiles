@@ -1,16 +1,20 @@
-local lsp_installer = require("nvim-lsp-installer")
+local lsp_installer = require "nvim-lsp-installer"
+
+vim.diagnostic.config {
+  underline = false,
+}
 
 -- replace the default lsp diagnostic symbols
-fn.sign_define("LspDiagnosticsSignError", { text = 'EE', numhl = "LspDiagnosticsDefaultError" })
-fn.sign_define("LspDiagnosticsSignWarning", { text = 'WW', numhl = "LspDiagnosticsDefaultWarning" })
-fn.sign_define("LspDiagnosticsSignInformation", { text = 'II', numhl = "LspDiagnosticsDefaultInformation" })
-fn.sign_define("LspDiagnosticsSignHint", { text = 'HH', numhl = "LspDiagnosticsDefaultHint" })
+fn.sign_define("DiagnosticSignError", { text = "EE", texthl = "DiagnosticError" })
+fn.sign_define("DiagnosticSignWarn", { text = "WW", texthl = "DiagnosticWarn" })
+fn.sign_define("DiagnosticSignInfo", { text = "II", texthl = "DiagnosticInfo" })
+fn.sign_define("DiagnosticSignHint", { text = "HH", texthl = "DiagnosticHint" })
 
 -- Auto populate quickfix
 cmd [[
   augroup lsp
     autocmd!
-    au User LspDiagnosticsChanged lua require('utils/lsp').diagnostics('document')
+    au User DiagnosticChanged lua require('utils/lsp').diagnostics('document')
   augroup END
 ]]
 
@@ -22,17 +26,16 @@ lsp_installer.on_server_ready(function(server)
     return nil
   end
   local config = {
-    on_attach = require'configs/lsp/on_attach',
-    handlers = require'configs/lsp/handlers',
-    capabilities = require'configs/lsp/capabilities',
-    flags = {debounce_text_changes = 150}
+    on_attach = require "configs/lsp/on_attach",
+    handlers = require "configs/lsp/handlers",
+    capabilities = require "configs/lsp/capabilities",
+    flags = { debounce_text_changes = 150 },
   }
-  local ok, configure = pcall(require, 'configs.lsp.servers.' .. server.name)
+  local ok, configure = pcall(require, "configs.lsp.servers." .. server.name)
   if ok then
     config = configure(config)
   end
   server:setup(config)
 
   cmd [[ do User LspAttachBuffers ]]
-
 end)

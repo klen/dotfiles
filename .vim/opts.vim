@@ -1,5 +1,4 @@
 " VIM/Neovim
-set hidden                            " Edit multiple unsaved files at the same time
 set confirm                           " Prompt to save unsaved changes when exiting
 set backup                            " Make backup file and leave it around
 set backupdir=/tmp/vim/backup         " Where to put backup files
@@ -100,6 +99,8 @@ set exrc
 
 " --- VIM only
 source $VIMRUNTIME/defaults.vim
+set hidden                            " Edit multiple unsaved files at the same time
+set nojoinspaces
 set sessionoptions-=options
 set viewoptions-=options
 set autoread                " auto reload changed files
