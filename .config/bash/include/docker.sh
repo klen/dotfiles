@@ -1,5 +1,5 @@
 # Support docker
-__is_cmd_exist docker && {
+_is_cmd_exist docker && {
 
     dps () {
         docker ps --format="table {{.Names}}\t{{.Status}}" $@

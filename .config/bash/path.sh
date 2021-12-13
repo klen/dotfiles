@@ -18,3 +18,9 @@
 
 # Homebrew coreutils
 [ -d /usr/local/opt/coreutils/libexec/gnubin/ ] && PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+
+# Homebrew curl
+[ -d /usr/local/opt/curl/bin ] && PATH=/usr/local/opt/curl/bin:$PATH
+
+# Homebrew mysql-client
+[ -d /usr/local/opt/mysql-client/bin ] && PATH=/usr/local/opt/mysql-client/bin:$PATH

@@ -1,9 +1,5 @@
 export PRJDIR=$HOME/projects
 
-[ ! -d $PRJDIR ] && [ -d $HOME/Dropbox ] && {
-    export PRJDIR=$HOME/Dropbox/projects
-}
-
 _cdp_completion() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
     local choices=$(find $PRJDIR -maxdepth 1 -mindepth 1 -type d)

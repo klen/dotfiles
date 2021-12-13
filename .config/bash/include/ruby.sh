@@ -12,7 +12,7 @@ setup () {
 
     local commands="knife vagrant cap gem"
     for n in $commands; do
-        __is_cmd_exist $n && source $CMPDIR/${n}.sh
+        _is_cmd_exist $n && source $XDG_CONFIG_HOME/bash/completion/${n}.sh
     done
 
     [ -d /usr/local/opt/ruby/bin ] && PATH=/usr/local/opt/ruby/bin:$PATH

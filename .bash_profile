@@ -7,7 +7,3 @@
 if [ -f "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
 fi
-
-source "$HOME/.cargo/env"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export PATH="/usr/local/opt/curl/bin:$PATH"

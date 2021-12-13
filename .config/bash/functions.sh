@@ -4,7 +4,6 @@
 # Show help
 hh () {
     echo "Avalible commands:"
-    echo "apt_update                          update from repository"
 
     echo "pk type filename                    pack archive"
     echo "ex filename                         unpack archive"
@@ -23,12 +22,15 @@ hh () {
 
     echo "ii                                  show system info"
 
-    echo "home                                Update user configurations"
-
     echo "colors                              show ansi colors table"
+
+    echo "config                              edit dotfiles"
+    echo "vim-conf                            edit vim configuration"
+    echo "nvim-conf                           edit neovim configuration"
+    echo "kitty-conf                          edit kitty configuration"
 }
 
-# find file by template
+# Find file by template
 ff() { find . -type f -iname '*'$*'*' -ls ; }
 
 # find file by template and execute command
@@ -137,17 +139,6 @@ pk () {
     fi
 }
 
-apt_update() {
-    sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/$1" \
-    -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"    
-}
-_sources_lists(){
-    local cur="${COMP_WORDS[COMP_CWORD]}"
-
-    COMPREPLY=( $( find /etc/apt/sources.list.d/ -name "*$cur*.list" -exec basename {} \; 2> /dev/null ) )
-} &&
-complete -F _sources_lists apt_update
-
 
 # Set terminal title
 title () {
@@ -169,12 +160,32 @@ colors () {
    # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m" 
 }
 
-home () {
-    test -d $HOME/.home || git clone https://github.com/klen/.home.git
+# Setup editors
+vim-conf () {
+    cd $HOME/.home/.vim
+    vim init.vim
+}
+
+nvim-conf () {
+    cd $HOME/.home/.config/nvim
+    nvim init.lua
+}
+
+kitty-conf () {
+    cd $HOME/.home/.config/kitty
+    $EDITOR kitty.conf
+}
+
+config () {
     cd $HOME/.home
-    make
-    cd -
-    . $HOME/.bashrc
+    $EDITOR Makefile
+}
+
+# Utils
+# -----
+
+_is_cmd_exist () {
+    command -v $1 1>/dev/null
 }
 
 _ask () {
@@ -189,27 +200,6 @@ _ask () {
     then
         return 1
     fi
-}
-
-# Setup editors
-vim-conf () {
-    cd $HOME/.home/.vim
-    vim init.vim
-}
-
-nvim-conf () {
-    cd $HOME/.home/.config/nvim
-    nvim init.lua
-}
-
-kitty-conf () {
-    cd $HOME/.home/.config/kitty
-    nvim kitty.conf
-}
-
-config () {
-    cd $HOME/.home
-    nvim Makefile
 }
 
 # vim:fdm=indent

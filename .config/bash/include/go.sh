@@ -1,4 +1,4 @@
-__is_cmd_exist go && {
+_is_cmd_exist go && {
 
     mkdir -p $HOME/go
     export GOPATH=$HOME/go

@@ -27,7 +27,7 @@ case `id -u` in
 esac
 
 # hostname
-__is_cmd_exist hostname && {
+_is_cmd_exist hostname && {
     if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_CLIENT2" ]; then
         PS1="${PS1}@${BLUE}$(hostname -f)"
 

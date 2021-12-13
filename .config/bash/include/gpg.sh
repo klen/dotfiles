@@ -1,6 +1,6 @@
-__is_cmd_exist gpg && {
+_is_cmd_exist gpg && {
 
-    source $CMPDIR/gpg.sh
+    source $XDG_CONFIG_HOME/bash/completion/gpg.sh
 
     [ ! -r $HOME/.gnupg/trustdb.gpg  ] && {
 
