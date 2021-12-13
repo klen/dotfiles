@@ -40,7 +40,7 @@ source $XDG_CONFIG_HOME/bash/include/go.sh
 source $XDG_CONFIG_HOME/bash/include/todo.sh
 source $XDG_CONFIG_HOME/bash/include/docker.sh
 source $XDG_CONFIG_HOME/bash/include/android.sh
-_is_cmd_exist rustc && source $XDG_CONFIG_HOME/bash/include/rust.sh
+source $XDG_CONFIG_HOME/bash/include/rust.sh
 _is_cmd_exist node && source $XDG_CONFIG_HOME/bash/include/node.sh
 _is_cmd_exist ruby && source $XDG_CONFIG_HOME/bash/include/ruby.sh
 
