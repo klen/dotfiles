@@ -161,22 +161,27 @@ colors () {
 }
 
 # Setup editors
-vim-conf () {
+conf-vim () {
     cd $HOME/.home/.vim
     vim init.vim
 }
 
-nvim-conf () {
+conf-nvim () {
     cd $HOME/.home/.config/nvim
     nvim init.lua
 }
 
-kitty-conf () {
+conf-kitty () {
     cd $HOME/.home/.config/kitty
     $EDITOR kitty.conf
 }
 
-config () {
+conf-bash () {
+    cd $HOME/.home/.config/bash
+    $EDITOR main.sh
+}
+
+conf-home () {
     cd $HOME/.home
     $EDITOR Makefile
 }
