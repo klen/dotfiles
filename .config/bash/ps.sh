@@ -3,7 +3,7 @@
 
 
 setup () {
-    PS1="\n"
+    PS1="\n$BOLD"
 
     # shell level
     if [ ! "$SHLVL" = "1" ]; then

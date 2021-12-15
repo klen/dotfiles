@@ -1,6 +1,6 @@
 " You probably always want to set this in your vim file
 set background=dark
-let g:colors_name="jellybeans2"
+let g:colors_name="test"
 
 " By setting our module to nil, we clear lua's cache,
 " which means the require ahead will *always* occur.
@@ -11,7 +11,7 @@ let g:colors_name="jellybeans2"
 "
 " Note if you're working in on your theme and have lush.ify'd the buffer,
 " your changes will be applied with our without the following line.
-lua package.loaded['colors.jellybeans2'] = nil
+lua package.loaded['colors.test'] = nil
 
 " include our theme file and pass it to lush to apply
-lua require('lush')(require('colors.jellybeans2'))
+lua require('lush')(require('colors.test'))

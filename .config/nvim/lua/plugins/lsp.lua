@@ -8,14 +8,14 @@ return {
     "williamboman/nvim-lsp-installer",
     requires = { "neovim/nvim-lspconfig" },
     config = function()
-      require "configs/lsp"
+      require "setup/lsp"
     end,
   },
 
   -- Support non-lsp formatters/linters/etc
   {
     "jose-elias-alvarez/null-ls.nvim",
-    config = require "configs/lsp/null-ls",
+    config = require "setup/lsp/null-ls",
     requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   },
 
@@ -26,7 +26,7 @@ return {
   --     { "nvim-lua/plenary.nvim" },
   --     { "nvim-treesitter/nvim-treesitter" },
   --   },
-  --   config = require "configs/refactoring",
+  --   config = require "setup/refactoring",
   -- },
 
   -- Support LSP colors
@@ -34,7 +34,7 @@ return {
 
   -- Configure diagnosticls
   {
-    "creativenull/diagnosticls-configs-nvim",
+    "creativenull/diagnosticls-setup-nvim",
     requires = { "neovim/nvim-lspconfig" },
   },
 
@@ -55,6 +55,6 @@ return {
   -- },
   -- {
   --   "folke/trouble.nvim",
-  --   config = require('configs.trouble'),
+  --   config = require('setup.trouble'),
   -- },
 }

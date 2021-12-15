@@ -56,7 +56,7 @@ g.codeschool_contrast_dark = "hard" -- hard|medium|soft
 cmd [[
   augroup packer_user_config
     autocmd!
-    autocmd BufEnter ~/.config/nvim/lua/lush_theme/*.lua Lushify
+    autocmd BufEnter **/.config/nvim/lua/colors/*.lua Lushify
   augroup end
 ]]
 

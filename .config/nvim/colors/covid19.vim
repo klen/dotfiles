@@ -11,7 +11,7 @@ let g:colors_name="covid19"
 "
 " Note if you're working in on your theme and have lush.ify'd the buffer,
 " your changes will be applied with our without the following line.
-lua package.loaded['lush_theme.covid19'] = nil
+lua package.loaded['colors.covid19'] = nil
 
 " include our theme file and pass it to lush to apply
-lua require('lush')(require('lush_theme.covid19'))
+lua require('lush')(require('colors.covid19'))

@@ -1,4 +1,4 @@
-require "configs/neoscroll"
+require "setup/neoscroll"
 
 return {
   {
@@ -10,12 +10,12 @@ return {
       end,
     },
     ft = "qf",
-    config = require "configs/bqf",
+    config = require "setup/bqf",
   },
   "rcarriga/nvim-notify",
   {
     "folke/which-key.nvim",
-    config = require "configs/which-key",
+    config = require "setup/which-key",
   },
 
   -- repeat surround motions with .

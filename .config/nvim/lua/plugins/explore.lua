@@ -4,7 +4,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     config = function()
-      require "configs/telescope"
+      require "setup/telescope"
     end,
   },
   {
@@ -28,13 +28,13 @@ return {
       "NvimTreeFindFile",
     },
     config = function()
-      require "configs/nvim-tree"
+      require "setup/nvim-tree"
     end,
   },
 
   {
     "simrat39/symbols-outline.nvim",
-    config = require "configs/symbols-outline",
+    config = require "setup/symbols-outline",
     cmd = {
       "SymbolsOutline",
       "SymbolsOutlineOpen",

@@ -8,7 +8,7 @@ return {
   -- Comments
   {
     "numToStr/Comment.nvim",
-    config = require "configs/comment",
+    config = require "setup/comment",
   },
 
   -- Python

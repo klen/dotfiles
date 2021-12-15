@@ -2,8 +2,8 @@ return function()
   local null_ls = require "null-ls"
 
   null_ls.setup {
-    debug = true,
-    on_attach = require "configs/lsp/on_attach",
+    debug = false,
+    on_attach = require "setup/lsp/on_attach",
 
     diagnostics_format = "#{c} #{m} (#{s})",
     sources = {
@@ -25,6 +25,7 @@ return function()
       },
       -- pip install pylama
       null_ls.builtins.diagnostics.pylama,
+      -- pip install pylint
       -- null_ls.builtins.diagnostics.pylint,
 
       -- Lua

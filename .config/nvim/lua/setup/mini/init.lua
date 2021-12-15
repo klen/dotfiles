@@ -1,4 +1,4 @@
-require "configs/mini/starter"
+require "setup/mini/starter"
 require("mini.sessions").setup { directory = g.SESSION_DIR }
 
 ---@diagnostic disable: undefined-global

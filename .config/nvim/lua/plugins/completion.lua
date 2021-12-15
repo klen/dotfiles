@@ -9,14 +9,14 @@ return {
     "hrsh7th/nvim-cmp", -- Auto complete
     requires = { "hrsh7th/cmp-nvim-lsp" },
     config = function()
-      require "configs/cmp"
+      require "setup/cmp"
     end,
   },
   {
     "L3MON4D3/LuaSnip",
     after = "nvim-cmp",
     config = function()
-      require "configs/luasnip"
+      require "setup/luasnip"
     end,
   },
   {

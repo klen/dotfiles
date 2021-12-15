@@ -51,26 +51,26 @@ return require("packer").startup(function(use)
   use {
     "echasnovski/mini.nvim",
     config = function()
-      require "configs/mini"
+      require "setup/mini"
     end,
   }
   use {
     "dstein64/nvim-scrollview",
-    config = require "configs/scrollview",
+    config = require "setup/scrollview",
   }
 
   -- Statusline.
   -- use {
   --   "nvim-lualine/lualine.nvim",
   --   config = function ()
-  --     require("configs/lualine")
+  --     require("setup/lualine")
   --   end
   -- }
 
   -- Run tests
   use {
     "vim-test/vim-test",
-    config = require "configs/vim-test",
+    config = require "setup/vim-test",
   }
 
   -- Languages Support
@@ -83,7 +83,7 @@ return require("packer").startup(function(use)
   use {
     "NTBBloodbath/rest.nvim",
     requires = { "nvim-lua/plenary.nvim" },
-    config = require "configs/rest",
+    config = require "setup/rest",
   }
 
   -- Git support

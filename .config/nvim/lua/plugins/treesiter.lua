@@ -17,7 +17,7 @@ return {
       "TSUpdateSync",
     },
     config = function()
-      require "configs/treesitter"
+      require "setup/treesitter"
     end,
   },
 

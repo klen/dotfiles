@@ -16,21 +16,30 @@ magenta=''
 red=''
 white=''
 yellow=''
+BOLD=''
 
 if [ -t 1 ] || [ $(tput colors) -ge 8 ]; then
-    NC='\033[0m'
-    BLUE='\033[1;34m'
-    CYAN='\033[1;36m'
-    GREEN='\033[1;32m'
-    MAGENTA='\033[1;35m'
-    RED='\033[1;31m'
-    WHITE='\033[1;37m'
-    YELLOW='\033[1;33m'
-    blue='\033[0;34m'
-    cyan='\033[0;36m'
-    green='\033[0;32m'
-    magenta='\033[0;35m'
-    red='\033[0;31m'
-    white='\033[0;37m'
-    yellow='\033[0;33m'
+    NC=$(tput sgr 0)
+    BOLD=$(tput bold)
+
+    red=$(tput setaf 1)
+    RED=$(tput setaf 9)
+
+    green=$(tput setaf 2)
+    GREEN=$(tput setaf 10)
+
+    yellow=$(tput setaf 3)
+    YELLOW=$(tput setaf 11)
+
+    blue=$(tput setaf 4)
+    BLUE=$(tput setaf 12)
+
+    magenta=$(tput setaf 5)
+    MAGENTA=$(tput setaf 13)
+
+    cyan=$(tput setaf 6)
+    CYAN=$(tput setaf 14)
+
+    white=$(tput setaf 7)
+    WHITE=$(tput setaf 15)
 fi

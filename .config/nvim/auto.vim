@@ -13,7 +13,7 @@ au!
 
   " Reload and compile plugins
   autocmd BufWritePost **/nvim/lua/plugins/*.lua source <afile> | PackerCompile
-  autocmd BufWritePost **/nvim/lua/configs/*.lua source <afile> | PackerCompile
+  autocmd BufWritePost **/nvim/lua/setup/*.lua source <afile> | PackerCompile
 
   " Terminal
   autocmd TermOpen * startinsert

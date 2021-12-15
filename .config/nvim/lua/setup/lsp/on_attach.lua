@@ -83,6 +83,7 @@ return function(client, bufnr)
     u.vmap("<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", { bufnr = bufnr })
   end
 
+  -- Auto format on save
   if client.resolved_capabilities.document_formatting then
     u.au("BufWritePre", "<buffer>", "lua require('utils.lsp').formatOnSave()")
   end

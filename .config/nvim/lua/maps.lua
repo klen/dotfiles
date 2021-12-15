@@ -28,10 +28,6 @@ u.nmap("n", "nzzzv")
 u.nmap("N", "Nzzzv")
 u.nmap("J", "mzJ`z")
 
--- use ESC to turn off search highlighting
-u.nmap("<Esc>", ":noh<CR>")
--- u.nmap('<Esc>', ':set invhlsearch<CR>')
-
 -- Save file
 u.nmap("<CR>", ":w<CR>")
 

@@ -26,12 +26,12 @@ lsp_installer.on_server_ready(function(server)
     return nil
   end
   local config = {
-    on_attach = require "configs/lsp/on_attach",
-    handlers = require "configs/lsp/handlers",
-    capabilities = require "configs/lsp/capabilities",
+    on_attach = require "setup/lsp/on_attach",
+    handlers = require "setup/lsp/handlers",
+    capabilities = require "setup/lsp/capabilities",
     flags = { debounce_text_changes = 150 },
   }
-  local ok, configure = pcall(require, "configs.lsp.servers." .. server.name)
+  local ok, configure = pcall(require, "setup.lsp.servers." .. server.name)
   if ok then
     config = configure(config)
   end

@@ -240,8 +240,8 @@ local theme = lush(function()
     -- LspReferenceWrite                    { }, -- used for highlighting "write" references
 
     -- DiagnosticDefaultError           { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- DiagnosticDefaultWarning         { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- DiagnosticDefaultInformation     { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    -- DiagnosticDefaultWarn         { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    -- DiagnosticDefaultInfo     { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
     -- DiagnosticDefaultHint            { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 
     DiagnosticSignError { fg = old_brick.lighten(10) }, -- Used for "Error" signs in sign column
@@ -250,8 +250,8 @@ local theme = lush(function()
     DiagnosticSignHint { fg = morning_glory.darken(40) }, -- Used for "Hint" signs in sign column
 
     DiagnosticVirtualTextError { DiagnosticSignError }, -- Used for "Error" diagnostic virtual text
-    DiagnosticVirtualTextWarn { DiagnosticSignWarning }, -- Used for "Warning" diagnostic virtual text
-    DiagnosticVirtualTextInfo { DiagnosticSignInformation }, -- Used for "Information" diagnostic virtual text
+    DiagnosticVirtualTextWarn { DiagnosticSignWarn }, -- Used for "Warning" diagnostic virtual text
+    DiagnosticVirtualTextInfo { DiagnosticSignInfo }, -- Used for "Information" diagnostic virtual text
     DiagnosticVirtualTextHint { DiagnosticSignHint }, -- Used for "Hint" diagnostic virtual text
 
     DiagnosticUnderlineError { gui = "none" }, -- Used to underline "Error" diagnostics

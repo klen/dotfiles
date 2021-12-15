@@ -95,7 +95,7 @@ ii() {
     echo -en "${RED}Date:$NC " ; date
     echo -en "${RED}Uptime :$NC " ; uptime
     echo -e "\n${RED}System logged users:$NC " ;w -h
-    echo -e "\n${RED}Free :$NC " ; free
+    _is_cmd_exist free && echo -e "\n${RED}Free :$NC " && free
     command -v landscape-sysinfo && landscape-sysinfo
 }
 
