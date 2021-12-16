@@ -1,17 +1,13 @@
 local notify = require "notify"
 local M = {}
 
-function M.diagnostics(mode) -- document|all
-  local diagnostics
-  if mode == "all" then
-    diagnostics = vim.diagnostic.get_all()
-  else
-    local buf = api.nvim_get_current_buf()
-    diagnostics = { [buf] = vim.diagnostic.get(buf) }
-  end
-  local items = lsp.util.diagnostics_to_items(diagnostics)
+function M.diagnostics()
+  -- Doesnt support buffer
+  -- vim.diagnostic.setqflist { open = false, namespace = "textDocument" }
+  local bufnr = api.nvim_get_current_buf()
+  local items = vim.diagnostic.toqflist(vim.diagnostic.get(bufnr))
   vim.fn.setqflist({}, " ", {
-    title = "Language Server",
+    title = "Diagnostics",
     items = items,
   })
 end
@@ -108,11 +104,6 @@ function M.jumpLocation(item)
 end
 
 -- TODO
-function M.processActions(err, result, ctx, _)
-  M.process(err, result, ctx, function()
-    print(vim.inspect(result))
-  end)
-end
 
 local function lsp_request(method, handler)
   local buf = api.nvim_get_current_buf()
@@ -129,7 +120,10 @@ function M.getDocumentSymbols()
   lsp_request("textDocument/documentSymbol", function(result)
     local win = api.nvim_get_current_win()
     local items = vim.lsp.util.symbols_to_items(result, buf)
-    lsp.util.set_loclist(items, win)
+    vim.fn.setloclist(win, {}, " ", {
+      title = "Diagnostics",
+      items = items,
+    })
     cmd "abo lw"
   end)
 end

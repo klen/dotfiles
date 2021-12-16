@@ -57,6 +57,7 @@ local hsl = lush.hsl
 local foreground = hsl "#e8e8d3"
 -- local background    = hsl("#151515").darken(30)
 local background = hsl("#151515").darken(14)
+
 local grey = hsl "#888888"
 local grey_one = hsl "#1c1c1c"
 local grey_two = hsl "#f0f0f0"
@@ -127,7 +128,7 @@ local theme = lush(function()
     -- CursorIM     { }, -- like Cursor, but used when in IME mode |CursorIM|
     CursorColumn { bg = grey_one }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     CursorLine { bg = grey_one }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
-    Directory { fg = brandy }, -- directory names (and other special names in listings)
+    Directory { fg = morning_glory }, -- directory names (and other special names in listings)
     DiffAdd { fg = tea_green, bg = dell }, -- diff mode: Added line |diff.txt|
     DiffChange { bg = calypso }, -- diff mode: Changed line |diff.txt|
     DiffDelete { fg = temptress, bg = purple }, -- diff mode: Deleted line |diff.txt|
@@ -151,15 +152,16 @@ local theme = lush(function()
     MoreMsg { fg = highland }, -- |more-prompt|
     NonText { fg = scorpion }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     Normal { bg = background, fg = foreground }, -- normal text
-    -- NormalFloat  { }, -- Normal text in floating windows.
     -- NormalNC     { }, -- normal text in non-current windows
-    Pmenu { fg = total_white, bg = scorpion }, -- Popup menu: normal item.
-    PmenuSel { fg = total_white, bg = cod_grey }, -- Popup menu: selected item.
-    -- PmenuSbar    { }, -- Popup menu: scrollbar.
+    Pmenu { fg = total_white, bg = grey_three }, -- Popup menu: normal item.
+    FloatBorder { Pmenu },
+    NormalFloat { Pmenu }, -- Normal text in floating windows.
+    PmenuSel { fg = wewak, bg = cod_grey }, -- Popup menu: selected item.
+    -- PmenuSbar {}, -- Popup menu: scrollbar.
     -- PmenuThumb   { }, -- Popup menu: Thumb of the scrollbar.
     Question { fg = mantis }, -- |hit-enter| prompt and yes/no questions
     QuickFixLine { bg = bright_grey }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-    Search { fg = wewak, bg = cocoa_brown }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
+    Search { fg = koromiko, gui = "underline" }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
     SpecialKey { fg = tundora, bg = grey_one }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
     SpellBad { bg = old_brick }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap { bg = dark_blue }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
@@ -321,6 +323,8 @@ local theme = lush(function()
     -- TSTitle              { };    -- Text that is part of a title.
     -- TSLiteral            { };    -- Literal text.
     -- TSURI                { };    -- Any URI like a link or email.
+
+    NvimTreeOpenedFile { Constant },
 
     pythonClass { Structure },
     -- pythonStatement      { };

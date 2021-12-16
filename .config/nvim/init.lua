@@ -15,18 +15,19 @@ require "utils/globals"
 -- Vim options
 vim.cmd "source ~/.config/nvim/opts.vim"
 
--- Auto commands
-vim.cmd "source ~/.config/nvim/auto.vim"
+-- Plugins
+require "plugin"
 
 -- Mapping
 require "maps"
 
--- Plugins
-require "plugins"
+-- Auto commands
+vim.cmd "source ~/.config/nvim/auto.vim"
 
 -- Colorscheme
--- cmd "colorscheme covid19"
-cmd "colorscheme vscode"
+local config = require "config"
+
+cmd("colorscheme " .. config.colorscheme)
 
 -- Must be written at the last.  see :help 'secure'.
 vim.opt.secure = true

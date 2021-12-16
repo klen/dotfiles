@@ -2,7 +2,7 @@ set confirm                           " Prompt to save unsaved changes when exit
 set backup                            " Make backup file and leave it around
 set backupdir=/tmp/nvim/backup        " Where to put backup files
 set directory=/tmp/nvim/swap          " Where to put swap files
-let g:SESSION_DIR='/tmp/nvim/session' " where to keep sessions
+let g:SESSION_DIR=stdpath('data') .. "/session" " where to keep sessions
 
 " Create directories
 if finddir(&directory) == ''

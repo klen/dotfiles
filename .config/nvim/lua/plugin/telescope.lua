@@ -1,0 +1,58 @@
+-- Find, Filter, Preview, Pick. All lua, all the time.
+-- https://github.com/nvim-telescope/telescope.nvim
+return {
+  "nvim-telescope/telescope.nvim",
+  config = function()
+    local telescope = require "telescope"
+
+    local utils = require "utils"
+    local actions = require "telescope.actions"
+
+    local config = {
+      defaults = {
+        path_display = { shorten = 5 },
+        set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+        mappings = {
+          i = {
+            ["<C-l>"] = actions.send_to_loclist + actions.open_loclist,
+            ["<esc>"] = actions.close,
+          },
+        },
+      },
+
+      pickers = {
+        find_files = { theme = "dropdown" },
+        oldfiles = { theme = "dropdown" },
+        treesitter = { theme = "dropdown" },
+        git_files = { theme = "dropdown" },
+        buffers = { theme = "dropdown" },
+        lsp_code_actions = { theme = "cursor" },
+        colorscheme = {
+          theme = "dropdown",
+          enable_preview = true,
+        },
+      },
+
+      extensions = {
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = "smart_case",
+        },
+        dash = {
+          dash_app_path = "/Applications/Dash4.app",
+        },
+      },
+    }
+    -- projects.nvim
+    -- telescope.load_extension "projects"
+    telescope.setup(config)
+
+    telescope.load_extension "fzf"
+
+    utils.nmap("<C-Space>", ":Telescope<CR>")
+    utils.lua_command("Config", "require'utils/telescope'.config()")
+    utils.lua_command("Files", "require'telescope.builtin'.git_files()")
+  end,
+}

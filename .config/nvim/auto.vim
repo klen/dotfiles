@@ -12,7 +12,7 @@ au!
   au InsertLeave * silent! set nopaste
 
   " Reload and compile plugins
-  autocmd BufWritePost **/nvim/lua/plugins/*.lua source <afile> | PackerCompile
+  autocmd BufWritePost **/nvim/lua/plugin/*.lua source <afile> | PackerCompile
   autocmd BufWritePost **/nvim/lua/setup/*.lua source <afile> | PackerCompile
 
   " Terminal
