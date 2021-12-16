@@ -1,7 +1,7 @@
 return {
   "echasnovski/mini.nvim",
   config = function()
-    local utils = require "utils"
+    local tools = require "tools"
     -- require('mini.bufremove').setup()
     -- require('mini.base16').setup()
     -- require("mini.comment").setup()
@@ -15,9 +15,9 @@ return {
       autoread = false,
       autowrite = true,
     }
-    utils.lua_command("-nargs=1 SessionRead", "MiniSessions.read(vim.fn.expand('<args>'))")
-    utils.lua_command("-nargs=1 SessionWrite", "MiniSessions.write(vim.fn.expand('<args>'))")
-    utils.lua_command("-nargs=0 SessionRestore", "MiniSessions.read(MiniSessions.get_latest())")
+    tools.lua_command("-nargs=1 SessionRead", "MiniSessions.read(vim.fn.expand('<args>'))")
+    tools.lua_command("-nargs=1 SessionWrite", "MiniSessions.write(vim.fn.expand('<args>'))")
+    tools.lua_command("-nargs=0 SessionRestore", "MiniSessions.read(MiniSessions.get_latest())")
 
     local plugins_path = vim.fn.stdpath "data" .. "/site/pack/packer/start"
     local plugins_count = vim.fn.len(vim.fn.globpath(plugins_path, "*", 0, 1))

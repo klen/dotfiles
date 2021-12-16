@@ -1,7 +1,7 @@
-local u = require "utils"
+local tools = require "tools"
 
 local M = {}
-local t = require "utils/tools"
+local helpers = require "tools.helpers"
 local breakpoint_cmd = "breakpoint()"
 
 function M.breakpoint(lnum)
@@ -22,13 +22,13 @@ function M.breakpoint(lnum)
     fn.append(lnum - 1, indent .. breakpoint_cmd)
     cmd "normal k"
   end
-  t.fast_save()
+  helpers.fast_save()
 end
 
 function M.setup()
   vim.wo.colorcolumn = "100"
-  u.lua_command("-buffer Breakpoint", "require('ftplugin/python').breakpoint(fn.line('.'))")
-  u.nmap("<leader>bb", "<cmd>Breakpoint<CR>", { buffer = true })
+  tools.lua_command("-buffer Breakpoint", "require('ftplugin/python').breakpoint(fn.line('.'))")
+  tools.nmap("<leader>bb", "<cmd>Breakpoint<CR>", { buffer = true })
 end
 
 return M

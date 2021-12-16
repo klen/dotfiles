@@ -10,7 +10,7 @@ vim.cmd [[
 pcall(require, "impatient")
 
 -- Setup globals
-require "utils/globals"
+require "tools/globals"
 
 -- Vim options
 vim.cmd "source ~/.config/nvim/opts.vim"

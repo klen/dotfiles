@@ -1,62 +1,62 @@
-local u = require "utils"
+local tools = require "tools"
 
 g.mapleader = ","
 g.maplocalleader = " "
 
 -- Navigation
-u.nmap("j", "gj")
-u.nmap("k", "gk")
-u.nmap("<left>", ":cprev<cr>zvzz") -- quickfix
-u.nmap("<right>", ":cnext<cr>zvzz")
-u.nmap("<up>", ":lprev<cr>zvzz") -- loclist
-u.nmap("<down>", ":lnext<cr>zvzz")
+tools.nmap("j", "gj")
+tools.nmap("k", "gk")
+tools.nmap("<left>", ":cprev<cr>zvzz") -- quickfix
+tools.nmap("<right>", ":cnext<cr>zvzz")
+tools.nmap("<up>", ":lprev<cr>zvzz") -- loclist
+tools.nmap("<down>", ":lnext<cr>zvzz")
 
 -- Automatically jump to end of text you pasted
-u.nmap("p", "p`]")
-u.vmap("p", "p`]")
-u.vmap("y", "y`]")
+tools.nmap("p", "p`]")
+tools.vmap("p", "p`]")
+tools.vmap("y", "y`]")
 
 -- Move lines
-u.nmap("<C-j>", ":m .+1<CR>==")
-u.nmap("<C-k>", ":m .-2<CR>==")
+tools.nmap("<C-j>", ":m .+1<CR>==")
+tools.nmap("<C-k>", ":m .-2<CR>==")
 
 -- Not jump on star, only highlight
-u.nmap("*", "*N")
+tools.nmap("*", "*N")
 
 -- Keep it centered
-u.nmap("n", "nzzzv")
-u.nmap("N", "Nzzzv")
-u.nmap("J", "mzJ`z")
+tools.nmap("n", "nzzzv")
+tools.nmap("N", "Nzzzv")
+tools.nmap("J", "mzJ`z")
 
 -- Save file
-u.nmap("<CR>", ":w<CR>")
+tools.nmap("<CR>", ":w<CR>")
 
 -- Toggle keymap
-u.nmap("<C-F>", "a<C-^><Esc>")
-u.imap("<C-F>", "<C-^>")
-u.vmap("<C-F>", "<Esc>a<C-^><Esc>gv")
+tools.nmap("<C-F>", "a<C-^><Esc>")
+tools.imap("<C-F>", "<C-^>")
+tools.vmap("<C-F>", "<Esc>a<C-^><Esc>gv")
 
 -- Command mode
-u.cmap("<C-A>", "<Home>", { silent = false })
-u.cmap("<C-E>", "<End>", { silent = false })
+tools.cmap("<C-A>", "<Home>", { silent = false })
+tools.cmap("<C-E>", "<End>", { silent = false })
 
 -- Paste relaces visual selection do not copy it
-u.vmap("p", '"_dP')
+tools.vmap("p", '"_dP')
 
 -- Disable ex mode (format lines insted)
-u.nmap("Q", "gq")
+tools.nmap("Q", "gq")
 
 -- Terminal mode
-u.tmap("<C-[>", "<C-\\><C-n>")
+tools.tmap("<C-[>", "<C-\\><C-n>")
 
 --  Commands
 --  --------
 
-u.command("-nargs=0 Reset", "write | :edit")
-u.command("-nargs=0 Remove", "call delete(expand('%')) | bdelete")
-u.command("-nargs=? Make", "vsplit | :terminal make <args>")
-u.lua_command("Dashboard", "MiniStarter.open()")
-u.lua_command("-nargs=1 Reload", "require'plenary.reload'.reload_module(fn.expand('<args>'))")
+tools.command("-nargs=0 Reset", "write | :edit")
+tools.command("-nargs=0 Remove", "call delete(expand('%')) | bdelete")
+tools.command("-nargs=? Make", "vsplit | :terminal make <args>")
+tools.lua_command("Dashboard", "MiniStarter.open()")
+tools.lua_command("-nargs=1 Reload", "require'plenary.reload'.reload_module(fn.expand('<args>'))")
 
 -- Plugins
 local ok, wk = pcall(require, "which-key")
@@ -148,7 +148,7 @@ wk.register {
   ["<leader>op"] = { "<cmd>set paste! paste?<cr>", "Toggle &paste" },
   ["<leader>ol"] = { "<cmd>set list! list?<cr>", "Toggle &list" },
   ["<leader>ow"] = { "<cmd>set wrap! wrap?<cr>", "Toggle &wrap" },
-  ["<leader>on"] = { "<cmd>lua require('utils.tools').toggle_number()<cr>", "Toggle &number" },
+  ["<leader>on"] = { "<cmd>lua require('tools.helpers').toggle_number()<cr>", "Toggle &number" },
   ["<leader>os"] = { "<cmd>set invhlsearch<cr>", "Toggle highlight for search results" },
 
   -- Operators
@@ -158,7 +158,7 @@ wk.register {
 
   -- Other
   ["<leader>:"] = { "<cmd>Telescope command_history<cr>", "Command history" },
-  ["gw"] = { "<cmd>lua require'utils.tools'.vimgrep()<cr>", "Grep current word" },
+  ["gw"] = { "<cmd>lua require'tools.helpers'.vimgrep()<cr>", "Grep current word" },
   ["gI"] = { "`.", "Go to the last edit" },
   ["gk"] = { "k", "Up" },
   ["gj"] = { "j", "Down" },

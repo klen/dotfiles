@@ -21,7 +21,7 @@ return {
     cmd [[
       augroup lsp
         autocmd!
-        au DiagnosticChanged * lua require('utils/lsp').diagnostics('document')
+        au DiagnosticChanged * lua require('plugin/lsp/utils').diagnostics()
       augroup END
     ]]
   end,

@@ -5,7 +5,7 @@ return {
   config = function()
     local telescope = require "telescope"
 
-    local utils = require "utils"
+    local tools = require "tools"
     local actions = require "telescope.actions"
 
     local config = {
@@ -51,8 +51,7 @@ return {
 
     telescope.load_extension "fzf"
 
-    utils.nmap("<C-Space>", ":Telescope<CR>")
-    utils.lua_command("Config", "require'utils/telescope'.config()")
-    utils.lua_command("Files", "require'telescope.builtin'.git_files()")
+    tools.nmap("<C-Space>", ":Telescope<CR>")
+    tools.lua_command("Files", "require'telescope.builtin'.git_files()")
   end,
 }

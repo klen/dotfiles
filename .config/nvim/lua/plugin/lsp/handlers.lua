@@ -1,14 +1,11 @@
-local utils = require "utils/lsp"
+local utils = require "plugin/lsp/utils"
 local handlers = {}
 
 handlers["workspace/symbol"] = utils.processSymbols
 handlers["textDocument/documentSymbol"] = utils.processSymbols
-
 handlers["callHierarchy/incomingCalls"] = utils.processCalls
 handlers["callHierarchy/outgoingCalls"] = utils.processCalls
-
 handlers["textDocument/definition"] = utils.gotoDefinition
-
 handlers["textDocument/references"] = utils.processLocations
 handlers["textDocument/implementation"] = utils.processLocations
 handlers["textDocument/declaration"] = utils.processLocations

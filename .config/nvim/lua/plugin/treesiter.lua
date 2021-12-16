@@ -18,7 +18,7 @@ return {
     },
     config = function()
       local nvim_treesitter = require "nvim-treesitter.configs"
-      local utils = require "utils"
+      local tools = require "tools"
 
       nvim_treesitter.setup {
         ensure_installed = "maintained",
@@ -88,9 +88,9 @@ return {
       }
 
       vim.opt.foldlevel = 99
-      utils.nmap("gm", ":TSHighlightCapturesUnderCursor<CR>")
-      utils.au("BufEnter", "*", "set foldmethod=expr")
-      utils.au("BufEnter", "*", "set foldexpr=nvim_treesitter#foldexpr()")
+      tools.nmap("gm", ":TSHighlightCapturesUnderCursor<CR>")
+      tools.au("BufEnter", "*", "set foldmethod=expr")
+      tools.au("BufEnter", "*", "set foldexpr=nvim_treesitter#foldexpr()")
     end,
   },
   {

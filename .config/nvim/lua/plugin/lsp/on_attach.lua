@@ -1,5 +1,5 @@
 return function(client, bufnr)
-  local utils = require "utils"
+  local tools = require "tools"
 
   -- Enable completion triggered by <c-x><c-o>
   api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -65,7 +65,7 @@ return function(client, bufnr)
   else
     -- Map keys in normal mode
     for target, source in pairs(maps) do
-      utils.nmap(target, source[1], { bufnr = bufnr })
+      tools.nmap(target, source[1], { bufnr = bufnr })
     end
   end
 
@@ -74,17 +74,17 @@ return function(client, bufnr)
 
   -- Code actions
   -- u.vmap("<space>a", "<cmd>lua lsp.buf.range_code_action()<CR>", {bufnr=bufnr})
-  utils.vmap("<space>a", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", { bufnr = bufnr })
+  tools.vmap("<space>a", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", { bufnr = bufnr })
 
   -- Formatting
-  utils.lua_command("Format", "lsp.buf.formatting()")
+  tools.lua_command("Format", "lsp.buf.formatting()")
 
   if client.resolved_capabilities.document_range_formatting then
-    utils.vmap("<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", { bufnr = bufnr })
+    tools.vmap("<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", { bufnr = bufnr })
   end
 
   -- Auto format on save
   if client.resolved_capabilities.document_formatting then
-    utils.au("BufWritePre", "<buffer>", "lua require('utils.lsp').formatOnSave()")
+    tools.au("BufWritePre", "<buffer>", "lua require('plugin.lsp.utils').formatOnSave()")
   end
 end

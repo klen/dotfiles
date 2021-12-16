@@ -44,3 +44,9 @@ stow:
 .PHONY: unstow
 unstow:
 	@stow -v -D -t $(HOME) .
+
+.PHONY: eslint
+eslint:
+	cd $(HOME) && npm install \
+		eslint-plugin-prettier eslint-plugin-unicorn eslint-plugin-import \
+		eslint-config-airbnb-base eslint-config-prettier eslint-config-airbnb-typescript

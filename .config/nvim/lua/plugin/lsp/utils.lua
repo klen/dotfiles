@@ -1,4 +1,3 @@
-local notify = require "notify"
 local M = {}
 
 function M.diagnostics()
@@ -14,12 +13,12 @@ end
 
 function M.process(err, result, ctx, cb)
   if err then
-    return notify(err.message, "error", { title = "LSP" })
+    return vim.notify(err.message, "error", { title = "LSP" })
   end
   if result and not vim.tbl_isempty(result) then
     cb(result)
   else
-    return notify(ctx.method .. " Not Found", "warn", { title = "LSP" })
+    return vim.notify(ctx.method .. " Not Found", "warn", { title = "LSP" })
   end
 end
 
