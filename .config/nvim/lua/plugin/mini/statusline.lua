@@ -65,7 +65,7 @@ local get_diagnostic = function()
   for _, level in ipairs { 4, 3, 2, 1 } do
     if stats[level] > 0 then
       contents_hl = diagnostic_highlight_map[level]
-      contents = contents .. " " .. string.sub(cfg.diagnostic.signs[level], 1, 1) .. stats[level]
+      contents = " " .. string.sub(cfg.diagnostic.signs[level], 1, 1) .. stats[level] .. contents
     end
   end
   if #contents > 0 then
@@ -85,14 +85,14 @@ require("mini.statusline").setup {
       local wrap = vim.wo.wrap and (MiniStatusline.is_truncated(120) and "W" or "WRAP") or ""
       table.insert(groups, { hl = mode_hl, strings = { mode, spell, wrap } })
 
-      -- Fileinfo
-      local fileinfo = MiniStatusline.section_fileinfo { trunc_width = 120 }
-      table.insert(groups, { hl = "MiniStatuslineFileinfo", strings = { fileinfo } })
-
       -- Diagnostic
       -- local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
       local diagnostic, diagnostic_hl = get_diagnostic()
       table.insert(groups, { hl = diagnostic_hl, strings = { diagnostic } })
+
+      -- Fileinfo
+      local fileinfo = MiniStatusline.section_fileinfo { trunc_width = 120 }
+      table.insert(groups, { hl = "MiniStatuslineFileinfo", strings = { fileinfo } })
 
       -- Mark general truncate point
       table.insert(groups, "%<")
@@ -117,8 +117,7 @@ require("mini.statusline").setup {
 
       -- Location
       local searchcount = MiniStatusline.section_searchcount { trunc_width = 75 }
-      local location = MiniStatusline.section_location { trunc_width = 75 }
-      table.insert(groups, { hl = mode_hl, strings = { searchcount, location } })
+      table.insert(groups, { hl = mode_hl, strings = { searchcount, "%2v:%l" } })
 
       -- Usage of `MiniStatusline.combine_groups()` ensures highlighting and
       -- correct padding with spaces between groups (accounts for 'missing'
