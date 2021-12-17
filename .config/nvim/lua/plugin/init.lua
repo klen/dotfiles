@@ -28,6 +28,14 @@ return plugins.packer.startup(function(use)
 
     -- UI Helpers (vim.ui.input, vim.ui.select)
     "stevearc/dressing.nvim",
+
+    -- Clipboard helper
+    {
+      "AckslD/nvim-neoclip.lua",
+      config = function()
+        require("neoclip").setup()
+      end,
+    },
   }
 
   -- Explore files/symbols/buffers/etc
@@ -99,6 +107,9 @@ return plugins.packer.startup(function(use)
       "Vimjas/vim-python-pep8-indent",
       ft = { "python" },
     },
+
+    -- CoffeeScript
+    "kchmck/vim-coffee-script",
   }
 
   -- Rest client

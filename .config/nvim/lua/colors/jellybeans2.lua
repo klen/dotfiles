@@ -241,20 +241,20 @@ local theme = lush(function()
     -- LspReferenceRead                     { }, -- used for highlighting "read" references
     -- LspReferenceWrite                    { }, -- used for highlighting "write" references
 
-    -- DiagnosticDefaultError           { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- DiagnosticDefaultWarn         { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- DiagnosticDefaultInfo     { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    -- DiagnosticDefaultHint            { }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticError { fg = old_brick }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticWarn { fg = goldenrod }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticInfo { fg = dell }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticHint { fg = perano }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 
-    DiagnosticSignError { fg = old_brick.lighten(10) }, -- Used for "Error" signs in sign column
-    DiagnosticSignWarn { fg = goldenrod.darken(40) }, -- Used for "Warning" signs in sign column
-    DiagnosticSignInfo { fg = ship_cove }, -- Used for "Information" signs in sign column
-    DiagnosticSignHint { fg = morning_glory.darken(40) }, -- Used for "Hint" signs in sign column
+    DiagnosticSignError { fg = total_white, bg = old_brick }, -- Used for "Error" signs in sign column
+    DiagnosticSignWarn { fg = total_black, bg = goldenrod }, -- Used for "Warning" signs in sign column
+    DiagnosticSignInfo { fg = total_white, bg = dell }, -- Used for "Information" signs in sign column
+    DiagnosticSignHint { fg = total_black, bg = perano }, -- Used for "Hint" signs in sign column
 
-    DiagnosticVirtualTextError { DiagnosticSignError }, -- Used for "Error" diagnostic virtual text
-    DiagnosticVirtualTextWarn { DiagnosticSignWarn }, -- Used for "Warning" diagnostic virtual text
-    DiagnosticVirtualTextInfo { DiagnosticSignInfo }, -- Used for "Information" diagnostic virtual text
-    DiagnosticVirtualTextHint { DiagnosticSignHint }, -- Used for "Hint" diagnostic virtual text
+    DiagnosticVirtualTextError { DiagnosticError }, -- Used for "Error" diagnostic virtual text
+    DiagnosticVirtualTextWarn { DiagnosticWarn }, -- Used for "Warning" diagnostic virtual text
+    DiagnosticVirtualTextInfo { DiagnosticInfo }, -- Used for "Information" diagnostic virtual text
+    DiagnosticVirtualTextHint { DiagnosticHint }, -- Used for "Hint" diagnostic virtual text
 
     DiagnosticUnderlineError { gui = "none" }, -- Used to underline "Error" diagnostics
     DiagnosticUnderlineWarn { gui = "none" }, -- Used to underline "Warning" diagnostics

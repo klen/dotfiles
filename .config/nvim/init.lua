@@ -12,17 +12,11 @@ pcall(require, "impatient")
 -- Setup globals
 require "tools/globals"
 
--- Vim options
-vim.cmd "source ~/.config/nvim/opts.vim"
-
 -- Plugins
 require "plugin"
 
 -- Mapping
-require "maps"
-
--- Auto commands
-vim.cmd "source ~/.config/nvim/auto.vim"
+require "keymaps"
 
 -- Colorscheme
 local config = require "config"

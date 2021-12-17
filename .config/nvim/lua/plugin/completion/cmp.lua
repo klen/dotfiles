@@ -1,3 +1,5 @@
+-- A completion plugin for neovim coded in Lua.
+-- https://github.com/hrsh7th/nvim-cmp
 return {
   "hrsh7th/nvim-cmp",
   requires = { "L3MON4D3/LuaSnip" },
@@ -63,28 +65,21 @@ return {
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-c>"] = cmp.mapping.abort(),
-        -- ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        ["<CR>"] = cmp.mapping(function(fallback)
-          if cmp.visible() and cmp.confirm(M.config.confirm_opts) then
-            if luasnip.jumpable() then
-              luasnip.jump(1)
-            end
-            return
-          end
-          -- if luasnip.jumpable() and luasnip.jump(1) then
-          --   return
-          -- end
-          fallback()
-        end),
+        ["<CR>"] = cmp.mapping.confirm { select = true, behavior = cmp.ConfirmBehavior.Replace },
+        -- ["<CR>"] = cmp.mapping(function(fallback)
+        --   if cmp.visible() and cmp.confirm(M.config.confirm_opts) then
+        --     if luasnip.jumpable() then
+        --       luasnip.jump(1)
+        --     end
+        --     return
+        --   end
+        --   fallback()
+        -- end),
         ["<Tab>"] = cmp.mapping(function(fallback)
-          if luasnip.jumpable() then
-            luasnip.jump(1)
-          elseif cmp.visible() then
+          if cmp.visible() then
             cmp.select_next_item()
-          elseif luasnip.expandable() then
-            luasnip.expand()
-            -- elseif luasnip.jumpable() then
-            --   luasnip.jump(1)
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           else
             fallback()
           end

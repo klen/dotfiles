@@ -5,6 +5,8 @@ au!
   au WinLeave,InsertEnter * set nocursorline
   au WinEnter,InsertLeave * set cursorline
 
+  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
+
   " Restore cursor position
   au BufWinEnter * call auto#restore_cursor()
 

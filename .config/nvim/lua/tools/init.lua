@@ -24,13 +24,17 @@ for _, mode in ipairs { "n", "o", "i", "x", "t", "v", "c" } do
 end
 
 -- Define VIM command
-M.command = function(name, fn)
-  cmd(string.format("command! %s %s", name, fn))
+--- @param name string -- a command name
+--- @param action string -- an action
+M.command = function(name, action)
+  cmd(string.format("command! %s %s", name, action))
 end
 
 -- Define VIM lua command
-M.lua_command = function(name, fn)
-  M.command(name, "lua " .. fn)
+--- @param name string -- a command name
+--- @param action string -- an lua action
+M.lua_command = function(name, action)
+  M.command(name, "lua " .. action)
 end
 
 M.t = function(str)
@@ -42,8 +46,25 @@ M.input = function(keys, mode)
 end
 
 -- Define VIM autocommand
+--- @param event string -- VIM event
+--- @param filetype string -- a file type
+--- @param action string -- an action
 M.au = function(event, filetype, action)
   cmd("au " .. event .. " " .. filetype .. " " .. action)
+end
+
+-- Reload a module
+--- @param module string -- a module name
+M.reload = function(module)
+  return require("plenary.reload").reload_module(module)
+end
+
+-- Reload a module and require it
+--- @param module string -- a module name
+--- @return table
+M.rrequire = function(module)
+  M.reload(module)
+  return require(module)
 end
 
 return M

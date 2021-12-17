@@ -20,4 +20,9 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   },
 }
 
+if pcall(require, "lsp-status") then
+  capabilities.window = capabilities.window or {}
+  capabilities.window.workDoneProgress = true
+end
+
 return capabilities

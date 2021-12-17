@@ -56,7 +56,7 @@ tools.command("-nargs=0 Reset", "write | :edit")
 tools.command("-nargs=0 Remove", "call delete(expand('%')) | bdelete")
 tools.command("-nargs=? Make", "vsplit | :terminal make <args>")
 tools.lua_command("Dashboard", "MiniStarter.open()")
-tools.lua_command("-nargs=1 Reload", "require'plenary.reload'.reload_module(fn.expand('<args>'))")
+tools.lua_command("-nargs=1 Reload", "require'tools'.reload(fn.expand('<args>'))")
 
 -- Plugins
 local ok, wk = pcall(require, "which-key")
@@ -78,6 +78,7 @@ wk.register {
   ["<leader>fD"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
   ["<leader>fw"] = { "<cmd>Telescope live_grep<cr>", "Find a word" },
 
+  -- Explore
   ["<leader>d"] = { name = "+explore" },
   ["<leader>dd"] = { "<cmd>NvimTreeFocus<cr>", "Open/focus Explorer" },
   ["<leader>df"] = { "<cmd>NvimTreeFindFile<cr>", "Locate File" },
@@ -86,6 +87,7 @@ wk.register {
   ["<leader>dl"] = { "<cmd>lopen<cr>", "Open loclist" },
   ["<leader>dq"] = { "<cmd>copen<cr>", "Open quickfix" },
   ["<leader>ds"] = { "<cmd>SymbolsOutline<cr>", "Explore symbols" },
+  ["<leader>dc"] = { "<cmd>Telescope neoclip<cr>", "Explore clipboard" },
 
   -- Git (fugitive)
   ["<leader>g"] = { name = "+git" },

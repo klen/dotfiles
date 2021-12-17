@@ -5,17 +5,16 @@ return {
     { "folke/lua-dev.nvim", module = "lua-dev" },
   },
   config = function()
-    local cfg = require "config"
-    local dcfg = cfg.lsp.diagnostic
+    local cfg = require("config").diagnostic
 
     -- Setup diagnostic
-    vim.diagnostic.config(dcfg.config)
+    vim.diagnostic.config(cfg.config)
 
     -- Setup diagnostic signs
-    fn.sign_define("DiagnosticSignError", { text = dcfg.error, texthl = "DiagnosticError" })
-    fn.sign_define("DiagnosticSignWarn", { text = dcfg.warn, texthl = "DiagnosticWarn" })
-    fn.sign_define("DiagnosticSignInfo", { text = dcfg.info, texthl = "DiagnosticInfo" })
-    fn.sign_define("DiagnosticSignHint", { text = dcfg.hint, texthl = "DiagnosticHint" })
+    fn.sign_define("DiagnosticSignError", { text = cfg.signs[0], texthl = "DiagnosticSignError" })
+    fn.sign_define("DiagnosticSignWarn", { text = cfg.signs[1], texthl = "DiagnosticSignWarn" })
+    fn.sign_define("DiagnosticSignInfo", { text = cfg.signs[2], texthl = "DiagnosticSignInfo" })
+    fn.sign_define("DiagnosticSignHint", { text = cfg.signs[3], texthl = "DiagnosticSignHint" })
 
     -- Auto populate quickfix
     cmd [[

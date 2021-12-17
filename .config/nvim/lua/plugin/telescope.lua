@@ -21,12 +21,13 @@ return {
       },
 
       pickers = {
+        buffers = { theme = "dropdown" },
         find_files = { theme = "dropdown" },
+        git_files = { theme = "dropdown" },
+        lsp_code_actions = { theme = "cursor" },
+        neoclip = { theme = "dropdown" },
         oldfiles = { theme = "dropdown" },
         treesitter = { theme = "dropdown" },
-        git_files = { theme = "dropdown" },
-        buffers = { theme = "dropdown" },
-        lsp_code_actions = { theme = "cursor" },
         colorscheme = {
           theme = "dropdown",
           enable_preview = true,
@@ -50,6 +51,7 @@ return {
     telescope.setup(config)
 
     telescope.load_extension "fzf"
+    telescope.load_extension "neoclip"
 
     tools.nmap("<C-Space>", ":Telescope<CR>")
     tools.lua_command("Files", "require'telescope.builtin'.git_files()")

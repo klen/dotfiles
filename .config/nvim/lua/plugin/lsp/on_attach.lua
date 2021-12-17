@@ -87,4 +87,10 @@ return function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
     tools.au("BufWritePre", "<buffer>", "lua require('plugin.lsp.utils').formatOnSave()")
   end
+
+  ---@diagnostic disable-next-line: redefined-local
+  local ok, lsp_status = pcall(require, "lsp-status")
+  if ok then
+    lsp_status.on_attach(client)
+  end
 end
