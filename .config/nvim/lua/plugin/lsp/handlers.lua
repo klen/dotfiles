@@ -10,10 +10,10 @@ handlers["textDocument/references"] = utils.processLocations
 handlers["textDocument/implementation"] = utils.processLocations
 handlers["textDocument/declaration"] = utils.processLocations
 handlers["textDocument/typeDefinition"] = utils.processLocations
-handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "rounded" })
+handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
 handlers["textDocument/signatureHelp"] = lsp.with(
   lsp.handlers.signature_help,
-  { border = "rounded" }
+  { border = "single" }
 )
 
 -- handlers["textDocument/codeAction"] = utils.processActions

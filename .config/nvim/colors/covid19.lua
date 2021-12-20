@@ -54,46 +54,33 @@
 local lush = require "lush"
 local hsl = lush.hsl
 
--- local foreground = hsl "#e4e4e4"
-local foreground = hsl "#c7c7c7"
-local background = hsl "#121212"
-
 local total_black = hsl "#000000"
 local total_white = hsl "#ffffff"
 
-local grey = hsl "#878787"
-local grey_one = hsl "#1c1c1c"
-local grey_two = hsl "#eeeeee"
-local grey_three = hsl "#303030"
-local regent_grey = hsl "#949494"
-local scorpion = hsl "#606060"
-local zambezi = hsl "#585858"
-local silver = hsl "#c6c6c6"
-local alto = hsl "#dadada"
-local gravel = hsl "#3a3a3a"
-local boulder = hsl "#767676"
-local cocoa_brown = hsl "#262626"
-local grey_chateau = hsl "#a8a8a8"
-local bright_grey = hsl "#444444"
-local shuttle_grey = hsl "#5f5f5f"
+local foreground = hsl "#c7c7c7"
+local background = hsl "#121212"
 
+local grey_one = hsl "#1c1c1c"
+local grey = hsl "#878787"
+local regent_grey = hsl "#949494"
 local cadet_blue = hsl "#bcbcbc"
+local grey_two = hsl "#eeeeee"
+local scorpion = hsl "#606060"
+local silver = hsl "#c6c6c6"
+local gravel = hsl "#3a3a3a"
+local cocoa_brown = hsl "#262626"
+local bright_grey = hsl "#444444"
+
 local dark_red = hsl "#870000"
 local raw_sienna = hsl "#d75f5f"
 local wewak = hsl "#ffafaf"
-local koromiko = hsl "#ffaf5f"
-local goldenrod = hsl "#ffd787"
-local dell = hsl "#5f5f00"
-local costa_del_sol = hsl "#4e4e4e"
+local orange = hsl "#F49F0A"
 local mantis = hsl "#5faf5f"
 local bud_green = hsl "#87af5f"
 local brandy = hsl "#d7d787"
-local tea_green = hsl "#d7d7af"
 local hoki = hsl "#5f8787"
 local dark_blue = hsl "#0000d7"
 local calypso = hsl "#005f87"
-local casal = hsl "#005f5f"
-local bayoux_blue = hsl "#5f5f87"
 local ship_cove = hsl "#8787af"
 local morning_glory = hsl "#87afd7"
 local perano = hsl "#afd7ff"
@@ -116,7 +103,7 @@ local theme = lush(function()
     -- styling for that group (meaning they mostly get styled as Normal)
     -- or leave them commented to apply vims default colouring or linking.
 
-    Comment       { fg = grey }, -- any comment
+    Comment       { fg = grey, gui = "italic" }, -- any comment
     ColorColumn   { bg = total_black }, -- used for the columns set with 'colorcolumn'
     Conceal       { fg = morning_glory }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor        { fg = background, bg = perano }, -- character under the cursor
@@ -125,7 +112,7 @@ local theme = lush(function()
     CursorColumn  { bg = grey_one }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     CursorLine    { bg = grey_one }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
     Directory     { fg = brandy }, -- directory names (and other special names in listings)
-    DiffAdd       { fg = tea_green, bg = dell }, -- diff mode: Added line |diff.txt|
+    DiffAdd       { fg = background, bg = mantis }, -- diff mode: Added line |diff.txt|
     DiffChange    { bg = calypso }, -- diff mode: Changed line |diff.txt|
     DiffDelete    { bg = dark_red }, -- diff mode: Deleted line |diff.txt|
     DiffText      { fg = morning_glory, bg = total_black }, -- diff mode: Changed text within a changed line |diff.txt|
@@ -133,15 +120,15 @@ local theme = lush(function()
     -- TermCursor   { }, -- cursor in a focused terminal
     -- TermCursorNC { }, -- cursor in an unfocused terminal
     ErrorMsg      { bg = dark_red }, -- error messages on the command line
-    VertSplit     { fg = boulder, bg = gravel }, -- the column separating vertically split windows
-    Folded        { fg = grey_chateau, bg = bright_grey }, -- line used for closed folds
-    FoldColumn    { fg = shuttle_grey, bg = grey_one }, -- 'foldcolumn'
-    SignColumn    { fg = boulder, bg = grey_three }, -- column where |signs| are displayed
+    VertSplit     { fg = foreground, bg = cocoa_brown }, -- the column separating vertically split windows
+    Folded        { fg = cadet_blue, bg = bright_grey }, -- line used for closed folds
+    FoldColumn    { fg = scorpion, bg = grey_one }, -- 'foldcolumn'
+    SignColumn    { fg = foreground, bg = gravel }, -- column where |signs| are displayed
     -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     -- Substitute   { }, -- |:substitute| replacement text highlighting
-    LineNr        { fg = zambezi }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+    LineNr        { fg = scorpion }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     CursorLineNr  { fg = silver }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-    MatchParen    { fg = total_white, bg = bayoux_blue }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+    MatchParen    { fg = total_white, bg = ship_cove }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     -- ModeMsg      { }, -- 'showmode' message (e.g., "-- INSERT -- ")
     -- MsgArea      { }, -- Area for messages and cmdline
     -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
@@ -150,9 +137,9 @@ local theme = lush(function()
     Normal        { bg = background, fg = foreground }, -- normal text
     -- NormalFloat  { }, -- Normal text in floating windows.
     -- NormalNC     { }, -- normal text in non-current windows
-    Pmenu         { fg = total_white, bg = scorpion }, -- Popup menu: normal item.
-    PmenuSel      { fg = total_white }, -- Popup menu: selected item.
-    -- PmenuSbar    { }, -- Popup menu: scrollbar.
+    Pmenu         { fg = foreground, bg = cocoa_brown }, -- Popup menu: normal item.
+    PmenuSel      { fg = foreground }, -- Popup menu: selected item.
+    PmenuSbar     { bg = foreground, fg = cocoa_brown }, -- Popup menu: scrollbar.
     -- PmenuThumb   { }, -- Popup menu: Thumb of the scrollbar.
     Question      { fg = mantis }, -- |hit-enter| prompt and yes/no questions
     QuickFixLine  { bg = bright_grey }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
@@ -160,9 +147,9 @@ local theme = lush(function()
     SpecialKey    { fg = bright_grey, bg = grey_one }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
     SpellBad      { bg = dark_red }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap      { bg = dark_blue }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-    SpellLocal    { bg = casal }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+    SpellLocal    { bg = calypso }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     SpellRare     { bg = ripe_plum }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-    StatusLine    { fg = total_black, bg = alto }, -- status line of current window
+    StatusLine    { fg = total_black, bg = silver }, -- status line of current window
     StatusLineNC  { fg = total_white, bg = gravel }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine       { fg = total_black, bg = cadet_blue }, -- tab pages line, not active tab page label
     TabLineFill   { fg = regent_grey }, -- tab pages line, where there are no labels
@@ -182,22 +169,22 @@ local theme = lush(function()
 
     Constant      { fg = raw_sienna }, -- (preferred) any constant
     String        { fg = bud_green }, --   a string constant: "this is a string"
-    StringDelimiter { fg = costa_del_sol },
-    -- Character      { }, --  a character constant: 'c', '\n'
-    -- Number         { }, --   a number constant: 234, 0xff
-    -- Boolean        { }, --  a boolean constant: TRUE, false
-    -- Float          { }, --    a floating point constant: 2.3e10
+    StringDelimiter { fg = bright_grey },
+    Character     { Constant }, --  a character constant: 'c', '\n'
+    Number        { Constant }, --   a number constant: 234, 0xff
+    Boolean       { Constant }, --  a boolean constant: TRUE, false
+    Float         { Constant }, --    a floating point constant: 2.3e10
 
     Identifier    { fg = biloba_flower }, -- (preferred) any variable name
-    Function      { fg = goldenrod }, -- function name (also: methods for classes)
+    Function      { fg = orange }, -- function name (also: methods for classes)
 
     Statement     { fg = ship_cove }, -- (preferred) any statement
-    -- Conditional    { }, --  if, then, else, endif, switch, etc.
-    -- Repeat         { }, --   for, do, while, etc.
-    -- Label          { }, --    case, default, etc.
-    Operator      { fg = morning_glory }, -- "sizeof", "+", "*", etc.
-    -- Keyword        { }, --  any other keyword
-    -- Exception      { }, --  try, catch, throw
+    Conditional   { Statement }, --  if, then, else, endif, switch, etc.
+    Repeat        { Statement }, --   for, do, while, etc.
+    Label         { Statement }, --    case, default, etc.
+    Operator      { Statement }, -- "sizeof", "+", "*", etc.
+    Keyword       { Statement }, --  any other keyword
+    Exception     { Statement }, --  try, catch, throw
 
     PreProc       { fg = morning_glory }, -- (preferred) generic Preprocessor
     -- Include        { }, --  preprocessor #include
@@ -205,10 +192,10 @@ local theme = lush(function()
     -- Macro          { }, --    same as Define
     -- PreCondit      { }, --  preprocessor #if, #else, #endif, etc.
 
-    Type          { fg = koromiko }, -- (preferred) int, long, char, etc.
-    -- StorageClass   { }, -- static, register, volatile, etc.
-    Structure     { fg = morning_glory }, --  struct, union, enum, etc.
-    -- Typedef        { }, --  A typedef
+    Type          { fg = morning_glory }, -- (preferred) int, long, char, etc.
+    StorageClass  { Type }, -- static, register, volatile, etc.
+    Structure     { Type }, --  struct, union, enum, etc.
+    Typedef       { Type }, --  A typedef
 
     Special       { fg = bud_green }, -- (preferred) any special symbol
     -- SpecialChar    { }, --  special character in a constant
@@ -237,12 +224,12 @@ local theme = lush(function()
     -- LspReferenceWrite                    { }, -- used for highlighting "write" references
 
     DiagnosticError { fg = raw_sienna }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    DiagnosticWarn { fg = goldenrod }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticWarn { fg = orange }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
     DiagnosticInfo { fg = morning_glory }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
     DiagnosticHint { fg = bud_green }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 
     DiagnosticSignError { fg = total_white, bg = dark_red }, -- Used for "Error" signs in sign column
-    DiagnosticSignWarn { fg = total_black, bg = goldenrod }, -- Used for "Warning" signs in sign column
+    DiagnosticSignWarn { fg = total_black, bg = orange }, -- Used for "Warning" signs in sign column
     DiagnosticSignInfo { fg = total_black, bg = morning_glory }, -- Used for "Information" signs in sign column
     DiagnosticSignHint { fg = total_black, bg = bud_green }, -- Used for "Hint" signs in sign column
 
@@ -251,10 +238,10 @@ local theme = lush(function()
     DiagnosticVirtualTextInfo { DiagnosticInfo }, -- Used for "Information" diagnostic virtual text
     DiagnosticVirtualTextHint { DiagnosticHint }, -- Used for "Hint" diagnostic virtual text
 
-    DiagnosticUnderlineError { gui = "none", guisp = dark_red }, -- Used to underline "Error" diagnostics
-    DiagnosticUnderlineWarn { gui = "none", guisp = dark_red }, -- Used to underline "Warning" diagnostics
-    DiagnosticUnderlineInfo { gui = "none", guisp = dark_red }, -- Used to underline "Information" diagnostics
-    DiagnosticUnderlineHint { gui = "none", guisp = dark_red }, -- Used to underline "Hint" diagnostics
+    DiagnosticUnderlineError { guisp = dark_red }, -- Used to underline "Error" diagnostics
+    DiagnosticUnderlineWarn { guisp = orange }, -- Used to underline "Warning" diagnostics
+    DiagnosticUnderlineInfo { guisp = morning_glory }, -- Used to underline "Information" diagnostics
+    DiagnosticUnderlineHint { guisp = bud_green }, -- Used to underline "Hint" diagnostics
 
     -- DiagnosticFloatingError          { }, -- Used to color "Error" diagnostic messages in diagnostics float
     -- DiagnosticFloatingWarn        { }, -- Used to color "Warning" diagnostic messages in diagnostics float
@@ -269,27 +256,28 @@ local theme = lush(function()
 
     -- TSAnnotation         { };    -- For C++/Dart attributes, annotations that can be attached to the code to denote some kind of meta information.
     -- TSAttribute          { };    -- (unstable) TODO: docs
-    -- TSBoolean            { };    -- For booleans.
-    -- TSCharacter          { };    -- For characters.
-    -- TSFloat              { };    -- For floats.
-    -- TSNumber             { };    -- For all numbers
-    -- TSComment            { };    -- For comment blocks.
-    TSConstructor       { Function }, -- For constructor calls and definitions: ` { }` in Lua, and Java constructors.
+    TSBoolean           { Constant };    -- For booleans.
+    TSCharacter         { Constant };    -- For characters.
+    TSFloat             { Constant };    -- For floats.
+    TSNumber            { Constant };    -- For all numbers
+    TSComment           { Comment };    -- For comment blocks.
+    -- TSConstructor       { Function }, -- For constructor calls and definitions: ` { }` in Lua, and Java constructors.
+    TSConstructor       { Structure }, -- For constructor calls and definitions: ` { }` in Lua, and Java constructors.
     -- TSConditional        { };    -- For keywords related to conditionnals.
-    TSConstant          { Normal }, -- For constants
-    TSConstBuiltin      { Constant }, -- For constant that are built in the language: `nil` in Lua.
+    TSConstant          { Normal, gui = "bold" }, -- For constants
+    TSConstBuiltin      { Constant, gui = "bold" }, -- For constant that are built in the language: `nil` in Lua.
     -- TSConstMacro         { };    -- For constants that are defined by macros: `NULL` in C.
     -- TSError              { };    -- For syntax/parser errors.
     -- TSException          { };    -- For exception related keywords.
     TSField             { Normal }, -- For fields.
-    -- TSFunction           { };    -- For function (calls and definitions).
-    TSFuncBuiltin       { Function }, -- For builtin functions: `table.insert` in Lua.
+    TSFunction          { Function },    -- For function (calls and definitions).
+    TSFuncBuiltin       { Function, gui = "bold" }, -- For builtin functions: `table.insert` in Lua.
     -- TSFuncMacro          { };    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
-    -- TSInclude            { };    -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
-    -- TSKeyword            { };    -- For keywords that don't fall in previous categories.
-    -- TSKeywordFunction    { };    -- For keywords used to define a fuction.
-    -- TSLabel              { };    -- For labels: `label:` in C and `:label:` in Lua.
-    TSMethod            { fg = koromiko }, -- For method calls and definitions.
+    TSInclude           { Statement };    -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
+    TSKeyword           { Statement };    -- For keywords that don't fall in previous categories.
+    TSKeywordFunction   { Statement };    -- For keywords used to define a fuction.
+    TSLabel             { Statement };    -- For labels: `label:` in C and `:label:` in Lua.
+    TSMethod            { fg = orange.lighten(10) }, -- For method calls and definitions.
     -- TSNamespace          { };    -- For identifiers referring to modules and namespaces.
     -- TSNone               { };    -- TODO: docs
     -- TSOperator           { };    -- For any operator: `+`, but also `->` and `*` in C.
@@ -299,9 +287,9 @@ local theme = lush(function()
     TSPunctDelimiter    { Normal }, -- For delimiters ie: `.`
     TSPunctBracket      { Normal }, -- For brackets and parens.
     TSPunctSpecial      { Normal }, -- For special punctutation that does not fall in the catagories before.
-    -- TSRepeat             { };    -- For keywords related to loops.
-    TSString             { String };    -- For strings.
-    TSStringRegex        { TSString };    -- For regexes.
+    TSRepeat            { TSKeyword };    -- For keywords related to loops.
+    TSString            { String };    -- For strings.
+    TSStringRegex       { TSString };    -- For regexes.
     -- TSStringEscape       { };    -- For escape characters within a string.
     -- TSSymbol             { };    -- For identifiers referring to symbols or atoms.
     TSType              { Structure }, -- For types.

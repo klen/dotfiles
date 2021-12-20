@@ -5,7 +5,7 @@ return {
     local null_ls = require "null-ls"
 
     null_ls.setup {
-      debug = false,
+      debug = true,
       on_attach = require "plugin/lsp/on_attach",
 
       diagnostics_format = "#{c} #{m} (#{s})",
