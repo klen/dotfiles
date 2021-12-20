@@ -3,7 +3,7 @@ local severity = vim.diagnostic.severity
 
 return {
   -- Color theme
-  colorscheme = "jellybeans2",
+  colorscheme = "covid19",
   background = "dark",
 
   -- Diagnostic
@@ -24,6 +24,20 @@ return {
   -- LSP settings
   lsp = {
     format_on_save = true,
+    servers = {
+      jsonls = {
+        document_formatting = false,
+        document_range_formatting = false,
+      },
+      tsserver = {
+        document_formatting = false,
+        document_range_formatting = false,
+      },
+      pyright = {
+        document_formatting = false,
+        document_range_formatting = false,
+      },
+    },
     filetypes = {
       javascript = {},
       lua = {},

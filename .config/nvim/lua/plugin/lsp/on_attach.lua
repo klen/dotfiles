@@ -1,11 +1,16 @@
+local cfg = require "config"
+
 return function(client, bufnr)
   local tools = require "tools"
+  local params = cfg.lsp.servers[client.name]
+  if params then
+    client.resolved_capabilities = vim.tbl_extend("force", client.resolved_capabilities, params)
+  end
 
   -- Enable completion triggered by <c-x><c-o>
   api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  --
   local maps = {
     ["K"] = { "<cmd>lua lsp.buf.hover()<cr>", "Show documentation" },
     ["gr"] = { "<cmd>lua lsp.buf.references()<cr>", "Find references" },
@@ -70,10 +75,9 @@ return function(client, bufnr)
   end
 
   -- Signature Help
-  -- u.au("cursorholdi", "*", "lua lsp.buf.signature_help()")
+  -- tools.au("cursorholdi", "*", "lua lsp.buf.signature_help()")
 
   -- Code actions
-  -- u.vmap("<space>a", "<cmd>lua lsp.buf.range_code_action()<CR>", {bufnr=bufnr})
   tools.vmap("<space>a", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", { bufnr = bufnr })
 
   -- Formatting

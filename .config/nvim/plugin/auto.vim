@@ -13,9 +13,6 @@ au!
   " Unset paste on InsertLeave
   au InsertLeave * silent! set nopaste
 
-  " Reload and compile plugins
-  autocmd BufWritePost **/nvim/lua/plugin/*.lua source <afile> | PackerCompile
-
   " Terminal
   autocmd TermOpen * startinsert
   autocmd TermOpen * setlocal nonumber norelativenumber

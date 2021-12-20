@@ -305,8 +305,8 @@ local theme = lush(function()
     TSPunctBracket { Normal }, -- For brackets and parens.
     TSPunctSpecial { Normal }, -- For special punctutation that does not fall in the catagories before.
     -- TSRepeat             { };    -- For keywords related to loops.
-    -- TSString             { };    -- For strings.
-    -- TSStringRegex        { };    -- For regexes.
+    TSString { String }, -- For strings.
+    TSStringRegex { TSString }, -- For regexes.
     -- TSStringEscape       { };    -- For escape characters within a string.
     -- TSSymbol             { };    -- For identifiers referring to symbols or atoms.
     TSType { Structure }, -- For types.

@@ -1,9 +1,7 @@
-local cmd = vim.cmd
-local first_install = false
-local present, packer = pcall(require, "packer")
+local M = {}
 
 -- Install packer
-if not present then
+function M.install()
   local packer_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
   print "Cloning packer.."
@@ -18,33 +16,56 @@ if not present then
     packer_path,
   }
 
-  cmd "packadd packer.nvim"
-  present, packer = pcall(require, "packer")
-
+  vim.cmd "packadd packer.nvim"
+  local present, packer = pcall(require, "packer")
   if present then
     print "Packer cloned successfully."
-    first_install = true
-  else
-    error("Couldn't clone packer !\nPacker path: " .. packer_path .. "\n" .. packer)
+    return packer
+  end
+  error("Couldn't clone packer !\nPacker path: " .. packer_path .. "\n" .. packer)
+end
+
+-- Setup plugins
+---@param init function a startup function
+function M.startup(init)
+  local present, packer = pcall(require, "packer")
+  if not present then
+    packer = M.install()
+  end
+  if not packer then
+    return
+  end
+
+  -- Auto update plugins
+  vim.cmd [[
+    augroup packer_recompile
+      autocmd!
+      autocmd BufWritePost **/nvim/lua/plugin/*.lua source <afile> | PackerCompile
+    augroup end
+  ]]
+
+  -- Start packer
+  packer.startup {
+    init,
+    -- Configure packer
+    config = {
+      display = {
+        open_fn = function()
+          return require("packer.util").float { border = "rounded" }
+        end,
+        prompt_border = "rounded",
+      },
+      git = {
+        clone_timeout = 800, -- Timeout, in seconds, for git clones
+      },
+      auto_clean = true,
+      compile_on_sync = true,
+    },
+  }
+
+  if M.first_install then
+    packer.sync()
   end
 end
 
--- Init packer
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-    prompt_border = "rounded",
-  },
-  git = {
-    clone_timeout = 800, -- Timeout, in seconds, for git clones
-  },
-  auto_clean = true,
-  compile_on_sync = true,
-}
-
-return {
-  packer = packer,
-  first_install = first_install,
-}
+return M

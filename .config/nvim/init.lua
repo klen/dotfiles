@@ -20,8 +20,10 @@ require "keymaps"
 
 -- Colorscheme
 local config = require "config"
-
-cmd("colorscheme " .. config.colorscheme)
+local ok, _ = pcall(vim.cmd, "colorscheme " .. config.colorscheme)
+if not ok then
+  cmd "colorscheme default"
+end
 
 -- Must be written at the last.  see :help 'secure'.
 vim.opt.secure = true

@@ -30,6 +30,8 @@ tools.nmap("J", "mzJ`z")
 
 -- Save file
 tools.nmap("<CR>", ":w<CR>")
+-- Fast save
+tools.nmap("<S-CR>", "lua require'tools.helpers'.fast_save()<CR>")
 
 -- Toggle keymap
 tools.nmap("<C-F>", "a<C-^><Esc>")

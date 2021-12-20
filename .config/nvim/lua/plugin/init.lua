@@ -1,11 +1,7 @@
-local plugins = require "plugin/packer"
-
 -- Disable some plugins
-require "plugin/disabled"
+require "plugin.disabled"
 
--- Setup plugins
-return plugins.packer.startup(function(use)
-  -- Packer can manage itself
+require("plugin.packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
   -- Speed up nvim require and startup time
@@ -134,10 +130,4 @@ return plugins.packer.startup(function(use)
       require("runner").setup()
     end,
   }
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if plugins.first_install then
-    plugins.packer.sync()
-  end
 end)

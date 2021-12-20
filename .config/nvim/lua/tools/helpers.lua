@@ -1,5 +1,6 @@
 local M = {}
 
+-- Use vimgrep to search a word
 M.vimgrep = function()
   vim.ui.input({
     prompt = "Search for pattern: ",
@@ -25,7 +26,7 @@ M.vimgrep = function()
           "noautocmd lvimgrep /" .. pattern .. "/gj " .. startdir .. "/**/" .. filepattern
         )
         if ok then
-          cmd "abo lope"
+          vim.cmd "abo lope"
         else
           vim.notify("Not found: " .. pattern, "warn")
         end
@@ -34,6 +35,7 @@ M.vimgrep = function()
   end)
 end
 
+-- Toggle `number` option
 M.toggle_number = function()
   if not vim.o.number then
     vim.o.number = true
@@ -45,11 +47,12 @@ M.toggle_number = function()
   end
 end
 
+-- Fast save file
 M.fast_save = function()
   if vim.o.modified then
-    cmd "noautocmd write"
+    vim.cmd "noautocmd write"
   end
-  return fn.expand "%" ~= ""
+  return vim.fn.expand "%" ~= ""
 end
 
 return M

@@ -238,20 +238,20 @@ local theme = lush(function()
     -- LspReferenceRead                     { }, -- used for highlighting "read" references
     -- LspReferenceWrite                    { }, -- used for highlighting "write" references
 
-    DiagnosticDefaultError { fg = dark_red }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    DiagnosticDefaultWarn { fg = purple }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    DiagnosticDefaultInfo { fg = ship_cove }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    DiagnosticDefaultHint { fg = calypso }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticError { fg = maroon }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticWarn { fg = goldenrod }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticInfo { fg = dell }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticHint { fg = perano }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 
-    -- DiagnosticSignError              { }, -- Used for "Error" signs in sign column
-    -- DiagnosticSignWarn            { }, -- Used for "Warning" signs in sign column
-    -- DiagnosticSignInfo        { }, -- Used for "Information" signs in sign column
-    -- DiagnosticSignHint               { }, -- Used for "Hint" signs in sign column
+    DiagnosticSignError { fg = total_white, bg = maroon }, -- Used for "Error" signs in sign column
+    DiagnosticSignWarn { fg = total_black, bg = goldenrod }, -- Used for "Warning" signs in sign column
+    DiagnosticSignInfo { fg = total_white, bg = dell }, -- Used for "Information" signs in sign column
+    DiagnosticSignHint { fg = total_black, bg = perano }, -- Used for "Hint" signs in sign column
 
-    -- DiagnosticVirtualTextError       { }, -- Used for "Error" diagnostic virtual text
-    -- DiagnosticVirtualTextWarn     { }, -- Used for "Warning" diagnostic virtual text
-    -- DiagnosticVirtualTextInfo { }, -- Used for "Information" diagnostic virtual text
-    -- DiagnosticVirtualTextHint        { }, -- Used for "Hint" diagnostic virtual text
+    DiagnosticVirtualTextError { DiagnosticError }, -- Used for "Error" diagnostic virtual text
+    DiagnosticVirtualTextWarn { DiagnosticWarn }, -- Used for "Warning" diagnostic virtual text
+    DiagnosticVirtualTextInfo { DiagnosticInfo }, -- Used for "Information" diagnostic virtual text
+    DiagnosticVirtualTextHint { DiagnosticHint }, -- Used for "Hint" diagnostic virtual text
 
     DiagnosticUnderlineError { gui = "none", guisp = dark_red }, -- Used to underline "Error" diagnostics
     DiagnosticUnderlineWarn { gui = "none", guisp = dark_red }, -- Used to underline "Warning" diagnostics
@@ -302,8 +302,8 @@ local theme = lush(function()
     TSPunctBracket      { Normal }, -- For brackets and parens.
     TSPunctSpecial      { Normal }, -- For special punctutation that does not fall in the catagories before.
     -- TSRepeat             { };    -- For keywords related to loops.
-    -- TSString             { };    -- For strings.
-    -- TSStringRegex        { };    -- For regexes.
+    TSString             { String };    -- For strings.
+    TSStringRegex        { TSString };    -- For regexes.
     -- TSStringEscape       { };    -- For escape characters within a string.
     -- TSSymbol             { };    -- For identifiers referring to symbols or atoms.
     TSType              { Structure }, -- For types.
@@ -325,6 +325,9 @@ local theme = lush(function()
     -- pythonStatement      { };
     -- pythonFunction       { };
     -- pythonCo
+
+    NvimTreeOpenedFile { fg = mantis },
+
   }
 end)
 
