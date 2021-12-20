@@ -10,10 +10,16 @@ local plugins = {
       vim.cmd [[
         augroup packer_user_config
           autocmd!
-          autocmd BufEnter **/.config/nvim/lua/colors/*.lua Lushify
+          autocmd BufEnter **/colors/*.lua Lushify
         augroup end
       ]]
     end,
+  },
+
+  -- base16
+  {
+    "RRethy/nvim-base16",
+    module = "base16-colorscheme",
   },
 
   -- Colorschemes

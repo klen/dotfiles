@@ -1,12 +1,7 @@
 {
   "root": true,
 
-  "plugins": [
-    // "@typescript-eslint",
-    "prettier",
-    "unicorn",
-    "import"
-  ],
+  "plugins": ["@typescript-eslint", "prettier", "unicorn", "import"],
 
   "extends": [
     // "airbnb-typescript/base",
@@ -32,5 +27,4 @@
     "no-console": 0,
     "no-debugger": "off"
   }
-
 }

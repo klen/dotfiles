@@ -78,7 +78,6 @@ local bright_grey = hsl "#444444"
 local shuttle_grey = hsl "#5f5f5f"
 
 local cadet_blue = hsl "#bcbcbc"
-local maroon = hsl "#5f0000"
 local dark_red = hsl "#870000"
 local raw_sienna = hsl "#d75f5f"
 local wewak = hsl "#ffafaf"
@@ -99,7 +98,6 @@ local ship_cove = hsl "#8787af"
 local morning_glory = hsl "#87afd7"
 local perano = hsl "#afd7ff"
 local ripe_plum = hsl "#5f005f"
-local purple = hsl "#5f0087"
 local biloba_flower = hsl "#d7afff"
 
 local theme = lush(function()
@@ -129,7 +127,7 @@ local theme = lush(function()
     Directory     { fg = brandy }, -- directory names (and other special names in listings)
     DiffAdd       { fg = tea_green, bg = dell }, -- diff mode: Added line |diff.txt|
     DiffChange    { bg = calypso }, -- diff mode: Changed line |diff.txt|
-    DiffDelete    { fg = maroon, bg = purple }, -- diff mode: Deleted line |diff.txt|
+    DiffDelete    { bg = dark_red }, -- diff mode: Deleted line |diff.txt|
     DiffText      { fg = morning_glory, bg = total_black }, -- diff mode: Changed text within a changed line |diff.txt|
     EndOfBuffer   { fg = background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     -- TermCursor   { }, -- cursor in a focused terminal
@@ -238,15 +236,15 @@ local theme = lush(function()
     -- LspReferenceRead                     { }, -- used for highlighting "read" references
     -- LspReferenceWrite                    { }, -- used for highlighting "write" references
 
-    DiagnosticError { fg = maroon }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticError { fg = raw_sienna }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
     DiagnosticWarn { fg = goldenrod }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    DiagnosticInfo { fg = dell }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    DiagnosticHint { fg = perano }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticInfo { fg = morning_glory }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticHint { fg = bud_green }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 
-    DiagnosticSignError { fg = total_white, bg = maroon }, -- Used for "Error" signs in sign column
+    DiagnosticSignError { fg = total_white, bg = dark_red }, -- Used for "Error" signs in sign column
     DiagnosticSignWarn { fg = total_black, bg = goldenrod }, -- Used for "Warning" signs in sign column
-    DiagnosticSignInfo { fg = total_white, bg = dell }, -- Used for "Information" signs in sign column
-    DiagnosticSignHint { fg = total_black, bg = perano }, -- Used for "Hint" signs in sign column
+    DiagnosticSignInfo { fg = total_black, bg = morning_glory }, -- Used for "Information" signs in sign column
+    DiagnosticSignHint { fg = total_black, bg = bud_green }, -- Used for "Hint" signs in sign column
 
     DiagnosticVirtualTextError { DiagnosticError }, -- Used for "Error" diagnostic virtual text
     DiagnosticVirtualTextWarn { DiagnosticWarn }, -- Used for "Warning" diagnostic virtual text
@@ -330,6 +328,10 @@ local theme = lush(function()
 
   }
 end)
+
+vim.opt.background = "dark"
+vim.g.colors_name = "covid19"
+lush(theme)
 
 -- return our parsed theme for extension or use else where.
 return theme

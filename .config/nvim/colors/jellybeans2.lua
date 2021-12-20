@@ -333,6 +333,10 @@ local theme = lush(function()
   }
 end)
 
+vim.opt.background = "dark"
+vim.g.colors_name = "jellybeans2"
+lush(theme)
+
 -- return our parsed theme for extension or use else where.
 return theme
 

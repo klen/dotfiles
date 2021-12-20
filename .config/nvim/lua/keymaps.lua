@@ -166,4 +166,8 @@ wk.register {
   ["gI"] = { "`.", "Go to the last edit" },
   ["gk"] = { "k", "Up" },
   ["gj"] = { "j", "Down" },
+  ["gM"] = {
+    "<cmd>lua require'tools.helpers'.synstack()<cr>",
+    "Show synstack for the current position",
+  },
 }
