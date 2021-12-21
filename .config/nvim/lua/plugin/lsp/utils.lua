@@ -30,8 +30,8 @@ function M.processLocations(err, result, ctx, cfg)
     local ranges = vim.tbl_map(function(loc)
       return loc.range
     end, result)
-    if cfg and cfg.jump and #items == 1 then
-      return M.jumpLocation(items[1])
+    if cfg and cfg.jump and #result == 1 then
+      return M.jumpLocation(result[1])
     end
     -- lsp.util.set_loclist(items, win)
     fn.setloclist(
@@ -96,10 +96,15 @@ function M.formatOnSave()
   end
 end
 
-function M.jumpLocation(item)
-  local win = vim.api.nvim_get_current_win
-  vim.cmd("edit " .. item.filename)
-  vim.api.nvim_win_set_cursor(win, { item.lnum, item.col })
+function M.jumpLocation(location)
+  local uri = location.uri or location.targetUri
+  if uri == nil then
+    return
+  end
+  if vim.api.nvim_get_current_buf() ~= vim.uri_to_bufnr(uri) then
+    vim.cmd "abo split"
+  end
+  vim.lsp.util.jump_to_location(location)
 end
 
 -- TODO

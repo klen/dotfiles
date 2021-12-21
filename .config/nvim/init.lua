@@ -2,7 +2,7 @@
 vim.g.start_time = vim.fn.reltime()
 
 -- Speed up Neovim
-vim.cmd [[
+vim.api.nvim_command [[
   syntax off
   filetype off
   filetype plugin indent off

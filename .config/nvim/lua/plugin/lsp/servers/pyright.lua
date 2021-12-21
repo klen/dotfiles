@@ -17,17 +17,12 @@ return function(defaults)
     -- Disable hints
     handlers = vim.tbl_extend("force", defaults.handlers, {
       ["textDocument/publishDiagnostics"] = function(err, result, ctx, _)
+        -- Skip hints
         result.diagnostics = vim.tbl_filter(function(message)
           return message.severity < 4
         end, result.diagnostics)
 
-        -- TODO: support nvim 0.6.0
-        lsp.diagnostic.on_publish_diagnostics(err, result, ctx, {
-          signs = true, -- Place Signs
-          underline = false, -- Underline errors
-          virtual_text = true, -- Enable virtual text
-          update_in_insert = false, -- update diagnostics insert mode
-        })
+        lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
       end,
     }),
 

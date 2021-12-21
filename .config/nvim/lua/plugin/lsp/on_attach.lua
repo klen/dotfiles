@@ -15,9 +15,12 @@ return function(client, bufnr)
     ["K"] = { "<cmd>lua lsp.buf.hover()<cr>", "Show documentation" },
     ["gr"] = { "<cmd>lua lsp.buf.references()<cr>", "Find references" },
     ["gd"] = { "<cmd>lua lsp.buf.definition()<cr>", "Go to definition" },
-    ["<space>gd"] = { "<cmd>to split | lua lsp.buf.definition()<cr>", "Go to definition (split)" },
+    ["<space>gd"] = {
+      "<cmd>abo split | lua lsp.buf.definition()<cr>",
+      "Go to definition (split)",
+    },
     ["gi"] = { "<cmd>lua lsp.buf.implementation()<cr>", "Go to implementation" },
-    ["gD"] = { "<cmd>lua lsp.buf.declaration()<cr>", "Go to declaration" },
+    ["gl"] = { "<cmd>lua lsp.buf.declaration()<cr>", "Go to declaration" },
     ["gt"] = { "<cmd>lua lsp.buf.type_definition()<cr>", "Go to type definition" },
     ["gs"] = { "<cmd>lua lsp.buf.signature_help()<cr>", "Show signature help" },
     ["ge"] = {
