@@ -1,37 +1,34 @@
 ---
-
 - hosts: all
   tasks:
-  # - homebrew: name=caskroom/cask/brew-cask
-  - homebrew_cask: name={{item}}
-    with_items:
-    - alfred            # UI
-    - blockblock
-    - calibre
-    - ccleaner
-    - dash
-    - docker
-    - firefox
-    - gimp
-    - google-chrome     # Browser
-    - google-drive
-    - hyperdock         # Manage windows
-    - iina              # Video player
-    - ilya-birman-typography-layout
-    - istat-menus       # Monitor
-    - iterm2            # Terminal
-    - kitty             # Terminal
-    - lulu              # Firewall
-    - obs
-    - obs-virtualcam
-    - parallels         # Virtualization
-    - slack             # Messenger
-    - spotify           # Media
-    - steam             # Games
-    - telegram          # Messenger
-    - the-unarchiver    # Archive manager
-    - transmission      # Torrent Client
-    - tunnelblick       # VPN manager
-    - zoomus            # Messenger
-    environment:
-      HOMEBREW_CASK_OPTS: --appdir=/Applications
+    # - homebrew: name=caskroom/cask/brew-cask
+    - homebrew_cask: name={{item}}
+      with_items:
+        - alfred # UI
+        - blockblock
+        - calibre
+        - ccleaner
+        - dash
+        - docker
+        - firefox
+        - google-chrome # Browser
+        - google-drive
+        - hyperdock # Manage windows
+        - iina # Video player
+        - ilya-birman-typography-layout
+        - istat-menus # Monitor
+        - iterm2 # Terminal
+        - kitty # Terminal
+        - lulu # Firewall
+        - obs
+        - obs-virtualcam
+        - parallels # Virtualization
+        - slack # Messenger
+        - spotify # Media
+        - steam # Games
+        - telegram # Messenger
+        - the-unarchiver # Archive manager
+        - transmission # Torrent Client
+        - tunnelblick # VPN manager
+      environment:
+        HOMEBREW_CASK_OPTS: --appdir=/Applications
