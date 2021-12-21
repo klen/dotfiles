@@ -1,17 +1,17 @@
 augroup vimrc
-au!
+autocmd!
 
   " Only show cursorline in the current window and in normal mode.
-  au WinLeave,InsertEnter * set nocursorline
-  au WinEnter,InsertLeave * set cursorline
+  autocmd WinLeave,InsertEnter * set nocursorline
+  autocmd WinEnter,InsertLeave * set cursorline
 
-  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
 
   " Restore cursor position
-  au BufWinEnter * call auto#restore_cursor()
+  autocmd BufWinEnter * call auto#restore_cursor()
 
   " Unset paste on InsertLeave
-  au InsertLeave * silent! set nopaste
+  autocmd InsertLeave * silent! set nopaste
 
   " Terminal
   autocmd TermOpen * startinsert
