@@ -1,4 +1,5 @@
 local M = {}
+local api = vim.api
 
 M.config = {
 
@@ -7,6 +8,11 @@ M.config = {
 
   -- Map keys
   mapping = true,
+
+  -- Global maps
+  global = {
+    ["<leader>mm"] = "make",
+  },
 
   -- Supported languages
   languages = {
@@ -20,12 +26,11 @@ M.config = {
 
 -- open new terminal
 function M.open(cmd)
-  vim.cmd(M.config.split)
-  vim.cmd "wincmd J"
+  api.nvim_command(M.config.split .. " | wincmd J")
   local winnr = vim.fn.win_getid()
-  local bufnr = vim.api.nvim_create_buf(false, false)
-  vim.api.nvim_set_current_buf(bufnr)
-  vim.api.nvim_win_set_buf(winnr, bufnr)
+  local bufnr = api.nvim_create_buf(false, false)
+  api.nvim_set_current_buf(bufnr)
+  api.nvim_win_set_buf(winnr, bufnr)
   vim.fn.termopen(cmd)
 end
 
@@ -34,28 +39,28 @@ end
 function M.start_repl()
   local filetype = vim.bo.filetype
   local cmd = M.config.languages[filetype]
-  M.open(cmd)
+  M.open(cmd.repl or cmd)
 end
 
 -- run_code runs the current file
 function M.run_file()
   local filetype = vim.bo.filetype
   local cmd = M.config.languages[filetype]
-  M.open(cmd .. " " .. vim.fn.expand "%")
+  M.open((cmd.run or cmd) .. " " .. vim.fn.expand "%")
 end
 
 function M.map_keys()
-  vim.api.nvim_buf_set_keymap(
+  api.nvim_buf_set_keymap(
     0,
     "n",
     "<leader>rr",
     "<cmd>lua require('runner').run_file()<CR>",
     { noremap = true, silent = true }
   )
-  vim.api.nvim_buf_set_keymap(
+  api.nvim_buf_set_keymap(
     0,
     "n",
-    "<leader>rs",
+    "<leader>rl",
     "<cmd>lua require('runner').start_repl()<CR>",
     { noremap = true, silent = true }
   )
@@ -68,11 +73,26 @@ function M.setup(cfg)
     M.config = vim.tbl_deep_extend("force", M.config, cfg)
   end
 
-  -- Setup mapping
+  -- Setup mappings
   if M.config.mapping then
     for lang, _ in pairs(M.config.languages) do
-      vim.cmd("au FileType " .. lang .. " lua require('runner').map_keys()")
+      api.nvim_command("au! FileType " .. lang .. " lua require('runner').map_keys()")
     end
+  end
+
+  -- Setup global mappings
+  if M.config.global then
+    api.nvim_command "augroup Runner"
+    api.nvim_command "autocmd!"
+    for map, cmd in pairs(M.config.global) do
+      api.nvim_set_keymap(
+        "n",
+        map,
+        "<cmd>lua require('runner').open('" .. cmd .. "')<CR>",
+        { noremap = true, silent = true }
+      )
+    end
+    api.nvim_command "augroup END"
   end
 end
 

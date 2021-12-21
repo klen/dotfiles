@@ -32,6 +32,14 @@ require("plugin.packer").startup(function(use)
         require("neoclip").setup()
       end,
     },
+
+    -- Local sources (TODO: use lua)
+    {
+      "ii14/exrc.vim",
+      config = function()
+        vim.g["exrc#names"] = { ".exrc.lua", ".exrc" }
+      end,
+    },
   }
 
   -- Explore files/symbols/buffers/etc
@@ -123,11 +131,17 @@ require("plugin.packer").startup(function(use)
     },
   }
 
-  -- Local plugins
+  -- Local plugins (in development)
   use {
     "~/.config/nvim/lua/plugin/local/runner",
     config = function()
       require("runner").setup()
     end,
   }
+  -- use {
+  --   "~/.config/nvim/lua/plugin/local/scope",
+  --   config = function()
+  --     require("scope").setup()
+  --   end,
+  -- }
 end)
