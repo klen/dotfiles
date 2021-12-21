@@ -61,15 +61,14 @@ local foreground = hsl "#c7c7c7"
 local background = hsl "#121212"
 
 local grey_one = hsl "#1c1c1c"
-local grey = hsl "#878787"
-local regent_grey = hsl "#949494"
-local cadet_blue = hsl "#bcbcbc"
-local grey_two = hsl "#eeeeee"
-local scorpion = hsl "#606060"
-local silver = hsl "#c6c6c6"
-local gravel = hsl "#3a3a3a"
 local cocoa_brown = hsl "#262626"
+local gravel = hsl "#3a3a3a"
 local bright_grey = hsl "#444444"
+local scorpion = hsl "#606060"
+local grey = hsl "#878787"
+local cadet_blue = hsl "#bcbcbc"
+local silver = hsl "#c6c6c6"
+local grey_two = hsl "#eeeeee"
 
 local dark_red = hsl "#870000"
 local raw_sienna = hsl "#d75f5f"
@@ -107,23 +106,23 @@ local theme = lush(function()
     ColorColumn   { bg = total_black }, -- used for the columns set with 'colorcolumn'
     Conceal       { fg = morning_glory }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor        { fg = background, bg = perano }, -- character under the cursor
-    -- lCursor      { }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
+    lCursor       { Cursor }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     -- CursorIM     { }, -- like Cursor, but used when in IME mode |CursorIM|
     CursorColumn  { bg = grey_one }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     CursorLine    { bg = grey_one }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
     Directory     { fg = brandy }, -- directory names (and other special names in listings)
     DiffAdd       { fg = background, bg = mantis }, -- diff mode: Added line |diff.txt|
-    DiffChange    { bg = calypso }, -- diff mode: Changed line |diff.txt|
+    DiffChange    { fg = background, bg = morning_glory }, -- diff mode: Changed line |diff.txt|
     DiffDelete    { bg = dark_red }, -- diff mode: Deleted line |diff.txt|
     DiffText      { fg = morning_glory, bg = total_black }, -- diff mode: Changed text within a changed line |diff.txt|
     EndOfBuffer   { fg = background }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     -- TermCursor   { }, -- cursor in a focused terminal
     -- TermCursorNC { }, -- cursor in an unfocused terminal
     ErrorMsg      { bg = dark_red }, -- error messages on the command line
-    VertSplit     { fg = foreground, bg = cocoa_brown }, -- the column separating vertically split windows
-    Folded        { fg = cadet_blue, bg = bright_grey }, -- line used for closed folds
+    VertSplit     { fg = grey, bg = cocoa_brown }, -- the column separating vertically split windows
     FoldColumn    { fg = scorpion, bg = grey_one }, -- 'foldcolumn'
     SignColumn    { fg = foreground, bg = gravel }, -- column where |signs| are displayed
+    Folded        { SignColumn },
     -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     -- Substitute   { }, -- |:substitute| replacement text highlighting
     LineNr        { fg = scorpion }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
@@ -152,12 +151,12 @@ local theme = lush(function()
     StatusLine    { fg = total_black, bg = silver }, -- status line of current window
     StatusLineNC  { fg = total_white, bg = gravel }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine       { fg = total_black, bg = cadet_blue }, -- tab pages line, not active tab page label
-    TabLineFill   { fg = regent_grey }, -- tab pages line, where there are no labels
+    TabLineFill   { fg = grey }, -- tab pages line, where there are no labels
     TabLineSel    { fg = total_black, bg = grey_two }, -- tab pages line, active tab page label
     Title         { fg = mantis }, -- titles for output from ":set all", ":autocmd" etc.
     Visual        { bg = bright_grey }, -- Visual mode selection
     -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
-    -- WarningMsg   { }, -- warning messages
+    WarningMsg    { fg = raw_sienna }, -- warning messages
     -- Whitespace   { }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WildMenu      { fg = wewak, bg = cocoa_brown }, -- current match in 'wildmenu' completion
 
