@@ -21,7 +21,7 @@ vnoremap <silent> p p`]
 nnoremap * *N
 
 " turn off search highlighting
-nnoremap <leader><space> :noh<CR>
+nnoremap <C-L> :nohlsearch<CR>
 
 " Save file
 noremap <silent> <CR> :w<CR>

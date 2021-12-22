@@ -29,8 +29,5 @@ if !exists('g:colors_name')
     set background=dark
 endif
 
-" enables the reading of .vimrc, .exrc and .gvimrc in the current directory.
-set exrc
-
 " must be written at the last.  see :help 'secure'.
 set secure

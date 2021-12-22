@@ -8,11 +8,6 @@ source $HOME/.vim/plugins/coc.vim
 source $HOME/.vim/plugins/nerd.vim
 Plug 'tpope/vim-commentary'
 
-Plug 'wfxr/minimap.vim', { 'do': ':!cargo install --locked code-minimap' }
-let g:minimap_width = 10
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
-
 " Status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -91,6 +86,9 @@ Plug 'seandewar/vim-qftoggle'
 nnoremap <leader>dl :Ltoggle<CR>
 nnoremap <leader>dq :Ctoggle<CR>
 
+" local configurations
+Plug 'ii14/exrc.vim'
+let g:exrc#names = ['.vimrc']
 
 " Other
 " -----

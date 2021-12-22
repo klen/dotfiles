@@ -94,9 +94,6 @@ set timeoutlen=500
 " Disable nvim intro
 set shortmess+="sI"
 
-" Enables the reading of .vimrc, .exrc and .gvimrc in the current directory.
-set exrc
-
 " --- VIM only
 source $VIMRUNTIME/defaults.vim
 set hidden                            " Edit multiple unsaved files at the same time
