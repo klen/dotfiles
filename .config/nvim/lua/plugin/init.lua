@@ -33,11 +33,11 @@ require("plugin.packer").startup(function(use)
       end,
     },
 
-    -- Local sources (TODO: use lua)
+    -- Local configs
     {
-      "ii14/exrc.vim",
+      "klen/nvim-config-local",
       config = function()
-        vim.g["exrc#names"] = { ".exrc.lua", ".exrc" }
+        require("config-local").setup()
       end,
     },
   }
@@ -138,10 +138,4 @@ require("plugin.packer").startup(function(use)
       require("runner").setup()
     end,
   }
-  -- use {
-  --   "~/.config/nvim/lua/plugin/local/scope",
-  --   config = function()
-  --     require("scope").setup()
-  --   end,
-  -- }
 end)

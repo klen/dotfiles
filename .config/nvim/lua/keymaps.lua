@@ -73,8 +73,10 @@ wk.register {
   ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find File" },
   ["<leader>fp"] = { "<cmd>Telescope projects<cr>", "Open projects" },
   ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-  ["<leader>fs"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Search document symbols" },
-  ["<leader>fS"] = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Search workspace symbols" },
+  ["<leader>fs"] = {
+    "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+    "Search workspace symbols",
+  },
   ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
   ["<leader>fd"] = { "<cmd>Dash<cr>", "Search in dash" },
   ["<leader>fD"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
