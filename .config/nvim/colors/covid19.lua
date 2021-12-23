@@ -74,8 +74,8 @@ local light_pink = hsl "#ffafaf"
 local mellow_apricot = hsl "#ffb964"
 local mantis = hsl "#5faf5f"
 local bud_green = hsl "#87af5f"
-local brandy = hsl "#d7d787"
-local steel_teal = hsl "#5f8787" -- TODO only one use
+local brandy = hsl "#d7d787" -- TODO: Not used
+local steel_teal = hsl "#5f8787"
 local dark_blue = hsl "#0000d7"
 local blue_sapphire = hsl "#005f87"
 local cool_grey = hsl "#8787af"
@@ -311,6 +311,7 @@ local theme = lush(function()
     -- NvimTree Hightlights
 		NvimTreeRootFolder { fg = cool_grey },
     NvimTreeOpenedFile { fg = mantis },
+    NvimTreeOpenedFolderName { Directory },
     NvimTreeSpecialFile { fg = steel_teal },
 
   }
