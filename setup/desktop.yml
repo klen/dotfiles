@@ -5,22 +5,21 @@
     - homebrew_cask: name={{item}}
       with_items:
         - alfred # UI
-        - blockblock
-        - calibre
-        - ccleaner
+        - calibre # Books Manager
+        - ccleaner # System cleaner
         - dash
-        - docker
-        - firefox
+        - docker # Utilities
+        - firefox # Browser
         - google-chrome # Browser
-        - google-drive
+        - google-drive # Cloud storage
         - hyperdock # Manage windows
         - iina # Video player
-        - ilya-birman-typography-layout
-        - istat-menus # Monitor
+        - ilya-birman-typography-layout # Keyboard
+        - istat-menus # Activity Monitor
         - iterm2 # Terminal
         - kitty # Terminal
         - lulu # Firewall
-        - obs
+        - obs # Video Streams
         - obs-virtualcam
         - parallels # Virtualization
         - slack # Messenger

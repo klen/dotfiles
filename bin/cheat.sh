@@ -44,6 +44,9 @@ CHTSH_MODE="$(cat "$CHTSH_HOME"/mode 2> /dev/null)"
 [ "$CHTSH_MODE" != lite ] && CHTSH_MODE=auto
 CHEATSH_INSTALLATION="$(cat "$CHTSH_HOME/standalone" 2> /dev/null)"
 
+# https://github.com/chubin/cheat.sh/issues/80
+CHTSH_CURL_OPTIONS='-A curl'
+
 
 export LESSSECURE=1
 STEALTH_MAX_SELECTION_LENGTH=5
