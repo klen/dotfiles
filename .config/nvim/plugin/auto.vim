@@ -1,23 +1,27 @@
-augroup vimrc
-autocmd!
+if has("autocmd")
 
-  " Only show cursorline in the current window and in normal mode.
-  autocmd WinLeave,InsertEnter * set nocursorline
-  autocmd WinEnter,InsertLeave * set cursorline
+  augroup vimrc
+  autocmd!
 
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
+    " Only show cursorline in the current window and in normal mode.
+    autocmd WinLeave,InsertEnter * set nocursorline
+    autocmd WinEnter,InsertLeave * set cursorline
 
-  " Restore cursor position
-  autocmd BufWinEnter * call auto#restore_cursor()
+    " Unset paste on InsertLeave
+    autocmd InsertLeave * silent! set nopaste
 
-  " Unset paste on InsertLeave
-  autocmd InsertLeave * silent! set nopaste
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
 
-  " Terminal
-  autocmd TermOpen * startinsert
-  autocmd TermOpen * setlocal nonumber norelativenumber
+    " Restore cursor position
+    autocmd BufWinEnter * call auto#restore_cursor()
 
-augroup END
+    " Terminal
+    autocmd TermOpen * startinsert
+    autocmd TermOpen * setlocal nonumber norelativenumber
+
+  augroup END
+
+endif
 
 
 " Restore cursor position
