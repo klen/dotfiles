@@ -1,4 +1,8 @@
-call plug#begin()
+if empty(glob($VIM .. '/plugged'))
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin($VIM .. "/plugged")
 
 " Completion, definitions, refactoring
 source $HOME/.vim/plugins/coc.vim
