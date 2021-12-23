@@ -110,7 +110,7 @@ local theme = lush(function()
     CursorColumn  { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     TermCursor    { fg = background, bg = mellow_apricot }, -- cursor in a focused terminal
     TermCursorNC  { TermCursor }, -- cursor in an unfocused terminal
-    Directory     { fg = brandy }, -- directory names (and other special names in listings)
+    Directory     { fg = iceberg }, -- directory names (and other special names in listings)
     DiffAdd       { fg = background, bg = mantis }, -- diff mode: Added line |diff.txt|
     DiffChange    { fg = background, bg = iceberg }, -- diff mode: Changed line |diff.txt|
     DiffDelete    { bg = dark_red }, -- diff mode: Deleted line |diff.txt|
@@ -135,7 +135,7 @@ local theme = lush(function()
     Whitespace    { NonText }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     Normal        { bg = background, fg = foreground }, -- normal text
     NormalFloat   { fg = foreground, bg = cocoa_brown }, -- Normal text in floating windows.
-    -- NormalNC      { }, -- normal text in non-current windows
+    -- NormalNC      { bg = background.lighten(3) }, -- normal text in non-current windows
     Pmenu         { NormalFloat }, -- Popup menu: normal item.
     PmenuSel      { fg = foreground }, -- Popup menu: selected item.
     PmenuSbar     { bg = foreground, fg = cocoa_brown }, -- Popup menu: scrollbar.
@@ -253,59 +253,63 @@ local theme = lush(function()
     -- TSError -> Error for example, so you do not have to define these unless
     -- you explicitly want to support Treesitter's improved syntax awareness.
 
-    -- TSAnnotation         { };    -- For C++/Dart attributes, annotations that can be attached to the code to denote some kind of meta information.
-    -- TSAttribute          { };    -- (unstable) TODO: docs
-    TSBoolean           { Constant };    -- For booleans.
-    TSCharacter         { Constant };    -- For characters.
-    TSFloat             { Constant };    -- For floats.
-    TSNumber            { Constant };    -- For all numbers
-    TSComment           { Comment };    -- For comment blocks.
+    -- TSAnnotation         { },    -- For C++/Dart attributes, annotations that can be attached to the code to denote some kind of meta information.
+    -- TSAttribute          { },    -- (unstable) TODO: docs
+    TSBoolean           { Constant },    -- For booleans.
+    TSCharacter         { Constant },    -- For characters.
+    TSFloat             { Constant },    -- For floats.
+    TSNumber            { Constant },    -- For all numbers
+    TSComment           { Comment },    -- For comment blocks.
     TSConstructor       { Structure }, -- For constructor calls and definitions: ` { }` in Lua, and Java constructors.
-    TSConditional       { Conditional };    -- For keywords related to conditionnals.
+    TSConditional       { Conditional },    -- For keywords related to conditionnals.
     TSConstant          { Normal, gui = "italic" }, -- For constants
     TSConstBuiltin      { Constant, gui = "italic" }, -- For constant that are built in the language: `nil` in Lua.
-    TSConstMacro        { TSConstBuiltin };    -- For constants that are defined by macros: `NULL` in C.
-    -- TSError              { };    -- For syntax/parser errors.
-    -- TSException          { };    -- For exception related keywords.
+    TSConstMacro        { TSConstBuiltin },    -- For constants that are defined by macros: `NULL` in C.
+    TSError             { fg=dark_red, gui="none" },    -- For syntax/parser errors.
+    TSException         { Statement },    -- For exception related keywords.
     TSField             { Normal }, -- For fields.
     TSFunction          { Function },    -- For function (calls and definitions).
     TSFuncBuiltin       { Function, gui = "bold" }, -- For builtin functions: `table.insert` in Lua.
-    TSFuncMacro         { TSFunction, gui = "bold" };    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
-    TSInclude           { Statement };    -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
-    TSKeyword           { Statement };    -- For keywords that don't fall in previous categories.
-    TSKeywordFunction   { Statement };    -- For keywords used to define a fuction.
-    TSLabel             { Statement };    -- For labels: `label:` in C and `:label:` in Lua.
+    TSFuncMacro         { TSFunction, gui = "bold" },    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
+    TSInclude           { Statement },    -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
+    TSKeyword           { Statement },    -- For keywords that don't fall in previous categories.
+    TSKeywordFunction   { Statement },    -- For keywords used to define a fuction.
+    TSLabel             { Statement },    -- For labels: `label:` in C and `:label:` in Lua.
     TSMethod            { fg = mellow_apricot.lighten(10) }, -- For method calls and definitions.
-    -- TSNamespace          { };    -- For identifiers referring to modules and namespaces.
-    -- TSNone               { };    -- TODO: docs
-    TSOperator          { Normal };    -- For any operator: `+`, but also `->` and `*` in C.
+    TSNamespace         { TSConstMacro },    -- For identifiers referring to modules and namespaces.
+    TSOperator          { Normal },    -- For any operator: `+`, but also `->` and `*` in C.
     TSParameter         { Normal }, -- For parameters of a function.
-    TSParameterReference { TSParameter };    -- For references to parameters of a function.
+    TSParameterReference { TSParameter },    -- For references to parameters of a function.
     TSProperty          { TSField }, -- Same as `TSField`.
     TSPunctDelimiter    { Normal }, -- For delimiters ie: `.`
     TSPunctBracket      { Normal }, -- For brackets and parens.
     TSPunctSpecial      { Normal }, -- For special punctutation that does not fall in the catagories before.
-    TSRepeat            { TSKeyword };    -- For keywords related to loops.
-    TSString            { String };    -- For strings.
-    TSStringRegex       { TSString };    -- For regexes.
-    -- TSStringEscape       { };    -- For escape characters within a string.
-    -- TSSymbol             { };    -- For identifiers referring to symbols or atoms.
+    TSRepeat            { TSKeyword },    -- For keywords related to loops.
+    TSString            { String },    -- For strings.
+    TSStringRegex       { TSString },    -- For regexes.
+    -- TSStringEscape       { },    -- For escape characters within a string.
+    -- TSSymbol             { },    -- For identifiers referring to symbols or atoms.
     TSType              { Structure }, -- For types.
     TSTypeBuiltin       { Operator }, -- For builtin types.
-    -- TSVariable           { };    -- Any variable name that does not have another highlight.
+    TSVariable          { Normal },    -- Any variable name that does not have another highlight.
     TSVariableBuiltin   { Normal, gui = "bold" }, -- Variable names that are defined by the languages, like `this` or `self`.
 
-    -- TSTag                { };    -- Tags like html tag names.
-    -- TSTagDelimiter       { };    -- Tag delimiter like `<` `>` `/`
-    -- TSText               { };    -- For strings considered text in a markup language.
-    -- TSEmphasis           { };    -- For text to be represented with emphasis.
-    -- TSUnderline          { };    -- For text to be represented with an underline.
-    -- TSStrike             { };    -- For strikethrough text.
-    -- TSTitle              { };    -- Text that is part of a title.
-    -- TSLiteral            { };    -- Literal text.
-    -- TSURI                { };    -- Any URI like a link or email.
+    -- TSTag                { },    -- Tags like html tag names.
+    -- TSTagDelimiter       { },    -- Tag delimiter like `<` `>` `/`
+    -- TSText               { },    -- For strings considered text in a markup language.
+    -- TSEmphasis           { },    -- For text to be represented with emphasis.
+    -- TSUnderline          { },    -- For text to be represented with an underline.
+    -- TSStrike             { },    -- For strikethrough text.
+    -- TSTitle              { },    -- Text that is part of a title.
+    -- TSLiteral            { },    -- Literal text.
+    -- TSURI                { },    -- Any URI like a link or email.
+
+    TSNote              { DiagnosticInfo },    -- TODO: docs
+    TSWarning           { DiagnosticWarn },    -- TODO: docs
+    TSDanger            { DiagnosticError },    -- TODO: docs
 
     -- NvimTree Hightlights
+		NvimTreeRootFolder { fg = cool_grey },
     NvimTreeOpenedFile { fg = mantis },
     NvimTreeSpecialFile { fg = steel_teal },
 
