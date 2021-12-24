@@ -237,10 +237,10 @@ local theme = lush(function()
     DiagnosticVirtualTextInfo { DiagnosticInfo }, -- Used for "Information" diagnostic virtual text
     DiagnosticVirtualTextHint { DiagnosticHint }, -- Used for "Hint" diagnostic virtual text
 
-    DiagnosticUnderlineError { guisp = dark_red }, -- Used to underline "Error" diagnostics
-    DiagnosticUnderlineWarn { guisp = mellow_apricot }, -- Used to underline "Warning" diagnostics
-    DiagnosticUnderlineInfo { guisp = iceberg }, -- Used to underline "Information" diagnostics
-    DiagnosticUnderlineHint { guisp = bud_green }, -- Used to underline "Hint" diagnostics
+    DiagnosticUnderlineError { Underlined, sp = dark_red }, -- Used to underline "Error" diagnostics
+    DiagnosticUnderlineWarn { Underlined, sp = mellow_apricot }, -- Used to underline "Warning" diagnostics
+    DiagnosticUnderlineInfo { Underlined, sp = iceberg }, -- Used to underline "Information" diagnostics
+    DiagnosticUnderlineHint { Underlined, sp = bud_green }, -- Used to underline "Hint" diagnostics
 
     DiagnosticFloatingError { DiagnosticError }, -- Used to color "Error" diagnostic messages in diagnostics float
     DiagnosticFloatingWarn  { DiagnosticWarn }, -- Used to color "Warning" diagnostic messages in diagnostics float
@@ -265,12 +265,12 @@ local theme = lush(function()
     TSConstant          { Normal, gui = "italic" }, -- For constants
     TSConstBuiltin      { Constant, gui = "italic" }, -- For constant that are built in the language: `nil` in Lua.
     TSConstMacro        { TSConstBuiltin },    -- For constants that are defined by macros: `NULL` in C.
-    TSError             { fg=dark_red, gui="none" },    -- For syntax/parser errors.
+    TSError             { Underlined, sp=fuzzy_wuzzy },    -- For syntax/parser errors.
     TSException         { Statement },    -- For exception related keywords.
     TSField             { Normal }, -- For fields.
     TSFunction          { Function },    -- For function (calls and definitions).
-    TSFuncBuiltin       { Function, gui = "bold" }, -- For builtin functions: `table.insert` in Lua.
-    TSFuncMacro         { TSFunction, gui = "bold" },    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
+    TSFuncBuiltin       { TSFunction }, -- For builtin functions: `table.insert` in Lua.
+    TSFuncMacro         { TSFunction },    -- For macro defined fuctions (calls and definitions): each `macro_rules` in Rust.
     TSInclude           { Statement },    -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
     TSKeyword           { Statement },    -- For keywords that don't fall in previous categories.
     TSKeywordFunction   { Statement },    -- For keywords used to define a fuction.

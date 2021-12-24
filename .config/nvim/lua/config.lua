@@ -3,11 +3,14 @@ local Config = require "tools.config"
 local severity = vim.diagnostic.severity
 
 return Config:init {
-  -- Color theme
+
+  -- Colors
+  ---------
   colorscheme = "covid19",
   background = "dark",
 
   -- Diagnostic
+  -------------
   diagnostic = {
     -- See :help vim.diagnostic.config()
     config = {
@@ -26,6 +29,7 @@ return Config:init {
   },
 
   -- LSP settings
+  ---------------
   lsp = {
     format_on_save = true,
     servers = {
