@@ -237,10 +237,10 @@ local theme = lush(function()
     DiagnosticVirtualTextInfo { DiagnosticInfo }, -- Used for "Information" diagnostic virtual text
     DiagnosticVirtualTextHint { DiagnosticHint }, -- Used for "Hint" diagnostic virtual text
 
-    DiagnosticUnderlineError { Underlined, sp = dark_red }, -- Used to underline "Error" diagnostics
-    DiagnosticUnderlineWarn { Underlined, sp = mellow_apricot }, -- Used to underline "Warning" diagnostics
-    DiagnosticUnderlineInfo { Underlined, sp = iceberg }, -- Used to underline "Information" diagnostics
-    DiagnosticUnderlineHint { Underlined, sp = bud_green }, -- Used to underline "Hint" diagnostics
+    DiagnosticUnderlineError { gui="undercurl", sp = dark_red }, -- Used to underline "Error" diagnostics
+    DiagnosticUnderlineWarn { gui="undercurl", sp = mellow_apricot }, -- Used to underline "Warning" diagnostics
+    DiagnosticUnderlineInfo { gui="undercurl", sp = iceberg }, -- Used to underline "Information" diagnostics
+    DiagnosticUnderlineHint { gui="undercurl", sp = bud_green }, -- Used to underline "Hint" diagnostics
 
     DiagnosticFloatingError { DiagnosticError }, -- Used to color "Error" diagnostic messages in diagnostics float
     DiagnosticFloatingWarn  { DiagnosticWarn }, -- Used to color "Warning" diagnostic messages in diagnostics float
@@ -265,7 +265,7 @@ local theme = lush(function()
     TSConstant          { Normal, gui = "italic" }, -- For constants
     TSConstBuiltin      { Constant, gui = "italic" }, -- For constant that are built in the language: `nil` in Lua.
     TSConstMacro        { TSConstBuiltin },    -- For constants that are defined by macros: `NULL` in C.
-    TSError             { Underlined, sp=fuzzy_wuzzy },    -- For syntax/parser errors.
+    TSError             { gui="undercurl", sp=fuzzy_wuzzy },    -- For syntax/parser errors.
     TSException         { Statement },    -- For exception related keywords.
     TSField             { Normal }, -- For fields.
     TSFunction          { Function },    -- For function (calls and definitions).

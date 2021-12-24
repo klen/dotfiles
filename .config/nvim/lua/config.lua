@@ -14,7 +14,10 @@ return Config:init {
   diagnostic = {
     -- See :help vim.diagnostic.config()
     config = {
-      underline = false,
+      -- underline = false,
+      underline = {
+        severity = { min = severity.ERROR },
+      },
       virtual_text = {
         severity = { min = severity.WARN },
       },
