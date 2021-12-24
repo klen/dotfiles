@@ -14,25 +14,6 @@ return function(defaults)
       },
     },
 
-    -- Disable hints
-    handlers = vim.tbl_extend("force", defaults.handlers, {
-      ["textDocument/publishDiagnostics"] = function(err, result, ctx, _)
-        -- Skip hints
-        result.diagnostics = vim.tbl_filter(function(message)
-          return message.severity < 4
-        end, result.diagnostics)
-
-        lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
-      end,
-    }),
-
-    -- Disable formatting
-    on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-      defaults.on_attach(client)
-    end,
-
     -- Auto load VIRTUALENV
     before_init = function(_, config)
       if vim.env.VIRTUAL_ENV then

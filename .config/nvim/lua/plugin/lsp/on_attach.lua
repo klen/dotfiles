@@ -1,10 +1,17 @@
+local tools = require "tools"
 local cfg = require "config"
 
 return function(client, bufnr)
-  local tools = require "tools"
-  local params = cfg.lsp.servers[client.name]
-  if params then
-    client.resolved_capabilities = vim.tbl_extend("force", client.resolved_capabilities, params)
+  local params = cfg.lsp.servers[client.name] or {}
+
+  -- Tune capabilities
+  if params.capabilities then
+    client.resolved_capabilities = vim.tbl_extend('force', client.resolved_capabilities, params.capabilities)
+  end
+
+  -- Tune diagnostic
+  if params.diagnostic then
+    vim.diagnostic.config(params.diagnostic, client.id)
   end
 
   -- Enable completion triggered by <c-x><c-o>
@@ -90,10 +97,9 @@ return function(client, bufnr)
     tools.vmap("<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", { bufnr = bufnr })
   end
 
-  local format_on_save = lsp.format_on_save
-    and (not params or params.format_on_save == nil or params.format_on_save)
-
   -- Auto format on save
+  local format_on_save = params.format_on_save
+  if format_on_save == nil then format_on_save = cfg.lsp.format_on_save end
   if client.resolved_capabilities.document_formatting and format_on_save then
     tools.au("BufWritePre", "<buffer>", "lua require('plugin.lsp.utils').formatOnSave()")
   end

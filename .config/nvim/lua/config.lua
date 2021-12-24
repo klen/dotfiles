@@ -12,6 +12,9 @@ return Config:init {
     -- See :help vim.diagnostic.config()
     config = {
       underline = false,
+      virtual_text = {
+        severity = { min = severity.WARN },
+      },
     },
     -- Customize signs
     signs = {
@@ -27,16 +30,25 @@ return Config:init {
     format_on_save = true,
     servers = {
       jsonls = {
-        document_formatting = false,
-        document_range_formatting = false,
+        capabilities = {
+          document_formatting = false,
+          document_range_formatting = false,
+        },
       },
       tsserver = {
-        document_formatting = false,
-        document_range_formatting = false,
+        capabilities = {
+          document_formatting = false,
+          document_range_formatting = false,
+        },
       },
       pyright = {
-        document_formatting = false,
-        document_range_formatting = false,
+        capabilities = {
+          document_formatting = false,
+          document_range_formatting = false,
+        },
+        diagnostic = {
+          severity = { min = severity.INFO },
+        },
       },
     },
   },

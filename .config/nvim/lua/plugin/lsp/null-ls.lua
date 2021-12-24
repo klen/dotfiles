@@ -6,7 +6,8 @@ return {
 
     null_ls.setup {
       debug = true,
-      on_attach = require "plugin/lsp/on_attach",
+      on_attach = require "plugin.lsp.on_attach",
+      handlers = require ("plugin.lsp.handlers")('null-ls'),
 
       diagnostics_format = "#{c} #{m} (#{s})",
       sources = {
