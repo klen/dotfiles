@@ -39,3 +39,7 @@ export FIGNORE="#:~:DS_Store:.pyc:.swp:.swo"
 
 # Ansible
 export ANSIBLE_NOCOWS=1
+
+# Tools
+type pyenv &>/dev/null && eval "$(pyenv init --path)"
+type zoxide &>/dev/null && eval "$(zoxide init bash)"

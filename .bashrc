@@ -7,4 +7,4 @@
 [ -z "$PS1" ] && return
 
 # Read main configuration
-source $HOME/.config/bash/main.sh
+source $HOME/.config/bash/bashrc
