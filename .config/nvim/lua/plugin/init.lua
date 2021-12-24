@@ -35,7 +35,8 @@ require("plugin.packer").startup(function(use)
 
     -- Local configs
     {
-      "klen/nvim-config-local",
+      -- "klen/nvim-config-local",
+      "~/projects/nvim/config-local",
       config = function()
         require("config-local").setup()
       end,
@@ -117,7 +118,7 @@ require("plugin.packer").startup(function(use)
   }
 
   -- Rest client
-  use(require "plugin/rest")
+  use(require "plugin.rest")
 
   -- Git support
   use {

@@ -1,7 +1,8 @@
 -- Basic configurations
+local Config = require "tools.config"
 local severity = vim.diagnostic.severity
 
-return {
+return Config:init {
   -- Color theme
   colorscheme = "covid19",
   background = "dark",
@@ -36,14 +37,6 @@ return {
       pyright = {
         document_formatting = false,
         document_range_formatting = false,
-      },
-    },
-    filetypes = {
-      javascript = {},
-      lua = {},
-      python = {},
-      html = {
-        format_on_save = false,
       },
     },
   },

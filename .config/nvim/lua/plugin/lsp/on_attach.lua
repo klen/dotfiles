@@ -84,14 +84,17 @@ return function(client, bufnr)
   tools.vmap("<space>a", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", { bufnr = bufnr })
 
   -- Formatting
-  tools.lua_command("Format", "lsp.buf.formatting()")
+  tools.command("-range Format", "lua require'plugin.lsp.utils'.format(<line1>,<line2>)")
 
   if client.resolved_capabilities.document_range_formatting then
     tools.vmap("<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", { bufnr = bufnr })
   end
 
+  local format_on_save = lsp.format_on_save
+    and (not params or params.format_on_save == nil or params.format_on_save)
+
   -- Auto format on save
-  if client.resolved_capabilities.document_formatting then
+  if client.resolved_capabilities.document_formatting and format_on_save then
     tools.au("BufWritePre", "<buffer>", "lua require('plugin.lsp.utils').formatOnSave()")
   end
 

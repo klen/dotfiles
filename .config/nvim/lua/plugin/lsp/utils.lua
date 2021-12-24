@@ -1,4 +1,5 @@
 local M = {}
+local api = vim.api
 
 function M.diagnostics()
   -- Doesnt support buffer
@@ -101,10 +102,19 @@ function M.jumpLocation(location)
   if uri == nil then
     return
   end
-  if vim.api.nvim_get_current_buf() ~= vim.uri_to_bufnr(uri) then
+  if api.nvim_get_current_buf() ~= vim.uri_to_bufnr(uri) then
     vim.cmd "abo split"
   end
   vim.lsp.util.jump_to_location(location)
+end
+
+-- Detect if range or not
+function M.format(line1, line2)
+  if line2 == line1 then
+    vim.lsp.buf.formatting_sync()
+  else
+    vim.lsp.buf.range_formatting()
+  end
 end
 
 -- TODO

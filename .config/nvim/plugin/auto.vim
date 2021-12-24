@@ -7,6 +7,8 @@ if has("autocmd")
     autocmd WinLeave,InsertEnter * set nocursorline
     autocmd WinEnter,InsertLeave * set cursorline
 
+    autocmd BufRead .vimrc.lua set ft=lua
+
     " Unset paste on InsertLeave
     autocmd InsertLeave * silent! set nopaste
 
