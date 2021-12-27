@@ -31,7 +31,6 @@ ansible-install:
 	@command -v yum && sudo yum install ansible || true
 	@command -v brew && brew install ansible || true
 
-
 .PHONY: epel
 epel:
 	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm

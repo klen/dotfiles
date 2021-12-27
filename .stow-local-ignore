@@ -1,11 +1,11 @@
 \.git
+\.github
 \.gitmodules
 /.gitignore
-/cfg
 /setup
 /inventory
-/Google Drive
 /README.rst
+/README.md
 /Makefile
 /todo\.txt
 \.mypy_cache
