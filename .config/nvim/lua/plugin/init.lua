@@ -5,7 +5,13 @@ require("plugin.packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
   -- Speed up nvim require and startup time
-  use { "lewis6991/impatient.nvim", "nathom/filetype.nvim" }
+  use { "lewis6991/impatient.nvim" }
+  use {
+    "nathom/filetype.nvim",
+    setup = function()
+      vim.g.did_load_filetypes = 1
+    end,
+  }
 
   -- Tools
   use {
@@ -15,6 +21,13 @@ require("plugin.packer").startup(function(use)
     -- Better scrolling
     require "plugin/neoscroll",
     require "plugin/nvim-scrollview",
+
+    -- {
+    --   "rinx/nvim-minimap",
+    --   config = function()
+    --     vim.g["minimap#window#height"] = vim.api.nvim_win_get_height(0)
+    --   end,
+    -- },
 
     -- Better notifies
     require "plugin/nvim-notify",
@@ -61,6 +74,13 @@ require("plugin.packer").startup(function(use)
 
     -- Code explorer
     require "plugin/symbols-outline",
+
+    -- {
+    --   "GustavoKatel/sidebar.nvim",
+    --   config = function()
+    --     require("sidebar-nvim").setup { open = true, side = "right" }
+    --   end,
+    -- },
   }
 
   -- Movements/Keys

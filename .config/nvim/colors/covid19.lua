@@ -143,12 +143,12 @@ local theme = lush(function()
     Question      { fg = mantis }, -- |hit-enter| prompt and yes/no questions
     QuickFixLine  { bg = onyx }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
     SpecialKey    { fg = onyx, bg = eerie_black }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
-    SpellBad      { bg = dark_red }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-    SpellCap      { bg = dark_blue }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-    SpellLocal    { bg = blue_sapphire }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-    SpellRare     { bg = midnight }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
+    SpellBad      { fg = total_white, bg = dark_red }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+    SpellCap      { fg = total_black, bg = bud_green }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+    SpellLocal    { fg = total_black, bg = iceberg }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+    SpellRare     { fg = total_black, bg = mellow_apricot }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
     StatusLine    { fg = total_black, bg = foreground }, -- status line of current window
-    StatusLineNC  { fg = total_white, bg = jet }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+    StatusLineNC  { fg = foreground, bg = jet }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine       { fg = total_black, bg = cadet_blue }, -- tab pages line, not active tab page label
     TabLineFill   { fg = battleship_grey }, -- tab pages line, where there are no labels
     TabLineSel    { fg = total_black, bg = foreground }, -- tab pages line, active tab page label
@@ -304,9 +304,9 @@ local theme = lush(function()
     -- TSLiteral            { },    -- Literal text.
     -- TSURI                { },    -- Any URI like a link or email.
 
-    TSNote              { DiagnosticInfo },    -- TODO: docs
+    TSNote              { DiagnosticInfo },    -- NOTE: docs
     TSWarning           { DiagnosticWarn },    -- TODO: docs
-    TSDanger            { DiagnosticError },    -- TODO: docs
+    TSDanger            { DiagnosticError },    -- XXX: docs
 
     -- NvimTree Hightlights
 		NvimTreeRootFolder { fg = cool_grey },

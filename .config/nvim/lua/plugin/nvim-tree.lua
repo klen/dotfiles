@@ -18,11 +18,11 @@ return {
     g.nvim_tree_window_picker_chars = "KJABCDEFGHILMNOPQRSTUVWXYZ1234567890J"
     vim.g.nvim_tree_window_picker_exclude = {
       filetype = {
+        "Outline",
+        "SidebarNvim",
         "notify",
         "packer",
         "qf",
-        "minimap",
-        "Outline",
       },
       buftype = {
         "terminal",

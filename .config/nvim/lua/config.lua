@@ -1,8 +1,9 @@
--- Basic configurations
+-- User configuration
 local Config = require "tools.config"
 local severity = vim.diagnostic.severity
 
-return Config:init {
+local cfg = Config:init {
+  debug = false,
 
   -- Colors
   ---------
@@ -59,4 +60,13 @@ return Config:init {
       },
     },
   },
+
+  -- Plugins
+  ----------
+  null_ls = {
+    disable = {
+      formatting = { "prettier" },
+    },
+  },
 }
+return cfg

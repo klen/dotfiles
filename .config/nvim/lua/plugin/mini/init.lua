@@ -1,5 +1,7 @@
 return {
   "echasnovski/mini.nvim",
+  -- function name in status line
+  requires = "SmiteshP/nvim-gps",
   config = function()
     -- require('mini.bufremove').setup()
     -- require('mini.base16').setup()

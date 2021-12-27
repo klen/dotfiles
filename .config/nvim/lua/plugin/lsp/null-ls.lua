@@ -2,12 +2,14 @@ return {
   "jose-elias-alvarez/null-ls.nvim",
   requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   config = function()
+    local cfg = require "config"
     local null_ls = require "null-ls"
 
     null_ls.setup {
-      debug = true,
+      debug = cfg.debug,
       on_attach = require "plugin.lsp.on_attach",
-      handlers = require ("plugin.lsp.handlers")('null-ls'),
+      ---@diagnostic disable-next-line: redundant-parameter
+      handlers = require "plugin.lsp.handlers" "null-ls",
 
       diagnostics_format = "#{c} #{m} (#{s})",
       sources = {
@@ -21,23 +23,23 @@ return {
         null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.code_actions.eslint,
         null_ls.builtins.formatting.eslint,
-        -- null_ls.builtins.formatting.prettier.with {
-        --   filetypes = {
-        --     "javascript",
-        --     "javascriptreact",
-        --     "typescript",
-        --     "typescriptreact",
-        --     "vue",
-        --     "css",
-        --     "scss",
-        --     "less",
-        --     -- "html",
-        --     "json",
-        --     "yaml",
-        --     "markdown",
-        --     "graphql",
-        --   },
-        -- },
+        null_ls.builtins.formatting.prettier.with {
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+            "css",
+            "scss",
+            "less",
+            -- "html",
+            "json",
+            "yaml",
+            "markdown",
+            "graphql",
+          },
+        },
 
         -- Python
         -- pip install black
@@ -63,5 +65,13 @@ return {
         -- null_ls.builtins.code_actions.refactoring,
       },
     }
+
+    -- Disable sources by config
+    local disable = cfg:get("null_ls.disable", {})
+    for method, sources in pairs(disable) do
+      for _, name in ipairs(sources) do
+        null_ls.disable { name = name, method = "NULL_LS_" .. method:upper() }
+      end
+    end
   end,
 }

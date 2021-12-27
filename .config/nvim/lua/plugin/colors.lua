@@ -16,12 +16,6 @@ local plugins = {
     end,
   },
 
-  -- base16
-  {
-    "RRethy/nvim-base16",
-    module = "base16-colorscheme",
-  },
-
   -- Colorschemes
   "kyazdani42/blue-moon",
   "EdenEast/nightfox.nvim",

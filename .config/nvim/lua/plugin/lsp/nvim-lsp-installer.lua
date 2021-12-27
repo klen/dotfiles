@@ -17,7 +17,7 @@ return {
         params = server_init(params)
       end
       server:setup(params)
-      vim.cmd [[ do User LspAttachBuffers ]]
+      vim.cmd "do User LspAttachBuffers"
     end)
   end,
 }

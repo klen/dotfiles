@@ -14,6 +14,7 @@ function table.is_table(t)
   return type(t) == "table"
 end
 
+-- Pop a value from table
 function table.pop(t, key)
   if not table.is_table(t) then
     return nil
@@ -23,6 +24,7 @@ function table.pop(t, key)
   return value
 end
 
+-- Check for table contains a value
 function table.contains(t, value)
   if not table.is_table(t) then
     return nil
@@ -35,6 +37,7 @@ function table.contains(t, value)
   return false
 end
 
+-- Reverse the given table (inplace)
 function table.reverse(t)
   if not table.is_table(t) then
     return nil
@@ -43,4 +46,16 @@ function table.reverse(t)
     t[idx], t[#t - idx + 1] = t[#t - idx + 1], t[idx]
   end
   return t
+end
+
+-- Get a value from the table by path
+function table.get(value, path, default)
+  for part in string.gmatch(path, "[^%.]+") do
+    if table.is_table(value) then
+      value = value[part]
+    else
+      return default
+    end
+  end
+  return value
 end
