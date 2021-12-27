@@ -1,37 +1,28 @@
 ---
 
 - homebrew: update_homebrew=yes
-  become: no
 
-- homebrew:
+- name: Install setup utils
+  homebrew:
+    name:
+    - cowsay
+    - fortune
+    - stow
+
+- name: Install terminal utils
+  homebrew:
     name:
     - bash
     - bash-completion
     - coreutils
-    - cowsay
-    - ctags
-    - docker
-    - fortune
-    - fzf
-    - git
-    - git-flow
-    - htop-osx
-    - httpie
-    - postgresql
-    - rsc_2fa
-    - stow
-    - terminal-notifier
-    - unzip
-    - wget
     - zoxide
-  become: no
+    - terminal-notifier
 
 - name: Install editors
   homebrew:
     name:
     - vim
     - neovim
-  become: no
 
 - name: Install languages / packages
   homebrew:
@@ -41,4 +32,15 @@
     - pyenv
     - rust
     - yarn
-  become: no
+
+- name: Install other tools
+  homebrew:
+    name:
+    - ctags
+    - fzf
+    - git-flow
+    - htop-osx
+    - httpie
+    - rsc_2fa
+    - unzip
+    - wget

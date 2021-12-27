@@ -17,7 +17,6 @@
 
   - include: install.mac.yml
     when: ansible_os_family == "Darwin"
-    become: yes
 
   - name: Setup ssh - pt. 1
     file: state=directory dest=~{{home_user}}/.ssh owner={{home_user}}
