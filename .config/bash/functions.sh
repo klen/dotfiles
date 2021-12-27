@@ -190,7 +190,7 @@ conf-home () {
 # -----
 
 _is_cmd_exist () {
-    command -v $1 1>/dev/null
+    type "$1" &> /dev/null ;
 }
 
 _ask () {
