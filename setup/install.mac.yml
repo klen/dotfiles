@@ -12,6 +12,7 @@
     - ctags
     - docker
     - fortune
+    - fzf
     - git
     - git-flow
     - htop-osx
@@ -22,6 +23,7 @@
     - terminal-notifier
     - unzip
     - wget
+    - zoxide
   become: no
 
 - name: Install editors
