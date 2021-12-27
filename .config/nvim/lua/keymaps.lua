@@ -71,16 +71,14 @@ wk.register {
   -- Find something
   ["<leader>f"] = { name = "+find" },
   ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find File" },
-  ["<leader>fp"] = { "<cmd>Telescope projects<cr>", "Open projects" },
-  ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
   ["<leader>fs"] = {
     "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
     "Search workspace symbols",
   },
   ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
+  ["<leader>fw"] = { "<cmd>Telescope live_grep<cr>", "Find a word" },
   ["<leader>fd"] = { "<cmd>Dash<cr>", "Search in dash" },
   ["<leader>fD"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
-  ["<leader>fw"] = { "<cmd>Telescope live_grep<cr>", "Find a word" },
 
   -- Explore
   ["<leader>d"] = { name = "+explore" },
@@ -92,6 +90,7 @@ wk.register {
   ["<leader>dq"] = { "<cmd>copen<cr>", "Open quickfix" },
   ["<leader>ds"] = { "<cmd>SymbolsOutline<cr>", "Explore symbols" },
   ["<leader>dc"] = { "<cmd>Telescope neoclip<cr>", "Explore clipboard" },
+  ["<leader>dr"] = { "<cmd>Telescope oldfiles<cr>", "Explore recent files" },
 
   -- Git (fugitive)
   ["<leader>g"] = { name = "+git" },

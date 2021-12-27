@@ -36,14 +36,6 @@ return {
       open_on_setup = true, -- open if empty or directory
       ignore_ft_on_setup = { "dashboard" }, -- ignore file types
       hijack_cursor = true, -- keeps the cursor on the first letter of the filename
-      update_cwd = true,
-      update_focused_file = {
-        enable = false,
-        update_cwd = true,
-      },
-      diagnostics = {
-        enable = false,
-      },
       view = {
         width = 30,
         side = "left",

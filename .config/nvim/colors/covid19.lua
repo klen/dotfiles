@@ -314,6 +314,9 @@ local theme = lush(function()
     NvimTreeOpenedFolderName { Directory },
     NvimTreeSpecialFile { fg = steel_teal },
 
+    -- SymbolsOutline
+    FocusedSymbol { Search, gui="none" }
+
   }
 end)
 
