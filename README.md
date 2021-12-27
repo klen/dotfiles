@@ -1,6 +1,6 @@
 # KK dotfiles
 
-![Screenshot of my shell prompt](https://github.com/klen/dotfiles/main/.github/screenshot.png)
+![Screenshot of my shell prompt](https://raw.githubusercontent.com/klen/dotfiles/master/.github/screenshot.png)
 
 ## Installation
 
