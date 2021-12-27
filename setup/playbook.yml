@@ -19,8 +19,6 @@
     when: ansible_os_family == "Darwin"
     become: yes
 
-  - file: state=directory owner={{home_user}} recurse=yes path=~{{home_user}}/.home
-
   - name: Setup ssh - pt. 1
     file: state=directory dest=~{{home_user}}/.ssh owner={{home_user}}
 
