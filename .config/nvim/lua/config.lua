@@ -42,16 +42,10 @@ local cfg = Config:init {
   lsp = {
     format_on_save = true,
     servers = {
-      jsonls = {
-        capabilities = {
-          document_formatting = false,
-          document_range_formatting = false,
-        },
-      },
       tsserver = {
         diagnostic = {
           -- Disable codes
-          disable = { 8006, 8008, 8010, 8011 },
+          disable = { 8006, 8008, 8010, 8011, 7006 },
         },
         capabilities = {
           document_formatting = false,

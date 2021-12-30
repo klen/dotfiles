@@ -16,10 +16,6 @@ tools.nmap("p", "p`]")
 tools.vmap("p", "p`]")
 tools.vmap("y", "y`]")
 
--- Move lines
-tools.nmap("<C-j>", ":m .+1<CR>==")
-tools.nmap("<C-k>", ":m .-2<CR>==")
-
 -- Not jump on star, only highlight
 tools.nmap("*", "*N")
 
@@ -103,6 +99,7 @@ wk.register {
   ["<leader>gc"] = { "<cmd>Git commit %<cr>", "Git commit" },
   ["<leader>gl"] = { "<cmd>Telescope git_bcommits<cr>", "Git log file" },
   ["<leader>gL"] = { "<cmd>Telescope git_commits<cr>", "Git log" },
+  ["<leader>gh"] = { "<cmd>!gh browse<cr>", "Browse current repo" },
 
   -- Plugins
   ["<leader>p"] = { name = "+plugins" },
@@ -136,8 +133,8 @@ wk.register {
   ["<leader>t"] = { "+tests" },
   ["<leader>tn"] = { "<cmd>TestNearest<cr>", "Run the nearest test" },
   ["<leader>tf"] = { "<cmd>TestFile<cr>", "Run the file" },
-  ["<leader>tt"] = { "<cmd>TestFile<cr>", "Run all tests" },
   ["<leader>tl"] = { "<cmd>TestLast<cr>", "Run the last test" },
+  ["<leader>tt"] = { "<cmd>TestSuite<cr>", "Run all tests" },
   ["<leader>tv"] = { "<cmd>TestVisit<cr>", "Visit the last test" },
 
   -- Buffers

@@ -74,15 +74,16 @@ local light_pink = hsl "#ffafaf"
 local mellow_apricot = hsl "#ffb964"
 local mantis = hsl "#5faf5f"
 local bud_green = hsl "#87af5f"
-local brandy = hsl "#d7d787" -- TODO: Not used
 local steel_teal = hsl "#5f8787"
-local dark_blue = hsl "#0000d7"
-local blue_sapphire = hsl "#005f87"
 local cool_grey = hsl "#8787af"
 local iceberg = hsl "#87afd7"
 local baby_blue_eyes = hsl "#afd7ff"
-local midnight = hsl "#5f005f"
 local mauve = hsl "#d7afff"
+
+-- TODO: Not used
+local brandy = hsl "#d7d787"
+local blue_sapphire = hsl "#005f87"
+local midnight = hsl "#5f005f"
 
 local theme = lush(function()
 

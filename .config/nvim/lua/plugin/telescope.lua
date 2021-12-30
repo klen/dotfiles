@@ -48,10 +48,12 @@ return {
     }
     -- projects.nvim
     -- telescope.load_extension "projects"
+
     telescope.setup(config)
 
     telescope.load_extension "fzf"
     telescope.load_extension "neoclip"
+    telescope.load_extension "notify"
 
     tools.nmap("<C-Space>", ":Telescope<CR>")
     tools.lua_command("Files", "require'telescope.builtin'.git_files()")
