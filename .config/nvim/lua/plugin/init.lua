@@ -150,9 +150,10 @@ require("plugin.packer").startup(function(use)
 
   -- Local plugins (in development)
   local path
+  local home = os.getenv('HOME')
 
   -- Local configs
-  path = "~/projects/nvim/config-local"
+  path = home .. "/projects/nvim/config-local"
   use {
     (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-config-local",
     config = function()
@@ -161,7 +162,7 @@ require("plugin.packer").startup(function(use)
   }
 
   -- Run tests
-  path = "~/projects/nvim/test"
+  path = home .. "/projects/nvim/test"
   use {
   (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-test",
     config = function()

@@ -4,14 +4,6 @@ return {
   "kevinhwang91/nvim-bqf",
   ft = "qf",
 
-  -- Requirements
-  requires = {
-    "junegunn/fzf",
-    run = function()
-      fn["fzf#install"]()
-    end,
-  },
-
   -- Configure
   config = function()
     cmd [[
