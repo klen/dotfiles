@@ -45,15 +45,6 @@ require("plugin.packer").startup(function(use)
         require("neoclip").setup()
       end,
     },
-
-    -- Local configs
-    {
-      -- "klen/nvim-config-local",
-      "~/projects/nvim/config-local",
-      config = function()
-        require("config-local").setup()
-      end,
-    },
   }
 
   -- Explore files/symbols/buffers/etc
@@ -129,15 +120,6 @@ require("plugin.packer").startup(function(use)
     -- Better Syntax
     "sheerun/vim-polyglot",
 
-    -- Run tests
-    {
-      -- "klen/nvim-config-local",
-      "~/projects/nvim/test",
-      config = function()
-        require("nvim-test").setup()
-      end,
-    },
-
     -- Commenting
     require "plugin/comment",
 
@@ -167,7 +149,27 @@ require("plugin.packer").startup(function(use)
   }
 
   -- Local plugins (in development)
+  local path
+
+  -- Local configs
+  path = "~/projects/nvim/config-local"
+  use {
+    (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-config-local",
+    config = function()
+      require("config-local").setup()
+    end,
+  }
+
   -- Run tests
+  path = "~/projects/nvim/test"
+  use {
+  (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-test",
+    config = function()
+      require("nvim-test").setup()
+    end,
+  }
+
+  -- Run code/repl
   use {
     "~/.config/nvim/lua/plugin/local/runner",
     config = function()
