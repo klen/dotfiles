@@ -91,6 +91,14 @@ require("plugin.packer").startup(function(use)
     -- repeat surround motions with .
     "tpope/vim-surround",
     "tpope/vim-repeat",
+
+    -- Movement
+    -- {
+    --   "booperlv/nvim-gomove",
+    --   config = function()
+    --     require("gomove").setup()
+    --   end,
+    -- },
   }
 
   -- Color schemes.
@@ -122,7 +130,13 @@ require("plugin.packer").startup(function(use)
     "sheerun/vim-polyglot",
 
     -- Run tests
-    require "plugin/vim-test",
+    {
+      -- "klen/nvim-config-local",
+      "~/projects/nvim/test",
+      config = function()
+        require("nvim-test").setup()
+      end,
+    },
 
     -- Commenting
     require "plugin/comment",
@@ -153,6 +167,7 @@ require("plugin.packer").startup(function(use)
   }
 
   -- Local plugins (in development)
+  -- Run tests
   use {
     "~/.config/nvim/lua/plugin/local/runner",
     config = function()
