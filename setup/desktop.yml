@@ -30,5 +30,6 @@
         - the-unarchiver # Archive manager
         - transmission # Torrent Client
         - tunnelblick # VPN manager
+        - font-hack-nerd-font
       environment:
         HOMEBREW_CASK_OPTS: --appdir=/Applications

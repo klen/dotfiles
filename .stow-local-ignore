@@ -9,3 +9,4 @@
 /Makefile
 /todo\.txt
 \.mypy_cache
+\.DS_Store
