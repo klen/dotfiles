@@ -15,8 +15,9 @@
     - bash
     - bash-completion
     - coreutils
-    - zoxide
+    - ripgrep
     - terminal-notifier
+    - zoxide
 
 - name: Install editors
   homebrew:
@@ -28,6 +29,7 @@
   homebrew:
     name:
     - golang
+    - luarocks
     - node
     - pyenv
     - rust

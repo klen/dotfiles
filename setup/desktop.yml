@@ -17,6 +17,7 @@
         - ilya-birman-typography-layout # Keyboard
         - istat-menus # Activity Monitor
         - iterm2 # Terminal
+        - karabiner-elements # Keyboard
         - kitty # Terminal
         - lulu # Firewall
         - obs # Video Streams
