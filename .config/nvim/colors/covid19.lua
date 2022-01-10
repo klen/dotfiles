@@ -266,7 +266,7 @@ local theme = lush(function()
     TSConstant          { Normal, gui = "italic" }, -- For constants
     TSConstBuiltin      { Constant, gui = "italic" }, -- For constant that are built in the language: `nil` in Lua.
     TSConstMacro        { TSConstBuiltin },    -- For constants that are defined by macros: `NULL` in C.
-    TSError             { gui="undercurl", sp=fuzzy_wuzzy },    -- For syntax/parser errors.
+    TSError             { Normal },    -- For syntax/parser errors.
     TSException         { Statement },    -- For exception related keywords.
     TSField             { Normal }, -- For fields.
     TSFunction          { Function },    -- For function (calls and definitions).
