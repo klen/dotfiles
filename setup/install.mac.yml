@@ -29,9 +29,9 @@
   homebrew:
     name:
     - golang
-    - luarocks
-    - node
-    - pyenv
+    - luarocks  # Lua package/versions manager
+    - nvm       # Node versions manager
+    - pyenv     # Python versions manager
     - rust
     - yarn
 
