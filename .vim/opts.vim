@@ -13,16 +13,10 @@ if !isdirectory(&directory)
     silent call mkdir(&directory, "p")
 endif
 
-let g:SHARE_DIR = $VIM
+let g:SHARE_DIR = $HOME . "/.vim"
 let g:SESSION_DIR=g:SHARE_DIR . "/sessions"  " where to keep sessions
 if !isdirectory(g:SESSION_DIR)
-    try
-        call mkdir(g:SESSION_DIR, "p")
-    catch /.*/
-        let g:SHARE_DIR = $HOME . "/.vim"
-        let g:SESSION_DIR=g:SHARE_DIR . "/sessions"
-        silent call mkdir(g:SESSION_DIR, "p")
-    endtry
+    silent call mkdir(g:SESSION_DIR, "p")
 endif
 
 set title                           " Show file name in window title
