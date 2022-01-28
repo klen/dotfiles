@@ -1,8 +1,11 @@
 {
   "root": true,
-
-  "plugins": ["@typescript-eslint", "prettier", "unicorn", "import"],
-
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "unicorn",
+    "import"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -13,22 +16,24 @@
     // "plugin:prettier/recommended",
     // "prettier"
   ],
-
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-
+  "globals": {
+    "cy": "readonly"
+  },
   "env": {
     "browser": true,
     "es6": true,
+    "jest": true,
     "node": true
   },
-
   "rules": {
     "no-console": "warn",
-    "no-debugger": "warn"
+    "no-debugger": "warn",
+    "unicorn/no-null": "off"
   }
 }
