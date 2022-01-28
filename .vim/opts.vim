@@ -3,19 +3,27 @@ set confirm                           " Prompt to save unsaved changes when exit
 set backup                            " Make backup file and leave it around
 set backupdir=/tmp/vim/backup         " Where to put backup files
 set directory=/tmp/vim/swap           " Where to put swap files
-let g:SESSION_DIR=$VIM . "/sessions"  " where to keep sessions
 
 " Create directories
-if finddir(&backupdir) == ''
+if !isdirectory(&backupdir)
     silent call mkdir(&backupdir, "p")
 endif
 
-if finddir(&directory) == ''
+if !isdirectory(&directory)
     silent call mkdir(&directory, "p")
 endif
 
-if finddir(g:SESSION_DIR) == ''
-    silent call mkdir(g:SESSION_DIR, "p")
+let g:SHARE_DIR = $VIM
+let g:SESSION_DIR=g:SHARE_DIR . "/sessions"  " where to keep sessions
+if !isdirectory(g:SESSION_DIR)
+    try
+        call mkdir(g:SESSION_DIR, "p")
+    catch /.*/
+        let g:SHARE_DIR = $HOME . "/.vim"
+        let g:SESSION_DIR=g:SHARE_DIR . "/sessions"
+        silent call mkdir(g:SESSION_DIR, "p")
+        echom g:SESSION_DIR
+    endtry
 endif
 
 set title                           " Show file name in window title

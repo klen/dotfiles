@@ -4,6 +4,9 @@
 
 scriptencoding utf-8
 
+" Options
+source $HOME/.vim/opts.vim
+
 " Open help in a vsplit rather than a split
 command! -nargs=? -complete=help Help :vertical help <args>
 cabbrev h h<C-\>esubstitute(getcmdline(), '^h\>', 'Help', '')<CR>

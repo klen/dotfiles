@@ -1,8 +1,8 @@
-if empty(glob($VIM . '/plugged'))
+if empty(glob(g:SHARE_DIR . '/plugged'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin($VIM . "/plugged")
+call plug#begin(g:SHARE_DIR . "/plugged")
 
 " Completion, definitions, refactoring
 source $HOME/.vim/plugins/coc.vim
