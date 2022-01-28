@@ -4,32 +4,33 @@
     # - homebrew: name=caskroom/cask/brew-cask
     - homebrew_cask: name={{item}}
       with_items:
-        - alfred # UI
-        - calibre # Books Manager
-        - ccleaner # System cleaner
-        - dash
-        - docker # Utilities
-        - firefox # Browser
-        - google-chrome # Browser
-        - google-drive # Cloud storage
-        - hyperdock # Manage windows
-        - iina # Video player
+        - alfred            # UI
+        - calibre           # Books Manager
+        - ccleaner          # System cleaner
+        - dash              # Documentation searcher
+        - docker            # Utilities
+        - firefox           # Browser
+        - font-hack-nerd-font
+        - google-chrome     # Browser
+        - google-drive      # Cloud storage
+        - hyperdock         # Manage windows
+        - iina              # Video player
         - ilya-birman-typography-layout # Keyboard
-        - istat-menus # Activity Monitor
-        - iterm2 # Terminal
+        - istat-menus       # Activity Monitor
+        - iterm2            # Terminal
         - karabiner-elements # Keyboard
-        - kitty # Terminal
-        - lulu # Firewall
-        - obs # Video Streams
+        - keepingyouawake   # Keep Mac awake
+        - kitty             # Terminal
+        - lulu              # Firewall
+        - obs               # Video Streams
         - obs-virtualcam
-        - parallels # Virtualization
-        - slack # Messenger
+        - parallels         # Virtualization
+        - slack             # Messenger
         - spotify # Media
         - steam # Games
         - telegram # Messenger
         - the-unarchiver # Archive manager
         - transmission # Torrent Client
         - tunnelblick # VPN manager
-        - font-hack-nerd-font
       environment:
         HOMEBREW_CASK_OPTS: --appdir=/Applications
