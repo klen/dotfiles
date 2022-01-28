@@ -93,7 +93,7 @@ end
 
 function M.formatOnSave()
   if vim.o.modified then
-    vim.lsp.buf.formatting_sync({}, 1000)
+    vim.lsp.buf.formatting_sync({}, 5000)
   end
 end
 
@@ -111,7 +111,7 @@ end
 -- Detect if range or not
 function M.format(line1, line2)
   if line2 == line1 then
-    vim.lsp.buf.formatting_sync()
+    vim.lsp.buf.formatting_sync({}, 5000)
   else
     vim.lsp.buf.range_formatting()
   end

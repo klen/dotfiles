@@ -9,7 +9,17 @@ local signs = {
 }
 
 local cfg = Config:init {
+
+  -- Enable debug mode
   debug = true,
+
+  -- Plugins
+  ----------
+  null_ls = {
+    disable = {
+      formatting = { "prettier" },
+    },
+  },
 
   -- Colors
   ---------
@@ -61,14 +71,6 @@ local cfg = Config:init {
           severity = { min = severity.INFO },
         },
       },
-    },
-  },
-
-  -- Plugins
-  ----------
-  null_ls = {
-    disable = {
-      formatting = { "prettier" },
     },
   },
 }

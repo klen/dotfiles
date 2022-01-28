@@ -20,9 +20,12 @@ return {
         --   eslint-plugin-prettier eslint-plugin-unicorn @typescript-eslint/eslint-plugin
         --   eslint-config-airbnb-base eslint-config-airbnb-typescript eslint-config-prettier
 
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.formatting.eslint,
+        -- null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.diagnostics.eslint_d,
+        -- null_ls.builtins.code_actions.eslint,
+        null_ls.builtins.code_actions.eslint_d,
+        -- null_ls.builtins.formatting.eslint,
+        null_ls.builtins.formatting.eslint_d,
         null_ls.builtins.formatting.prettier.with {
           filetypes = {
             "javascript",
@@ -53,7 +56,9 @@ return {
           },
         },
         -- pip install pylama
-        null_ls.builtins.diagnostics.pylama,
+        null_ls.builtins.diagnostics.pylama.with {
+          timeout = 5000,
+        },
         -- pip install pylint
         -- null_ls.builtins.diagnostics.pylint,
 
