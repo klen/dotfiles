@@ -37,4 +37,4 @@ alias vi='vim'
 alias sim='sudo vim'
 alias timestamp='date "+%Y%m%dT%H%M%S"'
 
-alias myip='curl ifconfig.co'
+alias myip='dig +short txt ch whoami.cloudflare @1.0.0.1'
