@@ -22,7 +22,6 @@ if !isdirectory(g:SESSION_DIR)
         let g:SHARE_DIR = $HOME . "/.vim"
         let g:SESSION_DIR=g:SHARE_DIR . "/sessions"
         silent call mkdir(g:SESSION_DIR, "p")
-        echom g:SESSION_DIR
     endtry
 endif
 
