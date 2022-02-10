@@ -11,7 +11,7 @@ return function()
     ["textDocument/references"] = utils.processLocations,
     ["textDocument/implementation"] = utils.processLocations,
     ["textDocument/declaration"] = utils.processLocations,
-    ["textDocument/typeDefinition"] = utils.processLocations,
+    ["textDocument/typeDefinition"] = utils.gotoDefinition,
     ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" }),
     ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single" }),
     ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)

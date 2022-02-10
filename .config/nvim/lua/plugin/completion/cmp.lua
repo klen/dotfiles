@@ -9,15 +9,15 @@ return {
     local M = {}
 
     M.config = {
-      confirm_opts = {
-        select = true,
-        behavior = cmp.ConfirmBehavior.Replace,
-      },
-      completion = {
-        ---@usage The minimum length of a word to complete on.
-        keyword_length = 1,
-        autocomplete = false,
-      },
+      -- confirm_opts = {
+      --   select = true,
+      --   behavior = cmp.ConfirmBehavior.Replace,
+      -- },
+      -- completion = {
+      --   ---@usage The minimum length of a word to complete on.
+      --   -- keyword_length = 2,
+      --   autocomplete = true,
+      -- },
       experimental = {
         ghost_text = true,
       },

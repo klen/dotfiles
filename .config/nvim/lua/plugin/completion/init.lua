@@ -1,27 +1,28 @@
 -- Auto completion support
 
 return {
-  require "plugin/completion/luasnip",
-  require "plugin/completion/cmp",
+
+  -- Snippets
   {
-    "saadparwaiz1/cmp_luasnip",
-    after = "LuaSnip",
+    "L3MON4D3/LuaSnip",
+    requires = { "rafamadriz/friendly-snippets" },
+    config = function()
+      require("luasnip/loaders/from_vscode").lazy_load()
+    end,
   },
+
+  -- Completion engine
   {
-    "hrsh7th/cmp-nvim-lsp",
-    after = "nvim-cmp",
+    "hrsh7th/nvim-cmp",
+    config = require "plugin/completion/config",
   },
-  {
-    "hrsh7th/cmp-nvim-lua",
-    after = "cmp-nvim-lsp",
-  },
-  {
-    "hrsh7th/cmp-buffer",
-    after = "cmp-nvim-lsp",
-  },
-  {
-    "hrsh7th/cmp-path",
-    after = "cmp-buffer",
-  },
+
+  -- Completion engine plugins
+  "hrsh7th/cmp-buffer", -- Buffer completion
+  "hrsh7th/cmp-path", -- Path completion
+  "hrsh7th/cmp-nvim-lsp", -- LSP completion
+  "hrsh7th/cmp-nvim-lua", -- VIM lua API completion
+  "saadparwaiz1/cmp_luasnip", -- Snippets completion
+
   -- use {"hrsh7th/cmp-cmdline", after = "cmp-path"}
 }

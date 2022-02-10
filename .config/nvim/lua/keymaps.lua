@@ -74,6 +74,8 @@ wk.register {
   ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
   ["<leader>fw"] = { "<cmd>Telescope live_grep<cr>", "Find a word" },
   ["<leader>fd"] = { "<cmd>Dash<cr>", "Search in dash" },
+  ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Find recent files" },
+  ["<leader>fb"] = { "<cmd>Telescope buffers<cr>", "Find buffers" },
   ["<leader>fD"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
 
   -- Explore

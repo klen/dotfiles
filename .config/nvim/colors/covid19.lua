@@ -138,7 +138,7 @@ local theme = lush(function()
     NormalFloat   { fg = foreground, bg = cocoa_brown }, -- Normal text in floating windows.
     -- NormalNC      { bg = background.lighten(3) }, -- normal text in non-current windows
     Pmenu         { NormalFloat }, -- Popup menu: normal item.
-    PmenuSel      { fg = foreground }, -- Popup menu: selected item.
+    PmenuSel      { fg = cocoa_brown, bg = foreground }, -- Popup menu: selected item.
     PmenuSbar     { bg = foreground, fg = cocoa_brown }, -- Popup menu: scrollbar.
     PmenuThumb    { VertSplit }, -- Popup menu: Thumb of the scrollbar.
     Question      { fg = mantis }, -- |hit-enter| prompt and yes/no questions

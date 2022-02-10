@@ -26,8 +26,8 @@ function M.install()
 end
 
 -- Setup plugins
----@param init function a startup function
-function M.startup(init)
+---@param init_plugins function a startup function
+function M.startup(init_plugins)
   local present, packer = pcall(require, "packer")
   if not present then
     packer = M.install()
@@ -46,7 +46,7 @@ function M.startup(init)
 
   -- Start packer
   packer.startup {
-    init,
+    init_plugins,
     -- Configure packer
     config = {
       display = {

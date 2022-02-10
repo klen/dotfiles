@@ -19,9 +19,11 @@ starter.setup {
 
     -- Custom actions
     { name = "Find files", action = "Telescope find_files", section = "Actions" },
-    { name = "Live grep", action = "Telescope live_grep", section = "Actions" },
-    { name = "Update plugins", action = "PackerSync", section = "Actions" },
-    { name = "Edit new", action = "enew", section = "Actions" },
+    { name = "Grep files", action = "Telescope live_grep", section = "Actions" },
+    { name = "Plugins update", action = "PackerSync", section = "Actions" },
+    { name = "Treesitter update", action = "TSUpdate", section = "Actions" },
+    { name = "Lsp servers update", action = "LspInstallInfo", section = "Actions" },
+    { name = "Edit local config", action = "ConfigEdit", section = "Actions" },
     { name = "Quit Neovim", action = "qall", section = "Actions" },
   },
   header = function()
