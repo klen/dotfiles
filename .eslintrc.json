@@ -1,39 +1,41 @@
 {
   "root": true,
-  "plugins": [
-    "@typescript-eslint",
-    "prettier",
-    "unicorn",
-    "import"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    // "airbnb-typescript/base",
-    // "plugin:@typescript-eslint/recommended",
-    "plugin:unicorn/recommended"
-    // "plugin:prettier/recommended",
-    // "prettier"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "project": "./tsconfig.json",
-    "sourceType": "module"
-  },
-  "globals": {
-    "cy": "readonly"
-  },
   "env": {
     "browser": true,
     "es6": true,
     "jest": true,
     "node": true
   },
+  "extends": [
+    "eslint:recommended",
+    "plugin:unicorn/recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "babelOptions": {
+      "rootMode": "upward"
+    }
+  },
+  "plugins": [
+    "prettier",
+    "react",
+    "unicorn"
+  ],
+  "globals": {
+    "cy": "readonly",
+    "globalThis": "readonly"
+  },
   "rules": {
     "no-console": "warn",
     "no-debugger": "warn",
-    "unicorn/no-null": "off"
+    "unicorn/no-null": "off",
+    "prettier/prettier": "warn"
   }
 }
