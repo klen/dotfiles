@@ -18,8 +18,10 @@ require "plugin"
 -- Mapping
 require "keymaps"
 
--- Colorscheme
+-- User config
 local config = require "config"
+
+-- Colorscheme
 local ok, _ = pcall(vim.cmd, "colorscheme " .. config.colorscheme)
 if not ok then
   cmd "colorscheme default"

@@ -21,6 +21,13 @@ if has("autocmd")
     autocmd TermOpen * startinsert
     autocmd TermOpen * setlocal nonumber norelativenumber
 
+    " Other
+    autocmd BufWritePre /tmp/* setlocal noundofile
+    autocmd BufWritePre COMMIT_EDITMSG setlocal noundofile
+    autocmd BufWritePre MERGE_MSG setlocal noundofile
+    autocmd BufWritePre *.tmp setlocal noundofile
+    autocmd BufWritePre *.bak setlocal noundofile
+
   augroup END
 
 endif

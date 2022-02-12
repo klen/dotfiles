@@ -17,6 +17,7 @@ local plugins = {
   },
 
   -- Colorschemes
+  "ray-x/aurora",
   "kyazdani42/blue-moon",
   "EdenEast/nightfox.nvim",
   "sainnhe/sonokai",
