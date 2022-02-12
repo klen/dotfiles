@@ -45,6 +45,9 @@ require("plugin.packer").startup(function(use)
         require("neoclip").setup()
       end,
     },
+
+    -- Toggle terminal
+    require "plugin/toggle-term",
   }
 
   -- Explore files/symbols/buffers/etc
@@ -150,7 +153,7 @@ require("plugin.packer").startup(function(use)
 
   -- Local plugins (in development)
   local path
-  local home = os.getenv('HOME')
+  local home = os.getenv "HOME"
 
   -- Local configs
   path = home .. "/projects/nvim/config-local"
@@ -164,9 +167,12 @@ require("plugin.packer").startup(function(use)
   -- Run tests
   path = home .. "/projects/nvim/test"
   use {
-  (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-test",
+    (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-test",
     config = function()
-      require("nvim-test").setup()
+      require("nvim-test").setup {
+        split = false,
+        cmd = 'TermExec cmd="%s"',
+      }
     end,
   }
 
