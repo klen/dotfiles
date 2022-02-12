@@ -6,11 +6,16 @@ return function(client, bufnr)
 
   -- Tune capabilities
   if params.capabilities then
-    client.resolved_capabilities = vim.tbl_extend('force', client.resolved_capabilities, params.capabilities)
+    client.resolved_capabilities = vim.tbl_extend(
+      "force",
+      client.resolved_capabilities,
+      params.capabilities
+    )
   end
 
   -- Tune diagnostic
   if params.diagnostic then
+    vim.diagnostic.get_namespace(client.id)
     vim.diagnostic.config(params.diagnostic, client.id)
   end
 
@@ -99,7 +104,9 @@ return function(client, bufnr)
 
   -- Auto format on save
   local format_on_save = params.format_on_save
-  if format_on_save == nil then format_on_save = cfg.lsp.format_on_save end
+  if format_on_save == nil then
+    format_on_save = cfg.lsp.format_on_save
+  end
   if client.resolved_capabilities.document_formatting and format_on_save then
     tools.au("BufWritePre", "<buffer>", "lua require('plugin.lsp.utils').formatOnSave()")
   end
