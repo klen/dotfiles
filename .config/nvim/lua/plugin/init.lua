@@ -48,6 +48,18 @@ require("plugin.packer").startup(function(use)
 
     -- Toggle terminal
     require "plugin/toggle-term",
+
+    -- indent guides
+    {
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        require("indent_blankline").setup {
+          use_treesitter = true,
+          show_first_indent_level = false,
+          filetype_exclude = { "", "help", "packer", "starter" },
+        }
+      end,
+    },
   }
 
   -- Explore files/symbols/buffers/etc
