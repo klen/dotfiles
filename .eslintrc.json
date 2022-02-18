@@ -8,7 +8,6 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:unicorn/recommended",
     "plugin:react/recommended",
     "prettier"
   ],
@@ -25,8 +24,7 @@
   },
   "plugins": [
     "prettier",
-    "react",
-    "unicorn"
+    "react"
   ],
   "globals": {
     "cy": "readonly",
@@ -35,7 +33,6 @@
   "rules": {
     "no-console": "warn",
     "no-debugger": "warn",
-    "unicorn/no-null": "off",
     "prettier/prettier": "warn"
   }
 }

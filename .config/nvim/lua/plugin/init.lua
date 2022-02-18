@@ -181,10 +181,7 @@ require("plugin.packer").startup(function(use)
   use {
     (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-test",
     config = function()
-      require("nvim-test").setup {
-        -- split = false,
-        -- cmd = 'TermExec cmd="%s"',
-      }
+      require("nvim-test").setup()
     end,
   }
 

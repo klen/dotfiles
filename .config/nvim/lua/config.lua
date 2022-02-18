@@ -56,6 +56,7 @@ local cfg = Config:init {
         diagnostic = {
           -- Disable codes
           disable = { 8006, 8008, 8010, 8011, 7006 },
+          severity = { min = severity.INFO },
         },
         capabilities = {
           document_formatting = false,
