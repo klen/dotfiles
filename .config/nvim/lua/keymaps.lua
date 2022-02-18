@@ -83,7 +83,7 @@ wk.register {
   ["<leader>dd"] = { "<cmd>NvimTreeFocus<cr>", "Open/focus Explorer" },
   ["<leader>df"] = { "<cmd>NvimTreeFindFile<cr>", "Locate File" },
   ["<leader>db"] = { "<cmd>Telescope buffers<cr>", "Explore buffers" },
-  ["<leader>dt"] = { "<cmd>vsplit | terminal<cr>", "Open terminal" },
+  ["<leader>dt"] = { "<cmd>bo vsplit | terminal<cr>", "Open terminal" },
   ["<leader>dl"] = { "<cmd>lopen<cr>", "Open loclist" },
   ["<leader>dq"] = { "<cmd>copen<cr>", "Open quickfix" },
   ["<leader>ds"] = { "<cmd>SymbolsOutline<cr>", "Explore symbols" },

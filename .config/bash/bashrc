@@ -29,9 +29,6 @@ source $XDG_CONFIG_HOME/bash/aliases.sh
 # Show login screen
 source $XDG_CONFIG_HOME/bash/login.sh
 
-# Smartcd
-source $XDG_CONFIG_HOME/bash/smartcd.sh
-
 # Setup gpg (disabled now)
 # source $XDG_CONFIG_HOME/bash/include/gpg.sh
 
@@ -55,6 +52,9 @@ _is_cmd_exist ruby && source $XDG_CONFIG_HOME/bash/include/ruby.sh
 
 # Close promt
 PS1="${PS1}\n$ "
+
+# Smartcd
+source $XDG_CONFIG_HOME/bash/smartcd.sh
 
 # Auto run screen on remote servers
 _is_cmd_exist screen && {
