@@ -77,6 +77,7 @@ wk.register {
   ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Find recent files" },
   ["<leader>fb"] = { "<cmd>Telescope buffers<cr>", "Find buffers" },
   ["<leader>fD"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
+  ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Search in help files" },
 
   -- Explore
   ["<leader>d"] = { name = "+explore" },

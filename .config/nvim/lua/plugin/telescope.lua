@@ -24,6 +24,7 @@ return {
         buffers = { theme = "dropdown" },
         find_files = { theme = "dropdown" },
         git_files = { theme = "dropdown" },
+        help_tags = { theme = "dropdown" },
         lsp_code_actions = { theme = "cursor" },
         neoclip = { theme = "dropdown" },
         oldfiles = { theme = "dropdown" },
