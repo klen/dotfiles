@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "preinstall": "npm i -g eslint eslint_d prettier"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0"
+  }
+}
