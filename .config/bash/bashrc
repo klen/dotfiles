@@ -35,7 +35,7 @@ source $XDG_CONFIG_HOME/bash/login.sh
 # Setup completion
 source /usr/local/etc/bash_completion 2>/dev/null || source /etc/bash_completion 2> /dev/null
 source $XDG_CONFIG_HOME/bash/completion/cd_.sh
-source $XDG_CONFIG_HOME/bash/completion/rmqadmin.sh
+# source $XDG_CONFIG_HOME/bash/completion/rmqadmin.sh
 _is_cmd_exist @ && source $XDG_CONFIG_HOME/bash/completion/atmark.sh
 
 # Setup tools

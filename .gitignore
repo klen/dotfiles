@@ -1,3 +1,4 @@
 /.config/zsh/plugins
 /todo.txt
 *.retry
+/.config/karabiner/automatic_backups/
