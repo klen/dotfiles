@@ -15,8 +15,8 @@ return function(client, bufnr)
 
   -- Tune diagnostic
   if params.diagnostic then
-    vim.diagnostic.get_namespace(client.id)
-    vim.diagnostic.config(params.diagnostic, client.id)
+    local ns = vim.lsp.diagnostic.get_namespace(client.id)
+    vim.diagnostic.config(params.diagnostic, ns)
   end
 
   -- Enable completion triggered by <c-x><c-o>
