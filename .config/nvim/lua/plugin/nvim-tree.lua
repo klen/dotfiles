@@ -9,25 +9,10 @@ return {
     "NvimTreeFindFile",
   },
   config = function()
-    g.nvim_tree_gitignore = 1 -- Ignore files from .gitignore
     g.nvim_tree_show_icons = { git = 0, folders = 1, files = 0 } -- Show icons
     g.nvim_tree_highlight_opened_files = 2
     g.nvim_tree_git_hl = 0 -- Will enable file highlight for git attributes
     g.nvim_tree_indent_markers = 0 -- This option shows indent markers when folders are open.
-    g.nvim_tree_disable_window_picker = 0
-    g.nvim_tree_window_picker_chars = "KJABCDEFGHILMNOPQRSTUVWXYZ1234567890J"
-    vim.g.nvim_tree_window_picker_exclude = {
-      filetype = {
-        "Outline",
-        "SidebarNvim",
-        "notify",
-        "packer",
-        "qf",
-      },
-      buftype = {
-        "terminal",
-      },
-    }
 
     local nvimtree = require "nvim-tree"
 
@@ -37,9 +22,6 @@ return {
       ignore_ft_on_setup = { "dashboard" }, -- ignore file types
       hijack_cursor = true, -- keeps the cursor on the first letter of the filename
       view = {
-        width = 30,
-        side = "left",
-        auto_resize = true,
         mappings = {
           list = {
             { key = "I", cb = tree_cb "toggle_dotfiles" },
@@ -49,6 +31,25 @@ return {
             { key = "md", cb = tree_cb "remove" },
             { key = "mm", cb = tree_cb "rename" },
             { key = "ma", cb = tree_cb "create" },
+          },
+        },
+      },
+      actions = {
+        open_file = {
+          window_picker = {
+            chars = "KJABCDEFGHILMNOPQRSTUVWXYZ1234567890J",
+            exclude = {
+              filetype = {
+                "Outline",
+                "SidebarNvim",
+                "notify",
+                "packer",
+                "qf",
+              },
+              buftype = {
+                "terminal",
+              },
+            },
           },
         },
       },

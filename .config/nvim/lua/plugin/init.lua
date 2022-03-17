@@ -49,7 +49,7 @@ require("plugin.packer").startup(function(use)
     -- Toggle terminal
     require "plugin/toggle-term",
 
-    -- indent guides
+    -- Indent guides
     {
       "lukas-reineke/indent-blankline.nvim",
       config = function()

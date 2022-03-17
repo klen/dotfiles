@@ -1,28 +1,5 @@
 local _, lsp_status = pcall(require, "lsp-status")
 
-local _, gps = pcall(require, "nvim-gps")
-if gps then
-  gps.setup {
-    icons = {
-      ["class-name"] = " ", -- Classes and class-like objects
-      ["function-name"] = " ", -- Functions
-      ["method-name"] = " ", -- Methods (functions inside class-like objects)
-      ["container-name"] = " ", -- Containers (example: lua tables)
-      ["tag-name"] = "炙", -- Tags (example: html tags)  })
-    },
-  }
-end
-
-local get_current_scope = function()
-  if gps then
-    local info = gps.get_location()
-    if info and #info > 0 then
-      return string.format(": %s", info)
-    end
-  end
-  return ""
-end
-
 local lsp_get_progress = function()
   if not lsp_status then
     return ""
@@ -123,15 +100,6 @@ require("mini.statusline").setup {
 
       local filename = MiniStatusline.section_filename { trunc_width = trunc_width }
       table.insert(groups, { hl = "MiniStatuslineFilename", strings = { filename } })
-
-      if not is_truncated then
-        table.insert(groups, {
-          hl = "MiniStatuslineFilename",
-          strings = {
-            get_current_scope(),
-          },
-        })
-      end
 
       -- End left alignment
       table.insert(groups, "%=")
