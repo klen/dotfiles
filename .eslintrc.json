@@ -1,11 +1,5 @@
 {
   "root": true,
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true,
-    "node": true
-  },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -29,6 +23,12 @@
   "globals": {
     "cy": "readonly",
     "globalThis": "readonly"
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
   },
   "rules": {
     "no-console": "warn",
