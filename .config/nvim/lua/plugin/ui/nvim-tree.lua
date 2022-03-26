@@ -8,6 +8,11 @@ return {
     "NvimTreeToggle",
     "NvimTreeFindFile",
   },
+  setup = function()
+    local cfg = require "config"
+    cfg.keymaps["<leader>dd"] = { "<cmd>NvimTreeFocus<cr>", "Open/focus Explorer" }
+    cfg.keymaps["<leader>df"] = { "<cmd>NvimTreeFindFile<cr>", "Locate File" }
+  end,
   config = function()
     g.nvim_tree_show_icons = { git = 0, folders = 1, files = 0 } -- Show icons
     g.nvim_tree_highlight_opened_files = 2

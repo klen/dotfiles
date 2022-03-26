@@ -1,3 +1,5 @@
+-- A Neovim plugin that displays interactive vertical scrollbars.
+-- https://github.com/dstein64/nvim-scrollview
 return {
   "dstein64/nvim-scrollview",
   config = function()

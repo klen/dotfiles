@@ -82,8 +82,8 @@ local mauve = hsl "#d7afff"
 
 -- TODO: Not used
 local brandy = hsl "#d7d787"
-local blue_sapphire = hsl "#005f87"
-local midnight = hsl "#5f005f"
+-- local blue_sapphire = hsl "#005f87"
+-- local midnight = hsl "#5f005f"
 
 local theme = lush(function()
 
@@ -122,8 +122,8 @@ local theme = lush(function()
     FoldColumn    { fg = dim_gray, bg = eerie_black }, -- 'foldcolumn'
     SignColumn    { FoldColumn }, -- column where |signs| are displayed
     Folded        { SignColumn },
-    Search        { fg = light_pink, gui = "underline" }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
-    IncSearch     { fg = background, bg = mellow_apricot }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+    Search        { fg = brandy }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
+    IncSearch     { fg = background, bg = brandy }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     Substitute    { Search }, -- |:substitute| replacement text highlighting
     LineNr        { fg = dim_gray }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     CursorLineNr  { fg = foreground }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.

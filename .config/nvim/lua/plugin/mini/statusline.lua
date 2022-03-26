@@ -1,31 +1,31 @@
-local _, lsp_status = pcall(require, "lsp-status")
-
-local lsp_get_progress = function()
-  if not lsp_status then
-    return ""
-  end
-  local clients = lsp.buf_get_clients(0)
-  local contents = ""
-  if not vim.tbl_isempty(vim.tbl_keys(clients)) then
-    local all_messages = lsp_status.messages()
-    for _, msg in ipairs(all_messages) do
-      if msg.progress then
-        contents = msg.title
-        if msg.message then
-          contents = contents .. " " .. msg.message
-        end
-        if msg.percentage then
-          contents = contents .. " (" .. msg.percentage .. "%%)"
-        end
-      elseif msg.status then
-        contents = msg.content
-      else
-        contents = msg.content
-      end
-    end
-  end
-  return contents
-end
+-- local _, lsp_status = pcall(require, "lsp-status")
+--
+-- local lsp_get_progress = function()
+--   if not lsp_status then
+--     return ""
+--   end
+--   local clients = lsp.buf_get_clients(0)
+--   local contents = ""
+--   if not vim.tbl_isempty(vim.tbl_keys(clients)) then
+--     local all_messages = lsp_status.messages()
+--     for _, msg in ipairs(all_messages) do
+--       if msg.progress then
+--         contents = msg.title
+--         if msg.message then
+--           contents = contents .. " " .. msg.message
+--         end
+--         if msg.percentage then
+--           contents = contents .. " (" .. msg.percentage .. "%%)"
+--         end
+--       elseif msg.status then
+--         contents = msg.content
+--       else
+--         contents = msg.content
+--       end
+--     end
+--   end
+--   return contents
+-- end
 
 local severity = vim.diagnostic.severity
 local cfg = require "config"
@@ -106,14 +106,14 @@ require("mini.statusline").setup {
 
       -- LSP
       if not is_truncated then
-        table.insert(groups, {
-          hl = "MiniStatuslineFilename",
-          strings = {
-            lsp_get_progress(),
-            -- lsp_get_current_function(),
-            -- get_current_scope(),
-          },
-        })
+        -- table.insert(groups, {
+        --   hl = "MiniStatuslineFilename",
+        --   strings = {
+        --     lsp_get_progress(),
+        --     -- lsp_get_current_function(),
+        --     -- get_current_scope(),
+        --   },
+        -- })
 
         -- Diagnostic
         -- local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
@@ -122,7 +122,7 @@ require("mini.statusline").setup {
       end
 
       -- Location
-      table.insert(groups, { hl = mode_hl, strings = { "%2v:%l" } })
+      table.insert(groups, { hl = mode_hl, strings = { "%2v:%l %p%%" } })
 
       -- Usage of `MiniStatusline.combine_groups()` ensures highlighting and
       -- correct padding with spaces between groups (accounts for 'missing'

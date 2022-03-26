@@ -9,8 +9,8 @@ return {
   -- Support non-lsp formatters/linters/etc
   require "plugin/lsp/null-ls",
 
-  -- Support LSP status for statusline
-  require "plugin/lsp/lsp-status",
+  -- -- Support LSP status for statusline
+  -- require "plugin/lsp/lsp-status",
 
   -- Support LSP colors
   "folke/lsp-colors.nvim",

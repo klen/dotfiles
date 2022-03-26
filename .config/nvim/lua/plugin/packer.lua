@@ -63,6 +63,14 @@ function M.startup(init_plugins)
     },
   }
 
+  -- Bind Keys
+  local cfg = require "config"
+  cfg.keymaps["<leader>ps"] = { "<cmd>PackerStatus<cr>", "Plugins Status" }
+  cfg.keymaps["<leader>pu"] = { "<cmd>PackerSync<cr>", "Update your plugins" }
+  cfg.keymaps["<leader>pc"] = { "<cmd>PackerClean<cr>", "Clean unused plugins" }
+  cfg.keymaps["<leader>pC"] = { "<cmd>PackerCompile<cr>", "Compile your plugins changes" }
+  cfg.keymaps["<leader>pi"] = { "<cmd>PackerInstall<cr>", "Install missing plugins" }
+
   if M.first_install then
     packer.sync()
   end

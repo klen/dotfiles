@@ -2,6 +2,7 @@
 
 local M = {}
 local api = vim.api
+local fn = vim.fn
 
 -- Map VIM keys
 function M.map(mode, target, source, opts)
@@ -76,6 +77,10 @@ end
 function M.rrequire(module)
   M.reload(module)
   return require(module)
+end
+
+function M.local_plugin(path, source)
+  return (fn.isdirectory(fn.expand(path)) == 1) and path or source
 end
 
 return M

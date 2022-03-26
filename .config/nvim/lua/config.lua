@@ -13,6 +13,9 @@ local cfg = Config:init {
   -- Enable debug mode
   debug = true,
 
+  -- Keymaps
+  keymaps = {},
+
   -- Plugins
   ----------
   null_ls = {

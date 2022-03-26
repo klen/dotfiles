@@ -66,51 +66,19 @@ wk.register {
 
   -- Find something
   ["<leader>f"] = { name = "+find" },
-  ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find File" },
-  ["<leader>fs"] = {
-    "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-    "Search workspace symbols",
-  },
-  ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
-  ["<leader>fw"] = { "<cmd>Telescope live_grep<cr>", "Find a word" },
-  ["<leader>fd"] = { "<cmd>Dash<cr>", "Search in dash" },
-  ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Find recent files" },
-  ["<leader>fb"] = { "<cmd>Telescope buffers<cr>", "Find buffers" },
-  ["<leader>fD"] = { "<cmd>DashWord<cr>", "Search current word in dash" },
-  ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Search in help files" },
-
-  -- Explore
-  ["<leader>d"] = { name = "+explore" },
-  ["<leader>dd"] = { "<cmd>NvimTreeFocus<cr>", "Open/focus Explorer" },
-  ["<leader>df"] = { "<cmd>NvimTreeFindFile<cr>", "Locate File" },
-  ["<leader>db"] = { "<cmd>Telescope buffers<cr>", "Explore buffers" },
-  ["<leader>dt"] = { "<cmd>bo vsplit | terminal<cr>", "Open terminal" },
-  ["<leader>dl"] = { "<cmd>lopen<cr>", "Open loclist" },
-  ["<leader>dq"] = { "<cmd>copen<cr>", "Open quickfix" },
-  ["<leader>ds"] = { "<cmd>SymbolsOutline<cr>", "Explore symbols" },
-  ["<leader>dc"] = { "<cmd>Telescope neoclip<cr>", "Explore clipboard" },
-  ["<leader>dr"] = { "<cmd>Telescope oldfiles<cr>", "Explore recent files" },
-
-  -- Git (fugitive)
-  ["<leader>g"] = { name = "+git" },
-  ["<leader>ga"] = { "<cmd>Gwrite<cr>", "Git add" },
-  ["<leader>gb"] = { "<cmd>Git blame<cr>", "Git blame" },
-  ["<leader>gd"] = { "<cmd>Gdiffsplit<cr>", "Git diff" },
-  ["<leader>gs"] = { "<cmd>abo Git<cr>", "Git status" },
-  ["<leader>gr"] = { "<cmd>Gdelete<cr>", "Git remove" },
-  ["<leader>gp"] = { "<cmd>Git push<cr>", "Git push all" },
-  ["<leader>gc"] = { "<cmd>Git commit %<cr>", "Git commit" },
-  ["<leader>gl"] = { "<cmd>Telescope git_bcommits<cr>", "Git log file" },
-  ["<leader>gL"] = { "<cmd>Telescope git_commits<cr>", "Git log" },
-  ["<leader>gh"] = { "<cmd>!gh browse<cr>", "Browse current repo" },
 
   -- Plugins
   ["<leader>p"] = { name = "+plugins" },
-  ["<leader>ps"] = { "<cmd>PackerStatus<cr>", "Plugins Status" },
-  ["<leader>pu"] = { "<cmd>PackerSync<cr>", "Update your plugins" },
-  ["<leader>pc"] = { "<cmd>PackerClean<cr>", "Clean unused plugins" },
-  ["<leader>pC"] = { "<cmd>PackerCompile<cr>", "Compile your plugins changes" },
-  ["<leader>pi"] = { "<cmd>PackerInstall<cr>", "Install missing plugins" },
+
+  -- Explore
+  ["<leader>d"] = { name = "+explore" },
+  ["<leader>dt"] = { "<cmd>bo vsplit | terminal<cr>", "Open terminal" },
+  ["<leader>dl"] = { "<cmd>lopen<cr>", "Open loclist" },
+  ["<leader>dq"] = { "<cmd>copen<cr>", "Open quickfix" },
+
+  -- Git (fugitive)
+  ["<leader>g"] = { name = "+git" },
+  ["<leader>gh"] = { "<cmd>!gh browse<cr>", "Browse current repo" },
 
   -- Comments
   ["gcc"] = { "Comment/uncomment line" },
@@ -134,11 +102,6 @@ wk.register {
 
   -- Tests (vim-test)
   ["<leader>t"] = { "+tests" },
-  ["<leader>tn"] = { "<cmd>TestNearest<cr>", "Run the nearest test" },
-  ["<leader>tf"] = { "<cmd>TestFile<cr>", "Run the file" },
-  ["<leader>tl"] = { "<cmd>TestLast<cr>", "Run the last test" },
-  ["<leader>tt"] = { "<cmd>TestSuite<cr>", "Run all tests" },
-  ["<leader>tv"] = { "<cmd>TestVisit<cr>", "Visit the last test" },
 
   -- Buffers
   ["<leader>b"] = { "+buffers" },
@@ -162,7 +125,6 @@ wk.register {
   ["gc"] = { name = "+comments" },
 
   -- Other
-  ["<leader>:"] = { "<cmd>Telescope command_history<cr>", "Command history" },
   ["gw"] = { "<cmd>lua require'tools.helpers'.vimgrep()<cr>", "Grep current word" },
   ["gI"] = { "`.", "Go to the last edit" },
   ["gk"] = { "k", "Up" },
@@ -172,3 +134,6 @@ wk.register {
     "Show synstack for the current position",
   },
 }
+
+local cfg = require "config"
+wk.register(cfg.keymaps)

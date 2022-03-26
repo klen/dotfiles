@@ -1,187 +1,66 @@
--- Disable some plugins
-require "plugin.disabled"
+-- Disable some builtin vim plugins
+local g = vim.g
+
+g.loaded_2html_plugin = 1
+g.loaded_getscript = 1
+g.loaded_getscriptPlugin = 1
+g.loaded_gzip = 1
+g.loaded_logipat = 1
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+g.loaded_netrwSettings = 1
+g.loaded_netrwFileHandlers = 1
+g.loaded_matchit = 1
+g.loaded_tar = 1
+g.loaded_tarPlugin = 1
+g.loaded_rrhelper = 1
+g.loaded_spellfile_plugin = 1
+g.loaded_vimball = 1
+g.loaded_vimballPlugin = 1
+g.loaded_zip = 1
+g.loaded_zipPlugin = 1
 
 require("plugin.packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
   -- Speed up nvim require and startup time
   use { "lewis6991/impatient.nvim" }
-  use {
-    "nathom/filetype.nvim",
-    setup = function()
-      vim.g.did_load_filetypes = 1
-    end,
-  }
+  use { "nathom/filetype.nvim" }
 
-  -- Tools
-  use {
-    -- Better loclist/qflist
-    require "plugin/nvim-bfq",
-
-    -- Better scrolling
-    require "plugin/neoscroll",
-    require "plugin/nvim-scrollview",
-
-    -- {
-    --   "rinx/nvim-minimap",
-    --   config = function()
-    --     vim.g["minimap#window#height"] = vim.api.nvim_win_get_height(0)
-    --   end,
-    -- },
-
-    -- Better notifies
-    require "plugin/nvim-notify",
-
-    -- Lua/plugins helpers
-    "nvim-lua/plenary.nvim",
-
-    -- UI Helpers (vim.ui.input, vim.ui.select)
-    "stevearc/dressing.nvim",
-
-    -- Clipboard helper
-    {
-      "AckslD/nvim-neoclip.lua",
-      config = function()
-        require("neoclip").setup()
-      end,
-    },
-
-    -- Toggle terminal
-    require "plugin/toggle-term",
-
-    -- Indent guides
-    {
-      "lukas-reineke/indent-blankline.nvim",
-      config = function()
-        require("indent_blankline").setup {
-          use_treesitter = true,
-          show_first_indent_level = false,
-          filetype_exclude = { "", "help", "packer", "starter" },
-        }
-      end,
-    },
-  }
-
-  -- Explore files/symbols/buffers/etc
-  use {
-    -- Highly extendable fuzzy finder over lists
-    require "plugin/telescope",
-    {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      requires = { "nvim-lua/plenary.nvim" },
-      run = "make",
-    },
-    {
-      "mrjones2014/dash.nvim",
-      run = "make install",
-    },
-    -- File explorer tree.
-    require "plugin/nvim-tree",
-
-    -- Code explorer
-    require "plugin/symbols-outline",
-
-    -- {
-    --   "GustavoKatel/sidebar.nvim",
-    --   config = function()
-    --     require("sidebar-nvim").setup { open = true, side = "right" }
-    --   end,
-    -- },
-  }
-
-  -- Movements/Keys
-  use {
-    -- Show key/operators maps
-    require "plugin/which-key",
-
-    -- repeat surround motions with .
-    "tpope/vim-surround",
-    "tpope/vim-repeat",
-
-    -- Movement
-    -- {
-    --   "booperlv/nvim-gomove",
-    --   config = function()
-    --     require("gomove").setup()
-    --   end,
-    -- },
-  }
-
-  -- Color schemes.
-  use(require "plugin/colors")
-
-  -- LSP (autocomplete, code browsing, diagnostic)
-  use(require "plugin/lsp")
+  -- Lua/plugins helpers
+  use "nvim-lua/plenary.nvim"
 
   -- TreeSitter (syntax, folding)
   use(require "plugin/treesiter")
 
-  -- Completion / Snippets
-  use(require "plugin/completion")
+  -- LSP (autocomplete, code browsing, diagnostic)
+  use(require "plugin/lsp")
+
+  -- UI
+  use(require "plugin/ui")
 
   -- Dashboard, pairs, statusline, cursorword
   use(require "plugin/mini")
 
-  -- Statusline.
-  -- use {
-  --   "nvim-lualine/lualine.nvim",
-  --   config = function ()
-  --     require("setup/lualine")
-  --   end
-  -- }
+  -- Code (Syntax/Completion/Snippets/Languages)
+  use(require "plugin/code")
 
-  -- Codding
-  use {
-    -- Better Syntax
-    "sheerun/vim-polyglot",
-
-    -- Commenting
-    require "plugin/comment",
-
-    -- Python
-    {
-      "Vimjas/vim-python-pep8-indent",
-      ft = { "python" },
-    },
-
-    -- CoffeeScript
-    "kchmck/vim-coffee-script",
-  }
+  -- Color schemes.
+  use(require "plugin/colors")
 
   -- Rest client
   use(require "plugin.rest")
 
-  -- Git support
-  use {
-    "tpope/vim-fugitive",
-    {
-      "lewis6991/gitsigns.nvim",
-      requires = { "nvim-lua/plenary.nvim" },
-      config = function()
-        require("gitsigns").setup { signcolumn = false }
-      end,
-    },
-  }
-
   -- Local plugins (in development)
-  local path
-  local home = os.getenv "HOME"
+  local tools = require "tools"
 
   -- Local configs
-  path = home .. "/projects/nvim/config-local"
   use {
-    (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-config-local",
+    tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local"),
     config = function()
-      require("config-local").setup()
-    end,
-  }
-
-  -- Run tests
-  path = home .. "/projects/nvim/test"
-  use {
-    (vim.fn.isdirectory(path) == 1) and path or "klen/nvim-test",
-    config = function()
-      require("nvim-test").setup()
+      require("config-local").setup {
+        lookup_parents = true,
+      }
     end,
   }
 

@@ -15,6 +15,8 @@ require "tools/globals"
 -- Plugins
 require "plugin"
 
+vim.cmd "command! -nargs=1 R lua require('tools').reload('<args>')<CR>"
+
 -- Mapping
 require "keymaps"
 
