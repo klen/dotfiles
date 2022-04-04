@@ -30,8 +30,7 @@ return {
         mappings = {
           list = {
             { key = "I", cb = tree_cb "toggle_dotfiles" },
-            { key = "f", cb = tree_cb "toggle_ignored" },
-            { key = "?", cb = tree_cb "toggle_help" },
+            { key = "f", cb = tree_cb "toggle_git_ignored" },
             { key = "C", cb = tree_cb "cd" },
             { key = "md", cb = tree_cb "remove" },
             { key = "mm", cb = tree_cb "rename" },

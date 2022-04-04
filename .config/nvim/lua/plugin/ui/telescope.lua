@@ -15,6 +15,7 @@ return {
         mappings = {
           i = {
             ["<C-l>"] = actions.send_to_loclist + actions.open_loclist,
+            ["<C-h>"] = actions.which_key,
             ["<esc>"] = actions.close,
           },
         },

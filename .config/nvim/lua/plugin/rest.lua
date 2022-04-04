@@ -25,5 +25,7 @@ return {
     }
 
     vim.cmd "au FileType http nmap <buffer><silent> <leader>rr <plug>RestNvim"
+    vim.cmd "au FileType http nmap <buffer><silent> <leader>rp <plug>RestNvimPreview"
+    vim.cmd "au FileType http nmap <buffer><silent> <leader>rl <plug>RestNvimLast"
   end,
 }
