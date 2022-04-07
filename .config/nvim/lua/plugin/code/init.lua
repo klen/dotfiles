@@ -11,6 +11,7 @@ return {
 
   -- Git support
   require "plugin/code/vim-fugitive",
+  require "plugin/code/gitsigns",
 
   -- Tests
   require "plugin/code/nvim-test",

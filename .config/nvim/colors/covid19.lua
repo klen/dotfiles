@@ -316,8 +316,15 @@ local theme = lush(function()
     NvimTreeSpecialFile { fg = steel_teal },
 
     -- SymbolsOutline
-    FocusedSymbol { Search, gui="none" }
+    FocusedSymbol { Search, gui="none" },
 
+    -- GitSigns
+    GitSignsAdd { fg = mantis},
+    GitSignsChange { fg = iceberg },
+    GitSignsDelete { fg = fuzzy_wuzzy},
+
+    -- IndentBlanklineIndent
+    IndentBlanklineChar { fg=cocoa_brown, gui="nocombine" },
   }
 end)
 
