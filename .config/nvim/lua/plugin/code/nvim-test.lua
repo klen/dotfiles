@@ -3,7 +3,11 @@ local tools = require "tools"
 return {
   tools.local_plugin("~/projects/nvim/test", "klen/nvim-test"),
   config = function()
-    require("nvim-test").setup()
+    require("nvim-test").setup {
+      termOpts = {
+        width = math.max(math.ceil(vim.o.columns * 0.35), 40),
+      },
+    }
   end,
   setup = function()
     local cfg = require "config"
@@ -12,5 +16,6 @@ return {
     cfg.keymaps["<leader>tl"] = { "<cmd>TestLast<cr>", "Run the last test" }
     cfg.keymaps["<leader>tt"] = { "<cmd>TestSuite<cr>", "Run all tests" }
     cfg.keymaps["<leader>tv"] = { "<cmd>TestVisit<cr>", "Visit the last test" }
+    cfg.keymaps["<leader>te"] = { "<cmd>TestEdit<cr>", "Edit tests" }
   end,
 }
