@@ -17,7 +17,6 @@ return {
     g.nvim_tree_show_icons = { git = 0, folders = 1, files = 0 } -- Show icons
     g.nvim_tree_highlight_opened_files = 2
     g.nvim_tree_git_hl = 0 -- Will enable file highlight for git attributes
-    g.nvim_tree_indent_markers = 0 -- This option shows indent markers when folders are open.
 
     local nvimtree = require "nvim-tree"
 
@@ -26,6 +25,7 @@ return {
       open_on_setup = true, -- open if empty or directory
       ignore_ft_on_setup = { "dashboard" }, -- ignore file types
       hijack_cursor = true, -- keeps the cursor on the first letter of the filename
+      indent_markers = false,
       view = {
         mappings = {
           list = {

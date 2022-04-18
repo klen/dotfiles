@@ -1,5 +1,6 @@
-local tools = require "tools"
 local cfg = require "config"
+local api = vim.api
+local utils = require "plugin.lsp.utils"
 
 return function(client, bufnr)
   local params = cfg.lsp.servers[client.name] or {}
@@ -85,21 +86,26 @@ return function(client, bufnr)
   else
     -- Map keys in normal mode
     for target, source in pairs(maps) do
-      tools.nmap(target, source[1], { bufnr = bufnr })
+      vim.keymap.set("n", target, source[1], { buffer = bufnr })
     end
   end
 
   -- Signature Help
-  -- tools.au("cursorholdi", "*", "lua lsp.buf.signature_help()")
+  vim.keymap.set("i", "<C-s>", lsp.buf.signature_help, { buffer = bufnr })
+  -- api.nvim_create_autocmd("cursorholdi", { pattern = "*", callback = lsp.buf.signature_help })
 
   -- Code actions
-  tools.vmap("<space>a", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", { bufnr = bufnr })
+  vim.keymap.set("v", "<space>a", lsp.buf.range_code_action, { buffer = bufnr })
 
   -- Formatting
-  tools.command("-range Format", "lua require'plugin.lsp.utils'.format(<line1>,<line2>)")
+  api.nvim_create_user_command("Format", function(args)
+    utils.format(args.line1, args.line2)
+  end, { range = true })
 
   if client.resolved_capabilities.document_range_formatting then
-    tools.vmap("<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", { bufnr = bufnr })
+    vim.keymap.set("v", "<space>f", function()
+      lsp.buf.range_formatting()
+    end, { buffer = bufnr })
   end
 
   -- Auto format on save
@@ -108,7 +114,7 @@ return function(client, bufnr)
     format_on_save = cfg.lsp.format_on_save
   end
   if client.resolved_capabilities.document_formatting and format_on_save then
-    tools.au("BufWritePre", "<buffer>", "lua require('plugin.lsp.utils').formatOnSave()")
+    api.nvim_create_autocmd("BufWritePre", { pattern = "<buffer>", callback = utils.formatOnSave })
   end
 
   ---@diagnostic disable-next-line: redefined-local

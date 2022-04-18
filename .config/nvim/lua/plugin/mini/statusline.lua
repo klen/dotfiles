@@ -87,22 +87,9 @@ require("mini.statusline").setup {
       local wrap = vim.wo.wrap and (is_truncated and "W" or "WRAP") or ""
       table.insert(groups, { hl = mode_hl, strings = { mode, spell, wrap } })
 
-      -- Fileinfo
-      local fileinfo = MiniStatusline.section_fileinfo { trunc_width = trunc_width }
-      table.insert(groups, { hl = mode_hl, strings = { fileinfo } })
-
       -- Git
       local git = MiniStatusline.section_git { trunc_width = trunc_width }
       table.insert(groups, { hl = "Statusline", strings = { git } })
-
-      -- Mark general truncate point
-      table.insert(groups, "%<")
-
-      local filename = MiniStatusline.section_filename { trunc_width = trunc_width }
-      table.insert(groups, { hl = "MiniStatuslineFilename", strings = { filename } })
-
-      -- End left alignment
-      table.insert(groups, "%=")
 
       -- LSP
       if not is_truncated then
@@ -120,6 +107,19 @@ require("mini.statusline").setup {
         local diagnostic, diagnostic_hl = get_diagnostic()
         table.insert(groups, { hl = diagnostic_hl, strings = { diagnostic } })
       end
+
+      -- Mark general truncate point
+      table.insert(groups, "%<")
+
+      local filename = MiniStatusline.section_filename { trunc_width = trunc_width }
+      table.insert(groups, { hl = "MiniStatuslineFilename", strings = { filename } })
+
+      -- End left alignment
+      table.insert(groups, "%=")
+
+      -- Fileinfo
+      local fileinfo = MiniStatusline.section_fileinfo { trunc_width = trunc_width }
+      table.insert(groups, { hl = "MiniStatuslineFilename", strings = { fileinfo } })
 
       -- Location
       table.insert(groups, { hl = mode_hl, strings = { "%2v:%l %p%%" } })

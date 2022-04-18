@@ -142,4 +142,35 @@ function M.getDocumentSymbols()
   end)
 end
 
+function M.showMessage(_, result, ctx, _)
+  local message_type = result.type
+  local message = result.message
+  local client_id = ctx.client_id
+  local client = vim.lsp.get_client_by_id(client_id)
+  local client_name = client and client.name or string.format("id=%d", client_id)
+  if not client then
+    return vim.notify(
+      string.format("LSP[%s] client has shut down after sending the message", client_name),
+      vim.log.levels.ERROR
+    )
+  end
+  vim.notify(message, message_type)
+end
+
+function M.logMessage(_, result, ctx, _)
+  local message_type = result.type
+  local message = result.message
+  local client_id = ctx.client_id
+  local client = vim.lsp.get_client_by_id(client_id)
+  local client_name = client and client.name or string.format("id=%d", client_id)
+  if not client then
+    return vim.notify(
+      string.format("LSP[%s] client has shut down after sending the message", client_name),
+      vim.log.levels.ERROR
+    )
+  end
+  local level = lsp.protocol.MessageType[message_type] or "Info"
+  vim.api.nvim_echo({ { message, level .. "Msg" } }, true, {})
+end
+
 return M

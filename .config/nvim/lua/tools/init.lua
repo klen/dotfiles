@@ -4,65 +4,8 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 
--- Map VIM keys
-function M.map(mode, target, source, opts)
-  local buffer = table.pop(opts, "buffer")
-  local bufnr = table.pop(opts, "bufnr")
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  if buffer or bufnr then
-    api.nvim_buf_set_keymap(bufnr or 0, mode, target, source, options)
-  else
-    api.nvim_set_keymap(mode, target, source, options)
-  end
-end
-
-for _, mode in ipairs { "n", "o", "i", "x", "t", "v", "c" } do
-  M[mode .. "map"] = function(...)
-    M.map(mode, ...)
-  end
-end
-
--- Define VIM command
---- @param name string -- a command name
---- @param action string -- an action
-function M.command(name, action)
-  api.nvim_command(string.format("command! %s %s", name, action))
-end
-
--- Define VIM lua command
---- @param name string -- a command name
---- @param action string -- an lua action
-function M.lua_command(name, action)
-  M.command(name, "lua " .. action)
-end
-
-function M.t(str)
-  return api.nvim_replace_termcodes(str, true, true, true)
-end
-
 function M.input(keys, mode)
-  api.nvim_feedkeys(M.t(keys), mode or "i", true)
-end
-
--- Define VIM autocommand
---- @param event string -- VIM event
---- @param filetype string -- a file type
---- @param action string -- an action
-function M.au(event, filetype, action)
-  api.nvim_command("autocmd " .. event .. " " .. filetype .. " " .. action)
-end
-
--- Define VIM autogroup
-function M.augroup(group_name, definitions)
-  api.nvim_command("augroup " .. group_name)
-  api.nvim_command "autocmd!"
-  for _, def in ipairs(definitions) do
-    M.au(def)
-  end
-  api.nvim_command "augroup END"
+  api.nvim_feedkeys(api.nvim_replace_termcodes(keys, true, true, true), mode or "i", true)
 end
 
 -- Reload a module
@@ -79,8 +22,71 @@ function M.rrequire(module)
   return require(module)
 end
 
+-- Check for the given path exists
 function M.local_plugin(path, source)
   return (fn.isdirectory(fn.expand(path)) == 1) and path or source
+end
+
+-- Use vimgrep to search a word
+M.vimgrep = function()
+  vim.ui.input({
+    prompt = "Search for pattern: ",
+    default = fn.expand "<cword>",
+  }, function(pattern)
+    if not pattern then
+      return vim.notify("Invalid pattern", "warning")
+    end
+    vim.ui.input({
+      prompt = "Start searching from directory: ",
+      default = fn.getcwd(),
+      completion = "dir",
+    }, function(startdir)
+      if not pattern then
+        return vim.notify("Invalid directory", "warning")
+      end
+      vim.ui.input({
+        prompt = "Search in files matching pattern: ",
+        default = "*.*",
+      }, function(filepattern)
+        local ok = pcall(
+          cmd,
+          "noautocmd lvimgrep /" .. pattern .. "/gj " .. startdir .. "/**/" .. filepattern
+        )
+        if ok then
+          vim.cmd "abo lope"
+        else
+          vim.notify("Not found: " .. pattern, "warn")
+        end
+      end)
+    end)
+  end)
+end
+
+-- Toggle `number` option
+M.toggle_number = function()
+  if not vim.o.number then
+    vim.o.number = true
+  elseif not vim.o.relativenumber then
+    vim.o.relativenumber = true
+  else
+    vim.o.number = false
+    vim.o.relativenumber = false
+  end
+end
+
+-- Fast save file
+M.fast_save = function()
+  if vim.o.modified then
+    vim.cmd "noautocmd write"
+  end
+  return vim.fn.expand "%" ~= ""
+end
+
+-- Show synstack
+M.synstack = function()
+  for _, value in ipairs(vim.fn.synstack(vim.fn.line ".", vim.fn.col ".")) do
+    printt(vim.fn.synIDattr(value, "name"))
+  end
 end
 
 return M

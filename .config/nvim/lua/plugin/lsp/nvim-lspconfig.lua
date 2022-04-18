@@ -6,6 +6,7 @@ return {
   },
   config = function()
     local cfg = require("config").diagnostic
+    local utils = require "plugin.lsp.utils"
 
     -- Setup diagnostic
     vim.diagnostic.config(cfg.config)
@@ -17,11 +18,10 @@ return {
     fn.sign_define("DiagnosticSignHint", { text = cfg.signs[4], texthl = "DiagnosticSignHint" })
 
     -- Auto populate quickfix
-    cmd [[
-      augroup lsp
-        autocmd!
-        au DiagnosticChanged * lua require('plugin/lsp/utils').diagnostics()
-      augroup END
-    ]]
+    vim.api.nvim_create_augroup("lsp", { clear = true })
+    vim.api.nvim_create_autocmd(
+      "DiagnosticChanged",
+      { pattern = "*", callback = utils.diagnostics, group = "lsp" }
+    )
   end,
 }

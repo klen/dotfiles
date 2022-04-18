@@ -7,7 +7,7 @@ return {
       local generate_handlers = require "plugin.lsp.handlers"
       local params = {
         on_attach = require "plugin.lsp.on_attach",
-        handlers = generate_handlers(server.name),
+        handlers = generate_handlers(),
         capabilities = require "plugin.lsp.capabilities",
         flags = { debounce_text_changes = 150 },
       }

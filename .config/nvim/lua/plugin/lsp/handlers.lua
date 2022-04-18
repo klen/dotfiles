@@ -1,8 +1,10 @@
-local utils = require "plugin/lsp/utils"
+local utils = require "plugin.lsp.utils"
 local cfg = require "config"
 
 return function()
   return {
+    ["window/logMessage"] = utils.logMessage,
+    ["window/showMessage"] = utils.showMessage,
     ["workspace/symbol"] = utils.processSymbols,
     ["textDocument/documentSymbol"] = utils.processSymbols,
     ["callHierarchy/incomingCalls"] = utils.processCalls,

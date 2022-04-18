@@ -1,66 +1,75 @@
 local tools = require "tools"
+local keymap = vim.keymap
 
 g.mapleader = ","
 g.maplocalleader = " "
 
 -- Navigation
-tools.nmap("j", "gj")
-tools.nmap("k", "gk")
-tools.nmap("<left>", ":cprev<cr>zvzz") -- quickfix
-tools.nmap("<right>", ":cnext<cr>zvzz")
-tools.nmap("<up>", ":lprev<cr>zvzz") -- loclist
-tools.nmap("<down>", ":lnext<cr>zvzz")
+keymap.set("n", "k", "gk")
+keymap.set("n", "j", "gj")
+keymap.set("n", "<left>", ":cprev<cr>zvzz") -- quickfix
+keymap.set("n", "<right>", ":cnext<cr>zvzz")
+keymap.set("n", "<up>", ":lprev<cr>zvzz") -- loclist
+keymap.set("n", "<down>", ":lnext<cr>zvzz")
 
 -- Automatically jump to end of text you pasted
-tools.nmap("p", "p`]")
-tools.vmap("p", "p`]")
-tools.vmap("y", "y`]")
+keymap.set({ "n", "v" }, "p", "p`]")
+keymap.set("v", "y", "y`]")
 
 -- Not jump on star, only highlight
-tools.nmap("*", "*N")
+keymap.set("n", "*", "*N")
 
 -- Keep it centered
-tools.nmap("n", "nzzzv")
-tools.nmap("N", "Nzzzv")
-tools.nmap("J", "mzJ`z")
+keymap.set("n", "n", "nzzzv")
+keymap.set("n", "N", "Nzzzv")
+keymap.set("n", "J", "mzJ`z")
 
 -- Save file
-tools.nmap("<CR>", ":w<CR>")
+keymap.set("n", "<CR>", ":w<CR>")
 -- Fast save
-tools.nmap("<S-CR>", "lua require'tools.helpers'.fast_save()<CR>")
+keymap.set("n", "<S-CR>", tools.fast_save)
 
 -- Toggle keymap
-tools.nmap("<C-F>", "a<C-^><Esc>")
-tools.imap("<C-F>", "<C-^>")
-tools.vmap("<C-F>", "<Esc>a<C-^><Esc>gv")
+keymap.set("n", "<C-F>", "a<C-^><Esc>")
+keymap.set("i", "<C-F>", "<C-^>")
+keymap.set("v", "<C-F>", "<Esc>a<C-^><Esc>gv")
 
 -- Command mode
-tools.cmap("<C-A>", "<Home>", { silent = false })
-tools.cmap("<C-E>", "<End>", { silent = false })
+keymap.set("c", "<C-A>", "<Home>")
+keymap.set("c", "<C-E>", "<End>")
 
 -- Paste relaces visual selection do not copy it
-tools.vmap("p", '"_dP')
+keymap.set("v", "p", '"_dP')
 
 -- Disable ex mode (format lines insted)
-tools.nmap("Q", "gq")
+keymap.set("n", "Q", "gq")
 
 -- Terminal mode
-tools.tmap("<C-[>", "<C-\\><C-n>")
+keymap.set("t", "<C-[>", "<C-\\><C-n>")
 
 --  Commands
 --  --------
 
-tools.command("-nargs=0 Reset", "write | :edit")
-tools.command("-nargs=0 Remove", "call delete(expand('%')) | bdelete")
-tools.command("-nargs=? Make", "vsplit | :terminal make <args>")
-tools.lua_command("Dashboard", "MiniStarter.open()")
-tools.lua_command("-nargs=1 Reload", "require'tools'.reload(fn.expand('<args>'))")
+vim.api.nvim_create_user_command("Reset", "write | :edit", { nargs = 0 })
+vim.api.nvim_create_user_command("Remove", "call delete(expand('%')) | bdelete", { nargs = 0 })
+vim.api.nvim_create_user_command("Make", "vsplit | :terminal make <args>", { nargs = "?" })
+vim.api.nvim_create_user_command("Dashboard", function()
+  MiniStarter.open()
+end, { nargs = 0 })
+vim.api.nvim_create_user_command("Reload", function(args)
+  tools.reload(args.args)
+end, { nargs = 1 })
 
 -- Plugins
 local ok, wk = pcall(require, "which-key")
 if not ok then
   return
 end
+
+-- Helpers
+keymap.set("n", "<leader>on", tools.toggle_number)
+keymap.set("n", "gw", tools.vimgrep)
+keymap.set("n", "gM", tools.synstack)
 
 wk.register {
 
@@ -116,7 +125,7 @@ wk.register {
   ["<leader>op"] = { "<cmd>set paste! paste?<cr>", "Toggle &paste" },
   ["<leader>ol"] = { "<cmd>set list! list?<cr>", "Toggle &list" },
   ["<leader>ow"] = { "<cmd>set wrap! wrap?<cr>", "Toggle &wrap" },
-  ["<leader>on"] = { "<cmd>lua require('tools.helpers').toggle_number()<cr>", "Toggle &number" },
+  ["<leader>on"] = { "Toggle &number" },
   ["<leader>os"] = { "<cmd>set invhlsearch<cr>", "Toggle highlight for search results" },
 
   -- Operators
@@ -125,14 +134,11 @@ wk.register {
   ["gc"] = { name = "+comments" },
 
   -- Other
-  ["gw"] = { "<cmd>lua require'tools.helpers'.vimgrep()<cr>", "Grep current word" },
+  ["gw"] = { "Grep current word" },
   ["gI"] = { "`.", "Go to the last edit" },
   ["gk"] = { "k", "Up" },
   ["gj"] = { "j", "Down" },
-  ["gM"] = {
-    "<cmd>lua require'tools.helpers'.synstack()<cr>",
-    "Show synstack for the current position",
-  },
+  ["gM"] = { "Show synstack for the current position" },
 }
 
 local cfg = require "config"

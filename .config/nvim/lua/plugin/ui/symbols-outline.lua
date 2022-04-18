@@ -1,7 +1,6 @@
 -- A tree like view for symbols in Neovim using the Language Server Protocol. Supports all your favourite languages.
 -- https://github.com/simrat39/symbols-outline.nvim
-local tools = require "tools"
-tools.au("FileType", "Outline", "set nowrap")
+vim.api.nvim_create_autocmd("FileType", { pattern = "Outline", command = "set nowrap" })
 
 return {
   "simrat39/symbols-outline.nvim",

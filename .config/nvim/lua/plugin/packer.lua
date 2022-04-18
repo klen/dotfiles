@@ -37,12 +37,11 @@ function M.startup(init_plugins)
   end
 
   -- Auto update plugins
-  vim.cmd [[
-    augroup packer_recompile
-      autocmd!
-      autocmd BufWritePost **/nvim/lua/plugin/*.lua source <afile> | PackerCompile
-    augroup end
-  ]]
+  vim.api.nvim_create_augroup("packer", { clear = true })
+  vim.api.nvim_create_autocmd(
+    "BufWritePost",
+    { pattern = "**/nvim/lua/plugin/*.lua ", command = "source <afile> | PackerCompile", group = "packer" }
+  )
 
   -- Start packer
   packer.startup {

@@ -91,3 +91,6 @@ set timeoutlen=500
 
 " Disable nvim intro
 set shortmess+="sI"
+
+" Must be written at the last.  see :help 'secure'.
+set secure

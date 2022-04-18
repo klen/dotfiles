@@ -1,6 +1,9 @@
 return {
   -- Highly extendable fuzzy finder over lists
-  require "plugin/ui/telescope",
+  {
+    "nvim-telescope/telescope.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+  },
 
   -- File explorer tree.
   require "plugin/ui/nvim-tree",
@@ -27,8 +30,8 @@ return {
   -- Indent guides
   require "plugin/ui/indent-blankline",
 
-  -- Search Dash.app from your Neovim fuzzy finder
-  require "plugin/ui/dash",
+  -- -- Search Dash.app from your Neovim fuzzy finder
+  -- require "plugin/ui/dash",
 
   -- Show key/operators maps
   require "plugin/ui/which-key",

@@ -25,13 +25,25 @@ require("plugin.packer").startup(function(use)
 
   -- Speed up nvim require and startup time
   use { "lewis6991/impatient.nvim" }
-  use { "nathom/filetype.nvim" }
 
-  -- Lua/plugins helpers
+  -- Lua/plugins helpers (must be installed)
   use "nvim-lua/plenary.nvim"
 
   -- TreeSitter (syntax, folding)
-  use(require "plugin/treesiter")
+  use {
+    {
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+    },
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    {
+      "nvim-treesitter/playground",
+      cmd = {
+        "TSPlaygroundToggle",
+        "TSHighlightCapturesUnderCursor",
+      },
+    },
+  }
 
   -- LSP (autocomplete, code browsing, diagnostic)
   use(require "plugin/lsp")
@@ -49,7 +61,7 @@ require("plugin.packer").startup(function(use)
   use(require "plugin/colors")
 
   -- Rest client
-  use(require "plugin.rest")
+  use "NTBBloodbath/rest.nvim"
 
   -- Local plugins (in development)
   local tools = require "tools"
@@ -58,9 +70,7 @@ require("plugin.packer").startup(function(use)
   use {
     tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local"),
     config = function()
-      require("config-local").setup {
-        lookup_parents = true,
-      }
+      require("config-local").setup()
     end,
   }
 
