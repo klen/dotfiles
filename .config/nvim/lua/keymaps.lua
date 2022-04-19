@@ -45,7 +45,8 @@ keymap.set("v", "p", '"_dP')
 keymap.set("n", "Q", "gq")
 
 -- Terminal mode
-keymap.set("t", "<C-[>", "<C-\\><C-n>")
+keymap.set("t", "<Esc>", "<C-\\><C-n>")
+-- keymap.set("t", "<C-[>", "<C-\\><C-n>")
 
 --  Commands
 --  --------

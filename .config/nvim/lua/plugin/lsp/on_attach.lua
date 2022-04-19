@@ -91,7 +91,7 @@ return function(client, bufnr)
   end
 
   -- Signature Help
-  vim.keymap.set("i", "<C-s>", lsp.buf.signature_help, { buffer = bufnr })
+  vim.keymap.set({ "i", "n" }, "<C-s>", lsp.buf.signature_help, { buffer = bufnr })
   -- api.nvim_create_autocmd("cursorholdi", { pattern = "*", callback = lsp.buf.signature_help })
 
   -- Code actions
