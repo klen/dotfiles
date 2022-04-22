@@ -1,29 +1,48 @@
+# Temporary files
+# ---------------
 *.bak
 *.egg
 *.egg-info
-*.log
 *.old
+*.sqlite-shm
+*.sqlite-wal
 *~
 .coverage
+
+# Environments
+# ------------
+.tox
 .env
-.pip/cache
+.venv
+
+# Editors/IDE
+# -----------
+.vimrc
+.vimrc.lua
 .ropeproject
 .tags
-.tox
-.vagrant
 
 # Compiled Python files
+# ---------------------
 *.py[co]
 __pycache__
 
 # Folder view configuration files
+# -------------------------------
 .DS_Store
 Desktop.ini
 
-# Thumbnail cache files
+# Cache files
+# -----------
 ._*
 Thumbs.db
+.pip/cache
 
 # Files that might appear on external disks
+# -----------------------------------------
 .Spotlight-V100
 .Trashes
+
+# Logs
+# ----
+*.log

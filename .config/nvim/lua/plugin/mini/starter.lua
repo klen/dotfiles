@@ -15,7 +15,7 @@ starter.setup {
   },
   items = {
     starter.sections.recent_files(10, true),
-    starter.sections.sessions(5, true),
+    -- starter.sections.sessions(5, true),
 
     -- Custom actions
     { name = "Find files", action = "Telescope find_files", section = "Actions" },
