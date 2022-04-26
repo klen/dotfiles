@@ -27,12 +27,13 @@ end
 function M.processLocations(err, result, ctx, cfg)
   M.process(err, result, ctx, function()
     local win = api.nvim_get_current_win()
-    local items = lsp.util.locations_to_items(result)
+    local client = lsp.get_client_by_id(ctx.client_id)
+    local items = lsp.util.locations_to_items(result, client.offset_encoding)
     local ranges = vim.tbl_map(function(loc)
       return loc.range
     end, result)
     if cfg and cfg.jump and #result == 1 then
-      return M.jumpLocation(result[1])
+      return M.jumpLocation(result[1], client.offset_encoding)
     end
     -- lsp.util.set_loclist(items, win)
     fn.setloclist(
@@ -97,7 +98,7 @@ function M.formatOnSave()
   end
 end
 
-function M.jumpLocation(location)
+function M.jumpLocation(location, offset_encoding)
   local uri = location.uri or location.targetUri
   if uri == nil then
     return
@@ -105,7 +106,7 @@ function M.jumpLocation(location)
   if api.nvim_get_current_buf() ~= vim.uri_to_bufnr(uri) then
     vim.cmd "abo split"
   end
-  vim.lsp.util.jump_to_location(location)
+  vim.lsp.util.jump_to_location(location, offset_encoding)
 end
 
 -- Detect if range or not
