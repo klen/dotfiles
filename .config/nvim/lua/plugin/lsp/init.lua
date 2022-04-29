@@ -15,13 +15,13 @@ return {
   -- Support LSP colors
   "folke/lsp-colors.nvim",
 
-  -- Signature helper
-  {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("lsp_signature").setup {}
-    end,
-  },
+  -- -- Signature helper
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  --   config = function()
+  --     require("lsp_signature").setup {}
+  --   end,
+  -- },
 
   -- Configure diagnosticls
   {

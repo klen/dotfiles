@@ -11,7 +11,7 @@ local signs = {
 local cfg = Config:init {
 
   -- Enable debug mode
-  debug = true,
+  debug = false,
 
   -- Keymaps
   keymaps = {},

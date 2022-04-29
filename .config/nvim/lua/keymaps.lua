@@ -12,6 +12,10 @@ keymap.set("n", "<right>", ":cnext<cr>zvzz")
 keymap.set("n", "<up>", ":lprev<cr>zvzz") -- loclist
 keymap.set("n", "<down>", ":lnext<cr>zvzz")
 
+-- Insert mode shortcuts
+keymap.set("i", "<C-o>", "<Esc>o")
+keymap.set("i", "<C-j>", "<Esc>J")
+
 -- Automatically jump to end of text you pasted
 keymap.set({ "n", "v" }, "p", "p`]")
 keymap.set("v", "y", "y`]")
