@@ -15,6 +15,11 @@ alias src='source ~/.bashrc'                # src:          Reload .bashrc file
 alias wget='wget -c'                        # Preferred 'wget' implementation (resume download)
 alias t='tail -f'
 
+# Replacements
+_is_cmd_exist bat && {
+  alias cat='bat'
+}
+
 # Personal
 # connect to remote host
 alias dsync='rsync -rlvztu --progress --stats'

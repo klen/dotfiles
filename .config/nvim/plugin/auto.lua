@@ -1,12 +1,6 @@
 local api = vim.api
 local autocmd = api.nvim_create_autocmd
 
-local function restore_cursor()
-  if vim.fn.line "'\"" <= vim.fn.line "$" then
-    vim.cmd 'normal! g`"'
-  end
-end
-
 api.nvim_create_augroup("vimrc", { clear = true })
 
 -- Only show cursorline in the current window and in normal mode.
@@ -45,7 +39,15 @@ autocmd({ "TermOpen" }, {
 -- })
 
 -- Restore cursor position
-autocmd("BufWinEnter", { pattern = "*", callback = restore_cursor })
+autocmd("BufWinEnter", {
+  pattern = "*",
+  callback = function()
+    if vim.fn.line "'\"" <= vim.fn.line "$" then
+      vim.cmd 'normal! g`"'
+    end
+  end,
+  group = "vimrc",
+})
 
 -- Files
 autocmd("BufWritePre", {

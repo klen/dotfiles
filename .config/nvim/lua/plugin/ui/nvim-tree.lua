@@ -25,7 +25,6 @@ return {
       open_on_setup = true, -- open if empty or directory
       ignore_ft_on_setup = { "dashboard" }, -- ignore file types
       hijack_cursor = true, -- keeps the cursor on the first letter of the filename
-      indent_markers = false,
       view = {
         mappings = {
           list = {
@@ -59,16 +58,7 @@ return {
       },
       filters = {
         dotfiles = true,
-        custom = {
-          "dist",
-          "build",
-          "__pycache__",
-          "node_modules",
-          "*.lock",
-          "*.egg-*",
-          ".cache",
-          ".git",
-        },
+        custom = { "__mocks__" },
       },
     }
 

@@ -12,12 +12,13 @@
 - name: Install terminal utils
   homebrew:
     name:
-    - bash
-    - bash-completion
+    - bash              # shell
+    - bash-completion   # shell-completion
+    - bat               # replacement for cat
     - coreutils
     - ripgrep
     - terminal-notifier
-    - zoxide
+    - zoxide            # replacement for cd
 
 - name: Install editors
   homebrew:

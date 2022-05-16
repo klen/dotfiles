@@ -66,6 +66,12 @@ local cfg = Config:init {
           document_range_formatting = false,
         },
       },
+      sumneko_lua = {
+        capabilities = {
+          document_formatting = false,
+          document_range_formatting = false,
+        },
+      },
       pyright = {
         capabilities = {
           document_formatting = false,

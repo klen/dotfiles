@@ -1,7 +1,7 @@
 [user]
     name = Kirill Klenov
     email = horneds@gmail.com
-    editor = vim
+    editor = nvim
 
 [core]
     autocrlf = input
