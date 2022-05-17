@@ -6,10 +6,10 @@
       with_items:
         - alfred            # UI
         - calibre           # Books Manager
-        - ccleaner          # System cleaner
+        # - ccleaner          # System cleaner
         - dash              # Documentation searcher
         - docker            # Utilities
-        - firefox           # Browser
+        # - firefox           # Browser
         - font-hack-nerd-font
         - google-chrome     # Browser
         - google-drive      # Cloud storage
@@ -20,17 +20,17 @@
         - iterm2            # Terminal
         - karabiner-elements # Keyboard
         - keepingyouawake   # Keep Mac awake
-        - kitty             # Terminal
+        # - kitty             # Terminal
         - lulu              # Firewall
-        - obs               # Video Streams
-        - obs-virtualcam
+        # - obs               # Video Streams
+        # - obs-virtualcam
         - parallels         # Virtualization
         - slack             # Messenger
-        - spotify # Media
+        # - spotify # Media
         - steam # Games
         - telegram # Messenger
         - the-unarchiver # Archive manager
         - transmission # Torrent Client
-        - tunnelblick # VPN manager
+        # - tunnelblick # VPN manager
       environment:
         HOMEBREW_CASK_OPTS: --appdir=/Applications

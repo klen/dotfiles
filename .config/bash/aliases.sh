@@ -19,6 +19,9 @@ alias t='tail -f'
 _is_cmd_exist bat && {
   alias cat='bat'
 }
+_is_cmd_exist z && {
+  alias cd='z'
+}
 
 # Personal
 # connect to remote host
