@@ -5,6 +5,6 @@ _is_cmd_exist git && {
 
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWSTASHSTATE=1
-    PS1=$PS1$GREEN'$(__git_ps1 " (%s)"):'$NC
+    PS1=$PS1$GREEN'$(__git_ps1 " (%s)")'$NC
 
 }
