@@ -2,6 +2,16 @@ local tools = require "tools"
 
 return {
 
+  -- Copilot
+  {
+    "github/copilot.vim",
+    config = function()
+      vim.keymap.set("i", "<C-g>n", "<Plug>(copilot-next)")
+      vim.keymap.set("i", "<C-g>p", "<Plug>(copilot-previous)")
+      vim.keymap.set("i", "<C-g>c", "<Plug>(copilot-dismiss)")
+    end,
+  },
+
   -- Repeat surround motions with .
   "tpope/vim-surround",
   "tpope/vim-repeat",

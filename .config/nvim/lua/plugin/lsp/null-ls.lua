@@ -6,7 +6,8 @@ return {
     local null_ls = require "null-ls"
 
     null_ls.setup {
-      debug = cfg.debug,
+      -- debug = cfg.debug,
+      debug = true,
       on_attach = require "plugin.lsp.on_attach",
       ---@diagnostic disable-next-line: redundant-parameter
       handlers = require "plugin.lsp.handlers" "null-ls",
@@ -21,11 +22,12 @@ return {
         --   eslint-config-airbnb-base eslint-config-airbnb-typescript eslint-config-prettier
 
         -- null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.diagnostics.eslint_d,
         -- null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.code_actions.eslint_d,
         -- null_ls.builtins.formatting.eslint,
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.code_actions.eslint_d,
         null_ls.builtins.formatting.eslint_d,
+
         null_ls.builtins.formatting.prettier.with {
           filetypes = {
             "javascript",

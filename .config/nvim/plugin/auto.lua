@@ -43,7 +43,7 @@ autocmd("BufWinEnter", {
   pattern = "*",
   callback = function()
     if vim.fn.line "'\"" <= vim.fn.line "$" then
-      vim.cmd 'normal! g`"'
+      api.nvim_command 'normal! g`"'
     end
   end,
   group = "vimrc",

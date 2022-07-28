@@ -14,10 +14,6 @@ return {
     cfg.keymaps["<leader>df"] = { "<cmd>NvimTreeFindFile<cr>", "Locate File" }
   end,
   config = function()
-    g.nvim_tree_show_icons = { git = 0, folders = 1, files = 0 } -- Show icons
-    g.nvim_tree_highlight_opened_files = 2
-    g.nvim_tree_git_hl = 0 -- Will enable file highlight for git attributes
-
     local nvimtree = require "nvim-tree"
 
     local tree_cb = require("nvim-tree.config").nvim_tree_callback
@@ -34,6 +30,17 @@ return {
             { key = "md", cb = tree_cb "remove" },
             { key = "mm", cb = tree_cb "rename" },
             { key = "ma", cb = tree_cb "create" },
+          },
+        },
+      },
+      renderer = {
+        highlight_git = false,
+        highlight_opened_files = "name",
+        icons = {
+          show = {
+            git = false,
+            folder = true,
+            file = false,
           },
         },
       },
@@ -58,7 +65,7 @@ return {
       },
       filters = {
         dotfiles = true,
-        custom = { "__mocks__" },
+        custom = { "__mocks__", "__snapshots__", ".DS_Store" },
       },
     }
 
