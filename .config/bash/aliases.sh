@@ -16,12 +16,8 @@ alias wget='wget -c'                        # Preferred 'wget' implementation (r
 alias t='tail -f'
 
 # Replacements
-_is_cmd_exist bat && {
-  alias cat='bat'
-}
-_is_cmd_exist z && {
-  alias cd='z'
-}
+_is_cmd_exist bat && alias cat='bat -p --theme="Solarized (dark)"'
+# _is_cmd_exist z && alias cd='z'
 
 # Personal
 # connect to remote host

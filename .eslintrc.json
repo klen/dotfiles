@@ -33,6 +33,17 @@
   "rules": {
     "no-console": "warn",
     "no-debugger": "warn",
-    "prettier/prettier": "warn"
+    "prettier/prettier": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ]
   }
 }
