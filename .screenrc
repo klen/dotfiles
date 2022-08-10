@@ -46,7 +46,7 @@ bind - resize -1
 bufferfile ~/.bak/screen-exchange
 
 # Xterm setup
-term xterm-color
-termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-termcapinfo xterm* ti@:te@
-termcapinfo xterm* bc@:bs@
+term xterm-256color
+# termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# termcapinfo xterm* ti@:te@
+# termcapinfo xterm* bc@:bs@
