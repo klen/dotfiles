@@ -12,7 +12,7 @@ fi
 
 # Information about screens
 if [ ! -z "$WINDOW" -a ! "$SHOWED_SCREEN_MESSAGE" = "true" ]; then
-    local detached_screens=`screen -list | grep Detached`
+    detached_screens=`screen -list | grep Detached`
     echo -e $YELLOW
     if [ ! -z "$detached_screens" ]; then
         echo "+---------------------------------------+"

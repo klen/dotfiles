@@ -18,14 +18,14 @@ setup () {
     # Reset Collor
     PS1="${PS1}${NC}"
 
-    # time
-    # PS1="${PS1}\A "
+    # Show current Time
+    PS1="${PS1}\A "
 
     # PID
     # PS1="${PS1}$$ "
 
     # current user
-    if [ "$SSH_CONNECTION"] ; then
+    if [ "$SSH_CONNECTION" ]; then
         PS1="${PS1}\u@\h "
     else
         [ "$EUID" -eq 0 ] && PS1="${PS1}$RED\u@ "
