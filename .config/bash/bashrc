@@ -8,14 +8,14 @@
 # Load env
 source $HOME/.config/bash/env.sh
 
+# Setup path
+source $XDG_CONFIG_HOME/bash/path.sh
+
 # Load options
 source $XDG_CONFIG_HOME/bash/options.sh
 
 # Load colors
 source $XDG_CONFIG_HOME/bash/colors.sh
-
-# Setup path
-source $XDG_CONFIG_HOME/bash/path.sh
 
 # Load functions
 source $HOME/.config/bash/functions.sh

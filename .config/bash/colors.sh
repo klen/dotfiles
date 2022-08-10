@@ -1,45 +1,22 @@
 # Define color variables
 # ======================
 
-NC=''
-BLUE=''
-CYAN=''
-GREEN=''
-MAGENTA=''
-RED=''
-WHITE=''
-YELLOW=''
-blue=''
-cyan=''
-green=''
-magenta=''
-red=''
-white=''
-yellow=''
-BOLD=''
+export NC=''
+export BLUE=''
+export CYAN=''
+export GREEN=''
+export MAGENTA=''
+export RED=''
+export WHITE=''
+export YELLOW=''
 
 if [ -t 1 ] || [ $(tput colors) -ge 8 ]; then
-    NC=$(tput sgr 0)
-    BOLD=$(tput bold)
-
-    red=$(tput setaf 1)
-    RED=$(tput setaf 9)
-
-    green=$(tput setaf 2)
-    GREEN=$(tput setaf 10)
-
-    yellow=$(tput setaf 3)
-    YELLOW=$(tput setaf 11)
-
-    blue=$(tput setaf 4)
-    BLUE=$(tput setaf 12)
-
-    magenta=$(tput setaf 5)
-    MAGENTA=$(tput setaf 13)
-
-    cyan=$(tput setaf 6)
-    CYAN=$(tput setaf 14)
-
-    white=$(tput setaf 7)
-    WHITE=$(tput setaf 15)
+    export NC=$(tput sgr 0)
+    export RED=$(tput setaf 9)
+    export GREEN=$(tput setaf 10)
+    export YELLOW=$(tput setaf 11)
+    export BLUE=$(tput setaf 12)
+    export MAGENTA=$(tput setaf 13)
+    export CYAN=$(tput setaf 14)
+    export WHITE=$(tput setaf 15)
 fi
