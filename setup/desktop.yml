@@ -1,8 +1,7 @@
 ---
 - hosts: all
   tasks:
-    # - homebrew: name=caskroom/cask/brew-cask
-    - homebrew_cask: name={{item}}
+    - community.general.homebrew_cask: name={{item}}
       with_items:
         - alfred            # UI
         - calibre           # Books Manager
@@ -10,7 +9,6 @@
         - dash              # Documentation searcher
         - docker            # Utilities
         # - firefox           # Browser
-        - font-hack-nerd-font
         - google-chrome     # Browser
         - google-drive      # Cloud storage
         - hyperdock         # Manage windows
@@ -24,7 +22,7 @@
         - lulu              # Firewall
         # - obs               # Video Streams
         # - obs-virtualcam
-        - parallels         # Virtualization
+        # - parallels         # Virtualization
         - slack             # Messenger
         # - spotify # Media
         - steam # Games
@@ -34,3 +32,9 @@
         # - tunnelblick # VPN manager
       environment:
         HOMEBREW_CASK_OPTS: --appdir=/Applications
+
+    - community.general.homebrew_tap:
+        name: homebrew/cask-fonts
+
+    - community.general.homebrew_cask:
+        name: font-hack-nerd-font 
