@@ -76,7 +76,7 @@ require("plugin.packer").startup(function(use)
 
   -- Run code/repl
   use {
-    "~/.config/nvim/lua/plugin/local/runner",
+    "~/projects/nvim/runner",
     config = function()
       require("runner").setup()
     end,

@@ -33,9 +33,9 @@ source $XDG_CONFIG_HOME/bash/include/git.sh
 source $XDG_CONFIG_HOME/bash/include/docker.sh
 source $XDG_CONFIG_HOME/bash/include/android.sh
 source $XDG_CONFIG_HOME/bash/include/lua.sh
+source $XDG_CONFIG_HOME/bash/include/node.sh
 _is_cmd_exist go && source $XDG_CONFIG_HOME/bash/include/go.sh
 _is_cmd_exist rustc && source $XDG_CONFIG_HOME/bash/include/rust.sh
-_is_cmd_exist node && source $XDG_CONFIG_HOME/bash/include/node.sh
 _is_cmd_exist ruby && source $XDG_CONFIG_HOME/bash/include/ruby.sh
 
 # Show login screen
