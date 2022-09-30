@@ -19,7 +19,7 @@ setup () {
     PS1="${PS1}${NC}"
 
     # Show current Time
-    PS1="${PS1}\A "
+    PS1="${PS1}${YELLOW}\A "
 
     # PID
     # PS1="${PS1}$$ "
@@ -39,7 +39,7 @@ setup () {
     # PS1="${PS1}${NC}@\H "
 
     # current path
-    PS1="${PS1}${BLUE}\w"
+    PS1="${PS1}${BLUE}\w${NC}"
 }
 
 setup && unset setup

@@ -1,6 +1,8 @@
-/.config/zsh/plugins
-/todo.txt
 *.retry
 /.config/karabiner/automatic_backups/
 /.config/zsh/.zcompdump
 /.config/zsh/.zsh_history
+/.config/zsh/plugins
+/.smartcd/inodes
+/.smartcd/scripts
+/todo.txt
