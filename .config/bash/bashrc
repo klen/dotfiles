@@ -26,6 +26,9 @@ source $XDG_CONFIG_HOME/bash/aliases.sh
 # Setup gpg (disabled now)
 # source $XDG_CONFIG_HOME/bash/include/gpg.sh
 
+# Setup PS
+source $XDG_CONFIG_HOME/bash/ps.sh
+
 # Setup tools
 source $XDG_CONFIG_HOME/bash/include/homebrew.sh
 source $XDG_CONFIG_HOME/bash/include/python.sh
@@ -46,9 +49,6 @@ source /usr/local/etc/bash_completion 2>/dev/null || source /etc/bash_completion
 source $XDG_CONFIG_HOME/bash/completion/cd_.sh
 # source $XDG_CONFIG_HOME/bash/completion/rmqadmin.sh
 _is_cmd_exist @ && source $XDG_CONFIG_HOME/bash/completion/atmark.sh
-
-# Setup PS
-source $XDG_CONFIG_HOME/bash/ps.sh
 
 # Close promt
 PS1="${PS1}\n$ "
