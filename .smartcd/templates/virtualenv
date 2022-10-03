@@ -20,10 +20,10 @@ autostash TOXDIR=.tox
 __PS=$PS1
 
 # Create virtualenv
-command -v virtualenv &>/dev/null && [ ! -d $VDIR ] && {
+ [ ! -d $VDIR ] && {
     smartcd inform "Virtualenv doesnt found. Attempt to create $VDIR"
     smartcd inform "------------------------------------------------"
-    virtualenv --python=python3 $VDIR
+    python3 -m venv $VDIR
     [ -s requirements.txt ] && {
         $VDIR/bin/pip install -r requirements.txt
     }
