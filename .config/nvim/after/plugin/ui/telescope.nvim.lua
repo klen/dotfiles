@@ -47,7 +47,12 @@ plug.setup {
   },
 }
 
-vim.keymap.set("n", "<C-Space>", "<cmd>Telescope<CR>")
+vim.keymap.set("n", "<C-Space>", "<cmd>Telescope<CR>", {})
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TelescopePreviewerLoaded",
+  command = "setlocal wrap linebreak nolist",
+  once = true,
+})
 
 local cfg = require "config"
 cfg.keymaps["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find Files" }
