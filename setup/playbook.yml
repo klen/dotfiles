@@ -7,15 +7,15 @@
 
   tasks:
 
-  - include: install.yum.yml
+  - import_tasks: install.yum.yml
     when: ansible_os_family == "RedHat"
     become: yes
 
-  - include: install.deb.yml
+  - import_tasks: install.deb.yml
     when: ansible_os_family == "Debian"
     become: yes
 
-  - include: install.mac.yml
+  - import_tasks: install.mac.yml
     when: ansible_os_family == "Darwin"
 
   - name: Setup ssh - pt. 1

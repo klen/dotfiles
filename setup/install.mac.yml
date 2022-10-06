@@ -44,7 +44,18 @@
     - git-flow
     - htop-osx
     - httpie
+    - mplayer
+    - mpv
     - rsc_2fa
     - stylua
     - unzip
     - wget
+
+- name: Python packages
+  ansible.builtin.pip:
+    name:
+    - wheel
+    - setuptools
+    - requests
+    - dnspython
+    - psutil
