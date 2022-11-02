@@ -129,3 +129,4 @@ confirm_playlist_reload = True
 # Valid values: True, true, False, false
 # Default value: False
 auto_save_playlist = False
+

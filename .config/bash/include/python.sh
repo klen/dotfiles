@@ -12,6 +12,10 @@ _is_cmd_exist pip && {
     source $XDG_CONFIG_HOME/bash/completion/pip.sh
 }
 
+_is_cmd_exist pyenv && {
+  eval "$(pyenv init -)"
+}
+
 _is_cmd_exist salt && {
     source $XDG_CONFIG_HOME/bash/completion/salt.sh
 }
