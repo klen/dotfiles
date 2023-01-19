@@ -1,10 +1,15 @@
 return {
   "neovim/nvim-lspconfig",
-  requires = {
-    -- Configure semneko lua
-    { "folke/lua-dev.nvim", module = "lua-dev" },
-  },
+  requires = "folke/neodev.nvim",
   config = function()
+    require("neodev").setup {
+      -- add any options here, or leave empty to use the default settings
+      -- override = function(_, library)
+      --   library.enabled = true
+      --   library.plugins = true
+      -- end,
+    }
+
     local cfg = require("config").diagnostic
     local utils = require "plugin.lsp.utils"
 

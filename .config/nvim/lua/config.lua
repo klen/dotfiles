@@ -62,20 +62,20 @@ local cfg = Config:init {
           severity = { min = severity.INFO },
         },
         capabilities = {
-          document_formatting = false,
-          document_range_formatting = false,
+          documentFormattingProvider = false,
+          documentRangeFormattingProvider = false,
         },
       },
       sumneko_lua = {
         capabilities = {
-          document_formatting = false,
-          document_range_formatting = false,
+          documentFormattingProvider = false,
+          documentRangeFormattingProvider = false,
         },
       },
       pyright = {
         capabilities = {
-          document_formatting = false,
-          document_range_formatting = false,
+          documentFormattingProvider = false,
+          documentRangeFormattingProvider = false,
         },
         diagnostic = {
           severity = { min = severity.INFO },

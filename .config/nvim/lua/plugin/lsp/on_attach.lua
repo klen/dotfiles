@@ -7,11 +7,8 @@ return function(client, bufnr)
 
   -- Tune capabilities
   if params.capabilities then
-    client.resolved_capabilities = vim.tbl_extend(
-      "force",
-      client.resolved_capabilities,
-      params.capabilities
-    )
+    client.server_capabilities =
+      vim.tbl_extend("force", client.server_capabilities, params.capabilities)
   end
 
   -- Tune diagnostic
@@ -71,7 +68,7 @@ return function(client, bufnr)
   }
 
   -- Hover
-  if not client.resolved_capabilities.hover then
+  if not client.server_capabilities.hover then
     table.pop(maps, "K")
   end
 
@@ -102,18 +99,12 @@ return function(client, bufnr)
     utils.format(args.line1, args.line2)
   end, { range = true })
 
-  if client.resolved_capabilities.document_range_formatting then
-    vim.keymap.set("v", "<space>f", function()
-      lsp.buf.range_formatting()
-    end, { buffer = bufnr })
-  end
-
   -- Auto format on save
   local format_on_save = params.format_on_save
   if format_on_save == nil then
     format_on_save = cfg.lsp.format_on_save
   end
-  if client.resolved_capabilities.document_formatting and format_on_save then
+  if client.server_capabilities.documentFormattingProvider and format_on_save then
     api.nvim_create_autocmd("BufWritePre", { pattern = "<buffer>", callback = utils.formatOnSave })
   end
 
