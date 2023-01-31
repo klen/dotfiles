@@ -68,7 +68,7 @@ return function(client, bufnr)
   }
 
   -- Hover
-  if not client.server_capabilities.hover then
+  if not client.server_capabilities.hoverProvider then
     table.pop(maps, "K")
   end
 
