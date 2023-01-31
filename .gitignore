@@ -1,7 +1,8 @@
 *.retry
 /.config/karabiner/automatic_backups/
-/.config/pyradio/*.ver
 /.config/pyradio/*.date
+/.config/pyradio/*.ver
+/.config/pyradio/data/*
 /.config/zsh/.zcompdump
 /.config/zsh/.zsh_history
 /.config/zsh/plugins

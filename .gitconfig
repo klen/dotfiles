@@ -96,6 +96,7 @@
 
 [help]
     autocorrect = 1
+
 [rerere]
-	enabled = true
-	autoUpdate = true
+    enabled = true
+    autoUpdate = true

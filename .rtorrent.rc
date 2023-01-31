@@ -1,0 +1,14 @@
+throttle.min_peers.normal.set = 40
+throttle.max_peers.normal.set = 52
+
+throttle.min_peers.seed.set = 10
+throttle.max_peers.seed.set = 52
+
+throttle.max_uploads.set = 8
+
+throttle.global_down.max_rate.set = 200
+throttle.global_up.max_rate.set = 28
+
+directory.default.set = ~/Downloads
+
+schedule2 = watch_directory,5,5,load.start=~/Downloads/*.torrent
