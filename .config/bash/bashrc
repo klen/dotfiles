@@ -20,9 +20,6 @@ source $XDG_CONFIG_HOME/bash/colors.sh
 # Load functions
 source $HOME/.config/bash/functions.sh
 
-# Aliases
-source $XDG_CONFIG_HOME/bash/aliases.sh
-
 # Setup gpg (disabled now)
 # source $XDG_CONFIG_HOME/bash/include/gpg.sh
 
@@ -40,6 +37,9 @@ source $XDG_CONFIG_HOME/bash/include/node.sh
 _is_cmd_exist go && source $XDG_CONFIG_HOME/bash/include/go.sh
 _is_cmd_exist rustc && source $XDG_CONFIG_HOME/bash/include/rust.sh
 _is_cmd_exist ruby && source $XDG_CONFIG_HOME/bash/include/ruby.sh
+
+# Aliases
+source $XDG_CONFIG_HOME/bash/aliases.sh
 
 # Show login screen
 source $XDG_CONFIG_HOME/bash/login.sh
