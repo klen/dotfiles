@@ -1,0 +1,21 @@
+# A list of rule codes or prefixes to enable
+select = ["ALL"]
+
+# A list of rule codes or prefixes to ignore
+ignore = ["D", "UP", "ANN", "DJ", "EM", "RSE", "SLF", "S101", "PLR2004"]
+
+# A list of file patterns to exclude from linting.
+exclude = [".venv", "assets", "build", "dist", "node_modules", "templates"]
+
+# Enable autofix behavior by-default
+fix = true
+
+# The line length to use when enforcing long-lines violations (like E501).
+line-length = 100
+
+# The Python version to target
+target-version = "py311"
+
+[isort]
+# Add the specified import line to all files.
+required-imports = ["from __future__ import annotations"]
