@@ -7,9 +7,6 @@ ignore = ["D", "UP", "ANN", "DJ", "EM", "RSE", "SLF", "S101", "PLR2004"]
 # A list of file patterns to exclude from linting.
 exclude = [".venv", "assets", "build", "dist", "node_modules", "templates"]
 
-# Enable autofix behavior by-default
-fix = true
-
 # The line length to use when enforcing long-lines violations (like E501).
 line-length = 100
 
