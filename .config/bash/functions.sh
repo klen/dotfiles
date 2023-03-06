@@ -186,6 +186,8 @@ conf-home () {
     $EDITOR Makefile
 }
 
+cdp () { cd $1; }
+
 # Utils
 # -----
 

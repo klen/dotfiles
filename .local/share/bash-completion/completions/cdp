@@ -5,5 +5,4 @@ _cdp_completion() {
     local choices=$(find $PRJDIR -maxdepth 1 -mindepth 1 -type d)
     COMPREPLY=( $(compgen -W "$choices" -- ${cur}) )
 }
-cdp () { cd $1; }
 complete -o default -o nospace -F _cdp_completion cdp

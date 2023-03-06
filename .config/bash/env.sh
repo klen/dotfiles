@@ -6,7 +6,7 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 export EDITOR=nvim
-export VISUAL=vim
+# export VISUAL=nvim
 export PAGER=less
 
 # Bash history
@@ -18,8 +18,8 @@ export HISTCONTROL=ignoreboth:erasedups
 # Setup XDG Base Directory specification
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 
 # Debian package settings
 export DEBFULLNAME="Kirill Klenov"

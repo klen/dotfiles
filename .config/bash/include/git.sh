@@ -1,8 +1,6 @@
 _is_cmd_exist git && {
 
-    source $XDG_CONFIG_HOME/bash/completion/git-completion.sh
-    source $XDG_CONFIG_HOME/bash/completion/git-flow.sh
-    source $XDG_CONFIG_HOME/bash/completion/git-promt.sh
+    source $XDG_CONFIG_HOME/bash/include/git-promt.sh
 
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWSTASHSTATE=1

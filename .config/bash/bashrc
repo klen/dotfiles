@@ -18,13 +18,16 @@ source $XDG_CONFIG_HOME/bash/options.sh
 source $XDG_CONFIG_HOME/bash/colors.sh
 
 # Load functions
-source $HOME/.config/bash/functions.sh
+source $XDG_CONFIG_HOME/bash/functions.sh
 
 # Setup gpg (disabled now)
 # source $XDG_CONFIG_HOME/bash/include/gpg.sh
 
 # Setup PS
 source $XDG_CONFIG_HOME/bash/ps.sh
+
+# Setup completions
+source $XDG_CONFIG_HOME/bash/include/bash-completion
 
 # Setup tools
 source $XDG_CONFIG_HOME/bash/include/homebrew.sh
@@ -43,12 +46,6 @@ source $XDG_CONFIG_HOME/bash/aliases.sh
 
 # Show login screen
 source $XDG_CONFIG_HOME/bash/login.sh
-
-# Setup completion
-source /usr/local/etc/bash_completion 2>/dev/null || source /etc/bash_completion 2> /dev/null
-source $XDG_CONFIG_HOME/bash/completion/cd_.sh
-# source $XDG_CONFIG_HOME/bash/completion/rmqadmin.sh
-_is_cmd_exist @ && source $XDG_CONFIG_HOME/bash/completion/atmark.sh
 
 # Close promt
 PS1="${PS1}\n$ "
