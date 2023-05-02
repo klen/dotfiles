@@ -4,6 +4,7 @@
 # Common settings
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+export OS=`uname -s`
 
 export EDITOR=nvim
 # export VISUAL=nvim

@@ -13,4 +13,8 @@ _is_cmd_exist docker && {
         docker exec -it $@
     }
 
+    if [ "$OS" == "Darwin" ]; then
+      export DOCKER_HOST=unix://"$HOME/.docker/run/docker.sock"
+    fi
+
 }
