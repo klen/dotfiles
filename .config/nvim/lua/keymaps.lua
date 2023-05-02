@@ -127,7 +127,6 @@ wk.register {
 
   -- Options
   ["<leader>o"] = { name = "+options" },
-  ["<leader>op"] = { "<cmd>set paste! paste?<cr>", "Toggle &paste" },
   ["<leader>ol"] = { "<cmd>set list! list?<cr>", "Toggle &list" },
   ["<leader>ow"] = { "<cmd>set wrap! wrap?<cr>", "Toggle &wrap" },
   ["<leader>on"] = { "Toggle &number" },

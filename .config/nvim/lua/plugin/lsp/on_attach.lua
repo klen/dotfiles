@@ -92,7 +92,7 @@ return function(client, bufnr)
   -- api.nvim_create_autocmd("cursorholdi", { pattern = "*", callback = lsp.buf.signature_help })
 
   -- Code actions
-  vim.keymap.set("v", "<space>a", lsp.buf.range_code_action, { buffer = bufnr })
+  vim.keymap.set("v", "<space>a", lsp.buf.code_action, { buffer = bufnr })
 
   -- Formatting
   api.nvim_create_user_command("Format", function(args)

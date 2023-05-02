@@ -15,13 +15,6 @@ autocmd({ "WinEnter", "InsertLeave" }, {
   group = "vimrc",
 })
 
--- Unset paste on InsertLeave
-autocmd({ "InsertLeave" }, {
-  pattern = "*",
-  command = "silent! set nopaste",
-  group = "vimrc",
-})
-
 -- Terminal
 autocmd({ "TermOpen" }, {
   pattern = "*",
