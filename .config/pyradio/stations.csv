@@ -4,7 +4,7 @@ Electronic/Dance (Electronic Culture),http://www.shouted.fm/tunein/electro-dsl.m
 Hip Hop (Power 1051 NYC),http://c11.prod.playlists.ihrhls.com/1481/playlist.m3u8
 Pop/Rock/Urban  (Frequence 3 - Paris),http://streams.frequence3.net/hd-mp3.m3u
 Public Radio (WNYC - Public Radio from New York to the World),http://wnyc-iheart.streamguys.com/wnycfm-iheart.aac
-Reggae Dancehall (Ragga Kings),http://www.raggakings.net/listen.m3u
+Reggae Dancehall (Ragga Kings),https://raggakings.radio:8443/stream.ogg
 Vox Noctem: Rock-Goth,http://r2d2.voxnoctem.de:8000/voxnoctem.mp3
 Beyond Metal (Progressive - Symphonic),http://streamingV2.shoutcast.com/BeyondMetal
 DanceUK,https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:8024/listen.pls&t=.pls
@@ -32,3 +32,10 @@ Hip Hop (Hot 97 NYC),http://playerservices.streamtheworld.com/pls/WQHTAAC.pls
 [SomaFM] Lounge (Illinois Street Lounge),http://somafm.com/illstreet.pls
 [SomaFM] Pop (PopTron!),http://somafm.com/poptron.pls
 [SomaFM] Progressive (Tags Trance Trip),http://somafm.com/tagstrance.pls
+Groove Salad Classic (Early 2000s Ambient),https://somafm.com/gsclassic.pls
+n5MD Radio (Ambient and Experimental),https://somafm.com/n5md.pls
+Vaporwaves [SomaFM],https://somafm.com/vaporwaves.pls
+The Trip: [SomaFM],https://somafm.com/thetrip.pls
+Heavyweight Reggae,https://somafm.com/reggae.pls
+Metal Detector,https://somafm.com/metal.pls
+Synphaera Radio (Space Music),https://somafm.com/synphaera.pls
