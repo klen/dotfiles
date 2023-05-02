@@ -5,7 +5,7 @@ return function(defaults)
     settings = {
       python = {
         analysis = {
-          typeCheckingMode = "off",
+          -- typeCheckingMode = "off",
           diagnosticMode = "openFilesOnly",
           diagnosticSeverityOverrides = {
             reportSelfClsParameterName = "none",

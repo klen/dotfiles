@@ -1,5 +1,6 @@
 -- User configuration
 local Config = require "tools.config"
+
 local severity = vim.diagnostic.severity
 local signs = {
   [severity.ERROR] = "EE",
@@ -66,7 +67,7 @@ local cfg = Config:init {
           documentRangeFormattingProvider = false,
         },
       },
-      sumneko_lua = {
+      lua_ls = {
         capabilities = {
           documentFormattingProvider = false,
           documentRangeFormattingProvider = false,

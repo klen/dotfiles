@@ -47,20 +47,24 @@ return {
         },
 
         -- Python
+        -- pip install ruff
+        null_ls.builtins.formatting.ruff,
+        null_ls.builtins.diagnostics.ruff,
+
         -- pip install black
         null_ls.builtins.formatting.black,
 
         -- pip install isort
-        null_ls.builtins.formatting.isort.with {
-          extra_args = {
-            "--line-length=100",
-            "--gitignore",
-          },
-        },
+        -- null_ls.builtins.formatting.isort.with {
+        --   extra_args = {
+        --     "--line-length=100",
+        --     "--gitignore",
+        --   },
+        -- },
         -- pip install pylama
-        null_ls.builtins.diagnostics.pylama.with {
-          timeout = 5000,
-        },
+        -- null_ls.builtins.diagnostics.pylama.with {
+        --   timeout = 5000,
+        -- },
         -- pip install pylint
         -- null_ls.builtins.diagnostics.pylint,
 
