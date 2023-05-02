@@ -4,7 +4,7 @@ _G.fn = vim.fn
 _G.g = vim.g
 _G.lsp = vim.lsp
 
-_G.printt = function(...)
+_G.pprint = function(...)
   print(unpack(vim.tbl_map(vim.inspect, { ... })))
 end
 

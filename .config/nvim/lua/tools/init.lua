@@ -85,7 +85,7 @@ end
 -- Show synstack
 M.synstack = function()
   for _, value in ipairs(vim.fn.synstack(vim.fn.line ".", vim.fn.col ".")) do
-    printt(vim.fn.synIDattr(value, "name"))
+    pprint(vim.fn.synIDattr(value, "name"))
   end
 end
 
