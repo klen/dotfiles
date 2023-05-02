@@ -4,10 +4,6 @@ _G.fn = vim.fn
 _G.g = vim.g
 _G.lsp = vim.lsp
 
-_G.pprint = function(...)
-  print(unpack(vim.tbl_map(vim.inspect, { ... })))
-end
-
 -- Table functions
 
 function table.is_table(t)
