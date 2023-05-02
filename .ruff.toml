@@ -2,7 +2,7 @@
 select = ["ALL"]
 
 # A list of rule codes or prefixes to ignore
-ignore = ["D", "UP", "ANN", "DJ", "EM", "RSE", "SLF", "S101", "PLR2004"]
+ignore = ["ANN", "ARG", "COM", "D", "DJ", "EM", "RSE", "SLF", "TRY", "UP", "PLR2004", "S101"]
 
 # A list of file patterns to exclude from linting.
 exclude = [".venv", "assets", "build", "dist", "node_modules", "templates"]
@@ -12,6 +12,9 @@ line-length = 100
 
 # The Python version to target
 target-version = "py311"
+
+[per-file-ignores]
+"test*.py" = ["ARG"]
 
 [isort]
 # Add the specified import line to all files.
