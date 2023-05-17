@@ -2,6 +2,7 @@
 -- https://github.com/folke/which-key.nvim
 return {
   "folke/which-key.nvim",
+  lazy = true,
   config = function()
     require("which-key").setup {
       plugins = {

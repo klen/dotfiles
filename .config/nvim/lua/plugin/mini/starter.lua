@@ -1,6 +1,4 @@
 local fn = vim.fn
-local plugins_path = fn.stdpath "data" .. "/site/pack/packer/start"
-local plugins_count = fn.len(fn.globpath(plugins_path, "*", 0, 1))
 local default_footer = [[
 Type query to filter items
 <BS> deletes latest character from query
@@ -34,8 +32,20 @@ starter.setup {
     local day_part = ({ "evening", "morning", "afternoon", "evening" })[part_id]
     return ("Good %s, Kirill"):format(day_part)
   end,
-  footer = ("Loaded " .. plugins_count .. " plugins. " .. "Load time: " .. fn.printf(
-    "%.3f",
-    fn.reltimefloat(fn.reltime(vim.g.start_time))
-  ) .. " seconds.\n\n" .. default_footer),
+  footer = function()
+    local lazy_stats = require("lazy").stats()
+    vim.print(lazy_stats)
+
+    return (
+      "Loaded "
+      .. lazy_stats.loaded
+      .. " from "
+      .. lazy_stats.count
+      .. " installed plugins. "
+      .. "Load time: "
+      .. fn.printf("%.3f", lazy_stats.times.LazyDone / 1000)
+      .. " seconds.\n\n"
+      .. default_footer
+    )
+  end,
 }

@@ -2,9 +2,6 @@ local tools = require "tools"
 
 require("plugin.lazy").setup {
 
-  -- Lua/plugins helpers (has to be installed)
-  "nvim-lua/plenary.nvim",
-
   -- TreeSitter (syntax, folding)
   {
     "nvim-treesitter/nvim-treesitter",

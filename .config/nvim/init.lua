@@ -1,11 +1,9 @@
--- Init Neovim
-vim.g.start_time = vim.fn.reltime()
-
 -- Speed up Neovim
 if vim.loader then
   vim.loader.enable()
 end
 
+-- Some options
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
