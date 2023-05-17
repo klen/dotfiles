@@ -99,6 +99,8 @@ local filetypeConfigMap = {
   python = { t.flake8, t.black, t.isort },
 }
 
+local fn = vim.fn
+
 return function(defaults)
   return vim.tbl_extend("force", defaults, {
     init_options = {

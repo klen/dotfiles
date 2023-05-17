@@ -1,12 +1,16 @@
+require "tools/table"
+
 local M = {}
 local api = vim.api
+local fn = vim.fn
+local lsp = vim.lsp
 
 function M.diagnostics()
   -- Doesnt support buffer
   -- vim.diagnostic.setqflist { open = false, namespace = "textDocument" }
   local bufnr = api.nvim_get_current_buf()
   local items = vim.diagnostic.toqflist(vim.diagnostic.get(bufnr))
-  vim.fn.setqflist({}, " ", {
+  fn.setqflist({}, " ", {
     title = "Diagnostics",
     items = items,
   })
@@ -94,7 +98,7 @@ end
 
 function M.formatOnSave()
   if vim.o.modified then
-    vim.lsp.buf.format { timeout_ms = 5000 }
+    lsp.buf.format { timeout_ms = 5000 }
   end
 end
 
@@ -106,15 +110,15 @@ function M.jumpLocation(location, offset_encoding)
   if api.nvim_get_current_buf() ~= vim.uri_to_bufnr(uri) then
     vim.cmd "abo split"
   end
-  vim.lsp.util.jump_to_location(location, offset_encoding)
+  lsp.util.jump_to_location(location, offset_encoding)
 end
 
 -- Detect if range or not
 function M.format(line1, line2)
   if line2 == line1 then
-    vim.lsp.buf.format { timeout_ms = 5000 }
+    lsp.buf.format { timeout_ms = 5000 }
   else
-    vim.lsp.buf.range_formatting()
+    lsp.buf.range_formatting()
   end
 end
 
@@ -134,8 +138,8 @@ function M.getDocumentSymbols()
   local buf = api.nvim_get_current_buf()
   lsp_request("textDocument/documentSymbol", function(result)
     local win = api.nvim_get_current_win()
-    local items = vim.lsp.util.symbols_to_items(result, buf)
-    vim.fn.setloclist(win, {}, " ", {
+    local items = lsp.util.symbols_to_items(result, buf)
+    fn.setloclist(win, {}, " ", {
       title = "Diagnostics",
       items = items,
     })
@@ -147,7 +151,7 @@ function M.showMessage(_, result, ctx, _)
   local message_type = result.type
   local message = result.message
   local client_id = ctx.client_id
-  local client = vim.lsp.get_client_by_id(client_id)
+  local client = lsp.get_client_by_id(client_id)
   local client_name = client and client.name or string.format("id=%d", client_id)
   if not client then
     return vim.notify(
@@ -162,7 +166,7 @@ function M.logMessage(_, result, ctx, _)
   local message_type = result.type
   local message = result.message
   local client_id = ctx.client_id
-  local client = vim.lsp.get_client_by_id(client_id)
+  local client = lsp.get_client_by_id(client_id)
   local client_name = client and client.name or string.format("id=%d", client_id)
   if not client then
     return vim.notify(

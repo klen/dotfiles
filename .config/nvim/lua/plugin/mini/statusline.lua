@@ -26,6 +26,7 @@
 --   end
 --   return contents
 -- end
+require "tools/table"
 
 local severity = vim.diagnostic.severity
 local cfg = require "config"

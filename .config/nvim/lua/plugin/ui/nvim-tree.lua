@@ -138,10 +138,10 @@ return {
       end,
     }
 
-    cmd [[ hi! link NvimTreeSpecialFile Special ]]
-    cmd [[ hi! link NvimTreeRootFolder Statement ]]
-    cmd [[ hi! link NvimTreeFolderName Directory ]]
-    cmd [[ hi! link NvimTreeSymlink Macro ]]
-    cmd [[ hi! link NvimTreeOpenedFolderName Identifier ]]
+    vim.cmd [[ hi! link NvimTreeSpecialFile Special ]]
+    vim.cmd [[ hi! link NvimTreeRootFolder Statement ]]
+    vim.cmd [[ hi! link NvimTreeFolderName Directory ]]
+    vim.cmd [[ hi! link NvimTreeSymlink Macro ]]
+    vim.cmd [[ hi! link NvimTreeOpenedFolderName Identifier ]]
   end,
 }

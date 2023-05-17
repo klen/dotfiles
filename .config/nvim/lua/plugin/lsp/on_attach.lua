@@ -1,6 +1,9 @@
+require "tools/table"
+
 local cfg = require "config"
-local api = vim.api
 local utils = require "plugin.lsp.utils"
+local api = vim.api
+local lsp = vim.lsp
 
 return function(client, bufnr)
   local params = cfg.lsp.servers[client.name] or {}
@@ -22,49 +25,36 @@ return function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local maps = {
-    ["K"] = { "<cmd>lua lsp.buf.hover()<cr>", "Show documentation" },
-    ["gr"] = { "<cmd>lua lsp.buf.references()<cr>", "Find references" },
-    ["gd"] = { "<cmd>lua lsp.buf.definition()<cr>", "Go to definition" },
+    ["K"] = { lsp.buf.hover, "Show documentation" },
+    ["gr"] = { lsp.buf.references, "Find references" },
+    ["gd"] = { lsp.buf.definition, "Go to definition" },
     ["<space>gd"] = {
-      "<cmd>abo split | lua lsp.buf.definition()<cr>",
+      "<cmd>abo split | lua vim.lsp.buf.definition()<cr>",
       "Go to definition (split)",
     },
-    ["gi"] = { "<cmd>lua lsp.buf.implementation()<cr>", "Go to implementation" },
-    ["gl"] = { "<cmd>lua lsp.buf.declaration()<cr>", "Go to declaration" },
-    ["gt"] = { "<cmd>lua lsp.buf.type_definition()<cr>", "Go to type definition" },
-    ["gs"] = { "<cmd>lua lsp.buf.signature_help()<cr>", "Show signature help" },
-    ["ge"] = {
-      "<cmd>lua vim.diagnostic.open_float()<cr>",
-      "Show line error",
-    },
-    ["<C-p>"] = {
-      "<cmd>lua vim.diagnostic.goto_prev()<cr>",
-      "Jump to the previous error",
-    },
-    ["<C-n>"] = {
-      "<cmd>lua vim.diagnostic.goto_next()<cr>",
-      "Jump to the next error",
-    },
-    ["<space>r"] = {
-      "<cmd>lua lsp.buf.rename()<cr>",
-      "Refactoring/Rename",
-    },
-    ["<space>a"] = {
-      "<cmd>lua lsp.buf.code_action()<cr>",
-      "Run a code action",
-    },
-    ["<space>f"] = { "<cmd>lua lsp.buf.formatting()<cr>", "Format code" },
-    ["<space>q"] = { "<cmd>lua vim.diagnostic.set_loclist()<cr>", "Fill location list" },
-    ["<space>wa"] = { "<cmd>lua lsp.add_workspace_folder()<cr>", "Add workspace folder" },
-    ["<space>wr"] = { "<cmd>lua lsp.remove_workspace_folder()<cr>", "Remove workspace folder" },
+    ["gi"] = { lsp.buf.implementation, "Go to implementation" },
+    ["gl"] = { lsp.buf.declaration, "Go to declaration" },
+    ["gt"] = { lsp.buf.type_definition, "Go to type definition" },
+    ["gs"] = { lsp.buf.signature_help, "Show signature help" },
+    ["ge"] = { vim.diagnostic.open_float, "Show line error" },
+    ["<C-p>"] = { vim.diagnostic.goto_prev, "Jump to the previous error" },
+    ["<C-n>"] = { vim.diagnostic.goto_next, "Jump to the next error" },
+    ["<space>r"] = { lsp.buf.rename, "Refactoring/Rename" },
+    ["<space>a"] = { lsp.buf.code_action, "Run a code action" },
+    ["<space>f"] = { lsp.buf.formatting, "Format code" },
+    ["<space>q"] = { vim.diagnostic.set_loclist, "Fill location list" },
+    ["<space>wa"] = { lsp.add_workspace_folder, "Add workspace folder" },
+    ["<space>wr"] = { lsp.remove_workspace_folder, "Remove workspace folder" },
     ["<space>wl"] = {
-      "<cmd>lua print(vim.inspect(lsp.buf.list_workspace_folders()))<cr>",
+      function()
+        print(vim.inspect(lsp.buf.list_workspace_folders()))
+      end,
       "List workspace folders",
     },
-    ["<space>s"] = { "<cmd>lua lsp.buf.workspace_symbol()<cr>", "Search symbol in workspace" },
-    ["<space>S"] = { "<cmd>lua lsp.buf.document_symbol()<cr>", "Search symbol in document" },
-    ["<space>i"] = { "<cmd>lua lsp.buf.incoming_calls()<cr>", "Show incomming calls" },
-    ["<space>o"] = { "<cmd>lua lsp.buf.outgoing_calls()<cr>", "Show outgoing calls" },
+    ["<space>s"] = { lsp.buf.workspace_symbol, "Search symbol in workspace" },
+    ["<space>S"] = { lsp.buf.document_symbol, "Search symbol in document" },
+    ["<space>i"] = { lsp.buf.incoming_calls, "Show incomming calls" },
+    ["<space>o"] = { lsp.buf.outgoing_calls, "Show outgoing calls" },
   }
 
   -- Hover

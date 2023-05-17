@@ -1,9 +1,3 @@
-_G.api = vim.api
-_G.cmd = vim.cmd
-_G.fn = vim.fn
-_G.g = vim.g
-_G.lsp = vim.lsp
-
 -- Table functions
 
 function table.is_table(t)

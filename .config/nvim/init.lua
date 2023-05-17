@@ -4,9 +4,6 @@ vim.g.start_time = vim.fn.reltime()
 -- Speed up Neovim
 vim.loader.enable()
 
--- Setup globals
-require "tools/globals"
-
 -- Plugins
 require "plugin"
 
@@ -19,5 +16,5 @@ local config = require "config"
 -- Colorscheme
 local ok, _ = pcall(vim.cmd, "colorscheme " .. config.colorscheme)
 if not ok then
-  cmd "colorscheme default"
+  vim.cmd "colorscheme default"
 end

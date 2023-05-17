@@ -85,4 +85,5 @@ local cfg = Config:init {
     },
   },
 }
+
 return cfg

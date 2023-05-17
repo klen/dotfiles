@@ -1,5 +1,7 @@
 -- Helper for users configurations
 
+require "tools/table"
+
 local Config = {}
 Config.__index = function(table, key)
   return table.opts[key]

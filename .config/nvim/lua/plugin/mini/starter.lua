@@ -1,5 +1,6 @@
-local plugins_path = vim.fn.stdpath "data" .. "/site/pack/packer/start"
-local plugins_count = vim.fn.len(vim.fn.globpath(plugins_path, "*", 0, 1))
+local fn = vim.fn
+local plugins_path = fn.stdpath "data" .. "/site/pack/packer/start"
+local plugins_count = fn.len(fn.globpath(plugins_path, "*", 0, 1))
 local default_footer = [[
 Type query to filter items
 <BS> deletes latest character from query

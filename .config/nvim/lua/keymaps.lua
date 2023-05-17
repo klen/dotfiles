@@ -1,4 +1,6 @@
 local tools = require "tools"
+local api = vim.api
+local g = vim.g
 local keymap = vim.keymap
 
 g.mapleader = ","
@@ -55,13 +57,13 @@ keymap.set("t", "<Esc>", "<C-\\><C-n>")
 --  Commands
 --  --------
 
-vim.api.nvim_create_user_command("Reset", "write | :edit", { nargs = 0 })
-vim.api.nvim_create_user_command("Remove", "call delete(expand('%')) | bdelete", { nargs = 0 })
-vim.api.nvim_create_user_command("Make", "vsplit | :terminal make <args>", { nargs = "?" })
-vim.api.nvim_create_user_command("Dashboard", function()
+api.nvim_create_user_command("Reset", "write | :edit", { nargs = 0 })
+api.nvim_create_user_command("Remove", "call delete(expand('%')) | bdelete", { nargs = 0 })
+api.nvim_create_user_command("Make", "vsplit | :terminal make <args>", { nargs = "?" })
+api.nvim_create_user_command("Dashboard", function()
   MiniStarter.open(0)
 end, { nargs = 0 })
-vim.api.nvim_create_user_command("Reload", function(args)
+api.nvim_create_user_command("Reload", function(args)
   tools.reload(args.args)
 end, { nargs = 1 })
 

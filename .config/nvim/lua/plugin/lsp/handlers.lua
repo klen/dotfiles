@@ -1,5 +1,8 @@
+require "tools/table"
+
 local utils = require "plugin.lsp.utils"
 local cfg = require "config"
+local lsp = vim.lsp
 
 return function()
   return {
@@ -17,7 +20,7 @@ return function()
     ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" }),
     ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single" }),
     ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-      local client = vim.lsp.get_client_by_id(ctx.client_id)
+      local client = lsp.get_client_by_id(ctx.client_id)
       local ds_config = cfg:get("lsp.servers." .. client.name .. ".diagnostic")
       if ds_config then
         -- Filter by severity
@@ -33,7 +36,7 @@ return function()
           end, result.diagnostics)
         end
       end
-      vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+      lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
     end,
   }
 
