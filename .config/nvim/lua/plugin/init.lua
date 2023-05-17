@@ -23,9 +23,6 @@ g.loaded_zipPlugin = 1
 require("plugin.packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
-  -- Speed up nvim require and startup time
-  use { "lewis6991/impatient.nvim" }
-
   -- Lua/plugins helpers (must be installed)
   use "nvim-lua/plenary.nvim"
 

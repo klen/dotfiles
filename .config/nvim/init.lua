@@ -2,7 +2,7 @@
 vim.g.start_time = vim.fn.reltime()
 
 -- Speed up Neovim
-pcall(require, "impatient")
+vim.loader.enable()
 
 -- Setup globals
 require "tools/globals"
