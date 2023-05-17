@@ -1,6 +1,11 @@
 return {
   "neovim/nvim-lspconfig",
-  dependencies = "folke/neodev.nvim",
+  dependencies = {
+    { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+    "mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  },
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("neodev").setup {
       -- add any options here, or leave empty to use the default settings
@@ -10,24 +15,49 @@ return {
       -- end,
     }
 
-    local cfg = require("config").diagnostic
-    local utils = require "plugins.lsp.utils"
-    local fn = vim.fn
-
     -- Setup diagnostic
-    vim.diagnostic.config(cfg.config)
+    local cfg = require "config"
+    local diagnostic = cfg.diagnostic
+    vim.diagnostic.config(diagnostic.config)
 
     -- Setup diagnostic signs
-    fn.sign_define("DiagnosticSignError", { text = cfg.signs[1], texthl = "DiagnosticSignError" })
-    fn.sign_define("DiagnosticSignWarn", { text = cfg.signs[2], texthl = "DiagnosticSignWarn" })
-    fn.sign_define("DiagnosticSignInfo", { text = cfg.signs[3], texthl = "DiagnosticSignInfo" })
-    fn.sign_define("DiagnosticSignHint", { text = cfg.signs[4], texthl = "DiagnosticSignHint" })
+    local fn = vim.fn
+    fn.sign_define(
+      "DiagnosticSignError",
+      { text = diagnostic.signs[1], texthl = "DiagnosticSignError" }
+    )
+    fn.sign_define(
+      "DiagnosticSignWarn",
+      { text = diagnostic.signs[2], texthl = "DiagnosticSignWarn" }
+    )
+    fn.sign_define(
+      "DiagnosticSignInfo",
+      { text = diagnostic.signs[3], texthl = "DiagnosticSignInfo" }
+    )
+    fn.sign_define(
+      "DiagnosticSignHint",
+      { text = diagnostic.signs[4], texthl = "DiagnosticSignHint" }
+    )
 
     -- Auto populate quickfix
+    local utils = require "plugins.lsp.utils"
     vim.api.nvim_create_augroup("lsp", { clear = true })
     vim.api.nvim_create_autocmd(
       "DiagnosticChanged",
       { pattern = "*", callback = utils.diagnostics, group = "lsp" }
     )
+
+    -- Setup servers
+    local lspconfig = require "lspconfig"
+    local generate_handlers = require "plugins.lsp.handlers"
+    local params = {
+      on_attach = require "plugins.lsp.on_attach",
+      handlers = generate_handlers(),
+      capabilities = require "plugins.lsp.capabilities",
+      flags = { debounce_text_changes = 150 },
+    }
+    for _, server in ipairs(cfg.lsp.ensure_installed) do
+      lspconfig[server].setup(params)
+    end
   end,
 }

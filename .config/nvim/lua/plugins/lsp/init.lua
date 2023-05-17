@@ -1,10 +1,23 @@
 return {
 
-  -- Support LSP
+  -- Install and tune LSP servers
+  -- require "plugins/lsp/nvim-lsp-installer",
+  {
+    "williamboman/mason.nvim",
+    lazy = true,
+    config = function()
+      require("mason").setup()
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    config = function()
+      local cfg = require "config"
+      require("mason-lspconfig").setup { ensure_installed = cfg.lsp.ensure_installed }
+    end,
+  },
   require "plugins/lsp/nvim-lspconfig",
-
-  -- Install LSP servers
-  require "plugins/lsp/nvim-lsp-installer",
 
   -- Support non-lsp formatters/linters/etc
   require "plugins/lsp/null-ls",

@@ -55,6 +55,7 @@ local cfg = Config:init {
   ---------------
   lsp = {
     format_on_save = true,
+    ensure_installed = { "pyright", "tsserver", "lua_ls", "rust_analyzer" }, -- servers to install
     servers = {
       tsserver = {
         diagnostic = {

@@ -42,7 +42,7 @@ return function(client, bufnr)
     ["<space>r"] = { lsp.buf.rename, "Refactoring/Rename" },
     ["<space>a"] = { lsp.buf.code_action, "Run a code action" },
     ["<space>f"] = { lsp.buf.formatting, "Format code" },
-    ["<space>q"] = { vim.diagnostic.set_loclist, "Fill location list" },
+    ["<space>q"] = { vim.diagnostic.setqflist, "Fill quickfix list" },
     ["<space>wa"] = { lsp.add_workspace_folder, "Add workspace folder" },
     ["<space>wr"] = { lsp.remove_workspace_folder, "Remove workspace folder" },
     ["<space>wl"] = {
