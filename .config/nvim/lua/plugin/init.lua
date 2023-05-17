@@ -70,7 +70,7 @@ require("plugin.packer").startup(function(use)
   use {
     tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local"),
     config = function()
-      require("config-local").setup()
+      require("config-local").setup { lookup_parents = true }
     end,
   }
 
