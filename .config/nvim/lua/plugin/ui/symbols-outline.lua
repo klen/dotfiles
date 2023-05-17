@@ -54,7 +54,7 @@ return {
       },
     }
   end,
-  setup = function()
+  init = function()
     local cfg = require "config"
     cfg.keymaps["<leader>ds"] = { "<cmd>SymbolsOutline<cr>", "Explore symbols" }
   end,

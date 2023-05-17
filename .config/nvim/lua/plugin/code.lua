@@ -28,7 +28,7 @@ return {
   "lewis6991/gitsigns.nvim",
   {
     "tpope/vim-fugitive",
-    setup = function()
+    init = function()
       local cfg = require "config"
       cfg.keymaps["<leader>ga"] = { "<cmd>Gwrite<cr>", "Git add" }
       cfg.keymaps["<leader>gb"] = { "<cmd>Git blame<cr>", "Git blame" }
@@ -46,7 +46,7 @@ return {
   -- Snippets
   {
     "L3MON4D3/LuaSnip",
-    requires = { "rafamadriz/friendly-snippets" },
+    dependencies = { "rafamadriz/friendly-snippets" },
   },
 
   -- Completion

@@ -1,81 +1,54 @@
--- Disable some builtin vim plugins
-local g = vim.g
+local tools = require "tools"
 
-g.loaded_2html_plugin = 1
-g.loaded_getscript = 1
-g.loaded_getscriptPlugin = 1
-g.loaded_gzip = 1
-g.loaded_logipat = 1
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
-g.loaded_netrwSettings = 1
-g.loaded_netrwFileHandlers = 1
-g.loaded_matchit = 1
-g.loaded_tar = 1
-g.loaded_tarPlugin = 1
-g.loaded_rrhelper = 1
-g.loaded_spellfile_plugin = 1
-g.loaded_vimball = 1
-g.loaded_vimballPlugin = 1
-g.loaded_zip = 1
-g.loaded_zipPlugin = 1
+require("plugin.lazy").setup {
 
-require("plugin.packer").startup(function(use)
-  use "wbthomason/packer.nvim"
-
-  -- Lua/plugins helpers (must be installed)
-  use "nvim-lua/plenary.nvim"
+  -- Lua/plugins helpers (has to be installed)
+  "nvim-lua/plenary.nvim",
 
   -- TreeSitter (syntax, folding)
-  use {
-    {
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+  },
+  "nvim-treesitter/nvim-treesitter-textobjects",
+  {
+    "nvim-treesitter/playground",
+    cmd = {
+      "TSPlaygroundToggle",
+      "TSHighlightCapturesUnderCursor",
     },
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    {
-      "nvim-treesitter/playground",
-      cmd = {
-        "TSPlaygroundToggle",
-        "TSHighlightCapturesUnderCursor",
-      },
-    },
-  }
+  },
 
   -- LSP (autocomplete, code browsing, diagnostic)
-  use(require "plugin/lsp")
+  require "plugin/lsp",
 
   -- UI
-  use(require "plugin/ui")
+  require "plugin/ui",
 
   -- Dashboard, pairs, statusline, cursorword
-  use(require "plugin/mini")
+  require "plugin/mini",
 
   -- Code (Syntax/Completion/Snippets/Languages)
-  use(require "plugin/code")
+  require "plugin/code",
 
-  -- Color schemes.
-  use(require "plugin/colors")
+  -- Color schemes
+  require "plugin/colors",
 
   -- Rest client
-  use "NTBBloodbath/rest.nvim"
+  "NTBBloodbath/rest.nvim",
 
   -- Local plugins (in development)
-  local tools = require "tools"
-
-  -- Local configs
-  use {
-    tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local"),
+  tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local", {
     config = function()
       require("config-local").setup { lookup_parents = true }
     end,
-  }
+  }),
 
   -- Run code/repl
-  use {
-    "~/projects/nvim/runner",
+  {
+    dir = "~/projects/nvim/runner",
     config = function()
       require("runner").setup()
     end,
-  }
-end)
+  },
+}

@@ -2,7 +2,7 @@
 -- https://github.com/Mofiqul/vscode.nvim
 return {
   "Mofiqul/vscode.nvim",
-  setup = function()
+  init = function()
     vim.g.vscode_style = "dark"
   end,
 }

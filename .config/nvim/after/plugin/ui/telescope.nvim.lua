@@ -48,10 +48,15 @@ plug.setup {
 }
 
 vim.keymap.set("n", "<C-Space>", "<cmd>Telescope<CR>", {})
+
+-- Configure previewer
 vim.api.nvim_create_autocmd("User", {
   pattern = "TelescopePreviewerLoaded",
-  command = "setlocal wrap linebreak nolist",
-  once = true,
+  callback = function(args)
+    vim.wo.wrap = true
+    vim.wo.linebreak = true
+    vim.wo.list = false
+  end,
 })
 
 local cfg = require "config"

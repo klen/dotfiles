@@ -8,7 +8,7 @@ return {
     "NvimTreeToggle",
     "NvimTreeFindFile",
   },
-  setup = function()
+  init = function()
     local cfg = require "config"
     cfg.keymaps["<leader>dd"] = { "<cmd>NvimTreeFocus<cr>", "Open/focus Explorer" }
     cfg.keymaps["<leader>df"] = { "<cmd>NvimTreeFindFile<cr>", "Locate File" }

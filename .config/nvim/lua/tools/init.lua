@@ -23,8 +23,12 @@ function M.rrequire(module)
 end
 
 -- Check for the given path exists
-function M.local_plugin(path, source)
-  return (fn.isdirectory(fn.expand(path)) == 1) and path or source
+function M.local_plugin(path, source, opts)
+  return vim.tbl_extend(
+    "force",
+    opts or {},
+    (fn.isdirectory(fn.expand(path)) == 1) and { dir = path } or { url = source }
+  )
 end
 
 -- Use vimgrep to search a word

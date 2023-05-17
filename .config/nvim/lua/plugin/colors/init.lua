@@ -12,11 +12,11 @@ return {
   "sainnhe/sonokai",
   {
     "nanotech/jellybeans.vim",
-    opt = true,
+    lazy = true,
   },
   {
     "mcchrish/zenbones.nvim",
-    requires = { "rktjmp/lush.nvim" },
+    dependencies = { "rktjmp/lush.nvim" },
   },
 
   require "plugin/colors/apprentice",

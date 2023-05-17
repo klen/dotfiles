@@ -2,7 +2,12 @@
 vim.g.start_time = vim.fn.reltime()
 
 -- Speed up Neovim
-vim.loader.enable()
+if vim.loader then
+  vim.loader.enable()
+end
+
+vim.g.mapleader = ","
+vim.g.maplocalleader = " "
 
 -- Plugins
 require "plugin"
@@ -14,7 +19,4 @@ require "keymaps"
 local config = require "config"
 
 -- Colorscheme
-local ok, _ = pcall(vim.cmd, "colorscheme " .. config.colorscheme)
-if not ok then
-  vim.cmd "colorscheme default"
-end
+pcall(vim.cmd, "colorscheme " .. config.colorscheme)

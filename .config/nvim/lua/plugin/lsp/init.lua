@@ -26,7 +26,7 @@ return {
   -- Configure diagnosticls
   {
     "creativenull/diagnosticls-configs-nvim",
-    requires = { "neovim/nvim-lspconfig" },
+    dependencies = { "neovim/nvim-lspconfig" },
   },
 
   {

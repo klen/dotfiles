@@ -1,6 +1,6 @@
 return {
   "williamboman/nvim-lsp-installer",
-  requires = "neovim/nvim-lspconfig",
+  dependencies = "neovim/nvim-lspconfig",
   config = function()
     require("nvim-lsp-installer").on_server_ready(function(server)
       -- Basic params

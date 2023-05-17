@@ -1,6 +1,6 @@
 return {
   "nvim-lua/lsp-status.nvim",
-  requires = {
+  dependencies = {
     "neovim/nvim-lspconfig",
   },
   config = function()

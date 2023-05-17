@@ -1,10 +1,6 @@
 local tools = require "tools"
 local api = vim.api
-local g = vim.g
 local keymap = vim.keymap
-
-g.mapleader = ","
-g.maplocalleader = " "
 
 -- Navigation
 keymap.set("n", "k", "gk")

@@ -2,8 +2,8 @@
 -- https://github.com/adisen99/codeschool.nvim
 return {
   "adisen99/codeschool.nvim",
-  requires = { "rktjmp/lush.nvim" },
-  setup = function()
+  dependencies = { "rktjmp/lush.nvim" },
+  init = function()
     vim.g.codeschool_contrast_dark = "hard" -- hard|medium|soft
   end,
 }

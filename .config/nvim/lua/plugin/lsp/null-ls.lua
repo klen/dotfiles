@@ -1,6 +1,6 @@
 return {
   "jose-elias-alvarez/null-ls.nvim",
-  requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   config = function()
     local cfg = require "config"
     local null_ls = require "null-ls"

@@ -2,7 +2,7 @@ return {
   -- Highly extendable fuzzy finder over lists
   {
     "nvim-telescope/telescope.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
 
   -- File explorer tree.
