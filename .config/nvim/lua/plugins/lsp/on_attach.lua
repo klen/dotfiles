@@ -1,7 +1,7 @@
 require "tools/table"
 
 local cfg = require "config"
-local utils = require "plugin.lsp.utils"
+local utils = require "plugins.lsp.utils"
 local api = vim.api
 local lsp = vim.lsp
 
@@ -47,7 +47,7 @@ return function(client, bufnr)
     ["<space>wr"] = { lsp.remove_workspace_folder, "Remove workspace folder" },
     ["<space>wl"] = {
       function()
-        print(vim.inspect(lsp.buf.list_workspace_folders()))
+        vim.print(lsp.buf.list_workspace_folders())
       end,
       "List workspace folders",
     },

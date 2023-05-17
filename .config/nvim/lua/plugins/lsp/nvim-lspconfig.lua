@@ -11,7 +11,7 @@ return {
     }
 
     local cfg = require("config").diagnostic
-    local utils = require "plugin.lsp.utils"
+    local utils = require "plugins.lsp.utils"
     local fn = vim.fn
 
     -- Setup diagnostic

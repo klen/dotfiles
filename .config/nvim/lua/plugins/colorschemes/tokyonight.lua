@@ -2,9 +2,8 @@
 -- https://github.com/folke/tokyonight.nvim
 return {
   "folke/tokyonight.nvim",
-  init = function()
-    vim.g.tokyonight_style = "night" -- night|day|storm
-    vim.g.tokyonight_italic_comments = false
-    vim.g.tokyonight_italic_keywords = false
-  end,
+  lazy = true,
+  opts = {
+    style = "night", -- night|day|storm
+  },
 }

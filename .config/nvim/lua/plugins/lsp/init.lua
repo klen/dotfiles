@@ -1,16 +1,16 @@
 return {
 
   -- Support LSP
-  require "plugin/lsp/nvim-lspconfig",
+  require "plugins/lsp/nvim-lspconfig",
 
   -- Install LSP servers
-  require "plugin/lsp/nvim-lsp-installer",
+  require "plugins/lsp/nvim-lsp-installer",
 
   -- Support non-lsp formatters/linters/etc
-  require "plugin/lsp/null-ls",
+  require "plugins/lsp/null-ls",
 
   -- -- Support LSP status for statusline
-  -- require "plugin/lsp/lsp-status",
+  -- require "plugins/lsp/lsp-status",
 
   -- Support LSP colors
   "folke/lsp-colors.nvim",

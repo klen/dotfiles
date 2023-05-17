@@ -2,6 +2,7 @@ require "tools/table"
 
 local M = {}
 local api = vim.api
+local cmd = vim.cmd
 local fn = vim.fn
 local lsp = vim.lsp
 
@@ -108,7 +109,7 @@ function M.jumpLocation(location, offset_encoding)
     return
   end
   if api.nvim_get_current_buf() ~= vim.uri_to_bufnr(uri) then
-    vim.cmd "abo split"
+    cmd "abo split"
   end
   lsp.util.jump_to_location(location, offset_encoding)
 end

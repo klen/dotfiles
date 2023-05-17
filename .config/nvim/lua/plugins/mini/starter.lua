@@ -34,7 +34,6 @@ starter.setup {
   end,
   footer = function()
     local lazy_stats = require("lazy").stats()
-    vim.print(lazy_stats)
 
     return (
       "Loaded "

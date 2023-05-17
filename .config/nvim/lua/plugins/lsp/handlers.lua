@@ -1,6 +1,6 @@
 require "tools/table"
 
-local utils = require "plugin.lsp.utils"
+local utils = require "plugins.lsp.utils"
 local cfg = require "config"
 local lsp = vim.lsp
 

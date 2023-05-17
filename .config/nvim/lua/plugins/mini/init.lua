@@ -25,12 +25,12 @@ return {
     }
 
     -- Minimal, fast, and flexible start screen
-    require "plugin.mini.starter"
+    require "plugins.mini.starter"
 
     -- Minimal and fast statusline
-    require "plugin.mini.statusline"
+    require "plugins.mini.statusline"
 
-    -- require "plugin.mini.sessions"
+    -- require "plugins.mini.sessions"
 
     -- vim.highlight.create("MiniStatuslineDevinfo", { guibg = "#171717" }, false)
     -- vim.highlight.create("MiniStatuslineFilename", {}, true)

@@ -4,15 +4,15 @@ return {
   config = function()
     require("nvim-lsp-installer").on_server_ready(function(server)
       -- Basic params
-      local generate_handlers = require "plugin.lsp.handlers"
+      local generate_handlers = require "plugins.lsp.handlers"
       local params = {
-        on_attach = require "plugin.lsp.on_attach",
+        on_attach = require "plugins.lsp.on_attach",
         handlers = generate_handlers(),
-        capabilities = require "plugin.lsp.capabilities",
+        capabilities = require "plugins.lsp.capabilities",
         flags = { debounce_text_changes = 150 },
       }
 
-      local ok, server_init = pcall(require, "plugin.lsp.servers." .. server.name)
+      local ok, server_init = pcall(require, "plugins.lsp.servers." .. server.name)
       if ok then
         params = server_init(params)
       end

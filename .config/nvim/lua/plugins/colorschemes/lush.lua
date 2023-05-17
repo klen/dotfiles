@@ -3,12 +3,11 @@
 return {
   "rktjmp/lush.nvim",
   config = function()
-    -- Lushify
-    vim.cmd [[
-        augroup packer_user_config
-          autocmd!
-          autocmd BufEnter **/colors/*.lua Lushify
-        augroup end
-      ]]
+    vim.api.nvim_create_autocmd("BufEnter", {
+      pattern = "**/colors/*.lua",
+      callback = function()
+        --   require("lush").ify()
+      end,
+    })
   end,
 }

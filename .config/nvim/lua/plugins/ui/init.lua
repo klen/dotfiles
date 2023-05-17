@@ -6,33 +6,33 @@ return {
   },
 
   -- File explorer tree.
-  require "plugin/ui/nvim-tree",
+  require "plugins/ui/nvim-tree",
 
   -- Code explorer
-  require "plugin/ui/symbols-outline",
+  require "plugins/ui/symbols-outline",
 
   -- Better loclist/qflist
-  require "plugin/ui/nvim-bfq",
+  require "plugins/ui/nvim-bfq",
 
   -- Better scrolling
-  require "plugin/ui/neoscroll",
-  require "plugin/ui/nvim-scrollview",
+  require "plugins/ui/neoscroll",
+  require "plugins/ui/nvim-scrollview",
 
   -- Better notifies
-  require "plugin/ui/nvim-notify",
+  require "plugins/ui/nvim-notify",
 
   -- UI Helpers (vim.ui.input, vim.ui.select)
-  require "plugin/ui/dressing",
+  require "plugins/ui/dressing",
 
   -- Manage multiple terminal windows
-  require "plugin/ui/toggle-term",
+  require "plugins/ui/toggle-term",
 
   -- Indent guides
-  require "plugin/ui/indent-blankline",
+  require "plugins/ui/indent-blankline",
 
   -- -- Search Dash.app from your Neovim fuzzy finder
-  -- require "plugin/ui/dash",
+  -- require "plugins/ui/dash",
 
   -- Show key/operators maps
-  require "plugin/ui/which-key",
+  require "plugins/ui/which-key",
 }

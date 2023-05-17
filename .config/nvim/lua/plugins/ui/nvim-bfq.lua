@@ -7,7 +7,7 @@ return {
 
   -- Configure
   config = function()
-    cmd [[
+    vim.cmd [[
       hi BqfPreviewBorder guifg=#50a14f ctermfg=71
       hi link BqfPreviewRange Search
     ]]

@@ -7,8 +7,8 @@ end
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
--- Plugins
-require "plugin"
+-- Setup plugins with https://github.com/folke/lazy.nvim
+require "tools/lazy"
 
 -- Mapping
 require "keymaps"
