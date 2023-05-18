@@ -22,14 +22,13 @@ autocmd({ "TermOpen" }, {
   group = "vimrc",
 })
 
--- Highlight yank (something doesnt work)
--- TODO: Disabled because an error in Nvim 7
--- autocmd({ "TextYankPost" }, {
---   pattern = "*",
---   callback = function()
---     vim.highlight.on_yank { higroup = "IncSearch", timeout = 50, on_visual = false }
---   end,
--- })
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = "vimrc",
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
 
 -- Restore cursor position
 autocmd("BufWinEnter", {

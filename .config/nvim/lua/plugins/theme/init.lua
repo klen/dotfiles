@@ -3,7 +3,7 @@ vim.opt.background = cfg.background
 
 return {
   -- Define Neovim themes as a DSL in lua
-  require "plugins/colorschemes/lush",
+  require "plugins/theme/lush",
 
   -- Colorschemes
   "ray-x/aurora",
@@ -20,10 +20,10 @@ return {
     lazy = true,
   },
 
-  require "plugins/colorschemes/apprentice",
-  require "plugins/colorschemes/codeschool",
-  require "plugins/colorschemes/material",
-  require "plugins/colorschemes/nordic",
-  require "plugins/colorschemes/tokyonight",
-  require "plugins/colorschemes/vscode",
+  require "plugins/theme/apprentice",
+  require "plugins/theme/codeschool",
+  require "plugins/theme/material",
+  require "plugins/theme/nordic",
+  require "plugins/theme/tokyonight",
+  require "plugins/theme/vscode",
 }

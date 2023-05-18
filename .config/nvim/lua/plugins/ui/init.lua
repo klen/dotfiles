@@ -1,9 +1,6 @@
 return {
   -- Highly extendable fuzzy finder over lists
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
+  require "plugins/ui/telescope",
 
   -- File explorer tree.
   require "plugins/ui/nvim-tree",

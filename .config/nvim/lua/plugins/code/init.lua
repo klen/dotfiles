@@ -50,18 +50,10 @@ return {
   }),
 
   -- Snippets
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = { "rafamadriz/friendly-snippets" },
-  },
+  require "plugins/code/luasnip",
 
   -- Completion
-  "hrsh7th/nvim-cmp", -- completion engine
-  "hrsh7th/cmp-buffer", -- Buffer completion
-  "hrsh7th/cmp-path", -- Path completion
-  "hrsh7th/cmp-nvim-lsp", -- LSP completion
-  "hrsh7th/cmp-nvim-lua", -- VIM lua API completion
-  "saadparwaiz1/cmp_luasnip", -- Snippets completion
+  require "plugins/code/nvim-cmp",
 
   -- Python
   {
@@ -73,7 +65,7 @@ return {
   "kchmck/vim-coffee-script",
 
   -- Rest client
-  "NTBBloodbath/rest.nvim",
+  require "plugins/code/rest",
 
   -- Local plugins (in development)
   tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local", {
