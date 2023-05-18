@@ -49,14 +49,18 @@ return {
 
     -- Setup servers
     local lspconfig = require "lspconfig"
-    local generate_handlers = require "plugins.lsp.handlers"
+    local generate_handlers = require "plugins.lsp.utils.handlers"
     local params = {
-      on_attach = require "plugins.lsp.on_attach",
+      on_attach = require "plugins.lsp.utils.on_attach",
       handlers = generate_handlers(),
-      capabilities = require "plugins.lsp.capabilities",
+      capabilities = require "plugins.lsp.utils.capabilities",
       flags = { debounce_text_changes = 150 },
     }
     for _, server in ipairs(cfg.lsp.ensure_installed) do
+      local ok, server_init = pcall(require, "plugins.lsp.servers." .. server)
+      if ok then
+        params = server_init(params)
+      end
       lspconfig[server].setup(params)
     end
   end,

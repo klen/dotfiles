@@ -8,9 +8,9 @@ return {
     null_ls.setup {
       -- debug = cfg.debug,
       debug = true,
-      on_attach = require "plugins.lsp.on_attach",
+      on_attach = require "plugins.lsp.utils.on_attach",
       ---@diagnostic disable-next-line: redundant-parameter
-      handlers = require "plugins.lsp.handlers" "null-ls",
+      handlers = require "plugins.lsp.utils.handlers" "null-ls",
 
       diagnostics_format = "#{c} #{m} (#{s})",
       sources = {

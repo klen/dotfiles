@@ -15,10 +15,10 @@ return function(defaults)
     },
 
     -- Auto load VIRTUALENV
-    before_init = function(_, config)
-      if vim.env.VIRTUAL_ENV then
-        config.settings.python.pythonPath = vim.env.VIRTUAL_ENV .. "/bin/python"
-      end
-    end,
+    -- before_init = function(_, config)
+    --   if vim.env.VIRTUAL_ENV then
+    --     config.settings.python.pythonPath = vim.env.VIRTUAL_ENV .. "/bin/python"
+    --   end
+    -- end,
   })
 end

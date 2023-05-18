@@ -54,26 +54,24 @@ local cfg = Config:init {
   -- LSP settings
   ---------------
   lsp = {
+    -- Default options (can be overriden per server)
     format_on_save = true,
-    ensure_installed = { "pyright", "tsserver", "lua_ls", "rust_analyzer" }, -- servers to install
+
+    -- Servers to install
+    ensure_installed = {
+      "bashls",
+      "dockerls",
+      "jsonls",
+      "lua_ls",
+      "pyright",
+      "rust_analyzer",
+      "taplo",
+      "tsserver",
+      "yamlls",
+    },
+
+    -- Configure servers
     servers = {
-      tsserver = {
-        diagnostic = {
-          -- Disable codes
-          disable = { 8006, 8008, 8010, 8011, 7006 },
-          severity = { min = severity.INFO },
-        },
-        capabilities = {
-          documentFormattingProvider = false,
-          documentRangeFormattingProvider = false,
-        },
-      },
-      lua_ls = {
-        capabilities = {
-          documentFormattingProvider = false,
-          documentRangeFormattingProvider = false,
-        },
-      },
       pyright = {
         capabilities = {
           documentFormattingProvider = false,
@@ -81,6 +79,23 @@ local cfg = Config:init {
         },
         diagnostic = {
           severity = { min = severity.INFO },
+        },
+      },
+      tsserver = {
+        capabilities = {
+          documentFormattingProvider = false,
+          documentRangeFormattingProvider = false,
+        },
+        diagnostic = {
+          -- Disable codes
+          disable = { 8006, 8008, 8010, 8011, 7006 },
+          severity = { min = severity.INFO },
+        },
+      },
+      lua_ls = {
+        capabilities = {
+          documentFormattingProvider = false,
+          documentRangeFormattingProvider = false,
         },
       },
     },
