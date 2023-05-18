@@ -1,5 +1,6 @@
 local tools = require "tools"
 local breakpoint_cmd = "breakpoint()"
+local cmd = vim.cmd
 local fn = vim.fn
 
 local function breakpoint()
