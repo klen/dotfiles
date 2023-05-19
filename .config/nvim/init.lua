@@ -17,4 +17,4 @@ require "keymaps"
 local config = require "config"
 
 -- Colorscheme
-pcall(vim.cmd, "colorscheme " .. config.colorscheme)
+pcall(vim.cmd, "colorscheme " .. config.colorscheme) ---@diagnostic disable-line
