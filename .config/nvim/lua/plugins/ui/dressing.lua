@@ -3,18 +3,14 @@
 return {
   "stevearc/dressing.nvim",
   event = "VeryLazy",
-  config = function()
-    require("dressing").setup {
-      input = {
-        anchor = "NW",
-        max_width = { 140, 0.9 },
-        min_width = { 40, 0.6 },
-      },
-      -- select = {
-      --   telescope = {
-      --     theme = "cursor",
-      --   },
-      -- },
-    }
-  end,
+  opts = {
+    input = {
+      anchor = "NW",
+      max_width = { 140, 0.9 },
+      min_width = { 40, 0.6 },
+    },
+    select = {
+      backend = { "nui", "telescope", "builtin" },
+    },
+  },
 }

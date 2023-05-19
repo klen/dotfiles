@@ -9,16 +9,19 @@ return {
     local cfg = require "config"
     cfg.keymaps["<leader>dd"] = { "<cmd>Neotree toggle<cr>", "Open files exporer" }
     cfg.keymaps["<leader>df"] = { "<cmd>Neotree reveal<cr>", "Locate the current File" }
+    cfg.keymaps["<leader>dg"] = { "<cmd>Neotree git_status reveal<cr>", "Locate the current File" }
     cfg.keymaps["<leader>ds"] =
       { "<cmd>Neotree document_symbols position=right<cr>", "Locate the current File" }
     cfg.keymaps["<leader>db"] =
       { "<cmd>Neotree toggle source=buffers<cr>", "Open buffers explorer" }
+
+    vim.g.neo_tree_remove_legacy_commands = 1
   end,
   opts = {
     sources = {
       "filesystem",
       "buffers",
-      -- "git_status",
+      "git_status",
       "document_symbols",
     },
     window = {
