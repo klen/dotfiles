@@ -13,13 +13,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setup plugins
-local lazy = require "lazy"
-lazy.setup "plugins"
-
 -- Setup mappings
+local lazy = require "lazy"
 local cfg = require "config"
 cfg.keymaps["<leader>pu"] = { lazy.update, "Update your plugins" }
 cfg.keymaps["<leader>pp"] = { lazy.home, "Plugins Status" }
 cfg.keymaps["<leader>pc"] = { lazy.clean, "Clean unused plugins" }
 cfg.keymaps["<leader>pb"] = { lazy.build, "Build your plugins" }
+
+return lazy

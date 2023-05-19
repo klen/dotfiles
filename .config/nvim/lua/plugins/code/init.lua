@@ -64,6 +64,9 @@ return {
   -- CoffeeScript
   "kchmck/vim-coffee-script",
 
+  -- Git support
+  require "plugins/code/git",
+
   -- Rest client
   require "plugins/code/rest",
 

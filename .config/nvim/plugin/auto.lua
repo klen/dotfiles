@@ -23,12 +23,13 @@ autocmd({ "TermOpen" }, {
 })
 
 -- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = "vimrc",
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- disabled because of errors
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   group = "vimrc",
+--   callback = function()
+--     vim.highlight.on_yank()
+--   end,
+-- })
 
 -- Restore cursor position
 autocmd("BufWinEnter", {

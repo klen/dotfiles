@@ -3,10 +3,11 @@ return {
   require "plugins/ui/telescope",
 
   -- File explorer tree.
-  require "plugins/ui/nvim-tree",
+  -- require "plugins/ui/nvim-tree",
+  require "plugins/ui/neo-tree",
 
   -- Code explorer
-  require "plugins/ui/symbols-outline",
+  -- require "plugins/ui/symbols-outline",
 
   -- Better loclist/qflist
   require "plugins/ui/nvim-bfq",

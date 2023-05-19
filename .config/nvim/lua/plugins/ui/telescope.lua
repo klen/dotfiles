@@ -52,7 +52,7 @@ return {
     { "<leader>ft", "<cmd>Telescope<cr>", desc = "Telescope" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
     { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Grep (root dir)" },
-    { "<leader>fb", "<cmd>Telescope buffers", desc = "Show buffers" },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Show buffers" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
     { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix" },
