@@ -29,6 +29,7 @@ return {
         ["o"] = "toggle_node",
         ["<c-x>"] = "open_split",
         ["<c-v>"] = "open_vsplit",
+        ["I"] = "toggle_hidden",
       },
     },
     document_symbols = {
