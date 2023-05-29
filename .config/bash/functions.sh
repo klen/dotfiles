@@ -24,10 +24,7 @@ hh () {
 
     echo "colors                              show ansi colors table"
 
-    echo "config                              edit dotfiles"
-    echo "vim-conf                            edit vim configuration"
-    echo "nvim-conf                           edit neovim configuration"
-    echo "kitty-conf                          edit kitty configuration"
+    echo "dotfiles                            edit dotfiles [bash|nvim|vim|...]"
 }
 
 # Find file by template
@@ -68,7 +65,7 @@ ffr() {
 # Show current user processes
 psm() { ps $@ -u $USER -o pid,user,%cpu,%mem,bsdtime,command ; }
 
-psa() { ps fax -o pid,ppid,user,%cpu,%mem,bsdtime,command ; } 
+psa() { ps fax -o pid,ppid,user,%cpu,%mem,bsdtime,command ; }
 
 # Show tree of current user processes
 psmt() { psm f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
@@ -129,7 +126,7 @@ pk () {
             tgz)   	tar czvf $2.tar.gz  $2      ;;
             tar)  	tar cpvf $2.tar  $2         ;;
             bz2)	bzip $2             ;;
-            gz)		gzip -c -9 -n $2 > $2.gz    ;;	
+            gz)		gzip -c -9 -n $2 > $2.gz    ;;
             zip)   	zip -r $2.zip $2    ;;
             7z)    	7z a $2.7z $2               ;;
             *)     	echo "'$1' cannot be packed via pk()" ;;
@@ -157,18 +154,30 @@ colors () {
         echo -e "\033[0;${i}m 0;${i} | \033[1;${i}m 1;${i}"
         echo -e ""
     done | column -c 80 -s ' ';
-   # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m" 
+   # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m"
 }
 
 # Setup editors
-conf-vim () {
-    cd $HOME/.home/.vim
-    vim init.vim
-}
-
-conf-nvim () {
-    cd $HOME/.home/.config/nvim
-    nvim init.lua
+dotfiles () {
+  if [ $1 ] ; then
+    echo "Setting up dotfiles for $1"
+    case $1 in
+        nvim)
+          cd $XDG_CONFIG_HOME/nvim
+          nvim $XDG_CONFIG_HOME/nvim/init.lua
+          ;;
+        vim)
+          cd $XDG_CONFIG_HOME/vim
+          vim $XDG_CONFIG_HOME/vim/init.vim
+          ;;
+        *)
+          cd $XDG_CONFIG_HOME/$1
+          ;;
+    esac
+  else
+    cd $XDG_CONFIG_HOME
+    $EDITOR $XDG_CONFIG_HOME/bash/bashrc
+  fi
 }
 
 conf-kitty () {

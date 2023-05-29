@@ -6,7 +6,8 @@
 # vim:ft=sh:fdm=marker
 
 # Load env
-source $HOME/.config/bash/env.sh
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+source $XDG_CONFIG_HOME/bash/env.sh
 
 # Setup path
 source $XDG_CONFIG_HOME/bash/path.sh
