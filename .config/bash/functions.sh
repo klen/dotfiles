@@ -175,8 +175,7 @@ dotfiles () {
           ;;
     esac
   else
-    cd $XDG_CONFIG_HOME
-    $EDITOR $XDG_CONFIG_HOME/bash/bashrc
+    cd ~/dotfiles
   fi
 }
 
