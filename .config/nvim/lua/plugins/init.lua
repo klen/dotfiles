@@ -9,4 +9,5 @@ lazy.setup {
   require "plugins/lsp",
   require "plugins/code",
   require "plugins/theme",
+  require "plugins/obsidian",
 }

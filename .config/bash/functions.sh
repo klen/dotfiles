@@ -24,7 +24,7 @@ hh () {
 
     echo "colors                              show ansi colors table"
 
-    echo "dotfiles                            edit dotfiles [bash|nvim|vim|...]"
+    echo "dotfiles [TYPE]                     edit dotfiles [bash|nvim|vim|...]"
 }
 
 # Find file by template
@@ -178,21 +178,6 @@ dotfiles () {
     cd $XDG_CONFIG_HOME
     $EDITOR $XDG_CONFIG_HOME/bash/bashrc
   fi
-}
-
-conf-kitty () {
-    cd $HOME/.home/.config/kitty
-    $EDITOR kitty.conf
-}
-
-conf-bash () {
-    cd $HOME/.home/.config/bash
-    $EDITOR main.sh
-}
-
-conf-home () {
-    cd $HOME/.home
-    $EDITOR Makefile
 }
 
 cdp () { cd $1; }

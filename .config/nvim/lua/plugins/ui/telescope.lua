@@ -57,6 +57,7 @@ return {
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
     { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix" },
     { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find word" },
+    { "<leader>fm", "<cmd>Telescope keymaps<cr>", desc = "Find keymaps" },
     { "<leader>gl", "<cmd>Telescope git_bcommits<cr>", desc = "Git log file" },
     { "<leader>gL", "<cmd>Telescope git_commits<cr>", desc = "Git log" },
     {

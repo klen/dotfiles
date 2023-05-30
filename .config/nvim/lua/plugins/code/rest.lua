@@ -4,9 +4,9 @@ return {
   "NTBBloodbath/rest.nvim",
   ft = "http",
   keys = {
-    { "<leader>rr", "<plug>RestNvim", { buffer = true } },
-    { "<leader>rp", "<plug>RestNvimPreview", { buffer = true } },
-    { "<leader>rl", "<plug>RestNvimLast", { buffer = true } },
+    { "<leader>rr", "<plug>RestNvim", buffer = true, desc = "Run request" },
+    { "<leader>rp", "<plug>RestNvimPreview", buffer = true, desc = "Preview request" },
+    { "<leader>rl", "<plug>RestNvimLast", buffer = true, desc = "Replay last request" },
   },
   opts = {
     -- Open request results in a horizontal split
