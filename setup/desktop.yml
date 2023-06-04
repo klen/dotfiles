@@ -4,6 +4,7 @@
     - community.general.homebrew_cask: name={{item}}
       with_items:
         - alfred            # UI
+        - appcleaner        # Clean applications
         - calibre           # Books Manager
         - docker            # Utilities
         - google-chrome     # Browser
@@ -16,12 +17,12 @@
         - keepingyouawake   # Keep Mac awake
         - lulu              # Firewall
         - obsidian          # Knowledge base
-        - qbittorrent       # Torrent Client
         - rectangle         # Window manager
         - slack             # Messenger
         - steam             # Games Store and Manager
         - telegram          # Messenger
         - the-unarchiver    # Archive manager
+        - transmission      # Lightweight Bittorrent client
       environment:
         HOMEBREW_CASK_OPTS: --appdir=/Applications
 
