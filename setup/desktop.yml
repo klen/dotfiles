@@ -5,32 +5,23 @@
       with_items:
         - alfred            # UI
         - calibre           # Books Manager
-        # - ccleaner          # System cleaner
-        - dash              # Documentation searcher
         - docker            # Utilities
-        # - firefox           # Browser
         - google-chrome     # Browser
         - google-drive      # Cloud storage
-        - hyperdock         # Manage windows
         - iina              # Video player
-        - ilya-birman-typography-layout # Keyboard
+        - ilya-birman-typography-layout # Keyboard layout
         - istat-menus       # Activity Monitor
         - iterm2            # Terminal
         - karabiner-elements # Keyboard
         - keepingyouawake   # Keep Mac awake
-        # - kitty             # Terminal
         - lulu              # Firewall
-        # - obs               # Video Streams
-        # - obs-virtualcam
-        # - parallels         # Virtualization
+        - obsidian          # Knowledge base
+        - qbittorrent       # Torrent Client
+        - rectangle         # Window manager
         - slack             # Messenger
-        # - spotify # Media
-        - steam # Games
-        - telegram # Messenger
-        - the-unarchiver # Archive manager
-        - qbittorrent         # Torrent Client
-        # - transmission # Torrent Client
-        # - tunnelblick # VPN manager
+        - steam             # Games Store and Manager
+        - telegram          # Messenger
+        - the-unarchiver    # Archive manager
       environment:
         HOMEBREW_CASK_OPTS: --appdir=/Applications
 
@@ -38,4 +29,4 @@
         name: homebrew/cask-fonts
 
     - community.general.homebrew_cask:
-        name: font-hack-nerd-font 
+        name: font-hack-nerd-font
