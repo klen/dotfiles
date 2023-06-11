@@ -6,6 +6,7 @@ end
 -- Some options
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
+vim.g.editorconfig = false
 
 -- Setup plugins
 require "plugins"

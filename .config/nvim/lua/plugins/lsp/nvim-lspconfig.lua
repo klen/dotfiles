@@ -40,7 +40,7 @@ return {
     )
 
     -- Auto populate quickfix
-    local utils = require "plugins.lsp.utils"
+    local utils = require "lsp.utils"
     vim.api.nvim_create_augroup("lsp", { clear = true })
     vim.api.nvim_create_autocmd(
       "DiagnosticChanged",
@@ -49,19 +49,12 @@ return {
 
     -- Setup servers
     local lspconfig = require "lspconfig"
-    local generate_handlers = require "plugins.lsp.utils.handlers"
-    local params = {
-      on_attach = require "plugins.lsp.utils.on_attach",
-      handlers = generate_handlers(),
-      capabilities = require "plugins.lsp.utils.capabilities",
-      flags = { debounce_text_changes = 150 },
-    }
-    for _, server in ipairs(cfg.lsp.ensure_installed) do
-      local ok, server_init = pcall(require, "plugins.lsp.servers." .. server)
-      if ok then
-        params = server_init(params)
-      end
-      lspconfig[server].setup(params)
+    local servers = require "lsp.servers"
+    local common_params = require "lsp.common"
+
+    for _, server in ipairs(servers) do
+      local ok, server_params = pcall(require, "lsp.configs." .. server)
+      lspconfig[server].setup(ok and server_params or common_params)
     end
   end,
 }

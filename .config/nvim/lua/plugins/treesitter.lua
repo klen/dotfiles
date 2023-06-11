@@ -49,7 +49,7 @@ return {
         },
         indent = {
           enable = true,
-          disable = { "python" },
+          disable = { "python", "rust" },
         },
         matchup = {
           enable = true,

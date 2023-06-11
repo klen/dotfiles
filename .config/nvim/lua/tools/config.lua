@@ -23,7 +23,7 @@ end
 
 -- Pring current configuration
 function Config:print()
-  print(vim.inspect(self.opts))
+  vim.print(self.opts)
 end
 
 -- Get a value by the given path

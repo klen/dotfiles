@@ -179,4 +179,10 @@ function M.logMessage(_, result, ctx, _)
   vim.api.nvim_echo({ { message, level .. "Msg" } }, true, {})
 end
 
+vim.api.nvim_create_augroup("lsp", { clear = true })
+vim.api.nvim_create_autocmd(
+  "DiagnosticChanged",
+  { pattern = "*", callback = M.diagnostics, group = "lsp" }
+)
+
 return M

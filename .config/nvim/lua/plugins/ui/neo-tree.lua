@@ -31,6 +31,8 @@ return {
         ["o"] = "toggle_node",
         ["<c-x>"] = "open_split",
         ["<c-v>"] = "open_vsplit",
+        ["<c-l>"] = "clear_filter",
+        ["/"] = "noop",
       },
     },
     document_symbols = {
