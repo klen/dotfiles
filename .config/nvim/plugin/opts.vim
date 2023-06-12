@@ -38,8 +38,8 @@ set signcolumn=number               " Place signs in number line
 set smartindent                     " Enable nice indent
 set expandtab                       " Tab with spaces
 set shiftround                      " Drop unused spaces
-" set shiftwidth=2                    " Number of spaces to use for each step of indent
-" set softtabstop=2                   " Tab like 2 spaces
+set shiftwidth=2                    " Number of spaces to use for each step of indent
+set softtabstop=2                   " Tab like 2 spaces
 
 " Set searching stuf
 set ignorecase                      " Ignore case in search patterns

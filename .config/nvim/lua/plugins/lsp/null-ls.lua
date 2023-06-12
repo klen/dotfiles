@@ -6,10 +6,9 @@ return {
     local null_ls = require "null-ls"
 
     null_ls.setup {
-      -- debug = cfg.debug,
-      debug = true,
+      debug = cfg.debug,
+
       on_attach = require "lsp.utils.on_attach",
-      ---@diagnostic disable-next-line: redundant-parameter
       handlers = require "lsp.utils.handlers",
 
       diagnostics_format = "#{c} #{m} (#{s})",
@@ -67,6 +66,9 @@ return {
         -- },
         -- pip install pylint
         -- null_ls.builtins.diagnostics.pylint,
+
+        -- Rust
+        null_ls.builtins.formatting.rustfmt,
 
         -- Lua
         -- cargo install stylua
