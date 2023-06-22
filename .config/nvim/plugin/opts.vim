@@ -32,13 +32,13 @@ set ruler                           " Show the line and column number of the cur
 " Number line settings.
 set number                          " Enable number line
 set numberwidth=2
-set signcolumn=number               " Place signs in number line
 
 " Set indentation stuf
 set smartindent                     " Enable nice indent
 set expandtab                       " Tab with spaces
 set shiftround                      " Drop unused spaces
 set shiftwidth=2                    " Number of spaces to use for each step of indent
+set tabstop=2
 set softtabstop=2                   " Tab like 2 spaces
 
 " Set searching stuf

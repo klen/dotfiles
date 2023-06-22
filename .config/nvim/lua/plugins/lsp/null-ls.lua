@@ -8,8 +8,8 @@ return {
     null_ls.setup {
       debug = cfg.debug,
 
-      on_attach = require "lsp.utils.on_attach",
       handlers = require "lsp.utils.handlers",
+      on_attach = require "lsp.utils.on_attach",
 
       diagnostics_format = "#{c} #{m} (#{s})",
       sources = {
