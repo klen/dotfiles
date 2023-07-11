@@ -76,9 +76,6 @@ set undofile
 set foldlevel=999                   " High default so folds are shown to start
 set foldlevelstart=999              " High default so folds are shown to start
 
-" True collor support.
-set termguicolors
-
 " Setting colorcolumn. This is set because of
 " this (https://github.com/lukas-reineke/indent-blankline.nvim/issues/59)
 " indent-blankline bug.
