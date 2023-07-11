@@ -35,9 +35,12 @@ autocmd({ "TermOpen" }, {
 autocmd("BufWinEnter", {
   pattern = "*",
   callback = function()
-    if vim.fn.line "'\"" <= vim.fn.line "$" then
-      api.nvim_command 'normal! g`"'
-    end
+    pcall(function()
+      local pos = vim.fn.line "'\""
+      if pos > 0 and pos <= vim.fn.line "$" then
+        vim.cmd [[normal! g`"zz]]
+      end
+    end)
   end,
   group = "vimrc",
 })

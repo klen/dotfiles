@@ -1,3 +1,6 @@
+[init]
+    defaultBranch = main
+
 [user]
     name = Kirill Klenov
     email = horneds@gmail.com
@@ -78,7 +81,7 @@
 
 [push]
     default = current
-    ; default = matching
+    autoSetupRemote = true
 
 [pull]
     rebase = true
@@ -86,17 +89,21 @@
 [rebase]
     autoStash = true
 
-[branch "master"]
-    remote = origin
-    merge = refs/heads/master
-
-[branch "develop"]
-    remote = origin
-    merge = refs/heads/develop
-
 [help]
     autocorrect = 1
 
 [rerere]
     enabled = true
     autoUpdate = true
+
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
+
+[branch "main"]
+    remote = origin
+    merge = refs/heads/main
+
+[branch "develop"]
+    remote = origin
+    merge = refs/heads/develop
