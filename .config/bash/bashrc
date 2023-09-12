@@ -28,7 +28,7 @@ source $XDG_CONFIG_HOME/bash/functions.sh
 source $XDG_CONFIG_HOME/bash/ps.sh
 
 # Setup completions
-source $XDG_CONFIG_HOME/bash/include/bash-completion
+source /etc/bash_completion 2>/dev/null || source $XDG_CONFIG_HOME/bash/include/bash-completion
 
 # Setup tools
 source $XDG_CONFIG_HOME/bash/include/homebrew.sh

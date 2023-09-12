@@ -66,7 +66,7 @@ enable_mouse = False
 #     x: enabled and repeat every x seconds
 #
 # Default value: -1
-enable_notifications = -1
+enable_notifications = 1
 
 # Station icon
 # Radio Browser will provide an icon for some of its stations.
@@ -118,7 +118,7 @@ theme = dark
 # not running, the terminal's background color will be used.
 # Valid values: True, true, False, false
 # Default value: False
-use_transparency = False
+use_transparency = True
 
 # Calculated color factor
 # This is to produce Secondary Windows background color
