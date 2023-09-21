@@ -13,4 +13,5 @@ return {
   "taplo",
   "tsserver",
   "yamlls",
+  "html",
 }
