@@ -35,6 +35,8 @@
     - nvm       # Node versions manager
     - tcl-tk    # Required by pyenv
     - pyenv     # Python versions manager
+    - poetry    # Python packaging and dependency management
+
     - rust
     - yarn
 
@@ -52,12 +54,3 @@
     - stylua
     - unzip
     - wget
-
-- name: Python packages
-  ansible.builtin.pip:
-    name:
-    - wheel
-    - setuptools
-    - requests
-    - dnspython
-    - psutil
