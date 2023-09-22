@@ -23,6 +23,7 @@
         - telegram          # Messenger
         - the-unarchiver    # Archive manager
         - transmission      # Lightweight Bittorrent client
+        - yandex-music-unofficial
       environment:
         HOMEBREW_CASK_OPTS: --appdir=/Applications
 
