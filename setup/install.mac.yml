@@ -33,6 +33,7 @@
     - golang
     - luarocks  # Lua package/versions manager
     - nvm       # Node versions manager
+    - tcl-tk    # Required by pyenv
     - pyenv     # Python versions manager
     - rust
     - yarn
