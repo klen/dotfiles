@@ -14,7 +14,7 @@
 
 # Enter any bash_enter commands below here: (leave this line!)
 autostash VNAME=$(basename $PWD)
-autostash VDIR=env
+autostash VDIR=.venv
 autostash TOXDIR=.tox
 
 __PS=$PS1
@@ -24,9 +24,8 @@ __PS=$PS1
     smartcd inform "Virtualenv doesnt found. Attempt to create $VDIR"
     smartcd inform "------------------------------------------------"
     python3 -m venv $VDIR
-    [ -s requirements.txt ] && {
-        $VDIR/bin/pip install -r requirements.txt
-    }
+    [ -s requirements.txt ] && $VDIR/bin/pip install -r requirements.txt
+    [ -s pyproject.toml ] && poetry install --with dev
 }
 
 # Create toxdir
