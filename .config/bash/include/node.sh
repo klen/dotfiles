@@ -1,5 +1,8 @@
 setup () {
 
+    # Nodeenv support
+    _is_cmd_exist nodenv && eval "$(nodenv init -)"
+
     # NVM support
     [ -s "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" ] && {
         alias manpath=false  # https://github.com/nvm-sh/nvm/issues/2747
