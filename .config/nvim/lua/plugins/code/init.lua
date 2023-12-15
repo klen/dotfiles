@@ -7,9 +7,7 @@ return {
     "github/copilot.vim",
     build = ":Copilot auth",
     config = function()
-      vim.keymap.set("i", "<C-g>n", "<Plug>(copilot-next)")
-      vim.keymap.set("i", "<C-g>p", "<Plug>(copilot-previous)")
-      vim.keymap.set("i", "<C-g>c", "<Plug>(copilot-dismiss)")
+      vim.keymap.set("i", "<M-l>", "<cmd>:Copilot<cr>")
     end,
   },
 
@@ -21,7 +19,7 @@ return {
   {
     "numToStr/Comment.nvim",
     config = function()
-      require("Comment").setup {}
+      require("Comment").setup()
     end,
   },
 
