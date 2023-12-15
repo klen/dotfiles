@@ -2,7 +2,21 @@
 select = ["ALL"]
 
 # A list of rule codes or prefixes to ignore
-ignore = ["ANN", "ARG", "COM", "D", "DJ", "EM", "RSE", "SLF", "TRY", "UP", "PLR2004", "S101"]
+ignore = [
+  "ANN",
+  "ARG",
+  "COM",
+  "D",
+  "DJ",
+  "EM",
+  "RSE",
+  "SLF",
+  "TRY",
+  "UP",
+  "PLR2004",
+  "S101",
+  "INP001",
+]
 
 # A list of file patterns to exclude from linting.
 exclude = [".venv", "assets", "build", "dist", "node_modules", "templates"]
