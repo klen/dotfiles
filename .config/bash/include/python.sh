@@ -5,16 +5,16 @@
 
 export PYTHONBREAKPOINT=ipdb.set_trace
 
-_is_cmd_exist pip && {
+hash pip 2>/dev/null && {
     export PIP_DOWNLOAD_CACHE=/tmp/.pip/$USER/cache
     export PIP_LOG_FILE=/tmp/.pip/$USER/pip.log
 }
 
-_is_cmd_exist pyenv && {
+hash pyenv 2>/dev/null && {
   eval "$(pyenv init -)"
 }
 
-_is_cmd_exist poetry && {
+hash poetry 2>/dev/null && {
   export POETRY_CONFIG_DIR=$XDG_CONFIG_HOME/pypoetry
   export POETRY_DATA_DIR=$XDG_DATA_HOME/pypoetry
 }

@@ -92,7 +92,7 @@ ii() {
     echo -en "${RED}Date:$NC " ; date
     echo -en "${RED}Uptime :$NC " ; uptime
     echo -e "\n${RED}System logged users:$NC " ;w -h
-    _is_cmd_exist free && echo -e "\n${RED}Free :$NC " && free
+    hash free 2> /dev/null && echo -e "\n${RED}Free :$NC " && free
     command -v landscape-sysinfo && landscape-sysinfo
 }
 
@@ -183,10 +183,6 @@ cdp () { cd $1; }
 
 # Utils
 # -----
-
-_is_cmd_exist () {
-    type "$1" &> /dev/null ;
-}
 
 _ask () {
     echo "$* [y/n]?"

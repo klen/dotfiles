@@ -15,10 +15,6 @@ alias src='source ~/.bashrc'                # src:          Reload .bashrc file
 alias wget='wget -c'                        # Preferred 'wget' implementation (resume download)
 alias t='tail -f'
 
-# Replacements
-# _is_cmd_exist bat && alias cat='bat -p --theme="Solarized (dark)"'
-# _is_cmd_exist z && alias cd='z'
-
 # Personal
 # connect to remote host
 alias dsync='rsync -rlvztu --progress --stats'
@@ -33,8 +29,8 @@ alias g='grep'
 
 # ls
 alias ls='ls $LS_OPTIONS -Fh'
-alias ll='ls $LS_OPTIONS -A'
-alias la='ll $LS_OPTIONS -FhlA'
+alias ll='ls $LS_OPTIONS -goAh'
+alias la='ll $LS_OPTIONS -FlAh'
 
 # others
 alias vi='vim'

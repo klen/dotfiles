@@ -1,4 +1,4 @@
-_is_cmd_exist git && {
+hash git 2>/dev/null && {
 
     source $XDG_CONFIG_HOME/bash/include/git-promt.sh
 

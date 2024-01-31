@@ -5,6 +5,9 @@
 # ======================================
 # vim:ft=sh:fdm=marker
 
+# Skip remaining setup if not an interactive shell
+[[ $- != *i* ]] && return
+
 # Load env
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 source $XDG_CONFIG_HOME/bash/env.sh
@@ -38,9 +41,9 @@ source $XDG_CONFIG_HOME/bash/include/docker.sh
 source $XDG_CONFIG_HOME/bash/include/android.sh
 source $XDG_CONFIG_HOME/bash/include/lua.sh
 source $XDG_CONFIG_HOME/bash/include/node.sh
-_is_cmd_exist go && source $XDG_CONFIG_HOME/bash/include/go.sh
-_is_cmd_exist rustc && source $XDG_CONFIG_HOME/bash/include/rust.sh
-_is_cmd_exist ruby && source $XDG_CONFIG_HOME/bash/include/ruby.sh
+hash go 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/go.sh
+hash rustc 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/rust.sh
+hash ruby 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/ruby.sh
 
 # Aliases
 source $XDG_CONFIG_HOME/bash/aliases.sh
@@ -55,7 +58,7 @@ PS1="${PS1}\n$ "
 source $XDG_CONFIG_HOME/bash/smartcd.sh
 
 # Auto run screen on remote servers
-_is_cmd_exist screen && {
+hash screen 2>/dev/null && {
     if [ ! -z "$SSH_CLIENT" ] && [ -z $WINDOW ]; then
         exec screen
     fi

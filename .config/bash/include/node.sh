@@ -1,7 +1,7 @@
 setup () {
 
     # Nodeenv support
-    _is_cmd_exist nodenv && eval "$(nodenv init -)"
+    hash nodenv 2>/dev/null && eval "$(nodenv init -)"
 
     # NVM support
     [ -s "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" ] && {

@@ -11,11 +11,11 @@ setup () {
     }
 
     # RBEnv support
-    _is_cmd_exist rbenv && eval "$(rbenv init - bash)"
+    hash rbenv 2>/dev/null && eval "$(rbenv init - bash)"
 
     local commands="cap gem"
     # for n in $commands; do
-    #     _is_cmd_exist $n && source $XDG_CONFIG_HOME/bash/completion/${n}.sh
+    #     hash $n 2>/dev/null && source $XDG_CONFIG_HOME/bash/completion/${n}.sh
     # done
 
     [ -d /usr/local/opt/ruby/bin ] && PATH=/usr/local/opt/ruby/bin:$PATH

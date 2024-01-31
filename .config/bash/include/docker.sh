@@ -1,5 +1,5 @@
 # Support docker
-_is_cmd_exist docker && {
+hash docker 2>/dev/null && {
 
     dps () {
         docker ps --format="table {{.Names}}\t{{.Status}}" $@

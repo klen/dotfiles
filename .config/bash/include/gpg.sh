@@ -1,4 +1,4 @@
-_is_cmd_exist gpg && {
+hash gpg 2>/dev/null && {
 
     [ ! -r $HOME/.gnupg/trustdb.gpg  ] && {
 
