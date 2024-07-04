@@ -1,0 +1,5 @@
+#!/bin/sh
+
+### lolcommits hook (begin) ###
+GIT_DIR=${GIT_DIR-`git rev-parse --git-dir`} && LANG="en_US.UTF-8" && PATH="$PATH:/usr/bin:/opt/homebrew/bin" && if [ ! -d "$GIT_DIR/rebase-merge" ] && [ "$LOLCOMMITS_CAPTURE_DISABLED" != "true" ]; then lolcommits --capture --delay 1 --fork; fi
+###  lolcommits hook (end)  ###
