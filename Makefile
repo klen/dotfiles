@@ -1,5 +1,4 @@
 # Makefile for home config
-
 all: update ansible stow
 
 .PHONY: help
