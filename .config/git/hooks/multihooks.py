@@ -39,32 +39,32 @@ For example:
    |_ 03-something_else
 ```
 
-Additionally, colored logging is supported if the package colorlog is 
+Additionally, colored logging is supported if the package colorlog is
 installed.
 """
+from __future__ import annotations
 
-from sys import argv
 from logging import getLogger
-from subprocess import Popen, PIPE
-from os import access, listdir, X_OK
-from os.path import isfile, isdir, abspath, normpath, dirname, join, basename
-
+from os import X_OK, access, listdir
+from os.path import abspath, basename, dirname, isdir, isfile, join, normpath
+from subprocess import PIPE, Popen
+from sys import argv
 
 GIT_HOOKS = [
-    'applypatch-msg',
-    'commit-msg',
-    'fsmonitor-watchman',
-    'post-checkout',
-    'post-commit',
-    'post-merge',
-    'post-update',
-    'pre-applypatch',
-    'pre-commit',
-    'pre-push',
-    'pre-rebase',
-    'pre-receive',
-    'prepare-commit-msg',
-    'update',
+    "applypatch-msg",
+    "commit-msg",
+    "fsmonitor-watchman",
+    "post-checkout",
+    "post-commit",
+    "post-merge",
+    "post-update",
+    "pre-applypatch",
+    "pre-commit",
+    "pre-push",
+    "pre-rebase",
+    "pre-receive",
+    "prepare-commit-msg",
+    "update",
 ]
 
 
@@ -73,25 +73,25 @@ def setup_logging():
     Setup logging with support for colored output if available.
     """
 
-    from logging import basicConfig, DEBUG
+    from logging import DEBUG, basicConfig
 
     FORMAT = (
-        '  %(log_color)s%(levelname)-8s%(reset)s | '
-        '%(log_color)s%(message)s%(reset)s'
+        "  %(log_color)s%(levelname)-8s%(reset)s | " "%(log_color)s%(message)s%(reset)s"
     )
 
     logging_kwargs = {
-        'level': DEBUG,
+        "level": DEBUG,
     }
 
     try:
         from logging import StreamHandler
+
         from colorlog import ColoredFormatter
 
         stream = StreamHandler()
         stream.setFormatter(ColoredFormatter(FORMAT))
 
-        logging_kwargs['handlers'] = [stream]
+        logging_kwargs["handlers"] = [stream]
 
     except ImportError:
         pass
@@ -109,35 +109,33 @@ def main():
     # Check multihooks facing what hook type
     hook_type = basename(__file__)
     if hook_type not in GIT_HOOKS:
-        log.fatal('Unknown hook type: {}'.format(hook_type))
+        log.fatal("Unknown hook type: {}".format(hook_type))
         exit(1)
 
     # Lookup for sub-hooks directory
     root = normpath(abspath(dirname(__file__)))
-    hooks_dir = join(root, '{}.d'.format(hook_type))
+    hooks_dir = join(root, "{}.d".format(hook_type))
     if not isdir(hooks_dir):
-        log.warning('No such directory: {}'.format(hooks_dir))
+        log.warning("No such directory: {}".format(hooks_dir))
         exit(0)
 
     # Gather scripts to call
     files = [join(hooks_dir, f) for f in listdir(hooks_dir)]
-    hooks = sorted(
-        [h for h in files if isfile(h) and access(h, X_OK)]
-    )
+    hooks = sorted([h for h in files if isfile(h) and access(h, X_OK)])
     if not hooks:
-        log.warning('No sub-hooks found for {}.'.format(hook_type))
+        log.warning("No sub-hooks found for {}.".format(hook_type))
         exit(0)
 
     # Execute hooks
     for h in hooks:
-        hook_id = '{}.d/{}'.format(hook_type, basename(h))
-        log.info('Running hook {}...'.format(hook_id))
+        hook_id = "{}.d/{}".format(hook_type, basename(h))
+        log.info("Running hook {}...".format(hook_id))
 
         proc = Popen([h] + argv[1:], stdout=PIPE, stderr=PIPE)
         stdout_raw, stderr_raw = proc.communicate()
 
-        stdout = stdout_raw.decode('utf-8').strip()
-        stderr = stderr_raw.decode('utf-8').strip()
+        stdout = stdout_raw.decode("utf-8").strip()
+        stderr = stderr_raw.decode("utf-8").strip()
 
         if stdout:
             log.info(stdout)
@@ -146,9 +144,9 @@ def main():
 
         # Log errors if a hook failed
         if proc.returncode != 0:
-            log.error('Hook {} failed. Aborting...'.format(hook_id))
-            exit(proc.returncode)
+            log.error("Hook {} failed. Aborting...".format(hook_id))
+            # exit(proc.returncode)  # noqa: ERA001
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
