@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 curdir = Path(__file__).parent
-emoji = (curdir / "emoji.db").read_text()
+emoji = (curdir / "emoji.db").read_text().splitlines()
 msg = Path(sys.argv[1])
 text = msg.read_text()
-msg.write_text(f"{text} {random.choice(emoji)}")
+msg.write_text(f"{text} {random.choice(emoji).strip()}")
