@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import random
+import sys
+from pathlib import Path
+
+curdir = Path(__file__).parent
+emoji = (curdir / "emoji.db").read_text().splitlines()
+msg = Path(sys.argv[1])
+text = msg.read_text()
+msg.write_text(f"{text.strip()} {random.choice(emoji).strip()}")
