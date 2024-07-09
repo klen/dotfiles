@@ -1,5 +1,6 @@
 [init]
     defaultBranch = main
+    templatedir = ~/.config/git/templates
 
 [user]
     name = Kirill Klenov
@@ -13,7 +14,6 @@
     pager = /usr/bin/less
     sharedRepository=group
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-    hooksPath = ~/.config/git/hooks
 
 [merge]
     tool = vimdiff

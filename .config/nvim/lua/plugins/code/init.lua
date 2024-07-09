@@ -66,7 +66,7 @@ return {
   require "plugins/code/git",
 
   -- Rest client
-  require "plugins/code/rest",
+  -- require "plugins/code/rest",
 
   -- Local plugins (in development)
   tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local", {
