@@ -8,11 +8,6 @@ return {
       plugins = {
         registers = false,
       },
-      operators = {
-        gc = "Comments",
-        ys = "Surround",
-        Q = "Format",
-      },
     }
   end,
 }

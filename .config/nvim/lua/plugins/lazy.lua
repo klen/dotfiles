@@ -16,9 +16,33 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup mappings
 local lazy = require "lazy"
 local cfg = require "config"
-cfg.keymaps["<leader>pu"] = { lazy.update, "Update your plugins" }
-cfg.keymaps["<leader>pp"] = { lazy.home, "Plugins Status" }
-cfg.keymaps["<leader>pc"] = { lazy.clean, "Clean unused plugins" }
-cfg.keymaps["<leader>pb"] = { lazy.build, "Build your plugins" }
+table.insert(cfg.keymaps, {
+  "<leader>pu",
+  function()
+    lazy.update()
+  end,
+  desc = "Update your plugins",
+})
+table.insert(cfg.keymaps, {
+  "<leader>pp",
+  function()
+    lazy.home()
+  end,
+  desc = "Plugins Status",
+})
+table.insert(cfg.keymaps, {
+  "<leader>pc",
+  function()
+    lazy.clean()
+  end,
+  desc = "Clean unused plugins",
+})
+table.insert(cfg.keymaps, {
+  "<leader>pb",
+  function()
+    lazy.build()
+  end,
+  desc = "Build your plugins",
+})
 
 return lazy

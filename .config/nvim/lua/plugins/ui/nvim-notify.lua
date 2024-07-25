@@ -8,7 +8,7 @@ return {
 
     -- Setup keymaps
     local cfg = require "config"
-    cfg.keymaps["<leader>fn"] = { "<cmd>Telescope notify<cr>", "Find notifies" }
+    table.insert(cfg.keymaps, { "<leader>fn", "<cmd>Telescope notify<cr>", desc = "Find notifies" })
 
     -- Setup telescope
     local telescope = require "telescope"

@@ -18,7 +18,8 @@ return {
   require "plugins/lsp/nvim-lspconfig",
 
   -- Support non-lsp formatters/linters/etc
-  require "plugins/lsp/null-ls",
+  -- require "plugins/lsp/null-ls",
+  require "plugins/lsp/none-ls",
 
   -- -- Support LSP status for statusline
   -- require "plugins/lsp/lsp-status",

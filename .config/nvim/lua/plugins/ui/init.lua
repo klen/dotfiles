@@ -33,4 +33,8 @@ return {
 
   -- Show key/operators maps
   require "plugins/ui/which-key",
+
+  {
+    "nvim-tree/nvim-web-devicons",
+  },
 }

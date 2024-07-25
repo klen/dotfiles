@@ -38,14 +38,13 @@ return {
           "vim",
           "yaml",
         },
+        sync_install = false,
+        auto_install = true,
+        ignore_install = {},
         highlight = {
           enable = true,
           disable = {},
-          additional_vim_regex_highlighting = { "markdown" },
-          custom_captures = {
-            ["python.field"] = "Identifier",
-            ["python.variable"] = "Identifier",
-          },
+          -- additional_vim_regex_highlighting = { "markdown" },
         },
         indent = {
           enable = true,

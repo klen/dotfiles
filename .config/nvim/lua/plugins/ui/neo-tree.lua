@@ -9,13 +9,27 @@ return {
   },
   init = function()
     local cfg = require "config"
-    cfg.keymaps["<leader>dd"] = { "<cmd>Neotree toggle<cr>", "Open files exporer" }
-    cfg.keymaps["<leader>df"] = { "<cmd>Neotree reveal<cr>", "Locate the current File" }
-    cfg.keymaps["<leader>dg"] = { "<cmd>Neotree git_status reveal<cr>", "Locate the current File" }
-    cfg.keymaps["<leader>ds"] =
-      { "<cmd>Neotree toggle source=document_symbols<cr>", "Locate the current File" }
-    cfg.keymaps["<leader>db"] =
-      { "<cmd>Neotree toggle source=buffers<cr>", "Open buffers explorer" }
+    table.insert(
+      cfg.keymaps,
+      { "<leader>dd", "<cmd>Neotree toggle<cr>", desc = "Open files exporer" }
+    )
+    table.insert(
+      cfg.keymaps,
+      { "<leader>df", "<cmd>Neotree reveal<cr>", desc = "Locate the current File" }
+    )
+    table.insert(
+      cfg.keymaps,
+      { "<leader>dg", "<cmd>Neotree git_status reveal<cr>", desc = "Show git status" }
+    )
+    table.insert(
+      cfg.keymaps,
+      { "<leader>ds", "<cmd>Neotree document_symbols reveal<cr>", desc = "Toggle document symbols" }
+    )
+    table.insert(cfg.keymaps, {
+      "<leader>dh",
+      "<cmd>Neotree toggle source=filesystem hidden<cr>",
+      desc = "Toggle hidden files",
+    })
 
     vim.g.neo_tree_remove_legacy_commands = 1
   end,

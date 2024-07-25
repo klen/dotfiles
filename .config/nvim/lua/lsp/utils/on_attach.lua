@@ -9,62 +9,141 @@ return function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local maps = {
-    ["K"] = { lsp.buf.hover, "Show documentation" },
-    ["gr"] = { lsp.buf.references, "Find references" },
-    ["gd"] = { lsp.buf.definition, "Go to definition" },
-    ["<space>gd"] = {
-      "<cmd>abo split | lua vim.lsp.buf.definition()<cr>",
-      "Go to definition (split)",
+    {
+      "gr",
+      lsp.buf.references,
+      desc = "Find references",
     },
-    ["<C-p>"] = { vim.diagnostic.goto_prev, "Jump to the previous error" },
-    ["<C-n>"] = { vim.diagnostic.goto_next, "Jump to the next error" },
-
-    ["gt"] = { lsp.buf.type_definition, "Go to type definition" },
-    ["gi"] = { lsp.buf.implementation, "Go to implementation" },
-    ["gl"] = { lsp.buf.declaration, "Go to declaration" },
-    ["gs"] = { lsp.buf.signature_help, "Show signature help" },
-    ["ge"] = { vim.diagnostic.open_float, "Show line error" },
-    ["<space>r"] = { lsp.buf.rename, "Refactoring/Rename" },
-    ["<space>a"] = { lsp.buf.code_action, "Run a code action" },
-    ["<space>f"] = { lsp.buf.formatting, "Format code" },
-    ["<space>q"] = { vim.diagnostic.setqflist, "Fill quickfix list" },
-    ["<space>wa"] = { lsp.add_workspace_folder, "Add workspace folder" },
-    ["<space>wr"] = { lsp.remove_workspace_folder, "Remove workspace folder" },
-    ["<space>s"] = { lsp.buf.workspace_symbol, "Search symbol in workspace" },
-    ["<space>S"] = { lsp.buf.document_symbol, "Search symbol in document" },
-    ["<space>i"] = { lsp.buf.incoming_calls, "Show incomming calls" },
-    ["<space>o"] = { lsp.buf.outgoing_calls, "Show outgoing calls" },
-    ["<space>wl"] = {
+    {
+      "gd",
+      lsp.buf.definition,
+      desc = "Go to definition",
+    },
+    {
+      "<space>gd",
+      "<cmd>abo split | lua vim.lsp.buf.definition()<cr>",
+      desc = "Go to definition (split)",
+    },
+    {
+      "<C-p>",
+      vim.diagnostic.goto_prev,
+      desc = "Jump to the previous error",
+    },
+    {
+      "<C-n>",
+      vim.diagnostic.goto_next,
+      desc = "Jump to the next error",
+    },
+    {
+      "gt",
+      lsp.buf.type_definition,
+      desc = "Go to type definition",
+    },
+    {
+      "gi",
+      lsp.buf.implementation,
+      desc = "Go to implementation",
+    },
+    {
+      "gl",
+      lsp.buf.declaration,
+      desc = "Go to declaration",
+    },
+    {
+      "gs",
+      lsp.buf.signature_help,
+      desc = "Show signature help",
+    },
+    {
+      "ge",
+      vim.diagnostic.open_float,
+      desc = "Show line error",
+    },
+    {
+      "<space>r",
+      lsp.buf.rename,
+      desc = "Refactoring/Rename",
+    },
+    {
+      "<space>a",
+      lsp.buf.code_action,
+      desc = "Run a code action",
+    },
+    {
+      "<space>f",
+      lsp.buf.formatting,
+      desc = "Format code",
+    },
+    {
+      "<space>q",
+      vim.diagnostic.setqflist,
+      desc = "Fill quickfix list",
+    },
+    {
+      "<space>wa",
+      lsp.add_workspace_folder,
+      desc = "Add workspace folder",
+    },
+    {
+      "<space>wr",
+      lsp.remove_workspace_folder,
+      desc = "Remove workspace folder",
+    },
+    {
+      "<space>s",
+      lsp.buf.workspace_symbol,
+      desc = "Search symbol in workspace",
+    },
+    {
+      "<space>S",
+      lsp.buf.document_symbol,
+      desc = "Search symbol in document",
+    },
+    {
+      "<space>i",
+      lsp.buf.incoming_calls,
+      desc = "Show incomming calls",
+    },
+    {
+      "<space>o",
+      lsp.buf.outgoing_calls,
+      desc = "Show outgoing calls",
+    },
+    {
+      "<space>wl",
       function()
         vim.print(lsp.buf.list_workspace_folders())
       end,
-      "List workspace folders",
+      desc = "List workspace folders",
     },
-    ["<space>c"] = {
+    {
+      "<space>c",
       function()
         vim.print(client.config)
       end,
-      "Show client config",
+      desc = "Show client config",
     },
+    { "<space>", group = "lsp" },
+    { "<space>w", group = "workspace" },
   }
 
   -- Hover
-  if not client.server_capabilities.hoverProvider then
-    table.pop(maps, "K")
+  if client.server_capabilities.hoverProvider then
+    table.insert(maps, {
+      "K",
+      lsp.buf.hover,
+      desc = "Show documentation",
+    })
   end
 
   local ok, wk = pcall(require, "which-key")
   if ok then
     -- Map with wk
-    wk.register {
-      ["<space>"] = { name = "+lsp" },
-      ["<space>w"] = { name = "+workspace" },
-    }
-    wk.register(maps, { buffer = bufnr })
+    wk.add(maps, { buffer = bufnr })
   else
     -- Map keys in normal mode
-    for target, source in pairs(maps) do
-      vim.keymap.set("n", target, source[1], { buffer = bufnr })
+    for _, map in ipairs(maps) do
+      vim.keymap.set("n", map[1], map[2], { buffer = bufnr })
     end
   end
 
