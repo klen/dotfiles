@@ -1,4 +1,4 @@
 #!/bin/sh
 
-BASEDIR=$(dirname "$0")
-$BASEDIR/lolcommits $@
+HERE="$(cd "$(dirname "$0")" && pwd)"
+$HERE/lolcommits $@

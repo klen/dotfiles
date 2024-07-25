@@ -3,7 +3,6 @@ return {
   require "plugins/ui/telescope",
 
   -- File explorer tree.
-  -- require "plugins/ui/nvim-tree",
   require "plugins/ui/neo-tree",
 
   -- Code explorer
@@ -34,7 +33,6 @@ return {
   -- Show key/operators maps
   require "plugins/ui/which-key",
 
-  {
-    "nvim-tree/nvim-web-devicons",
-  },
+  -- Setup Icons
+  require "plugins/ui/nvim-web-devicons",
 }

@@ -34,6 +34,11 @@ return {
     vim.g.neo_tree_remove_legacy_commands = 1
   end,
   opts = {
+    default_component_configs = {
+      -- icon = {
+      --   enabled = false,
+      -- },
+    },
     sources = {
       "filesystem",
       "buffers",
