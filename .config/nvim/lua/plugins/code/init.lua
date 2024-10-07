@@ -2,15 +2,6 @@ local tools = require "tools"
 
 return {
 
-  -- Copilot
-  {
-    "github/copilot.vim",
-    build = ":Copilot auth",
-    config = function()
-      vim.keymap.set("i", "<M-l>", "<cmd>:Copilot<cr>")
-    end,
-  },
-
   -- Repeat surround motions with .
   "tpope/vim-surround",
   "tpope/vim-repeat",
@@ -36,19 +27,23 @@ return {
       }
 
       local wk = require "which-key"
-      wk.register {
-        ["<leader>tn"] = { "<cmd>TestNearest<cr>", "Run the nearest test" },
-        ["<leader>tf"] = { "<cmd>TestFile<cr>", "Run the file" },
-        ["<leader>tl"] = { "<cmd>TestLast<cr>", "Run the last test" },
-        ["<leader>tt"] = { "<cmd>TestSuite<cr>", "Run all tests" },
-        ["<leader>tv"] = { "<cmd>TestVisit<cr>", "Visit the last test" },
-        ["<leader>te"] = { "<cmd>TestEdit<cr>", "Edit tests" },
+      wk.add {
+        { "<leader>tn", "<cmd>TestNearest<cr>", desc = "Run the nearest test" },
+        { "<leader>tf", "<cmd>TestFile<cr>", desc = "Run the file" },
+        { "<leader>tl", "<cmd>TestLast<cr>", desc = "Run the last test" },
+        { "<leader>tt", "<cmd>TestSuite<cr>", desc = "Run all tests" },
+        { "<leader>tv", "<cmd>TestVisit<cr>", desc = "Visit the last test" },
+        { "<leader>te", "<cmd>TestEdit<cr>", desc = "Edit tests" },
       }
     end,
   }),
 
+  -- Copilot
+  -- require "plugins/code/copilot-vim",
+  require "plugins/code/copilot",
+
   -- Snippets
-  require "plugins/code/luasnip",
+  -- require "plugins/code/luasnip",
 
   -- Completion
   require "plugins/code/nvim-cmp",
@@ -66,7 +61,8 @@ return {
   require "plugins/code/git",
 
   -- Rest client
-  -- require "plugins/code/rest",
+  require "plugins/code/luarocks",
+  require "plugins/code/rest",
 
   -- Local plugins (in development)
   tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local", {

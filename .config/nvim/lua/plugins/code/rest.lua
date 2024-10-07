@@ -4,42 +4,23 @@ return {
   "NTBBloodbath/rest.nvim",
   ft = "http",
   keys = {
-    { "<leader>rr", "<plug>RestNvim", buffer = true, desc = "Run request" },
-    { "<leader>rp", "<plug>RestNvimPreview", buffer = true, desc = "Preview request" },
-    { "<leader>rl", "<plug>RestNvimLast", buffer = true, desc = "Replay last request" },
+    { "<leader>rr", "<cmd>Rest run<cr>", buffer = true, desc = "Run request" },
+    { "<leader>rl", "<cmd>Rest last<cr>", buffer = true, desc = "Replay last request" },
+    { "<leader>rs", "<cmd>Rest env select<cr>", buffer = true, desc = "Select env file" },
   },
-  opts = {
-    -- Open request results in a horizontal split
-    result_split_horizontal = false,
-    -- Keep the http file buffer above|left when split horizontal|vertical
-    result_split_in_place = false,
-    -- Skip SSL verification, useful for unknown certificates
-    skip_ssl_verification = false,
-    -- Encode URL before making request
-    encode_url = true,
-    -- Highlight request on run
-    highlight = {
-      enabled = true,
-      timeout = 150,
-    },
-    result = {
-      -- toggle showing URL, HTTP info, headers at top the of result window
-      show_url = true,
-      show_http_info = true,
-      show_headers = true,
-      -- executables or functions for formatting response body [optional]
-      -- set them to false if you want to disable them
-      formatters = {
-        json = "jq",
-        html = function(body)
-          return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
-        end,
+  dependencies = { "luarocks.nvim" },
+  config = function()
+    vim.g.rest_nvim = {
+      response = {
+        ---Default response hooks
+        ---@class rest.Config.Response.Hooks
+        hooks = {
+          ---@type boolean Decode the request URL segments on response UI to improve readability
+          decode_url = true,
+          ---@type boolean Format the response body using `gq` command
+          format = true,
+        },
       },
-    },
-    -- Jump to request line on run
-    jump_to_request = false,
-    env_file = ".env",
-    custom_dynamic_variables = {},
-    yank_dry_run = true,
-  },
+    }
+  end,
 }
