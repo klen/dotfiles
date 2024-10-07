@@ -13,7 +13,7 @@ player = mpv,mplayer,vlc
 # Open last playlist
 # If this option is enabled, the last opened playlist will be opened
 # the next time PyRadio is opened. This option will take precedence
-# over the "Def. playlist" option.
+# over the "Def. playlist" option and the "-s" commans line parameter.
 # Default value: False
 open_last_playlist = False
 
@@ -66,7 +66,7 @@ enable_mouse = False
 #     x: enabled and repeat every x seconds
 #
 # Default value: -1
-enable_notifications = 1
+enable_notifications = 0
 
 # Station icon
 # Radio Browser will provide an icon for some of its stations.
@@ -118,7 +118,17 @@ theme = dark
 # not running, the terminal's background color will be used.
 # Valid values: True, true, False, false
 # Default value: False
-use_transparency = True
+use_transparency = False
+
+# Always obey config Transparency setting
+# Most themes will either be transparent of opaque by default.
+# This means that these themes will never be allowed to change
+# the transparency setting within PyRadio.
+# Enabling this option will make all themes to behave as if
+# their "transparency" option is set to 2 (Obey config setting).
+# Valid values: True, true, False, false
+# Default value: False
+force_transparency = False
 
 # Calculated color factor
 # This is to produce Secondary Windows background color
@@ -157,6 +167,11 @@ auto_save_playlist = False
 # message, change the value to False.
 # Default value: True
 show_no_themes_message = True
+
+# When recording is turned on, a message will
+# be displayed if this option is True (default)
+#
+show_recording_message = True
 
 # Remote Control server
 # A simple http server that can accept remote
