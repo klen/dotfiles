@@ -33,10 +33,10 @@ return {
   event = "InsertEnter",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp", -- LSP completion
-    "hrsh7th/cmp-buffer", -- Buffer completion
-    "hrsh7th/cmp-path", -- Path completion
+    "hrsh7th/cmp-buffer",   -- Buffer completion
+    "hrsh7th/cmp-path",     -- Path completion
     "hrsh7th/cmp-nvim-lua", -- VIM lua API completion
-    "saadparwaiz1/cmp_luasnip", -- Snippets completion
+    -- "saadparwaiz1/cmp_luasnip", -- Snippets completion
   },
   opts = function()
     local cmp = require "cmp"
@@ -44,11 +44,11 @@ return {
       completion = {
         completeopt = "menu,menuone,noinsert",
       },
-      snippet = {
-        expand = function(args)
-          require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-        end,
-      },
+      -- snippet = {
+      --   expand = function(args)
+      --     require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+      --   end,
+      -- },
       mapping = {
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -60,8 +60,8 @@ return {
       },
       sources = {
         { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "buffer", keyword_length = 5 },
+        -- { name = "luasnip" },
+        { name = "buffer",  keyword_length = 5 },
         { name = "path" },
       },
       formatting = {
@@ -70,7 +70,7 @@ return {
           vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
           vim_item.menu = ({
             nvim_lsp = "[lsp]",
-            luasnip = "[snippet]",
+            -- luasnip = "[snippet]",
             buffer = "[buffer]",
             path = "[path]",
           })[entry.source.name]
