@@ -13,7 +13,6 @@ alias rm='rm -i'
 alias show_options='shopt'                  # Show_options: display bash options settings
 alias src='source ~/.bashrc'                # src:          Reload .bashrc file
 alias wget='wget -c'                        # Preferred 'wget' implementation (resume download)
-alias t='tail -f'
 
 # Personal
 # connect to remote host
@@ -22,10 +21,6 @@ alias hsync='rsync -lrtvpC .'
 
 # ---------------
 # Common
-alias ..='cd ..'
-alias ...='cd ../..'
-
-alias g='grep'
 
 # ls
 alias ls='ls $LS_OPTIONS -Fh'
@@ -34,7 +29,4 @@ alias la='ll $LS_OPTIONS -FlAh'
 
 # others
 alias vi='vim'
-alias sim='sudo vim'
-alias timestamp='date "+%Y%m%dT%H%M%S"'
-
 alias myip='dig +short txt ch whoami.cloudflare @1.0.0.1'
