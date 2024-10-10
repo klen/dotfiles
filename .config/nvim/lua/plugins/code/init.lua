@@ -2,16 +2,16 @@ local tools = require "tools"
 
 return {
 
-  -- Repeat surround motions with .
-  "tpope/vim-surround",
-  "tpope/vim-repeat",
+  -- Support surround
+  {
+    "kylechui/nvim-surround",
+    opts = {},
+  },
 
   -- Comment code
   {
     "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
-    end,
+    opts = {},
   },
 
   -- Tests
