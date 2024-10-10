@@ -3,8 +3,8 @@
   tasks:
     - community.general.homebrew_cask: name={{item}}
       with_items:
-        - alfred            # UI
-        - appcleaner        # Clean applications
+        - alfred            # UI tool
+        - appcleaner        # Uninstaller
         - calibre           # Books Manager
         - docker            # Utilities
         - google-chrome     # Browser
@@ -13,7 +13,7 @@
         - ilya-birman-typography-layout # Keyboard layout
         - istat-menus       # Activity Monitor
         - iterm2            # Terminal
-        - karabiner-elements # Keyboard
+        - karabiner-elements # Keyboard tuner
         - keepingyouawake   # Keep Mac awake
         - lulu              # Firewall
         - obsidian          # Knowledge base
@@ -23,7 +23,7 @@
         - telegram          # Messenger
         - the-unarchiver    # Archive manager
         - transmission      # Lightweight Bittorrent client
-        - yandex-music-unofficial
+        - yandex-music      # Yandex Music Client
       environment:
         HOMEBREW_CASK_OPTS: --appdir=/Applications
 
