@@ -14,7 +14,6 @@
     name:
     - bash              # shell
     - bash-completion   # shell-completion
-    - bat               # replacement for cat
     - coreutils
     - pass
     - ripgrep
@@ -31,10 +30,10 @@
   homebrew:
     name:
     - golang
-    - luarocks  # Lua package/versions manager
-    - nvm       # Node versions manager
     - tcl-tk    # Required by pyenv
     - pyenv     # Python versions manager
+    - nodenv    # Node versions manager
+    - luarocks  # Lua package/versions manager
     - poetry    # Python packaging and dependency management
 
     - rust

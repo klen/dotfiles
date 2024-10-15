@@ -9,11 +9,11 @@
 
   - import_tasks: install.yum.yml
     when: ansible_os_family == "RedHat"
-    become: yes
+    become: true
 
   - import_tasks: install.deb.yml
     when: ansible_os_family == "Debian"
-    become: yes
+    become: true
 
   - import_tasks: install.mac.yml
     when: ansible_os_family == "Darwin"
@@ -34,5 +34,3 @@
       line="{{item}}"
       create=yes
     with_items: "{{home_fingerprints}}"
-
-# vim:sw=2:ft=ansible
