@@ -45,6 +45,7 @@ source $XDG_CONFIG_HOME/bash/include/yandex.sh
 hash go 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/go.sh
 hash rustc 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/rust.sh
 hash ruby 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/ruby.sh
+hash uv 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/uv.sh
 
 # Aliases
 source $XDG_CONFIG_HOME/bash/aliases.sh
