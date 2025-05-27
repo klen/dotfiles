@@ -47,7 +47,7 @@ return {
 
         -- Lua
         -- cargo install stylua
-        null_ls.builtins.formatting.stylua,
+        -- null_ls.builtins.formatting.stylua,
       },
     }
 

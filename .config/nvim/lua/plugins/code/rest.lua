@@ -4,8 +4,8 @@ return {
   "NTBBloodbath/rest.nvim",
   ft = "http",
   keys = {
-    { "<leader>rr", "<cmd>Rest run<cr>", buffer = true, desc = "Run request" },
-    { "<leader>rl", "<cmd>Rest last<cr>", buffer = true, desc = "Replay last request" },
+    { "<leader>rr", "<cmd>Rest run<cr>",        buffer = true, desc = "Run request" },
+    { "<leader>rl", "<cmd>Rest last<cr>",       buffer = true, desc = "Replay last request" },
     { "<leader>rs", "<cmd>Rest env select<cr>", buffer = true, desc = "Select env file" },
   },
   dependencies = { "luarocks.nvim" },
@@ -22,6 +22,5 @@ return {
         },
       },
     }
-    require("telescope").load_extension "rest"
   end,
 }
