@@ -2,23 +2,21 @@ return {
 
   -- Install and tune LSP servers
   {
-    "williamboman/mason.nvim",
-    lazy = true,
-    config = function()
-      require("mason").setup()
-    end,
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = require "lsp.servers",
+      automatic_installation = true,
+    },
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
   },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    config = function()
-      require("mason-lspconfig").setup { ensure_installed = require "lsp.servers" }
-    end,
-  },
-  require "plugins/lsp/nvim-lspconfig",
+
+  -- NVIM Development tools
+  { "folke/lazydev.nvim", ft = "lua", opts = {} },
 
   -- Support non-lsp formatters/linters/etc
-  -- require "plugins/lsp/null-ls",
   require "plugins/lsp/none-ls",
 
   -- -- Support LSP status for statusline
@@ -26,14 +24,6 @@ return {
 
   -- Support LSP colors
   "folke/lsp-colors.nvim",
-
-  -- -- Signature helper
-  -- {
-  --   "ray-x/lsp_signature.nvim",
-  --   config = function()
-  --     require("lsp_signature").setup {}
-  --   end,
-  -- },
 
   -- Configure diagnosticls
   {

@@ -26,12 +26,16 @@ return function(client, bufnr)
     },
     {
       "<C-p>",
-      vim.diagnostic.goto_prev,
+      function()
+        vim.diagnostic.jump { count = -1, float = true }
+      end,
       desc = "Jump to the previous error",
     },
     {
       "<C-n>",
-      vim.diagnostic.goto_next,
+      function()
+        vim.diagnostic.jump { count = 1, float = true }
+      end,
       desc = "Jump to the next error",
     },
     {

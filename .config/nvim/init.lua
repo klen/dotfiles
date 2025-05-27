@@ -11,6 +11,9 @@ vim.g.editorconfig = false
 -- Setup plugins
 require "plugins"
 
+-- Setup LSP
+require "lsp"
+
 -- Mapping
 require "keymaps"
 

@@ -39,8 +39,8 @@ return {
   }),
 
   -- Copilot
-  -- require "plugins/code/copilot-vim",
-  require "plugins/code/copilot",
+  require "plugins/code/copilot-vim",
+  -- require "plugins/code/copilot",
 
   -- Snippets
   -- require "plugins/code/luasnip",

@@ -6,12 +6,13 @@
 return {
   "bashls",
   "dockerls",
+  "html",
   "jsonls",
   "lua_ls",
+  "pico8_ls",
   "pyright",
   "rust_analyzer",
   "taplo",
   "ts_ls",
   "yamlls",
-  "html",
 }

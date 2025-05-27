@@ -48,9 +48,8 @@ return {
     window = {
       mappings = {
         ["o"] = "toggle_node",
-        ["<c-x>"] = "open_split",
-        ["<c-v>"] = "open_vsplit",
-        ["/"] = "noop",
+        ["<C-x>"] = "open_split",
+        ["<C-v>"] = "open_vsplit",
       },
     },
     document_symbols = {
