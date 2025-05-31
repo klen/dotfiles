@@ -11,14 +11,6 @@ local cfg = Config:init {
   -- Keymaps
   keymaps = {},
 
-  -- Plugins
-  ----------
-  null_ls = {
-    disable = {
-      formatting = { "prettier" },
-    },
-  },
-
   -- Colors
   ---------
   colorscheme = "covid19",

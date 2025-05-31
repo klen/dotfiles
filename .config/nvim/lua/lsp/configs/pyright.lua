@@ -15,11 +15,7 @@ return vim.tbl_deep_extend("force", common, {
     },
   },
 
-  -- LSP Capabilities
-  capabilities = {
-    documentFormattingProvider = false,
-    documentRangeFormattingProvider = false,
-  },
+  format = false, -- Disable formatting
 
   -- Setup Diagnostics
   diagnostic = {

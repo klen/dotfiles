@@ -1,3 +1,5 @@
+local on_attach = require "lsp.utils.on_attach"
+
 return {
   "nvimtools/none-ls.nvim",
   dependencies = { "nvim-lua/plenary.nvim", "nvimtools/none-ls-extras.nvim" },
@@ -9,7 +11,11 @@ return {
       debug = cfg.debug,
 
       handlers = require "lsp.utils.handlers",
-      on_attach = require "lsp.utils.on_attach",
+      on_attach = function(client, bufnr)
+        -- Enable formatting
+        client.config.format = true
+        return on_attach(client, bufnr)
+      end,
 
       diagnostics_format = "#{c} #{m} (#{s})",
 
@@ -17,15 +23,9 @@ return {
 
         null_ls.builtins.formatting.prettier.with {
           filetypes = {
-            "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-            "vue",
             "css",
             "scss",
             "less",
-            -- "html",
             "json",
             "yaml",
             "markdown",

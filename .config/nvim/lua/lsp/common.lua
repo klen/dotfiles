@@ -4,6 +4,9 @@ return {
   capabilities = require "lsp.utils.capabilities",
   flags = { debounce_text_changes = 150 },
 
+  -- Formatting
+  format = true,
+
   -- Setup diagnostic like this
   -- diagnostic = {
   --   disable = { 8006, 8008, 8010, 8011, 7006 },

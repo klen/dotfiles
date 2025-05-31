@@ -33,6 +33,12 @@ function M.processLocations(err, result, ctx, cfg)
   M.process(err, result, ctx, function()
     local win = api.nvim_get_current_win()
     local client = lsp.get_client_by_id(ctx.client_id)
+    if not client then
+      return vim.notify(
+        string.format("LSP[%s] client has shut down after sending the message", ctx.client_id),
+        vim.log.levels.ERROR
+      )
+    end
     local items = lsp.util.locations_to_items(result, client.offset_encoding)
     local ranges = vim.tbl_map(function(loc)
       return loc.range
@@ -111,7 +117,7 @@ function M.jumpLocation(location, offset_encoding)
   if api.nvim_get_current_buf() ~= vim.uri_to_bufnr(uri) then
     cmd "abo split"
   end
-  lsp.util.jump_to_location(location, offset_encoding)
+  lsp.util.show_document(location, offset_encoding)
 end
 
 -- Detect if range or not
@@ -127,8 +133,8 @@ end
 
 local function lsp_request(method, handler)
   local buf = api.nvim_get_current_buf()
-  local params = lsp.util.make_position_params()
-  params.context = { includeDeclaration = true }
+  local params = lsp.util.make_position_params(0, 'utf-8')
+  -- params.context = { includeDeclaration = true }
   lsp.buf_request(buf, method, params, function(err, m, result)
     result = method == m and result or m
     M.process(err, result, { bufnr = buf }, handler)

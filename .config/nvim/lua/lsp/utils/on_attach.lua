@@ -5,7 +5,7 @@ local lsp = vim.lsp
 
 return function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local maps = {
@@ -127,7 +127,7 @@ return function(client, bufnr)
       end,
       desc = "Show client config",
     },
-    { "<space>", group = "lsp" },
+    { "<space>",  group = "lsp" },
     { "<space>w", group = "workspace" },
   }
 
@@ -164,7 +164,7 @@ return function(client, bufnr)
   end, { range = true })
 
   -- Auto format on save
-  if client.server_capabilities.documentFormattingProvider then
+  if client.server_capabilities.documentFormattingProvider and client.config.format then
     vim.api.nvim_create_autocmd(
       "BufWritePre",
       { pattern = "<buffer>", callback = utils.formatOnSave }
