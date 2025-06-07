@@ -103,9 +103,9 @@ function M.processCalls(err, result, ctx, _)
   end)
 end
 
-function M.formatOnSave()
+function M.formatOnSave(client)
   if vim.o.modified then
-    lsp.buf.format { timeout_ms = 5000 }
+    lsp.buf.format { timeout_ms = 5000, id = client.id }
   end
 end
 

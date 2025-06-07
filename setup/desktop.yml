@@ -1,34 +1,146 @@
 ---
 - hosts: all
+  handlers:
+    - name: Restart Dock
+      ansible.builtin.shell: killall Dock
+
+    - name: Restart Finder
+      ansible.builtin.shell: killall Finder
   tasks:
-    - community.general.homebrew_cask: name={{item}}
-      with_items:
-        - alfred            # UI tool
-        - appcleaner        # Uninstaller
-        - calibre           # Books Manager
-        - docker            # Utilities
-        - google-chrome     # Browser
-        - google-drive      # Cloud storage
-        - iina              # Video player
-        - ilya-birman-typography-layout # Keyboard layout
-        - istat-menus       # Activity Monitor
-        - iterm2            # Terminal
-        - karabiner-elements # Keyboard tuner
-        - keepingyouawake   # Keep Mac awake
-        - lulu              # Firewall
-        - obsidian          # Knowledge base
-        - rectangle         # Window manager
-        - slack             # Messenger
-        - steam             # Games Store and Manager
-        - telegram          # Messenger
-        - the-unarchiver    # Archive manager
-        - transmission      # Lightweight Bittorrent client
-        - yandex-music      # Yandex Music Client
-      environment:
-        HOMEBREW_CASK_OPTS: --appdir=/Applications
+    # - community.general.homebrew_cask: name={{item}}
+    #   with_items:
+    #     - alfred # UI tool
+    #     - appcleaner # Uninstaller
+    #     - calibre # Books Manager
+    #     - docker # Utilities
+    #     - google-chrome # Browser
+    #     - google-drive # Cloud storage
+    #     - iina # Video player
+    #     - ilya-birman-typography-layout # Keyboard layout
+    #     - istat-menus # Activity Monitor
+    #     - iterm2 # Terminal
+    #     - karabiner-elements # Keyboard tuner
+    #     - keepingyouawake # Keep Mac awake
+    #     - lulu # Firewall
+    #     - obsidian # Knowledge base
+    #     - rectangle # Window manager
+    #     - slack # Messenger
+    #     - steam # Games Store and Manager
+    #     - telegram # Messenger
+    #     - the-unarchiver # Archive manager
+    #     - transmission # Lightweight Bittorrent client
+    #     - yandex-music # Yandex Music Client
+    #   environment:
+    #     HOMEBREW_CASK_OPTS: --appdir=/Applications
+    #
+    # - community.general.homebrew_tap:
+    #     name: homebrew/cask-fonts
+    #
+    # - community.general.homebrew_cask:
+    #     name: font-hack-nerd-font
 
-    - community.general.homebrew_tap:
-        name: homebrew/cask-fonts
+    # Setup Finder
+    # ------------
 
-    - community.general.homebrew_cask:
-        name: font-hack-nerd-font
+    - name: Set Finder default view to list
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXPreferredViewStyle
+        value: Nlsv
+        state: present
+      notify: Restart Finder
+
+    - name: Keep folders on top in Finder
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: _FXSortFoldersFirst
+        value: true
+        state: present
+      notify: Restart Finder
+
+    - name: Show hidden files in Finder
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: AppleShowAllFiles
+        value: true
+        state: present
+      notify: Restart Finder
+
+    - name: Set default search scope to current folder
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXDefaultSearchScope
+        value: SCcf
+        state: present
+      notify: Restart Finder
+
+    - name: Show path bar in Finder
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowPathbar
+        value: true
+        type: bool
+        state: present
+      notify: Restart Finder
+
+    - name: Show status bar in finder
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowStatusBar
+        value: true
+        type: bool
+        state: present
+      notify: Restart Finder
+
+    # Setup Dock
+    # ----------
+
+    - name: Auto hide Dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide
+        value: true
+        type: bool
+        state: present
+      notify: Restart Dock
+
+    - name: Minimize windows into application icon
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: minimize-to-application
+        value: true
+        type: bool
+        state: present
+      notify: Restart Dock
+
+    - name: Minimize windows using scale effect
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: mineffect
+        value: scale
+        state: present
+      notify: Restart Dock
+
+    - name: Scroll to expose windows
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: scroll-to-open
+        value: true
+        type: bool
+        state: present
+      notify: Restart Dock
+
+    # Disable Apple Logs
+    - name: Disable Crash Reporter
+      community.general.osx_defaults:
+        domain: com.apple.CrashReporter
+        key: UseUNC
+        type: bool
+        value: false
+
+    - name: Disable Assistant
+      community.general.osx_defaults:
+        domain: com.apple.assistant.support
+        key: "Assistant Enabled"
+        type: bool
+        value: false

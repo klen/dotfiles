@@ -20,6 +20,9 @@ return {
 
   ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
     local client = lsp.get_client_by_id(ctx.client_id)
+    if not client or not client.config then
+      return
+    end
     local ds_config = client.config.diagnostic
     if ds_config then
       -- Filter by severity
@@ -35,7 +38,7 @@ return {
         end, result.diagnostics)
       end
     end
-    lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+    lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
   end,
 }
 

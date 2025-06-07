@@ -167,7 +167,7 @@ return function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider and client.config.format then
     vim.api.nvim_create_autocmd(
       "BufWritePre",
-      { pattern = "<buffer>", callback = utils.formatOnSave }
+      { pattern = "<buffer>", callback = function() utils.formatOnSave(client) end }
     )
   end
 
