@@ -29,11 +29,11 @@ return {
       local wk = require "which-key"
       wk.add {
         { "<leader>tn", "<cmd>TestNearest<cr>", desc = "Run the nearest test" },
-        { "<leader>tf", "<cmd>TestFile<cr>", desc = "Run the file" },
-        { "<leader>tl", "<cmd>TestLast<cr>", desc = "Run the last test" },
-        { "<leader>tt", "<cmd>TestSuite<cr>", desc = "Run all tests" },
-        { "<leader>tv", "<cmd>TestVisit<cr>", desc = "Visit the last test" },
-        { "<leader>te", "<cmd>TestEdit<cr>", desc = "Edit tests" },
+        { "<leader>tf", "<cmd>TestFile<cr>",    desc = "Run the file" },
+        { "<leader>tl", "<cmd>TestLast<cr>",    desc = "Run the last test" },
+        { "<leader>tt", "<cmd>TestSuite<cr>",   desc = "Run all tests" },
+        { "<leader>tv", "<cmd>TestVisit<cr>",   desc = "Visit the last test" },
+        { "<leader>te", "<cmd>TestEdit<cr>",    desc = "Edit tests" },
       }
     end,
   }),
@@ -78,4 +78,6 @@ return {
       require("runner").setup()
     end,
   },
+
+  -- require "plugins/code/avante",
 }
