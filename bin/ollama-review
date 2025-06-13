@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+MODEL=${MODEL:-qwen3}
+SYSTEM=${SYSTEM:-/codding}
+
+SAVE_MODE=false
+FIX_MODE=false
+FILE=""
+
+# Parse arguments
+for arg in "$@"; do
+  case $arg in
+    --save)
+      SAVE_MODE=true
+      shift
+      ;;
+    --fix)
+      FIX_MODE=true
+      shift
+      ;;
+    *)
+      FILE="$arg"
+      ;;
+  esac
+done
+
+if [[ -z "$FILE" || ! -f "$FILE" ]]; then
+  echo "❌ File not found or not provided."
+  exit 1
+fi
+
+CONTENT=$(cat "$FILE")
+
+if [ "$FIX_MODE" = true ]; then
+  PROMPT="You are a senior developer. Rewrite the following code with improvements and fixes. Maintain formatting and language:
+
+$CONTENT"
+else
+  PROMPT="You are a senior code reviewer. Analyze the following code and suggest improvements, refactoring opportunities, or anti-patterns. Provide the response in bullet points or markdown:
+
+$CONTENT"
+fi
+
+RESPONSE=$(jq -nc --arg model "$MODEL" --arg prompt "$PROMPT" --arg system "$SYSTEM"   '{model: $model, prompt: $prompt, system: $system, stream: false}' |
+  curl -s http://localhost:11434/api/generate     -H "Content-Type: application/json"     -d @- |
+  jq -r '.response // ""' |
+  sed '/<think>/,/<\/think>/d' |
+  sed '/^$/d')
+
+if [[ -z "$RESPONSE" ]]; then
+  echo "⚠️ No response from model."
+  exit 1
+fi
+
+if [ "$SAVE_MODE" = true ]; then
+  OUTFILE="${FILE}.review.md"
+  if [ "$FIX_MODE" = true ]; then
+    OUTFILE="${FILE}.fixed"
+  fi
+  echo "$RESPONSE" > "$OUTFILE"
+  echo "✅ Output saved to $OUTFILE"
+else
+  echo "$RESPONSE"
+fi
+

@@ -7,37 +7,38 @@
     - name: Restart Finder
       ansible.builtin.shell: killall Finder
   tasks:
-    # - community.general.homebrew_cask: name={{item}}
-    #   with_items:
-    #     - alfred # UI tool
-    #     - appcleaner # Uninstaller
-    #     - calibre # Books Manager
-    #     - docker # Utilities
-    #     - google-chrome # Browser
-    #     - google-drive # Cloud storage
-    #     - iina # Video player
-    #     - ilya-birman-typography-layout # Keyboard layout
-    #     - istat-menus # Activity Monitor
-    #     - iterm2 # Terminal
-    #     - karabiner-elements # Keyboard tuner
-    #     - keepingyouawake # Keep Mac awake
-    #     - lulu # Firewall
-    #     - obsidian # Knowledge base
-    #     - rectangle # Window manager
-    #     - slack # Messenger
-    #     - steam # Games Store and Manager
-    #     - telegram # Messenger
-    #     - the-unarchiver # Archive manager
-    #     - transmission # Lightweight Bittorrent client
-    #     - yandex-music # Yandex Music Client
-    #   environment:
-    #     HOMEBREW_CASK_OPTS: --appdir=/Applications
-    #
-    # - community.general.homebrew_tap:
-    #     name: homebrew/cask-fonts
-    #
-    # - community.general.homebrew_cask:
-    #     name: font-hack-nerd-font
+    - community.general.homebrew_cask: name={{item}}
+      with_items:
+        - alfred # UI tool
+        - appcleaner # Uninstaller
+        - calibre # Books Manager
+        - clop # Clipboard Manager
+        - docker # Utilities
+        - google-chrome # Browser
+        - google-drive # Cloud storage
+        - iina # Video player
+        - ilya-birman-typography-layout # Keyboard layout
+        - istat-menus # Activity Monitor
+        - iterm2 # Terminal
+        - karabiner-elements # Keyboard tuner
+        - keepingyouawake # Keep Mac awake
+        - latest # Update installed apps
+        - lulu # Firewall
+        - obsidian # Knowledge base
+        - slack # Messenger
+        - steam # Games Store and Manager
+        - telegram # Messenger
+        - the-unarchiver # Archive manager
+        - transmission # Lightweight Bittorrent client
+        - yandex-music # Yandex Music Client
+      environment:
+        HOMEBREW_CASK_OPTS: --appdir=/Applications
+
+    - community.general.homebrew_tap:
+        name: homebrew/cask-fonts
+
+    - community.general.homebrew_cask:
+        name: font-hack-nerd-font
 
     # Setup Finder
     # ------------

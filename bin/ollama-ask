@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+MODEL=${MODEL:-qwen3}
+SYSTEM=${SYSTEM:-/no_think /codding}
+
+PROMPT="$*"
+
+jq -nc --arg model "$MODEL" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
+  '{model: $model, prompt: $prompt, system: $system, stream: false}' |
+  curl -s http://localhost:11434/api/generate \
+    -H "Content-Type: application/json" \
+    -d @- |
+  jq -r '.response // "⚠️ Empty response or model error"' |
+  sed '/<think>/,/<\/think>/d'
