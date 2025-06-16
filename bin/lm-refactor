@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+MODEL=${MODEL:-qwen/qwen2.5-coder-14b}
+SYSTEM="You are a code refactoring assistant.
+
+Your job:
+- Fix bugs and logic issues
+- Optimize performance and memory usage
+- Improve readability and apply clean code principles (DRY, KISS, SOLID, etc.)
+- Refactor and simplify the code where possible
+
+Output rules:
+- Output only the final, modified version of the code
+- Do NOT wrap the code in markdown (no \`\`\` blocks)
+- Do NOT add explanations, comments, or formatting
+- Output raw code only — plain text, no prefixes or suffixes
+"
+PROMPT="Analyze and improve the following code. Output only the modified version, as plain code without markdown formatting.
+
+Code:
+"
+
+FILE="$1"
+
+if [[ -z "$FILE" || ! -f "$FILE" ]]; then
+  echo "❌ File not found or not provided."
+  exit 1
+fi
+
+CONTENT=$(<"$FILE")
+PROMPT="$PROMPT
+
+$CONTENT"
+
+RESPONSE=$(
+  jq -nc --arg model "$MODEL" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
+    '{
+        model: $model,
+        messages: [
+          { role: "system", content: $system },
+          { role: "user", content: $prompt }
+        ]
+  }' |
+  curl -s http://localhost:1234/v1/chat/completions \
+    -H "Content-Type: application/json" -d @- |
+  jq -r '.choices[0].message.content'
+)
+
+if [[ -z "$RESPONSE" ]]; then
+  echo "⚠️ No response from model."
+  exit 1
+fi
+
+echo "$RESPONSE" > "$FILE"
+echo "✅ Output saved to $FILE"
