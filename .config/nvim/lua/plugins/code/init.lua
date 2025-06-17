@@ -38,9 +38,6 @@ return {
   require "plugins/code/copilot-vim",
   -- require "plugins/code/copilot",
 
-  -- Snippets
-  -- require "plugins/code/luasnip",
-
   -- Python
   {
     "Vimjas/vim-python-pep8-indent",

@@ -36,7 +36,6 @@ return {
     "hrsh7th/cmp-buffer",   -- Buffer completion
     "hrsh7th/cmp-path",     -- Path completion
     "hrsh7th/cmp-nvim-lua", -- VIM lua API completion
-    -- "saadparwaiz1/cmp_luasnip", -- Snippets completion
   },
   opts = function()
     local cmp = require "cmp"
@@ -45,11 +44,6 @@ return {
       completion = {
         completeopt = "menu,menuone,noinsert",
       },
-      -- snippet = {
-      --   expand = function(args)
-      --     require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-      --   end,
-      -- },
       mapping = {
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
