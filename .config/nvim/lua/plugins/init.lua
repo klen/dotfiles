@@ -1,43 +1,19 @@
 -- Setup plugins
 
-local lazy = require "plugins/lazy"
+return {
 
-lazy.setup {
-  spec = {
-    -- NVIM Development tools
-    { "folke/lazydev.nvim", ft = "lua", opts = {} },
+  -- Colors
+  require "plugins/colors",
 
-    -- Colors
-    require "plugins/colors",
+  -- UI
+  require "plugins/ui",
 
-    -- UI
-    require "plugins/ui",
+  -- Code editing
+  require "plugins/code",
 
-    -- Code editing
-    require "plugins/code",
+  -- LSP and completion
+  require "plugins/lsp",
 
-    -- LSP and completion
-    require "plugins/lsp",
+  require "plugins/mini",
 
-    require "plugins/mini",
-
-  },
-  defaults = {
-    version = false,
-  },
-  install = {
-    colorscheme = { "habamax", "tokyonight" },
-  },
-  performance = {
-    rtp = {
-      -- disable some rtp plugins
-      disabled_plugins = {
-        'gzip',
-        'tarPlugin',
-        'tohtml',
-        'tutor',
-        'zipPlugin',
-      },
-    },
-  },
 }

@@ -1,22 +1,15 @@
 -- Speed up Neovim
-if vim.loader then
-  vim.loader.enable()
-end
+vim.loader.enable()
 
--- Some options
-vim.g.mapleader = ","      -- Set leader keys
-vim.g.maplocalleader = " " -- Set leader keys
-vim.g.editorconfig = false -- Disable editorconfig plugin
-vim.g.showmode = false     -- Disable showmode, use statusline instead
+require "config/opts"
+require "config/auto"
+require "config/keymaps"
 
 -- Setup plugins
-require "plugins"
+require "config/lazy"
 
 -- Setup LSP
 require "lsp"
-
--- Mapping
-require "keymaps"
 
 -- User config
 local config = require "config"
