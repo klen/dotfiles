@@ -133,7 +133,8 @@ end
 
 local function lsp_request(method, handler)
   local buf = api.nvim_get_current_buf()
-  local params = lsp.util.make_position_params(0, 'utf-8')
+  local client = vim.lsp.get_clients({ bufnr = buf })[1]
+  local params = lsp.util.make_position_params(0, client and client.offset_encoding or "utf-16")
   -- params.context = { includeDeclaration = true }
   lsp.buf_request(buf, method, params, function(err, m, result)
     result = method == m and result or m

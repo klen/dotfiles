@@ -13,8 +13,11 @@ return {
     },
   },
 
-  -- NVIM Development tools
-  { "folke/lazydev.nvim", ft = "lua", opts = {} },
+  -- Configure diagnosticls
+  {
+    "creativenull/diagnosticls-configs-nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
 
   -- Support non-lsp formatters/linters/etc
   require "plugins/lsp/none-ls",
@@ -22,17 +25,13 @@ return {
   -- -- Support LSP status for statusline
   -- require "plugins/lsp/lsp-status",
 
-  -- Support LSP colors
-  "folke/lsp-colors.nvim",
-
-  -- Configure diagnosticls
-  {
-    "creativenull/diagnosticls-configs-nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
-  },
+  -- Completion
+  require "plugins/lsp/nvim-cmp",
 
   {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu",
   },
+
+  -- require "plugins/lsp/llm",
 }

@@ -2,15 +2,17 @@ local tools = require "tools"
 
 return {
 
-  -- Support surround
-  {
-    "kylechui/nvim-surround",
-    opts = {},
-  },
+  require "plugins/code/treesitter",
 
   -- Comment code
   {
     "numToStr/Comment.nvim",
+    opts = {},
+  },
+
+  -- Support surround
+  {
+    "kylechui/nvim-surround",
     opts = {},
   },
 
@@ -45,9 +47,6 @@ return {
   -- Snippets
   -- require "plugins/code/luasnip",
 
-  -- Completion
-  require "plugins/code/nvim-cmp",
-
   -- Python
   {
     "Vimjas/vim-python-pep8-indent",
@@ -80,5 +79,4 @@ return {
   },
 
   -- require "plugins/code/avante",
-  -- require "plugins/code/llm",
 }

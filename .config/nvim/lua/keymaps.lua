@@ -10,10 +10,6 @@ keymap.set("n", "<right>", ":cnext<cr>zvzz")
 keymap.set("n", "<up>", ":lprev<cr>zvzz")   -- loclist
 keymap.set("n", "<down>", ":lnext<cr>zvzz")
 
--- Insert mode shortcuts
-keymap.set("i", "<C-o>", "<Esc>o")
-keymap.set("i", "<C-j>", "<Esc>J")
-
 -- Not jump on star, only highlight
 keymap.set("n", "*", "*N")
 
