@@ -21,5 +21,6 @@ local common_params = require "lsp.common"
 
 for _, server in ipairs(servers) do
   local ok, server_params = pcall(require, "lsp.configs." .. server)
+  -- Debug config
   vim.lsp.config(server, ok and server_params or common_params)
 end

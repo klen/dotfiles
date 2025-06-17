@@ -80,4 +80,5 @@ return {
   },
 
   -- require "plugins/code/avante",
+  -- require "plugins/code/llm",
 }

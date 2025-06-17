@@ -16,7 +16,18 @@ return function(client, bufnr)
     },
     {
       "gd",
-      lsp.buf.definition,
+      function(opts)
+        lsp.buf.definition({
+          on_list = function(ctx)
+            local items = ctx.items
+            if #items == 1 then
+              -- If only one item, jump to it directly
+              return utils.jumpLocation(items[1].user_data, 'utf-8')
+            end
+          end,
+        })
+      end,
+      -- lsp.buf.definition,
       desc = "Go to definition",
     },
     {
