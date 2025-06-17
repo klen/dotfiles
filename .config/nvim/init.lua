@@ -2,8 +2,6 @@
 vim.loader.enable()
 
 require "config/opts"
-require "config/auto"
-require "config/keymaps"
 
 -- Setup plugins
 require "config/lazy"
@@ -12,6 +10,8 @@ require "config/lazy"
 require "lsp"
 
 -- User config
+require "config/auto"
+require "config/keymaps"
 local config = require "config"
 
 -- Colorscheme
