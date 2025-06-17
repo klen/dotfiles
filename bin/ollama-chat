@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
+
 MODEL=${MODEL:-gemma3:12b}
 echo "🧠 $MODEL REPL — press Ctrl+D to exit"
 
 while true; do
   read -rp "> " input || break
   [[ -z "$input" ]] && continue
-  jq -nc --arg model "$MODEL" --arg prompt "$input"     '{model: $model, prompt: $prompt, stream: false}' |
-    curl -s http://localhost:11434/api/generate       -H "Content-Type: application/json"       -d @- |
-    jq -r '.response // "⚠️ Empty response or model error"' |
-    glow --width=200 --style=dark
+
+  curl -s http://localhost:11434/api/generate \
+    -H "Content-Type: application/json" \
+    -d "$(jq -nc --arg model "$MODEL" --arg prompt "$input" '{model: $model, prompt: $prompt, stream: false}')" |
+  jq -r '.response // "⚠️ Empty response or model error"' |
+  glow --width=200 --style=dark
 done

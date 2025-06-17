@@ -1,7 +1,35 @@
 #!/usr/bin/env bash
 
 MODEL=${MODEL:-qwen/qwen2.5-coder-14b}
-SYSTEM="You are a code refactoring assistant.
+
+detect_language() {
+  EXT="${1##*.}"
+  case "$EXT" in
+    py) echo "Python";;
+    js) echo "JavaScript";;
+    ts) echo "TypeScript";;
+    go) echo "Go";;
+    rs) echo "Rust";;
+    cpp|cc|cxx|c++) echo "C++";;
+    c) echo "C";;
+    sh|bash) echo "Bash";;
+    java) echo "Java";;
+    *) echo "code";;
+  esac
+}
+
+refactor_file() {
+  local FILE="$1"
+
+  if [[ ! -f "$FILE" ]]; then
+    echo "❌ File not found: $FILE"
+    return 1
+  fi
+
+  local LANGUAGE
+  LANGUAGE=$(detect_language "$FILE")
+
+  local SYSTEM="You are a $LANGUAGE code refactoring assistant.
 
 Your job:
 - Fix bugs and logic issues
@@ -11,45 +39,65 @@ Your job:
 
 Output rules:
 - Output only the final, modified version of the code
-- Do NOT wrap the code in markdown (no \`\`\` blocks)
+- Do NOT wrap the code in markdown blocks
 - Do NOT add explanations, comments, or formatting
 - Output raw code only — plain text, no prefixes or suffixes
 "
-PROMPT="Analyze and improve the following code. Output only the modified version, as plain code without markdown formatting.
+
+  local CONTENT
+  CONTENT=$(<"$FILE")
+
+  local PROMPT="Analyze and improve the following code. Output only the modified version, as plain code.
 
 Code:
-"
-
-FILE="$1"
-
-if [[ -z "$FILE" || ! -f "$FILE" ]]; then
-  echo "❌ File not found or not provided."
-  exit 1
-fi
-
-CONTENT=$(<"$FILE")
-PROMPT="$PROMPT
 
 $CONTENT"
 
-RESPONSE=$(
-  jq -nc --arg model "$MODEL" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
-    '{
-        model: $model,
-        messages: [
-          { role: "system", content: $system },
-          { role: "user", content: $prompt }
-        ]
-  }' |
-  curl -s http://localhost:1234/v1/chat/completions \
-    -H "Content-Type: application/json" -d @- |
-  jq -r '.choices[0].message.content'
-)
+  local RAW_RESPONSE RESPONSE
+  RAW_RESPONSE=$(
+    jq -nc --arg model "$MODEL" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
+      '{
+          model: $model,
+          messages: [
+            { role: "system", content: $system },
+            { role: "user", content: $prompt }
+          ]
+      }' |
+    curl -s http://localhost:1234/v1/chat/completions \
+      -H "Content-Type: application/json" -d @-
+  )
 
-if [[ -z "$RESPONSE" ]]; then
-  echo "⚠️ No response from model."
+  if echo "$RAW_RESPONSE" | jq -e '.error' >/dev/null; then
+    echo "❌ LLM error for $FILE: $(echo "$RAW_RESPONSE" | jq -r '.error.message')" >&2
+    return 1
+  fi
+
+  RESPONSE=$(echo "$RAW_RESPONSE" | jq -r '.choices[0].message.content')
+
+  if [[ -z "$RESPONSE" ]]; then
+    echo "⚠️ No response from model for $FILE."
+    return 1
+  fi
+
+  # Remove ```lang and ``` blocks if present
+  RESPONSE=$(echo "$RESPONSE" | sed -e '/^```/d')
+
+  echo "$RESPONSE" > "$FILE"
+  echo "✅ Refactored $FILE"
+}
+
+# === Main logic ===
+TARGET="$1"
+
+if [[ -z "$TARGET" ]]; then
+  echo "Usage: $0 <file-or-directory>"
   exit 1
 fi
 
-echo "$RESPONSE" > "$FILE"
-echo "✅ Output saved to $FILE"
+if [[ -d "$TARGET" ]]; then
+  find "$TARGET" -type f $begin:math:text$ -name "*.py" -o -name "*.js" -o -name "*.ts" -o -name "*.go" -o -name "*.rs" -o -name "*.c" -o -name "*.cpp" -o -name "*.sh" $end:math:text$ | while read -r FILE; do
+    refactor_file "$FILE"
+  done
+else
+  refactor_file "$TARGET"
+fi

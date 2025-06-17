@@ -1,8 +1,48 @@
 #!/bin/bash
 
+# Variables
+# ---------
 HOOK_FILE=".git/hooks/prepare-commit-msg"
 SCRIPT_NAME=$(basename "$0")
 MODEL=${MODEL:-qwen/qwen2.5-coder-14b}
+
+SYSTEM="You're a Git commit message generator."
+PROMPT="
+Generate a short, one-line Git commit message from the diff below.
+
+Use conventional commit format (feat, fix, refactor, chore, build, test, docs, style, perf).
+Use imperative verbs (e.g. add, fix, refactor, update).
+End with a fitting emoji.
+
+Only output the message. No extra text.
+
+Return format: <type>: <action> <subject> <emoji>
+Example: feat: add search bar to header ✨
+
+Diff:"
+
+# Functions
+# --------
+show_help() {
+  cat <<EOF
+Usage: $0 [--install | --hook <commit-msg-file> | --help]
+
+Options:
+  --install              Install this script as a Git prepare-commit-msg hook
+  --hook <file>          Internal use: invoked by Git with path to commit message file
+  --help, -h             Show this help message
+
+Description:
+  When invoked normally (no args), the script analyzes staged changes
+  and generates a Git commit message using an LLM running locally.
+
+Examples:
+  $0                         # Generate a commit message and print it
+  $0 --install               # Install as Git hook
+  $0 --hook .git/COMMIT_EDITMSG  # Called by Git automatically
+EOF
+  exit 0
+}
 
 install_hook() {
   cat > "$HOOK_FILE" <<EOF
@@ -24,19 +64,30 @@ EOF
   exit 0
 }
 
-# Handle --install flag
-if [[ "$1" == "--install" ]]; then
-  install_hook
-fi
-
-# If run as hook, $1 is the path to the commit message file
-if [[ "$1" == "--hook" && -n "$2" ]]; then
-  COMMIT_MSG_FILE="$2"
-else
-  COMMIT_MSG_FILE=""
-fi
+# Handle flags
+# ------------
+case "$1" in
+  --help|-h)
+    show_help
+    ;;
+  --install)
+    install_hook
+    ;;
+  --hook)
+    COMMIT_MSG_FILE="$2"
+    ;;
+  "")
+    COMMIT_MSG_FILE=""
+    ;;
+  *)
+    echo "❌ Unknown option: $1"
+    echo "Use --help for usage information"
+    exit 1
+    ;;
+esac
 
 # Check dependencies
+# ------------------
 for dep in git curl jq; do
   if ! command -v "$dep" &> /dev/null; then
     echo "❌ $dep is not installed" >&2
@@ -45,6 +96,7 @@ for dep in git curl jq; do
 done
 
 # Check staged changes
+# --------------------
 DIFF_OUTPUT=$(git diff --cached)
 DIFF_SIZE=${#DIFF_OUTPUT}
 
@@ -53,23 +105,9 @@ if [ "$DIFF_SIZE" -eq 0 ]; then
   exit 1
 fi
 
-SYSTEM="You're a Git commit message generator."
-PROMPT="
-Generate a short, one-line Git commit message from the diff below.
+PROMPT="$PROMPT
 
-Use conventional commit format (feat, fix, refactor, chore, build, test, docs, style, perf).
-Use imperative verbs (e.g. add, fix, refactor, update).
-End with a fitting emoji.
-
-Only output the message. No extra text.
-
-Return format: <type>: <action> <subject> <emoji>
-Example: feat: add search bar to header ✨
-
-Diff:
-
-$DIFF_OUTPUT
-"
+$DIFF_OUTPUT"
 
 RESPONSE=$(
   jq -nc --arg model "$MODEL" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
