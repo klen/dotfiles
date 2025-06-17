@@ -95,7 +95,7 @@ if [[ -z "$TARGET" ]]; then
 fi
 
 if [[ -d "$TARGET" ]]; then
-  find "$TARGET" -type f $begin:math:text$ -name "*.py" -o -name "*.js" -o -name "*.ts" -o -name "*.go" -o -name "*.rs" -o -name "*.c" -o -name "*.cpp" -o -name "*.sh" $end:math:text$ | while read -r FILE; do
+  find "$TARGET" -type f \( -name "*.py" -o -name "*.js" -o -name "*.ts" -o -name "*.go" -o -name "*.rs" -o -name "*.c" -o -name "*.cpp" -o -name "*.sh" \) | while read -r FILE; do
     refactor_file "$FILE"
   done
 else

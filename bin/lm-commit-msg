@@ -76,7 +76,12 @@ case "\$2" in
   merge|squash|tag) exit 0 ;;
 esac
 
-$(realpath "$0") --hook "\$1"
+if ! command -v lm-commit-msg > /dev/null 2>&1; then
+  echo "⚠️ lm-commit-msg not found in PATH, skipping hook"
+  exit 0
+fi
+
+lm-commit-msg --hook "\$1"
 EOF
 
   chmod +x "$HUSKY_HOOK_FILE"
