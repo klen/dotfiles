@@ -4,7 +4,6 @@ alias cic='set completion-ignore-case On'   # cic:          Make tab-completion 
 alias cp='cp -iv'                           # Preferred 'cp' implementation
 alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
 alias fix_term='echo -e "\033c"'            # fix_term:     Reset the conosle.  Similar to the reset command
-alias less='less -FSRXc'                    # Preferred 'less' implementation
 alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
 alias mv='mv -iv'                           # Preferred 'mv' implementation
 alias nano='nano -W'                        # Preferred 'nano' implementation
