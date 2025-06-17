@@ -10,12 +10,6 @@ return {
     opts = {},
   },
 
-  -- Support surround
-  {
-    "kylechui/nvim-surround",
-    opts = {},
-  },
-
   -- Tests
   tools.local_plugin("~/projects/nvim/test", "klen/nvim-test", {
     keys = { "<leader>tn", "<leader>tf", "<leader>tl", "<leader>tt", "<leader>tv", "<leader>te" },

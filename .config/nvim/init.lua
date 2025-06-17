@@ -4,9 +4,10 @@ if vim.loader then
 end
 
 -- Some options
-vim.g.mapleader = ","
-vim.g.maplocalleader = " "
-vim.g.editorconfig = false
+vim.g.mapleader = ","      -- Set leader keys
+vim.g.maplocalleader = " " -- Set leader keys
+vim.g.editorconfig = false -- Disable editorconfig plugin
+vim.g.showmode = false     -- Disable showmode, use statusline instead
 
 -- Setup plugins
 require "plugins"
