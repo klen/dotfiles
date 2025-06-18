@@ -36,7 +36,9 @@ return {
     -- vim.highlight.create("MiniStatuslineFilename", {}, true)
     -- vim.highlight.create("MiniStatuslineFileinfo", {}, true)
 
-    require("mini.surround").setup()
+    require("mini.surround").setup {
+      n_lines = 100,
+    }
     -- require("mini.tabline").setup()
     -- require("mini.trailspace").setup()
   end,
