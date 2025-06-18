@@ -21,7 +21,6 @@ keymap.set("n", "J", "mzJ`z")
 -- Save file
 keymap.set("n", "<CR>", function()
   vim.cmd "write"
-  vim.notify("File saved", vim.log.levels.INFO, { title = "Save" })
 end)
 
 -- Fast save

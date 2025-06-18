@@ -28,10 +28,10 @@ return {
   -- Completion
   require "plugins/lsp/nvim-cmp",
 
-  {
-    "weilbith/nvim-code-action-menu",
-    cmd = "CodeActionMenu",
-  },
+  -- Copilot
+  require "plugins/lsp/copilot-vim",
+  require "plugins/lsp/copilotchat-nvim",
+  -- require "plugins/lsp/copilot",
 
   -- require "plugins/lsp/llm",
 }

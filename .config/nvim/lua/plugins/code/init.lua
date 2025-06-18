@@ -35,10 +35,6 @@ return {
     end,
   }),
 
-  -- Copilot
-  require "plugins/code/copilot-vim",
-  -- require "plugins/code/copilot",
-
   -- Python
   {
     "Vimjas/vim-python-pep8-indent",
