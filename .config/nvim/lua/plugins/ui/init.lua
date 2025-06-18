@@ -5,14 +5,16 @@ return {
   -- Setup Icons
   require "plugins/ui/nvim-web-devicons",
 
-  -- UI Helpers (vim.ui.input, vim.ui.select)
-  require "plugins/ui/dressing",
-
   -- Indent guides
   require "plugins/ui/indent-blankline",
 
-  -- Better notifies
-  require "plugins/ui/nvim-notify",
+  require "plugins/ui/noice",
+
+  -- -- UI Helpers (vim.ui.input, vim.ui.select)
+  -- require "plugins/ui/dressing",
+  --
+  -- -- Better notifies
+  -- require "plugins/ui/nvim-notify",
 
   -- Better scrolling
   require "plugins/ui/neoscroll",

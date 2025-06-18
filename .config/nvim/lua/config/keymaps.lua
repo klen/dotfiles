@@ -19,7 +19,11 @@ keymap.set("n", "N", "Nzzzv")
 keymap.set("n", "J", "mzJ`z")
 
 -- Save file
-keymap.set("n", "<CR>", ":w<CR>")
+keymap.set("n", "<CR>", function()
+  vim.cmd "write"
+  vim.notify("File saved", vim.log.levels.INFO, { title = "Save" })
+end)
+
 -- Fast save
 keymap.set("n", "<S-CR>", tools.fast_save)
 
