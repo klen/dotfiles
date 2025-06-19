@@ -6,7 +6,7 @@ return {
     table.insert(cfg.keymaps, {
       "<leader>fn",
       function()
-        require("noice").cmd("history")
+        require("noice").cmd("all")
       end,
       desc = "Find notifies"
     })
@@ -38,6 +38,24 @@ return {
       bottom_search = true,         -- use a classic bottom cmdline for search
       command_palette = true,       -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
+    },
+    cmdline = {
+      opts = {
+        border = {
+          style = "rounded",
+        },
+        win_options = {
+          winhighlight = "Normal:Normal,FloatBorder:Normal",
+        },
+        position = {
+          row = 5,
+          col = "50%",
+        },
+        size = {
+          width = 80,
+          height = "auto",
+        },
+      }
     },
   },
   dependencies = {

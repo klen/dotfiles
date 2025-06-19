@@ -66,5 +66,9 @@ return {
     end,
   },
 
+  -- Completion
+  -- require "plugins/code/nvim-cmp",
+  require "plugins/code/blink-cmp",
+
   -- require "plugins/code/avante",
 }

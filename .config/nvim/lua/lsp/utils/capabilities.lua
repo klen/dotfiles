@@ -25,4 +25,4 @@ if pcall(require, "lsp-status") then
   capabilities.window.workDoneProgress = true
 end
 
-return capabilities
+return require("blink.cmp").get_lsp_capabilities(capabilities)

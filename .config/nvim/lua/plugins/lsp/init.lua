@@ -10,6 +10,7 @@ return {
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
       "neovim/nvim-lspconfig",
+      "sanghen/blink.cmp",
     },
   },
 
@@ -24,9 +25,6 @@ return {
 
   -- -- Support LSP status for statusline
   -- require "plugins/lsp/lsp-status",
-
-  -- Completion
-  require "plugins/lsp/nvim-cmp",
 
   -- Copilot
   require "plugins/lsp/copilot-vim",

@@ -21,10 +21,17 @@ keymap.set("n", "J", "mzJ`z")
 -- Save file
 keymap.set("n", "<CR>", function()
   vim.cmd "write"
-end)
+end, { desc = "Save file" })
 
 -- Fast save
-keymap.set("n", "<S-CR>", tools.fast_save)
+keymap.set("n", "<S-CR>", tools.fast_save, { desc = "Fast save" })
+
+-- Quit Nvim
+keymap.set("n", "<leader>qq", function()
+    vim.cmd "qa"
+  end,
+  { desc = "Quit Nvim" }
+)
 
 -- Toggle keymap
 keymap.set("n", "<C-F>", "a<C-^><Esc>")
