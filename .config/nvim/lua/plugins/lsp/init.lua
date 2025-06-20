@@ -1,35 +1,54 @@
 return {
-
-  -- Install and tune LSP servers
+  --- Language Server Protocol (LSP) Management ---
+  -- `mason-org/mason-lspconfig.nvim`: Integrates Mason.nvim with nvim-lspconfig
+  -- to simplify the installation and setup of LSP servers.
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = require "lsp.servers",
-      automatic_installation = true,
+      -- Ensure these LSP servers are installed.
+      -- `require "lsp.servers"` is expected to return a table of server names (e.g., {"lua_ls", "pyright"}).
+      ensure_installed = require("lsp.servers"),
+      automatic_installation = true, -- Automatically install missing servers
     },
     dependencies = {
+      -- `mason-org/mason.nvim`: The universal package manager for Neovim.
+      -- Used for managing LSP servers, DAP adapters, linters, and formatters.
       { "mason-org/mason.nvim", opts = {} },
+      -- `neovim/nvim-lspconfig`: Core plugin for Neovim's LSP client, providing
+      -- default configurations for various LSP servers.
       "neovim/nvim-lspconfig",
+      -- `sanghen/blink.cmp`: Likely a completion plugin that integrates with LSP.
       "sanghen/blink.cmp",
     },
   },
 
-  -- Configure diagnosticls
+  --- Diagnostic and Linter Configuration ---
+  -- `creativenull/diagnosticls-configs-nvim`: Provides configurations for
+  -- `diagnostic-languageserver` to integrate external linters and formatters
+  -- into the LSP diagnostic system.
   {
     "creativenull/diagnosticls-configs-nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
+    dependencies = { "neovim/nvim-lspconfig" }, -- Requires nvim-lspconfig
   },
 
-  -- Support non-lsp formatters/linters/etc
-  require "plugins/lsp/none-ls",
+  -- Support for non-LSP formatters, linters, etc.
+  -- This typically refers to `null-ls.nvim` (now `none-ls.nvim`) which allows
+  -- integrating CLI tools for diagnostics and formatting.
+  require("plugins/lsp/none-ls"),
 
-  -- -- Support LSP status for statusline
+  -- -- Support LSP status for statusline (Commented Out)
+  -- -- This section is commented out, suggesting `lsp-status.nvim` is not currently in use.
+  -- -- It usually provides information about the active LSP client in the statusline.
   -- require "plugins/lsp/lsp-status",
 
-  -- Copilot
-  require "plugins/lsp/copilot-vim",
-  require "plugins/lsp/copilotchat-nvim",
-  -- require "plugins/lsp/copilot",
+  --- AI Code Assistants ---
+  -- `Copilot`: Integration with GitHub Copilot for AI-powered code suggestions.
+  require("plugins/lsp/copilot-vim"),      -- Main Copilot plugin for Vim/Neovim
+  require("plugins/lsp/copilotchat-nvim"), -- Copilot Chat integration
+  -- require "plugins/lsp/copilot",         -- Alternative Copilot plugin (commented out)
 
+  -- `LLM` Integration (Commented Out)
+  -- This line is commented out, indicating another Large Language Model (LLM) plugin
+  -- is not currently active.
   -- require "plugins/lsp/llm",
 }

@@ -1,74 +1,93 @@
-local tools = require "tools"
+-- Import helper functions from the 'tools' module
+local tools = require("tools")
 
 return {
+  -- Import the Treesitter configuration (likely from plugins/code/treesitter.lua)
+  require("plugins/code/treesitter"),
 
-  require "plugins/code/treesitter",
-
-  -- Comment code
+  --- Code Commenting ---
+  -- `folke/ts-comments.nvim`: Adds enhanced comment toggling using Treesitter.
   {
     "folke/ts-comments.nvim",
-    event = "VeryLazy",
-    opts = {},
+    event = "VeryLazy", -- Load this plugin very late to minimize startup time
+    opts = {},          -- No specific options configured here
   },
 
-  -- Tests
+  --- Testing ---
+  -- `klen/nvim-test`: A Neovim plugin for running tests.
+  -- Uses `tools.local_plugin` to allow local development of this plugin.
   tools.local_plugin("~/projects/nvim/test", "klen/nvim-test", {
+    -- Define keybindings that `which-key` will recognize and display.
     keys = { "<leader>tn", "<leader>tf", "<leader>tl", "<leader>tt", "<leader>tv", "<leader>te" },
+    -- Configuration function for `nvim-test`. This runs after the plugin is loaded.
     config = function()
-      local test = require "nvim-test"
+      local test = require("nvim-test")
+      local wk = require("which-key") -- Assuming which-key is already loaded
 
-      test.setup {
+      -- Setup `nvim-test` with a custom terminal width for test output.
+      test.setup({
         termOpts = {
-          width = math.max(math.ceil(vim.o.columns * 0.35), 40),
+          width = math.max(math.ceil(vim.o.columns * 0.35), 40), -- Terminal width: 35% of columns or min 40
         },
-      }
+      })
 
-      local wk = require "which-key"
-      wk.add {
+      -- Add `nvim-test` keymaps to `which-key` for easy discovery.
+      wk.add({
         { "<leader>tn", "<cmd>TestNearest<cr>", desc = "Run the nearest test" },
-        { "<leader>tf", "<cmd>TestFile<cr>",    desc = "Run the file" },
-        { "<leader>tl", "<cmd>TestLast<cr>",    desc = "Run the last test" },
-        { "<leader>tt", "<cmd>TestSuite<cr>",   desc = "Run all tests" },
-        { "<leader>tv", "<cmd>TestVisit<cr>",   desc = "Visit the last test" },
-        { "<leader>te", "<cmd>TestEdit<cr>",    desc = "Edit tests" },
-      }
+        { "<leader>tf", "<cmd>TestFile<cr>",    desc = "Run all tests in current file" },
+        { "<leader>tl", "<cmd>TestLast<cr>",    desc = "Run the last executed test" },
+        { "<leader>tt", "<cmd>TestSuite<cr>",   desc = "Run the entire test suite" },
+        { "<leader>tv", "<cmd>TestVisit<cr>",   desc = "Visit the last test file" },
+        { "<leader>te", "<cmd>TestEdit<cr>",    desc = "Edit tests (if supported by runner)" },
+      })
     end,
   }),
 
-  -- Python
+  --- Language-Specific Support ---
+  -- Python indenting based on PEP8.
   {
     "Vimjas/vim-python-pep8-indent",
-    ft = { "python" },
+    ft = { "python" }, -- Load only for Python files
   },
-
-  -- CoffeeScript
+  -- CoffeeScript syntax highlighting and indentation.
   "kchmck/vim-coffee-script",
 
-  -- Git support
-  require "plugins/code/git",
+  --- Git Integration ---
+  -- Import Git-related plugin configurations (likely from plugins/code/git.lua).
+  require("plugins/code/git"),
 
-  -- Rest client
-  require "plugins/code/luarocks",
-  require "plugins/code/rest",
+  --- API/REST Client ---
+  -- `luarocks` integration (likely for managing dependencies of Neovim plugins).
+  require("plugins/code/luarocks"),
+  -- REST client plugin configuration (likely from plugins/code/rest.lua).
+  require("plugins/code/rest"),
 
-  -- Local plugins (in development)
+  --- Local Plugin Development ---
+  -- `klen/nvim-config-local`: Manages local (project-specific) Neovim configurations.
+  -- Uses `tools.local_plugin` for local development.
   tools.local_plugin("~/projects/nvim/config-local", "klen/nvim-config-local", {
     config = function()
-      require("config-local").setup { lookup_parents = true }
+      -- Setup `nvim-config-local` to look for config files in parent directories.
+      require("config-local").setup({ lookup_parents = true })
     end,
   }),
 
-  -- Run code/repl
+  --- Code Execution / REPL ---
+  -- Local plugin for running code or launching REPLs.
   {
-    dir = "~/projects/nvim/runner",
+    dir = "~/projects/nvim/runner", -- Path to the local `runner` plugin directory
     config = function()
-      require("runner").setup()
+      require("runner").setup()     -- Initialize the runner plugin
     end,
   },
 
-  -- Completion
+  --- Completion ---
+  -- Custom completion setup using `blink-cmp`.
+  -- `nvim-cmp` is commented out, suggesting `blink-cmp` is a replacement or custom wrapper.
   -- require "plugins/code/nvim-cmp",
-  require "plugins/code/blink-cmp",
+  require("plugins/code/blink-cmp"),
 
+  --- Other (Commented Out) ---
+  -- The following line is commented out, indicating it's not currently active.
   -- require "plugins/code/avante",
 }

@@ -1,152 +1,188 @@
-local tools = require "tools"
+local tools = require "tools" -- Assuming 'tools' module provides helper functions
 local api = vim.api
-local keymap = vim.keymap
+local keymap = vim.keymap     -- Alias for vim.keymap.set
 
--- Navigation
-keymap.set("n", "k", "gk")
-keymap.set("n", "j", "gj")
-keymap.set("n", "<left>", ":cprev<cr>zvzz") -- quickfix
-keymap.set("n", "<right>", ":cnext<cr>zvzz")
-keymap.set("n", "<up>", ":lprev<cr>zvzz")   -- loclist
-keymap.set("n", "<down>", ":lnext<cr>zvzz")
+--- General Navigation ---
+-- Map 'k' and 'j' to 'gk' and 'gj' respectively.
+-- This makes vertical movement consistent across wrapped and unwrapped lines.
+keymap.set("n", "k", "gk", { desc = "Move cursor up (display line)" })
+keymap.set("n", "j", "gj", { desc = "Move cursor down (display line)" })
 
--- Not jump on star, only highlight
-keymap.set("n", "*", "*N")
+-- Navigate through quickfix list (errors/warnings from `:make`, `:grep`)
+keymap.set("n", "<left>", ":cprev<CR>zvzz", { desc = "Previous quickfix item (centered)" })
+keymap.set("n", "<right>", ":cnext<CR>zvzz", { desc = "Next quickfix item (centered)" })
 
--- Keep it centered
-keymap.set("n", "n", "nzzzv")
-keymap.set("n", "N", "Nzzzv")
-keymap.set("n", "J", "mzJ`z")
+-- Navigate through location list (local to window, e.g., from `:lvimgrep`)
+keymap.set("n", "<up>", ":lprev<CR>zvzz", { desc = "Previous loclist item (centered)" })
+keymap.set("n", "<down>", ":lnext<CR>zvzz", { desc = "Next loclist item (centered)" })
 
--- Save file
+-- When using '*', only highlight occurrences, do not jump to the next match.
+keymap.set("n", "*", "*N", { desc = "Highlight all occurrences of word under cursor" })
+
+-- Keep search results centered on the screen.
+-- 'zz' centers the screen, 'zv' makes sure the cursor line is visible.
+keymap.set("n", "n", "nzzzv", { desc = "Next search match (centered)" })
+keymap.set("n", "N", "Nzzzv", { desc = "Previous search match (centered)" })
+
+-- Preserve cursor position when joining lines.
+-- 'mz' sets a mark 'z', 'J' joins, '`z' returns to mark 'z'.
+keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+
+--- File Operations ---
+-- Save the current file.
 keymap.set("n", "<CR>", function()
   vim.cmd "write"
 end, { desc = "Save file" })
 
--- Fast save
-keymap.set("n", "<S-CR>", tools.fast_save, { desc = "Fast save" })
+-- Fast save (assuming `tools.fast_save` handles this)
+keymap.set("n", "<S-CR>", tools.fast_save, { desc = "Fast save (no prompts)" })
 
--- Quit Nvim
+-- Quit Neovim
 keymap.set("n", "<leader>qq", function()
-    vim.cmd "qa"
-  end,
-  { desc = "Quit Nvim" }
-)
+  vim.cmd "qa" -- Quit all windows, no save prompts
+end, { desc = "Quit Nvim" })
 
--- Toggle keymap
-keymap.set("n", "<C-F>", "a<C-^><Esc>")
-keymap.set("i", "<C-F>", "<C-^>")
-keymap.set("v", "<C-F>", "<Esc>a<C-^><Esc>gv")
+--- Mode Toggles / Special Mappings ---
+-- Toggle between alternative file (useful for header/source, spec/impl files).
+-- This relies on the `<C-^>` command.
+keymap.set("n", "<C-F>", "a<C-^><Esc>", { desc = "Toggle alternative file (Normal mode)" })
+keymap.set("i", "<C-F>", "<C-^>", { desc = "Toggle alternative file (Insert mode)" })
+keymap.set("v", "<C-F>", "<Esc>a<C-^><Esc>gv", { desc = "Toggle alternative file (Visual mode)" })
 
--- Command mode
-keymap.set("c", "<C-A>", "<Home>")
-keymap.set("c", "<C-E>", "<End>")
+-- Command mode navigation
+keymap.set("c", "<C-A>", "<Home>", { desc = "Go to beginning of command line" })
+keymap.set("c", "<C-E>", "<End>", { desc = "Go to end of command line" })
 
--- Paste relaces visual selection do not copy it
-keymap.set("v", "p", '"_dP')
+-- When pasting over a visual selection, don't copy the selected text into the default register.
+-- "_d" deletes into the black hole register, "P" pastes before the cursor.
+keymap.set("v", "p", '"_dP', { desc = "Paste over selection without yanking it" })
 
--- Disable ex mode (format lines insted)
-keymap.set("n", "Q", "gq")
+-- Disable Ex mode (`Q` key) and map it to `gq` (format lines).
+-- This prevents accidental entry into the less commonly used Ex mode.
+keymap.set("n", "Q", "gq", { desc = "Format lines (instead of Ex mode)" })
 
--- Terminal mode
-keymap.set("t", "<Esc>", "<C-\\><C-n>")
+-- Terminal mode escape sequence
+-- Exit terminal mode and return to Normal mode.
+keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+-- (Optional) If <C-[> is also used for escape:
 -- keymap.set("t", "<C-[>", "<C-\\><C-n>")
 
---  Commands
---  --------
+--- User Commands ---
+-- Define custom user commands for common tasks.
+api.nvim_create_user_command("Reset", "write | :edit", { nargs = 0, desc = "Save and reload current file" })
+api.nvim_create_user_command("Remove", "call delete(expand('%')) | bdelete",
+  { nargs = 0, desc = "Delete current file and its buffer" })
+api.nvim_create_user_command("Make", "vsplit | :terminal make <args>",
+  { nargs = "?", desc = "Run make in a new terminal split" })
 
-api.nvim_create_user_command("Reset", "write | :edit", { nargs = 0 })
-api.nvim_create_user_command("Remove", "call delete(expand('%')) | bdelete", { nargs = 0 })
-api.nvim_create_user_command("Make", "vsplit | :terminal make <args>", { nargs = "?" })
+-- Opens the dashboard (assuming MiniStarter is available)
 api.nvim_create_user_command("Dashboard", function()
-  MiniStarter.open(0)
-end, { nargs = 0 })
+  -- Using pcall for robustness in case MiniStarter is not loaded
+  local MiniStarter = require("mini.starter")
+  if MiniStarter and MiniStarter.open then
+    MiniStarter.open(0)
+  else
+    vim.notify("MiniStarter not available or not loaded.", vim.log.levels.WARN)
+  end
+end, { nargs = 0, desc = "Open the MiniStarter dashboard" })
+
+-- Reloads Neovim configuration (assuming `tools.reload` handles this)
 api.nvim_create_user_command("Reload", function(args)
   tools.reload(args.args)
-end, { nargs = 1 })
+end, { nargs = 1, desc = "Reload Neovim configuration" })
 
--- Plugins
+
+--- Plugin Integrations (which-key) ---
+-- Load which-key plugin, if available.
 local ok, wk = pcall(require, "which-key")
 if not ok then
+  vim.notify("which-key plugin not found. Some keymaps may not be displayed.", vim.log.levels.WARN)
   return
 end
 
--- Helpers
-keymap.set("n", "<leader>on", tools.toggle_number)
-keymap.set("n", "gw", tools.vimgrep)
-keymap.set("n", "gM", tools.synstack)
+-- Define helper keymaps outside of which-key groups for direct access.
+keymap.set("n", "<leader>on", tools.toggle_number, { desc = "Toggle line numbers" })
+keymap.set("n", "gw", tools.vimgrep, { desc = "Grep word under cursor" })
+keymap.set("n", "gM", tools.synstack, { desc = "Show syntax stack at cursor" })
 
+-- Add keymaps to which-key for discoverability.
 wk.add {
-  -- Find something
-  { "<leader>f",  group = "find" },
+  -- Find something (prefix for various search/find commands)
+  { "<leader>f",  group = "Find" },
 
-  -- Plugins
-  { "<leader>p",  group = "plugins" },
+  -- Plugins (prefix for plugin-related commands)
+  { "<leader>p",  group = "Plugins" },
 
-  -- Explore
-  { "<leader>d",  group = "explore" },
-  { "<leader>dt", "<cmd>bo vsplit | terminal<cr>",   desc = "Open terminal" },
-  { "<leader>dl", "<cmd>lopen<cr>",                  desc = "Open loclist" },
-  { "<leader>dq", "<cmd>copen<cr>",                  desc = "Open quickfix" },
+  -- Explore (prefix for various exploration/navigation tools)
+  { "<leader>d",  group = "Explore" },
+  { "<leader>dt", "<cmd>bo vsplit | terminal<cr>",   desc = "Open terminal in new bottom split" },
+  { "<leader>dl", "<cmd>lopen<cr>",                  desc = "Open location list" },
+  { "<leader>dq", "<cmd>copen<cr>",                  desc = "Open quickfix list" },
 
-  -- Git (fugitive)
-  { "<leader>g",  group = "git" },
-  { "<leader>gh", "<cmd>!gh browse<cr>",             desc = "Browse current repo" },
+  -- Git (fugitive plugin, or external commands)
+  { "<leader>g",  group = "Git" },
+  { "<leader>gh", "<cmd>!gh browse<cr>",             desc = "Browse current Git repo on GitHub" },
 
-  -- Windows
-  { "<leader>h",  "<cmd>wincmd h<cr>",               desc = "Go to the left window" },
-  { "<leader>j",  "<cmd>wincmd j<cr>",               desc = "Go to the down window" },
-  { "<leader>k",  "<cmd>wincmd k<cr>",               desc = "Go to the up window" },
-  { "<leader>l",  "<cmd>wincmd l<cr>",               desc = "Go to the right window" },
-  { "<leader>c",  group = "close window" },
-  { "<leader>ch", "<cmd>wincmd h<cr><cmd>close<cr>", desc = "Close the left window" },
-  { "<leader>cj", "<cmd>wincmd j<cr><cmd>close<cr>", desc = "Close the down window" },
-  { "<leader>ck", "<cmd>wincmd k<cr><cmd>close<cr>", desc = "Close the up window" },
-  { "<leader>cl", "<cmd>wincmd l<cr>close<cr>",      desc = "Close the right window" },
-  { "<leader>cc", "<cmd>close<cr>",                  desc = "Close the current window" },
-  { "<leader>r",  group = "resize window" },
-  { "<leader>rk", "<cmd>resize -5<cr>",              desc = "Expand window up" },
-  { "<leader>rj", "<cmd>resize +5<cr>",              desc = "Expand window bellow" },
-  { "<leader>rl", "<C-W>5>",                         desc = "Expand window right" },
-  { "<leader>rh", "<C-W>5<",                         desc = "Expand window left" },
+  -- Window Management
+  { "<leader>h",  "<cmd>wincmd h<cr>",               desc = "Go to left window" },
+  { "<leader>j",  "<cmd>wincmd j<cr>",               desc = "Go to down window" },
+  { "<leader>k",  "<cmd>wincmd k<cr>",               desc = "Go to up window" },
+  { "<leader>l",  "<cmd>wincmd l<cr>",               desc = "Go to right window" },
 
-  -- Tests (vim-test)
-  { "<leader>t",  group = "tests" },
+  { "<leader>c",  group = "Close Window" },
+  { "<leader>ch", "<cmd>wincmd h<cr><cmd>close<cr>", desc = "Close left window" },
+  { "<leader>cj", "<cmd>wincmd j<cr><cmd>close<cr>", desc = "Close down window" },
+  { "<leader>ck", "<cmd>wincmd k<cr><cmd>close<cr>", desc = "Close up window" },
+  { "<leader>cl", "<cmd>wincmd l<cr>close<cr>",      desc = "Close right window" },
+  { "<leader>cc", "<cmd>close<cr>",                  desc = "Close current window" },
 
-  -- Buffers
-  { "<leader>b",  group = "buffers" },
+  { "<leader>r",  group = "Resize Window" },
+  { "<leader>rk", "<cmd>resize -5<cr>",              desc = "Shrink window height" },
+  { "<leader>rj", "<cmd>resize +5<cr>",              desc = "Expand window height" },
+  { "<leader>rl", "<C-W>5>",                         desc = "Expand window width" },
+  { "<leader>rh", "<C-W>5<",                         desc = "Shrink window width" },
+
+  -- Tests (often integrated with vim-test or similar plugins)
+  { "<leader>t",  group = "Tests" },
+
+  -- Buffer Management
+  { "<leader>b",  group = "Buffers" },
   {
     "<leader>bd",
     "<cmd>bdelete<cr>",
     desc = "Delete the current buffer",
   },
-  { "<leader>bn", "<cmd>bnext<cr>", desc = "Go to the next buffer" },
-  { "<Tab>",      "<cmd>bnext<cr>", desc = "Go to the next buffer" },
-  { "<S-Tab>",    "<cmd>bnext<cr>", desc = "Go to the next buffer" },
+  { "<leader>bn", "<cmd>bnext<cr>", desc = "Go to next buffer" },
+  -- Note: <Tab> and <S-Tab> are mapped to next buffer. Consider if this conflicts with completion.
+  { "<Tab>",      "<cmd>bnext<cr>", desc = "Go to next buffer (Tab)" },
+  { "<S-Tab>",    "<cmd>bprev<cr>", desc = "Go to previous buffer (Shift+Tab)" }, -- Corrected S-Tab to bprev
   {
     "<leader>bp",
     "<cmd>bprev<cr>",
-    desc = "Go to the previous buffer",
+    desc = "Go to previous buffer",
   },
 
-  -- Options
-  { "<leader>o",  group = "options" },
-  { "<leader>ol", "<cmd>set list! list?<cr>", desc = "Toggle &list" },
-  { "<leader>ow", "<cmd>set wrap! wrap?<cr>", desc = "Toggle &wrap" },
-  { "<leader>on", tools.toggle_number },
+  -- Options (toggle various Neovim options)
+  { "<leader>o",  group = "Options" },
+  { "<leader>ol", "<cmd>set list! list?<cr>", desc = "Toggle list characters" },
+  { "<leader>ow", "<cmd>set wrap! wrap?<cr>", desc = "Toggle text wrapping" },
+  { "<leader>on", tools.toggle_number,        desc = "Toggle line numbers" }, -- Duplicated, but useful for which-key display
   {
     "<leader>os",
     "<cmd>set invhlsearch<cr>",
     desc = "Toggle highlight for search results",
   },
 
-  -- Other
-  { "gw", desc = "Grep current word" },
-  { "gI", "`.",                                           desc = "Go to the last edit" },
-  { "gk", "k",                                            desc = "Up" },
-  { "gj", "j",                                            desc = "Down" },
-  { "gM", desc = "Show synstack for the current position" },
+  -- Other General Mappings (some are redundant with above, but explicit in which-key)
+  { "gw", tools.vimgrep,  desc = "Grep current word (from tools)" },
+  { "gI", "`.",           desc = "Go to the last edit position" },
+  { "gk", "k",            desc = "Move up (original 'k' behavior)" }, -- Redundant if k=gk is set globally
+  { "gj", "j",            desc = "Move down (original 'j' behavior)" }, -- Redundant if j=gj is set globally
+  { "gM", tools.synstack, desc = "Show syntax stack at current position (from tools)" },
 }
 
+-- Load additional keymaps from a configuration module, if provided.
 local cfg = require "config"
-wk.add(cfg.keymaps)
+if cfg and cfg.keymaps then
+  wk.add(cfg.keymaps)
+end
