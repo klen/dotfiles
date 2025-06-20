@@ -11,7 +11,11 @@ return function(client, bufnr)
   local maps = {
     {
       "gr",
-      lsp.buf.references,
+      function(context, opts)
+        opts = opts or {}
+        opts.loclist = true
+        return lsp.buf.references(context, opts)
+      end,
       desc = "Find references",
     },
     {

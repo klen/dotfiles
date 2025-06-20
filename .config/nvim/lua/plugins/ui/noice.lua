@@ -48,11 +48,11 @@ return {
           winhighlight = "Normal:Normal,FloatBorder:Normal",
         },
         position = {
-          row = 5,
-          col = "50%",
+          col = 0,
+          row = "100%",
         },
         size = {
-          width = 80,
+          width = 100,
           height = "auto",
         },
       }
@@ -60,6 +60,6 @@ return {
   },
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "rcarriga/nvim-notify",
+    -- "rcarriga/nvim-notify",
   }
 }
