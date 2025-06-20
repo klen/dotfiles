@@ -36,6 +36,7 @@ return {
     { "<leader>gl", function() require('snacks').picker.git_log() end,      desc = "Git Log" },
     { "<leader>gf", function() require('snacks').picker.git_log_file() end, desc = "Git Log File" },
     { "<leader>gb", function() require('snacks').picker.git_branches() end, desc = "Git Branches" },
+    { "<leader>gg", function() require('snacks').lazygit() end,             desc = "Lazygit" },
     -- { "<leader>gs", function() require('snacks').picker.git_status() end, desc = "Git Status" },
     -- { "<leader>gc", function() require('snacks').picker.git_commits() end, desc = "Git Commits" },
     -- { "<leader>gC", function() require('snacks').picker.git_commit() end, desc = "Git Commit" },
