@@ -113,9 +113,9 @@ local theme = lush(function(injected_functions)
     TermCursor { fg = background, bg = mellow_apricot },  -- cursor in a focused terminal
     TermCursorNC { TermCursor },                          -- cursor in an unfocused terminal
     Directory { fg = iceberg },                           -- directory names (and other special names in listings)
-    DiffAdd { fg = background, bg = mantis },             -- diff mode: Added line |diff.txt|
-    DiffChange { fg = background, bg = iceberg },         -- diff mode: Changed line |diff.txt|
-    DiffDelete { bg = dark_red },                         -- diff mode: Deleted line |diff.txt|
+    DiffAdd { fg = mantis },                              -- diff mode: Added line |diff.txt|
+    DiffChange { fg = iceberg },                          -- diff mode: Changed line |diff.txt|
+    DiffDelete { fg = fuzzy_wuzzy },                      -- diff mode: Deleted line |diff.txt|
     DiffText { fg = iceberg, bg = total_black },          -- diff mode: Changed text within a changed line |diff.txt|
     EndOfBuffer { fg = background },                      -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     ErrorMsg { bg = dark_red },                           -- error messages on the command line
@@ -136,7 +136,7 @@ local theme = lush(function(injected_functions)
     NonText { fg = jet },                                -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     Whitespace { NonText },                              -- "nbsp", "space", "tab" and "trail" in 'listchars'
     Normal { bg = background, fg = foreground },         -- normal text
-    NormalFloat { fg = foreground, bg = cocoa_brown },   -- Normal text in floating windows.
+    NormalFloat { fg = foreground },                     -- Normal text in floating windows.
     -- NormalNC      { bg = background.lighten(3) }, -- normal text in non-current windows
     Pmenu { NormalFloat },                               -- Popup menu: normal item.
     PmenuSel { fg = cocoa_brown, bg = foreground },      -- Popup menu: selected item.

@@ -26,6 +26,7 @@ opt.numberwidth = 2
 opt.cursorline = true
 -- Disable the default mode indicator (e.g., -- INSERT --), as it's redundant with a statusline
 opt.showmode = false
+opt.laststatus = 3 -- Always show the statusline
 -- Disable the nvim intro message
 opt.shortmess:append("sI")
 
@@ -74,18 +75,14 @@ opt.virtualedit = 'all' -- Allow the cursor to move into "virtual" space
 
 -- [[ 4. Files & System ]]
 
--- Configure backup, swap, and persistent undo files
-opt.backup = true
+-- Configure swap, and persistent undo files
+opt.swapfile = false
 opt.undofile = true -- Enable persistent undo
-opt.backupdir = fn.expand('~/.cache/nvim/backup')
-opt.directory = fn.expand('~/.cache/nvim/swap')
 opt.undodir = fn.expand('~/.cache/nvim/undo')
 
--- Create necessary directories on startup if they don't exist
-for _, dir in ipairs({ opt.backupdir:get()[1], opt.directory:get()[1], opt.undodir:get()[1] }) do
-  if fn.isdirectory(dir) == 0 then
-    fn.mkdir(dir, "p")
-  end
+local undodir = opt.undodir:get()[1] -- Get the first path in the undodir list
+if not fn.isdirectory(undodir) then
+  fn.mkdir(undodir)                  -- Create the undo directory if it doesn't exist
 end
 
 -- Use the system clipboard

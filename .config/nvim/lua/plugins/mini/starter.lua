@@ -27,8 +27,14 @@ starter.setup({
     -- starter.sections.sessions(5, true), -- Commented out: Section for recent sessions.
 
     -- Custom actions section. These are user-defined commands.
-    { name = "New file",   action = "enew",                 section = "Actions" },
-    { name = "Find files", action = "Telescope find_files", section = "Actions" },
+    { name = "New file",          action = "enew",            section = "Actions" },
+    {
+      name = "Find files",
+      action = function()
+        require("snacks").picker.smart() -- Opens a file picker using snacks.nvim
+      end,
+      section = "Actions"
+    },
 
     -- Action to open the Lazy.nvim plugin management home page.
     {
@@ -53,7 +59,7 @@ starter.setup({
     -- [12:00, 20:00) - afternoon
     -- [20:00, 04:00) - evening (this range wraps around midnight)
     local part_id = math.floor((hour + 4) / 8) +
-    1                                                                            -- Adjust hour and divide by 8-hour blocks
+        1                                                                        -- Adjust hour and divide by 8-hour blocks
     local day_part = ({ "evening", "morning", "afternoon", "evening" })[part_id] -- Map ID to greeting
     return ("Good %s, Kirill"):format(day_part)                                  -- Personalized greeting
   end,

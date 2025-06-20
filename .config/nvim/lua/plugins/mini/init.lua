@@ -17,12 +17,12 @@ return {
     require("mini.cursorword").setup { delay = 1000 }
 
     -- Functions for fast and simple fuzzy matching.
-    require("mini.fuzzy").setup()
-    require("telescope").setup {
-      defaults = {
-        generic_sorter = require("mini.fuzzy").get_telescope_sorter,
-      },
-    }
+    -- require("mini.fuzzy").setup()
+    -- require("telescope").setup {
+    --   defaults = {
+    --     generic_sorter = require("mini.fuzzy").get_telescope_sorter,
+    --   },
+    -- }
 
     -- Minimal, fast, and flexible start screen
     require "plugins.mini.starter"

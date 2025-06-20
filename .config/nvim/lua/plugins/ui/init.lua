@@ -1,4 +1,7 @@
 return {
+  require('plugins/ui/incline'),
+  require('plugins/ui/snacks'),
+
   --- File Explorer ---
   -- `nvim-neo-tree/neo-tree.nvim`: A modern, fast, and highly customizable file explorer tree.
   -- This is a popular choice for navigating project files within Neovim.
@@ -9,20 +12,11 @@ return {
   -- (like Neo-tree, statuslines, etc.) by leveraging the Nerd Fonts.
   require("plugins/ui/nvim-web-devicons"),
 
-  --- Indent Guides ---
-  -- `lukas-reineke/indent-blankline.nvim`: Displays vertical indent lines
-  -- to visually clarify code structure, especially in nested blocks.
-  require("plugins/ui/indent-blankline"),
-
   --- Notifications and UI Messaging ---
   -- `folke/noice.nvim`: A highly customizable plugin for Neovim's messages,
   -- command line, and UI, making them more modern and less intrusive.
   require("plugins/ui/noice"),
 
-  --- Scrolling Enhancements ---
-  -- `karb94/neoscroll.nvim`: Smooths out Neovim's scrolling behavior,
-  -- making it more aesthetically pleasing and less jarring.
-  require("plugins/ui/neoscroll"),
   -- `dstein64/nvim-scrollview`: Provides a minimap/overview of the current buffer,
   -- often showing cursor position and diagnostics.
   require("plugins/ui/nvim-scrollview"),
@@ -31,11 +25,6 @@ return {
   -- `folke/which-key.nvim`: Shows a pop-up with possible keybindings
   -- as you type, making it easier to discover and remember mappings.
   require("plugins/ui/which-key"),
-
-  --- Fuzzy Finder ---
-  -- `nvim-telescope/telescope.nvim`: A highly extendable fuzzy finder
-  -- for navigating files, buffers, git changes, LSP diagnostics, and more.
-  require("plugins/ui/telescope"),
 
   --- Quickfix and Location Lists ---
   -- `kevinhwang91/nvim-bqf`: Enhances the built-in quickfix (`:copen`)

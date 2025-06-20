@@ -49,17 +49,9 @@ return {
     }
   end,
   keys = {
-    { "<leader>ft", "<cmd>Telescope<cr>", desc = "Telescope" },
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Grep (root dir)" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Show buffers" },
-    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
-    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-    { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix" },
-    { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Find word" },
-    { "<leader>fm", "<cmd>Telescope keymaps<cr>", desc = "Find keymaps" },
+    { "<leader>fm", "<cmd>Telescope keymaps<cr>",      desc = "Find keymaps" },
     { "<leader>gl", "<cmd>Telescope git_bcommits<cr>", desc = "Git log file" },
-    { "<leader>gL", "<cmd>Telescope git_commits<cr>", desc = "Git log" },
+    { "<leader>gL", "<cmd>Telescope git_commits<cr>",  desc = "Git log" },
     {
       "<leader>fs",
       function()

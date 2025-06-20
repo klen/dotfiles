@@ -1,6 +1,25 @@
-local tools = require "tools" -- Assuming 'tools' module provides helper functions
+local tools = require("tools") -- Assuming 'tools' module provides helper functions
 local api = vim.api
-local keymap = vim.keymap     -- Alias for vim.keymap.set
+local keymap = vim.keymap      -- Alias for vim.keymap.set
+
+--- Global & Utility Mappings ---
+-- Clear search highlights.
+keymap.set("n", "<C-c>", ":nohl<CR>", { desc = "Clear search highlights", silent = true })
+
+-- Delete character under cursor without copying it to register.
+-- This prevents overwriting your paste buffer with single character deletes.
+keymap.set("n", "x", '"_x', { desc = "Delete character under cursor without copying it", noremap = true, silent = true })
+
+-- Global word replacement.
+-- Prompts for a replacement, defaulting to the word under the cursor.
+keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Replace word under cursor globally" })
+
+--- Window Splitting ---
+keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
+keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
+keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
 
 --- General Navigation ---
 -- Map 'k' and 'j' to 'gk' and 'gj' respectively.
@@ -42,26 +61,22 @@ keymap.set("n", "<leader>qq", function()
   vim.cmd "qa" -- Quit all windows, no save prompts
 end, { desc = "Quit Nvim" })
 
---- Mode Toggles / Special Mappings ---
--- Toggle between alternative file (useful for header/source, spec/impl files).
--- This relies on the `<C-^>` command.
-keymap.set("n", "<C-F>", "a<C-^><Esc>", { desc = "Toggle alternative file (Normal mode)" })
-keymap.set("i", "<C-F>", "<C-^>", { desc = "Toggle alternative file (Insert mode)" })
-keymap.set("v", "<C-F>", "<Esc>a<C-^><Esc>gv", { desc = "Toggle alternative file (Visual mode)" })
-
+--- Command Mode ---
 -- Command mode navigation
 keymap.set("c", "<C-A>", "<Home>", { desc = "Go to beginning of command line" })
 keymap.set("c", "<C-E>", "<End>", { desc = "Go to end of command line" })
 
+--- Visual Mode ---
 -- When pasting over a visual selection, don't copy the selected text into the default register.
 -- "_d" deletes into the black hole register, "P" pastes before the cursor.
-keymap.set("v", "p", '"_dP', { desc = "Paste over selection without yanking it" })
+keymap.set("v", "p", '"_dP', { desc = "Paste without overwriting selection", noremap = true, silent = true })
 
+--- Ex Mode ---
 -- Disable Ex mode (`Q` key) and map it to `gq` (format lines).
 -- This prevents accidental entry into the less commonly used Ex mode.
 keymap.set("n", "Q", "gq", { desc = "Format lines (instead of Ex mode)" })
 
--- Terminal mode escape sequence
+--- Terminal Mode ---
 -- Exit terminal mode and return to Normal mode.
 keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 -- (Optional) If <C-[> is also used for escape:
@@ -69,9 +84,6 @@ keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 --- User Commands ---
 -- Define custom user commands for common tasks.
-api.nvim_create_user_command("Reset", "write | :edit", { nargs = 0, desc = "Save and reload current file" })
-api.nvim_create_user_command("Remove", "call delete(expand('%')) | bdelete",
-  { nargs = 0, desc = "Delete current file and its buffer" })
 api.nvim_create_user_command("Make", "vsplit | :terminal make <args>",
   { nargs = "?", desc = "Run make in a new terminal split" })
 
@@ -90,7 +102,6 @@ end, { nargs = 0, desc = "Open the MiniStarter dashboard" })
 api.nvim_create_user_command("Reload", function(args)
   tools.reload(args.args)
 end, { nargs = 1, desc = "Reload Neovim configuration" })
-
 
 --- Plugin Integrations (which-key) ---
 -- Load which-key plugin, if available.
@@ -182,7 +193,7 @@ wk.add {
 }
 
 -- Load additional keymaps from a configuration module, if provided.
-local cfg = require "config"
+local cfg = require("config")
 if cfg and cfg.keymaps then
   wk.add(cfg.keymaps)
 end
