@@ -17,6 +17,9 @@ return {
   },
   event = "InsertEnter",
   opts = {
+    enabled = function()
+      return not vim.tbl_contains({ 'copilot-chat' }, vim.bo.filetype)
+    end,
     -- sources = {
     --   default = { 'copilot', 'lsp', 'buffer' },
     --   providers = {
