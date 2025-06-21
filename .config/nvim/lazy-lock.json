@@ -1,8 +1,9 @@
 {
   "CopilotChat.nvim": { "branch": "main", "commit": "5df0b668d23c05c173f6bc79bb19642215b8b66a" },
+  "blink-copilot": { "branch": "main", "commit": "bdc45bbbed2ec252b3a29f4adecf031e157b5573" },
   "blink.cmp": { "branch": "main", "commit": "9bcb14b43852a6f2bfd5ac9ef29cb5cf09b1b39b" },
   "codeschool.nvim": { "branch": "master", "commit": "aae2d97b16a70def6223170b1e61c3d3bebda051" },
-  "copilot.vim": { "branch": "release", "commit": "3955014c503b0cd7b30bc56c86c56c0736ca0951" },
+  "copilot.lua": { "branch": "master", "commit": "c1bb86abbed1a52a11ab3944ef00c8410520543d" },
   "diagnosticls-configs-nvim": { "branch": "main", "commit": "97b83434e1ba8eee61d868f72b7f03a21ea42d8c" },
   "gitsigns.nvim": { "branch": "main", "commit": "88205953bd748322b49b26e1dfb0389932520dc9" },
   "incline.nvim": { "branch": "main", "commit": "0fd2d5a27504dba7fdc507a53275f22c081fe640" },

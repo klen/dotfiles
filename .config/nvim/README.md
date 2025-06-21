@@ -2,4 +2,4 @@
 
 Just a configuration for [Neovim Editor](https://neovim.io/)
 
-Supported Neovim version: 0.7+
+Supported Neovim version: 0.10+
