@@ -2,20 +2,30 @@
 
 # Variables
 # ---------
-MODEL=${MODEL:-qwen/qwen2.5-coder-14b}
+MODEL=${MODEL:-qwen/qwen2.5-coder-32b}
 
 SYSTEM="You're a Git commit message generator."
 PROMPT="
-Generate a short, one-line Git commit message from the diff below.
+Generate a Git commit message from the diff below.
 
 Use conventional commit format (feat, fix, refactor, chore, build, test, docs, style, perf).
+The first line should be a short, one-line message.
 Use imperative verbs (e.g. add, fix, refactor, update).
-End with a fitting emoji.
+End the first line with a fitting emoji.
+
+After the first line, provide a more detailed explanation of the changes. This can be multiple lines if necessary.
 
 Only output the message. No extra text.
 
-Return format: <type>: <action> <subject> <emoji>
-Example: feat: add search bar to header ✨
+Return format:
+<type>: <action> <subject> <emoji>
+
+<Detailed explanation of changes, possibly multiline.>
+
+Example:
+feat: add search bar to header ✨
+
+This commit introduces a new search bar component in the header section of the application. It allows users to quickly search for content across the site. The search functionality is integrated with the existing backend API.
 
 Diff:"
 
