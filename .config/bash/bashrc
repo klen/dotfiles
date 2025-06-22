@@ -34,6 +34,7 @@ source $XDG_CONFIG_HOME/bash/ps.sh
 source /etc/bash_completion 2>/dev/null || source $XDG_CONFIG_HOME/bash/include/bash-completion
 
 # Setup tools
+source $XDG_CONFIG_HOME/bash/include/dotfiles.sh
 source $XDG_CONFIG_HOME/bash/include/homebrew.sh
 source $XDG_CONFIG_HOME/bash/include/python.sh
 source $XDG_CONFIG_HOME/bash/include/git.sh
@@ -62,9 +63,9 @@ source $XDG_CONFIG_HOME/bash/smartcd.sh
 
 # Auto run screen on remote servers
 hash screen 2>/dev/null && {
-    if [ ! -z "$SSH_CLIENT" ] && [ -z $WINDOW ]; then
-        exec screen
-    fi
+  if [ ! -z "$SSH_CLIENT" ] && [ -z $WINDOW ]; then
+    exec screen
+  fi
 }
 
 # Changing the terminal title to the last shell command

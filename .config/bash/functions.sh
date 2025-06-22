@@ -162,36 +162,6 @@ colors() {
   # for i in {0..255}; do echo -e "\e[38;05;${i}m\\\e[38;05;${i}m"; done | column -c 80 -s '  '; echo -e "\e[m"
 }
 
-# Setup editors
-dotfiles() {
-  if [ $1 ]; then
-    echo "Setting up dotfiles for $1"
-    case $1 in
-    nvim)
-      cd $XDG_CONFIG_HOME/nvim
-      nvim $XDG_CONFIG_HOME/nvim/init.lua
-      ;;
-    vim)
-      cd $XDG_CONFIG_HOME/vim
-      vim $XDG_CONFIG_HOME/vim/init.vim
-      ;;
-    bin)
-      cd $HOME/bin
-      nvim $HOME/bin
-      ;;
-    env)
-      cd $XDG_CONFIG_HOME
-      nvim $XDG_CONFIG_HOME/env.local
-      ;;
-    *)
-      cd $XDG_CONFIG_HOME/$1
-      ;;
-    esac
-  else
-    cd ~/dotfiles
-  fi
-}
-
 cdp() { cd $1; }
 
 # Utils
