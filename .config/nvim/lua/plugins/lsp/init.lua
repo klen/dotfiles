@@ -42,10 +42,9 @@ return {
   -- require "plugins/lsp/lsp-status",
 
   --- AI Code Assistants ---
-  -- `Copilot`: Integration with GitHub Copilot for AI-powered code suggestions.
-  require("plugins/lsp/copilot"),          -- Main Copilot plugin for Vim/Neovim
-  require("plugins/lsp/copilotchat-nvim"), -- Copilot Chat integration
-  -- require "plugins/lsp/copilot",         -- Alternative Copilot plugin (commented out)
+  require("plugins/lsp/copilot"),       -- Main Copilot plugin for Vim/Neovim
+  require("plugins/lsp/codecompanion"), -- Main Copilot plugin for Vim/Neovim
+  -- require("plugins/lsp/copilotchat-nvim"), -- Copilot Chat integration
 
   -- `LLM` Integration (Commented Out)
   -- This line is commented out, indicating another Large Language Model (LLM) plugin
