@@ -2,7 +2,7 @@
 
 # Variables
 # ---------
-MODEL=${MODEL:-qwen/qwen2.5-coder-32b}
+LLM=${LLM:-qwen/qwen2.5-coder-14b}
 
 SYSTEM="You're a Git commit message generator."
 PROMPT="
@@ -158,7 +158,7 @@ PROMPT="$PROMPT
 $DIFF_OUTPUT"
 
 RESPONSE=$(
-  jq -nc --arg model "$MODEL" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
+  jq -nc --arg model "$LLM" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
     '{
       model: $model,
       messages: [

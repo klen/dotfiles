@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
-MODEL=${MODEL:-qwen/qwen2.5-coder-14b}
+LLM=${LLM:-qwen/qwen2.5-coder-14b}
 
 detect_language() {
   EXT="${1##*.}"
   case "$EXT" in
-    py) echo "Python";;
-    js) echo "JavaScript";;
-    ts) echo "TypeScript";;
-    go) echo "Go";;
-    rs) echo "Rust";;
-    cpp|cc|cxx|c++) echo "C++";;
-    c) echo "C";;
-    sh|bash) echo "Bash";;
-    java) echo "Java";;
-    *) echo "code";;
+  py) echo "Python" ;;
+  js) echo "JavaScript" ;;
+  ts) echo "TypeScript" ;;
+  go) echo "Go" ;;
+  rs) echo "Rust" ;;
+  cpp | cc | cxx | c++) echo "C++" ;;
+  c) echo "C" ;;
+  sh | bash) echo "Bash" ;;
+  java) echo "Java" ;;
+  *) echo "code" ;;
   esac
 }
 
@@ -55,7 +55,7 @@ $CONTENT"
 
   local RAW_RESPONSE RESPONSE
   RAW_RESPONSE=$(
-    jq -nc --arg model "$MODEL" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
+    jq -nc --arg model "$LLM" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
       '{
           model: $model,
           messages: [
@@ -63,8 +63,8 @@ $CONTENT"
             { role: "user", content: $prompt }
           ]
       }' |
-    curl -s http://localhost:1234/v1/chat/completions \
-      -H "Content-Type: application/json" -d @-
+      curl -s http://localhost:1234/v1/chat/completions \
+        -H "Content-Type: application/json" -d @-
   )
 
   if echo "$RAW_RESPONSE" | jq -e '.error' >/dev/null; then
@@ -82,7 +82,7 @@ $CONTENT"
   # Remove ```lang and ``` blocks if present
   RESPONSE=$(echo "$RESPONSE" | sed -e '/^```/d')
 
-  echo "$RESPONSE" > "$FILE"
+  echo "$RESPONSE" >"$FILE"
   echo "✅ Refactored $FILE"
 }
 

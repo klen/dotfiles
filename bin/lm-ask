@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+LLM=${LLM:-qwen/qwen2.5-coder-14b}
+
+PROMPT="$*"
+SYSTEM="You are a code analysis and improvement assistant. Your job is to analyze the provided code and suggest improvements, optimizations, and fixes."
+
+if [[ -z "$PROMPT" ]]; then
+  echo "❌ No prompt provided. Usage: lm-ask <prompt>"
+  exit 1
+fi
+
+RESPONSE=$(
+  jq -nc --arg model "$LLM" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
+    '{
+        model: $model,
+        messages: [
+          { role: "system", content: $system },
+          { role: "user", content: $prompt }
+        ],
+        stream: false
+      }' |
+    curl -s http://localhost:1234/v1/chat/completions \
+      -H "Content-Type: application/json" \
+      -d @- \
+      --silent --show-error --fail
+)
+
+if [[ "$RESPONSE" == *"error"* ]]; then
+  echo "❌ Request failed: $RESPONSE" >&2
+  exit 1
+fi
+
+echo "$RESPONSE" | jq -r '.choices[0].message.content' |
+  glow --width=200 --style=dark # Format output with glow
