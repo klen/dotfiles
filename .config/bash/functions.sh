@@ -179,6 +179,10 @@ dotfiles() {
       cd $HOME/bin
       nvim $HOME/bin
       ;;
+    env)
+      cd $XDG_CONFIG_HOME
+      nvim $XDG_CONFIG_HOME/env.local
+      ;;
     *)
       cd $XDG_CONFIG_HOME/$1
       ;;

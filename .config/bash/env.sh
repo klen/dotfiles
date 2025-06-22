@@ -9,7 +9,7 @@ export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 # Common settings
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export OS=`uname -s`
+export OS=$(uname -s)
 
 export EDITOR=nvim
 # export VISUAL=nvim
@@ -43,3 +43,9 @@ export ANSIBLE_NOCOWS=1
 # Tools
 type pyenv &>/dev/null && eval "$(pyenv init --path)"
 type zoxide &>/dev/null && eval "$(zoxide init bash)"
+
+# Load user-specific environment variables
+[ -f "$XDG_CONFIG_HOME/env.local" ] && source "$XDG_CONFIG_HOME/env.local"
+
+alias env='env | sort'
+alias envs='env | sort | grep -v -E "^(BASH|PWD|SHLVL|XDG_|_)"'
