@@ -4,6 +4,9 @@
 # ---------
 LLM=${LLM:-qwen/qwen2.5-coder-14b}
 
+# New variable for context limit in characters
+CONTEXT_LIMIT=${CONTEXT_LIMIT:-8192} # Default to 8192 characters
+
 SYSTEM="You're a Git commit message generator."
 PROMPT="
 Generate a Git commit message from the diff below.
@@ -40,22 +43,22 @@ show_help() {
 Usage: $0 [--install | --husky | --hook <commit-msg-file> | --help]
 
 Options:
-  --install              Install this script as a Git prepare-commit-msg hook
-  --husky                Install this script as a Husky hook
-  --hook <file>          Internal use: invoked by Git with path to commit message file
-  --help, -h             Show this help message
+  --install               Install this script as a Git prepare-commit-msg hook
+  --husky                 Install this script as a Husky hook
+  --hook <file>           Internal use: invoked by Git with path to commit message file
+  --help, -h              Show this help message
 
 Description:
   When invoked normally (no args), the script analyzes staged changes
   and generates a Git commit message using an LLM running locally.
 
 Examples:
-  $0                         # Generate a commit message and print it
-  $0 --install               # Install as Git hook
-  $0 --husky                 # Install as Husky hook
+  $0                      # Generate a commit message and print it
+  $0 --install            # Install as Git hook
+  $0 --husky              # Install as Husky hook
   $0 --hook .git/COMMIT_EDITMSG  # Called by Git automatically
 EOF
-  exit 0}
+  exit 0
 }
 
 install_hook() {
@@ -65,7 +68,7 @@ install_hook() {
 
 # Do not override merge, squash, or tag messages
 case "\$2" in
-  merge|squash|tag) exit 0 ;;
+  amend|merge|squash|tag) exit 0 ;;
 esac
 
 # Call this script with appropriate args
@@ -83,7 +86,7 @@ install_husky_hook() {
   cat >"$HUSKY_HOOK_FILE" <<EOF
 #!/bin/sh
 case "\$2" in
-  merge|squash|tag) exit 0 ;;
+  amend|merge|squash|tag) exit 0 ;;
 esac
 
 if ! command -v lm-commit-msg > /dev/null 2>&1; then
@@ -153,11 +156,18 @@ if [ "$DIFF_SIZE" -eq 0 ]; then
   exit 1
 fi
 
+# Truncate diff if it exceeds CONTEXT_LIMIT
+if [ "$DIFF_SIZE" -gt "$CONTEXT_LIMIT" ]; then
+  echo "✂️ Diff truncated from $DIFF_SIZE to $CONTEXT_LIMIT characters due to CONTEXT_LIMIT." >&2
+  DIFF_OUTPUT=$(echo "$DIFF_OUTPUT" | head -c "$CONTEXT_LIMIT")
+fi
+
 PROMPT="$PROMPT
 
 $DIFF_OUTPUT"
 
-RESPONSE=$(
+# Make the curl request and capture the raw JSON response
+RESPONSE_JSON=$(
   jq -nc --arg model "$LLM" --arg prompt "$PROMPT" --arg system "$SYSTEM" \
     '{
       model: $model,
@@ -173,25 +183,34 @@ RESPONSE=$(
       --silent --show-error --fail
 )
 
-if [[ "$RESPONSE" == *"error"* ]]; then
-  echo "❌ Request failed: $RESPONSE" >&2
+# Check if curl command itself failed (e.g., connection refused, bad URL)
+if [ $? -ne 0 ]; then
+  echo "❌ curl command failed to connect to LLM API. Make sure your LLM server is running at http://localhost:1234." >&2
   exit 1
 fi
 
-COMMIT_MESSAGE=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
-
-# Fallback if jq fails
-if [ -z "$COMMIT_MESSAGE" ]; then
-  COMMIT_MESSAGE=$(echo "$RESPONSE" | grep -o '"content":"[^"]*' | cut -d '"' -f4)
+# Check if the response is valid JSON and contains a top-level "error" key
+if echo "$RESPONSE_JSON" | jq -e 'has("error")' >/dev/null 2>&1; then
+  ERROR_MESSAGE=$(echo "$RESPONSE_JSON" | jq -r '.error.message // .error // "Unknown error"')
+  echo "❌ LLM API responded with an error: $ERROR_MESSAGE" >&2
+  exit 1
+# Check if the response is malformed JSON
+elif ! echo "$RESPONSE_JSON" | jq -e '.' >/dev/null 2>&1; then
+  echo "❌ LLM API returned malformed JSON response: $RESPONSE_JSON" >&2
+  exit 1
 fi
 
-if [ -z "$COMMIT_MESSAGE" ]; then
-  echo "❌ No commit message generated. Please check the model response." >&2
+# Extract the commit message content using jq
+COMMIT_MESSAGE=$(echo "$RESPONSE_JSON" | jq -r '.choices[0].message.content')
+
+# Fallback/validation: Ensure the extracted message is not empty or "null" literal
+if [ -z "$COMMIT_MESSAGE" ] || [ "$COMMIT_MESSAGE" = "null" ]; then
+  echo "❌ No commit message generated or the content field was empty/null. Please check the LLM's response structure." >&2
   exit 1
 fi
 
 # Clean up ``` markdown blocks if present
-COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed '/^```/d')
+COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed '/^```bash\|^```text\|^```markdown\|^```/d')
 
 # Output
 if [ -n "$COMMIT_MSG_FILE" ]; then
