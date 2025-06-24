@@ -50,6 +50,7 @@ return {
         ["o"] = "toggle_node",
         ["<C-x>"] = "open_split",
         ["<C-v>"] = "open_vsplit",
+        ['/'] = "noop",
       },
     },
     document_symbols = {
