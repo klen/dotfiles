@@ -1,4 +1,8 @@
 # Support for Conda (insalled via Homebrew)
-if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
-  . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
-fi
+#
+[ -d "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d" ] && {
+  [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ] && . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+
+  export MAMBA_EXE='/opt/homebrew/Caskroom/miniforge/base/bin/mamba'
+  [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/mamba.sh" ] && . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/mamba.sh"
+}
