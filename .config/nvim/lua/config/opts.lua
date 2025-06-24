@@ -32,7 +32,6 @@ opt.shortmess:append("sI")
 
 -- Configure how special characters are displayed
 opt.listchars = { tab = '⇥ ', trail = '·', extends = '⋯', precedes = '⋯', eol = '$', nbsp = '~' }
-opt.fillchars = { fold = '·' }
 
 -- Set a virtual color column to fix a bug with some plugins like indent-blankline
 opt.colorcolumn = '9999'
@@ -125,8 +124,8 @@ opt.timeoutlen = 500  -- Time to wait for a mapped sequence to complete
 opt.ttimeoutlen = 500 -- Time to wait for a terminal key code to complete
 
 -- Folding settings
-opt.foldlevel = 999
-opt.foldlevelstart = 999
+opt.foldlevel = 99
+opt.foldlevelstart = 99
 
 -- Don't use octal/hex formats for CTRL-A/CTRL-X number operations
 opt.nrformats = ''

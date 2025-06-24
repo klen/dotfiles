@@ -25,4 +25,15 @@ if pcall(require, "lsp-status") then
   capabilities.window.workDoneProgress = true
 end
 
-return require("blink.cmp").get_lsp_capabilities(capabilities)
+if pcall(require, "blink.cmp") then
+  capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+end
+
+if pcall(require, "ufo") then
+  capabilities.textDocument.foldingRange = {
+    lineFoldingOnly = true,
+    dynamicRegistration = false,
+  }
+end
+
+return capabilities

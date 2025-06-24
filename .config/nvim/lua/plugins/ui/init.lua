@@ -1,6 +1,7 @@
 return {
   require('plugins/ui/incline'),
   require('plugins/ui/snacks'),
+  require('plugins/ui/nvim-ufo'),
 
   --- File Explorer ---
   -- `nvim-neo-tree/neo-tree.nvim`: A modern, fast, and highly customizable file explorer tree.

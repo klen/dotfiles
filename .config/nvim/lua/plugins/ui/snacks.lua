@@ -22,7 +22,17 @@ return {
         style = "terminal",
       }
     },
-    picker = {
+    picker = {},
+    styles = {},
+    lazygit = {
+      win = {
+        width = function()
+          return vim.o.columns - 2
+        end,
+        height = function()
+          return vim.o.lines - 2
+        end,
+      }
     }
   },
   keys = {
@@ -35,10 +45,10 @@ return {
     { "<leader>fr", function() require('snacks').picker.recent() end,              desc = "Recent Files" },
     { "<leader>fd", function() require('snacks').picker.diagnostics() end,         desc = "Diagnostics" },
     { "<leader>fk", function() require('snacks').picker.keymaps() end,             desc = "Keymaps" },
-    { "<leader>gl", function() require('snacks').picker.git_log() end,             desc = "Git Log" },
-    { "<leader>gf", function() require('snacks').picker.git_log_file() end,        desc = "Git Log File" },
     { "<leader>gb", function() require('snacks').picker.git_branches() end,        desc = "Git Branches" },
     { "<leader>gg", function() require('snacks').lazygit() end,                    desc = "Lazygit" },
+    { "<leader>gl", function() require('snacks').lazygit.log() end,                desc = "Git Log" },
+    { "<leader>gf", function() require('snacks').lazygit.log_file() end,           desc = "Git Log File" },
     { "<leader>go", function() require('snacks').gitbrowse() end,                  desc = "Git Browse" },
     { "<leader>gr", function() require('snacks').gitbrowse({ what = "repo" }) end, desc = "Git Browse Repo" },
     -- { "<leader>gs", function() require('snacks').picker.git_status() end, desc = "Git Status" },
