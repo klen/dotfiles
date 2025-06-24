@@ -1,0 +1,8 @@
+gui:
+  showFileTree: true
+  showIcons: true
+
+git:
+  autoFetch: true
+  commit:
+    signOff: true
