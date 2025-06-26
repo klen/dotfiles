@@ -45,7 +45,7 @@ return {
     { "<leader>fr", function() require('snacks').picker.recent() end,              desc = "Recent Files" },
     { "<leader>fd", function() require('snacks').picker.diagnostics() end,         desc = "Diagnostics" },
     { "<leader>fk", function() require('snacks').picker.keymaps() end,             desc = "Keymaps" },
-    { "<leader>gb", function() require('snacks').picker.git_branches() end,        desc = "Git Branches" },
+    { "<leader>gB", function() require('snacks').picker.git_branches() end,        desc = "Git Branches" },
     { "<leader>gg", function() require('snacks').lazygit() end,                    desc = "Lazygit" },
     { "<leader>gl", function() require('snacks').lazygit.log() end,                desc = "Git Log" },
     { "<leader>gf", function() require('snacks').lazygit.log_file() end,           desc = "Git Log File" },
