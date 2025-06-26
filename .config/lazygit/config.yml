@@ -6,3 +6,8 @@ git:
   autoFetch: true
   commit:
     signOff: true
+
+keybinding:
+  universal:
+    scrollUpMain: "<C-u>"
+    scrollDownMain: "<C-d>"
