@@ -24,7 +24,6 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     curWidth = curWidth + chunkWidth
   end
   table.insert(newVirtText, { suffix, 'Comment' })
-  vim.print(virtText, lnum, endLnum, width, truncate)
   return newVirtText
 end
 
