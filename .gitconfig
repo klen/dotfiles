@@ -53,6 +53,7 @@
     ; Common abbr
     co = checkout
     ci = commit
+    cia = commit -a
     st = status -sb
     br = branch
     mg = merge --no-ff
