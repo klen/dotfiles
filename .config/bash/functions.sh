@@ -90,56 +90,106 @@ killps() {
 
 # Show system information
 ii() {
-  echo -en "\n${RED}System:$NC "
-  uname -a
-  echo -en "${RED}Date:$NC "
-  date
-  echo -en "${RED}Uptime :$NC "
-  uptime
-  echo -e "\n${RED}System logged users:$NC "
-  w -h
-  hash free 2>/dev/null && echo -e "\n${RED}Free :$NC " && free
-  command -v landscape-sysinfo && landscape-sysinfo
-}
+  local RED=${RED:-"\e[31m"}
+  local NC=${NC:-"\e[0m"}
 
+  echo -e "\n${RED}System:${NC}"
+  uname -a
+
+  echo -e "${RED}Date:${NC}"
+  date
+
+  echo -e "${RED}Uptime:${NC}"
+  uptime
+
+  echo -e "\n${RED}Logged-in users:${NC}"
+  w -h
+
+  if command -v free >/dev/null 2>&1; then
+    echo -e "\n${RED}Memory usage:${NC}"
+    free -h
+  fi
+
+  if command -v landscape-sysinfo >/dev/null 2>&1; then
+    echo -e "\n${RED}Landscape sysinfo:${NC}"
+    landscape-sysinfo
+  fi
+
+  if command -v df >/dev/null 2>&1; then
+    echo -e "\n${RED}Disk usage:${NC}"
+    df -h
+  fi
+}
 # unpack
 ex() {
-  if [ -f $1 ]; then
-    case $1 in
-    *.tar.bz2) tar xjf $1 ;;
-    *.tar.gz) tar xzf $1 ;;
-    *.bz2) bunzip2 $1 ;;
-    *.rar) rar x $1 ;;
-    *.gz) gunzip $1 ;;
-    *.tar) tar xf $1 ;;
-    *.tbz2) tar xjf $1 ;;
-    *.tgz) tar xzf $1 ;;
-    *.zip) unzip $1 ;;
-    *.Z) uncompress $1 ;;
-    *.7z) 7z x $1 ;;
-    *) echo "'$1' cannot be extracted via extract()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
+  if [ $# -eq 0 ]; then
+    echo "Usage: ex <file>"
+    return 1
   fi
-}
 
+  local file="$1"
+
+  if [ ! -f "$file" ]; then
+    echo "Error: '$file' is not a valid file"
+    return 2
+  fi
+
+  case "$file" in
+  *.tar.bz2) tar xjf "$file" ;;
+  *.tar.gz) tar xzf "$file" ;;
+  *.tar.xz) tar xJf "$file" ;;
+  *.bz2) bunzip2 "$file" ;;
+  *.rar) unrar x "$file" ;;
+  *.gz) gunzip "$file" ;;
+  *.tar) tar xf "$file" ;;
+  *.tbz2) tar xjf "$file" ;;
+  *.tgz) tar xzf "$file" ;;
+  *.zip) unzip "$file" ;;
+  *.Z) uncompress "$file" ;;
+  *.7z) 7z x "$file" ;;
+  *)
+    echo "Error: '$file' cannot be extracted via ex()"
+    return 3
+    ;;
+  esac
+}
 # pack
 pk() {
-  if [ $1 ]; then
-    case $1 in
-    tbz) tar cjvf $2.tar.bz2 $2 ;;
-    tgz) tar czvf $2.tar.gz $2 ;;
-    tar) tar cpvf $2.tar $2 ;;
-    bz2) bzip $2 ;;
-    gz) gzip -c -9 -n $2 >$2.gz ;;
-    zip) zip -r $2.zip $2 ;;
-    7z) 7z a $2.7z $2 ;;
-    *) echo "'$1' cannot be packed via pk()" ;;
-    esac
-  else
-    echo "'$1' is not supported"
+  if [ $# -lt 2 ]; then
+    echo "Usage: pk {tbz|tgz|tar|bz2|gz|gzip|zip|7z} <file_or_folder>"
+    return 1
   fi
+
+  local type=$1
+  local target=$2
+
+  case "$type" in
+  tbz)
+    tar cjvf "$target.tar.bz2" "$target"
+    ;;
+  tgz)
+    tar czvf "$target.tar.gz" "$target"
+    ;;
+  tar)
+    tar cpvf "$target.tar" "$target"
+    ;;
+  bz2)
+    bzip2 "$target"
+    ;;
+  gz | gzip)
+    gzip -c -9 -n "$target" >"$target.gz"
+    ;;
+  zip)
+    zip -r "$target.zip" "$target"
+    ;;
+  7z)
+    7z a "$target.7z" "$target"
+    ;;
+  *)
+    echo "Error: '$type' is not supported by pk()"
+    return 2
+    ;;
+  esac
 }
 
 # Set terminal title
