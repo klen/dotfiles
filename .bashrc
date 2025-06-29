@@ -8,8 +8,3 @@
 
 # Read main configuration
 source $HOME/.config/bash/bashrc
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/horneds/.lmstudio/bin"
-# End of LM Studio CLI section
-
