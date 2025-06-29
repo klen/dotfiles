@@ -8,11 +8,6 @@ return {
   -- This is a popular choice for navigating project files within Neovim.
   require("plugins/ui/neo-tree"),
 
-  --- Icons ---
-  -- `nvim-tree/nvim-web-devicons`: Provides file type icons for various plugins
-  -- (like Neo-tree, statuslines, etc.) by leveraging the Nerd Fonts.
-  require("plugins/ui/nvim-web-devicons"),
-
   --- Notifications and UI Messaging ---
   -- `folke/noice.nvim`: A highly customizable plugin for Neovim's messages,
   -- command line, and UI, making them more modern and less intrusive.

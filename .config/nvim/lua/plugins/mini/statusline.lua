@@ -19,6 +19,12 @@ return {
         local mode, mode_hl = MiniStatusline.section_mode { trunc_width = trunc_width }
         table.insert(groups, { hl = mode_hl, strings = { mode, spell } })
 
+        -- Recording macro status
+        local macro_recording = vim.fn.reg_recording()
+        if macro_recording ~= "" then
+          table.insert(groups, { strings = { "REC@" .. macro_recording } })
+        end
+
         -- Git
         local git = MiniStatusline.section_git { trunc_width = trunc_width }
         table.insert(groups, { hl = "Statusline", strings = { git } })

@@ -22,6 +22,11 @@ return {
     }
   },
 
+  -- Icon Provider
+  {
+    "echasnovski/mini.icons",
+  },
+
   -- Minimal, fast, and flexible start screen
   require "plugins.mini.starter",
 
