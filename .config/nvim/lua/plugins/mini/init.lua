@@ -6,10 +6,6 @@ return {
     opts = {}
   },
   {
-    "echasnovski/mini.pairs",
-    opts = {}
-  },
-  {
     "echasnovski/mini.cursorword",
     opts = {
       delay = 1000, -- Highlight word under cursor after 1 second
@@ -25,7 +21,24 @@ return {
   -- Icon Provider
   {
     "echasnovski/mini.icons",
+    lazy = true,
+    opts = {},
   },
+
+  -- Navigate with brackets
+  {
+    "echasnovski/mini.bracketed",
+    opts = {},
+  },
+
+  -- AI
+  require "plugins.mini.ai",
+
+  -- Pairs
+  require "plugins.mini.pairs",
+
+  -- Files
+  require "plugins.mini.files",
 
   -- Minimal, fast, and flexible start screen
   require "plugins.mini.starter",

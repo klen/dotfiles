@@ -87,6 +87,13 @@ return {
   -- require "plugins/code/nvim-cmp",
   require("plugins/code/blink-cmp"),
 
+  -- Automatically add closing tags for HTML and JSX
+  {
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    opts = {},
+  },
+
   --- Other (Commented Out) ---
   -- The following line is commented out, indicating it's not currently active.
   -- require "plugins/code/avante",

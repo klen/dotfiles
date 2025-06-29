@@ -18,7 +18,7 @@ return {
       -- default configurations for various LSP servers.
       "neovim/nvim-lspconfig",
       -- `sanghen/blink.cmp`: Likely a completion plugin that integrates with LSP.
-      "sanghen/blink.cmp",
+      -- "sanghen/blink.cmp",
     },
   },
 

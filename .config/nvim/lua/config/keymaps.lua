@@ -158,26 +158,18 @@ wk.add {
 
   -- Buffer Management
   { "<leader>b",  group = "Buffers" },
-  {
-    "<leader>bd",
-    "<cmd>bdelete<cr>",
-    desc = "Delete the current buffer",
-  },
-  { "<leader>bn", "<cmd>bnext<cr>", desc = "Go to next buffer" },
+  { "<leader>bd", "<cmd>bdelete<cr>",                desc = "Delete the current buffer" },
+  { "<leader>bn", "<cmd>bnext<cr>",                  desc = "Go to next buffer" },
+  { "<leader>bp", "<cmd>bprev<cr>",                  desc = "Go to previous buffer" },
   -- Note: <Tab> and <S-Tab> are mapped to next buffer. Consider if this conflicts with completion.
-  { "<Tab>",      "<cmd>bnext<cr>", desc = "Go to next buffer (Tab)" },
-  { "<S-Tab>",    "<cmd>bprev<cr>", desc = "Go to previous buffer (Shift+Tab)" }, -- Corrected S-Tab to bprev
-  {
-    "<leader>bp",
-    "<cmd>bprev<cr>",
-    desc = "Go to previous buffer",
-  },
+  { "<Tab>",      "<cmd>bnext<cr>",                  desc = "Go to next buffer (Tab)" },
+  { "<S-Tab>",    "<cmd>bprev<cr>",                  desc = "Go to previous buffer (Shift+Tab)" }, -- Corrected S-Tab to bprev
 
   -- Options (toggle various Neovim options)
   { "<leader>o",  group = "Options" },
-  { "<leader>ol", "<cmd>set list! list?<cr>", desc = "Toggle list characters" },
-  { "<leader>ow", "<cmd>set wrap! wrap?<cr>", desc = "Toggle text wrapping" },
-  { "<leader>on", tools.toggle_number,        desc = "Toggle line numbers" }, -- Duplicated, but useful for which-key display
+  { "<leader>ol", "<cmd>set list! list?<cr>",        desc = "Toggle list characters" },
+  { "<leader>ow", "<cmd>set wrap! wrap?<cr>",        desc = "Toggle text wrapping" },
+  { "<leader>on", tools.toggle_number,               desc = "Toggle line numbers" }, -- Duplicated, but useful for which-key display
   {
     "<leader>os",
     "<cmd>set invhlsearch<cr>",
@@ -187,7 +179,7 @@ wk.add {
   -- Other General Mappings (some are redundant with above, but explicit in which-key)
   { "gw", tools.vimgrep,  desc = "Grep current word (from tools)" },
   { "gI", "`.",           desc = "Go to the last edit position" },
-  { "gk", "k",            desc = "Move up (original 'k' behavior)" }, -- Redundant if k=gk is set globally
+  { "gk", "k",            desc = "Move up (original 'k' behavior)" },   -- Redundant if k=gk is set globally
   { "gj", "j",            desc = "Move down (original 'j' behavior)" }, -- Redundant if j=gj is set globally
   { "gM", tools.synstack, desc = "Show syntax stack at current position (from tools)" },
 }
