@@ -157,14 +157,14 @@ done
 for dep in git curl jq; do
   if ! command -v "$dep" &>/dev/null; then
     echo "❌ $dep is not installed" >&2
-    exit 1
+    exit 0
   fi
 done
 
 # Check if we're in a Git repo
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
   echo "❌ Not a Git repository." >&2
-  exit 1
+  exit 0
 fi
 
 # Get diff based on DIFF_SOURCE
@@ -177,14 +177,14 @@ if [ "$DIFF_SOURCE" == "diff" ]; then
 elif [ "$DIFF_SOURCE" == "last-commit" ]; then
   if ! git rev-parse HEAD >/dev/null 2>&1; then
     echo "❌ No commits found in the repository." >&2
-    exit 1
+    exit 0
   fi
   DIFF_OUTPUT=$(git diff HEAD~1..HEAD)
   if [ -z "$DIFF_OUTPUT" ]; then
     echo "ℹ️ No changes found in the last commit. Perhaps the commit was empty or you are on the first commit." >&2
     # It's possible to have no diff for the last commit (e.g., initial empty commit or a revert)
     # For commit message generation, an empty diff won't work well, so we should probably exit.
-    exit 1
+    exit 0
   fi
 fi
 
