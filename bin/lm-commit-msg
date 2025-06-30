@@ -172,7 +172,7 @@ if [ "$DIFF_SOURCE" == "diff" ]; then
   DIFF_OUTPUT=$(git diff --cached)
   if [ -z "$DIFF_OUTPUT" ]; then
     echo "❌ No staged changes found. Run 'git add' first." >&2
-    exit 1
+    exit 0
   fi
 elif [ "$DIFF_SOURCE" == "last-commit" ]; then
   if ! git rev-parse HEAD >/dev/null 2>&1; then
