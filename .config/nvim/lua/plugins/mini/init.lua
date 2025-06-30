@@ -35,10 +35,10 @@ return {
   require "plugins.mini.ai",
 
   -- Pairs
-  require "plugins.mini.pairs",
+  -- require "plugins.mini.pairs",
 
   -- Files
-  require "plugins.mini.files",
+  -- require "plugins.mini.files",
 
   -- Minimal, fast, and flexible start screen
   require "plugins.mini.starter",

@@ -9,22 +9,6 @@ return {
       cmd = { adapter = "lmstudio" },
       chat = { adapter = "lmstudio" },
       inline = { adapter = "lmstudio" },
-    },
-    adapters = {
-      lmstudio = function()
-        return require("codecompanion.adapters").extend("openai_compatible", {
-          env = {
-            url = "http://localhost:1234",
-          },
-        })
-      end,
-    },
-    display = {
-      action_palette = {
-        provider = "snacks"
-      }
-    },
-    strategies = {
       slash_commands = {
         ['buffer'] = {
           opts = { provider = "snacks" }
@@ -39,6 +23,20 @@ return {
           opts = { provider = "snacks" }
         },
       },
+    },
+    adapters = {
+      lmstudio = function()
+        return require("codecompanion.adapters").extend("openai_compatible", {
+          env = {
+            url = "http://localhost:1234",
+          },
+        })
+      end,
+    },
+    display = {
+      action_palette = {
+        provider = "snacks"
+      }
     },
   },
 }

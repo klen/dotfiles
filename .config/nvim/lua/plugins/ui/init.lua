@@ -3,6 +3,9 @@ return {
   require('plugins/ui/snacks'),
   require('plugins/ui/nvim-ufo'),
 
+  --- File Explorer ---
+  require("plugins/ui/neo-tree"),
+
   --- Notifications and UI Messaging ---
   -- `folke/noice.nvim`: A highly customizable plugin for Neovim's messages,
   -- command line, and UI, making them more modern and less intrusive.

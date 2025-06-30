@@ -1,6 +1,7 @@
+-- https://github.com/echasnovski/mini.files
 return {
   "echasnovski/mini.files",
-  lazy = true,
+  lazy = false,
   keys = {
     {
       "<leader>dd",
@@ -18,6 +19,7 @@ return {
     }
   },
   opts = {
+    use_as_default_explorer = true,
     content = {
       filter = function(fs_entry)
         -- Show all files if `show_dotfiles` is true, otherwise hide dotfiles

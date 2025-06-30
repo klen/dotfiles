@@ -53,9 +53,6 @@ return {
         matchup = {
           enable = true,
         },
-        autotag = {
-          enable = true,
-        },
         textobjects = {
           select = {
             enable = true,

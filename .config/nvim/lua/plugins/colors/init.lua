@@ -14,11 +14,11 @@ return {
   --- Installed Colorschemes ---
   -- These lines import the configurations for various colorschemes from your 'plugins/colors/' directory.
   -- Each `require` call likely points to a Lua file that sets up and potentially configures a specific theme.
-  require("plugins/colors/jellybeans"),
-  require("plugins/colors/zenbones"),
-  require("plugins/colors/codeschool"),
-  require("plugins/colors/tokyonight"),
-  require("plugins/colors/vscode"),
+  -- require("plugins/colors/jellybeans"),
+  -- require("plugins/colors/zenbones"),
+  -- require("plugins/colors/codeschool"),
+  -- require("plugins/colors/tokyonight"),
+  -- require("plugins/colors/vscode"),
 
   --- LSP Colors Support ---
   -- `folke/lsp-colors.nvim`: This plugin enhances the display of LSP (Language Server Protocol) diagnostics

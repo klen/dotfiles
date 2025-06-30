@@ -88,11 +88,19 @@ return {
   require("plugins/code/blink-cmp"),
 
   -- Automatically add closing tags for HTML and JSX
+  -- https://github.com/windwp/nvim-ts-autotag
   {
     "windwp/nvim-ts-autotag",
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = {},
   },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
+  }
 
   --- Other (Commented Out) ---
   -- The following line is commented out, indicating it's not currently active.

@@ -34,6 +34,45 @@ return {
     vim.g.neo_tree_remove_legacy_commands = 1
   end,
   opts = {
+    close_if_last_window = true, -- close Neo-tree if it is the last window
+    sources = {
+      "filesystem",
+      "buffers",
+      "git_status",
+      "document_symbols",
+    },
+    window = {
+      mappings = {
+        ["o"] = "toggle_node",
+        ["<C-x>"] = "open_split",
+        ["<C-v>"] = "open_vsplit",
+        ['/'] = "noop",
+      },
+    },
+    document_symbols = {
+      follow_cursor = true,
+      window = {
+        position = "right",
+      },
+    },
+    filesystem = {
+      window = {
+        mappings = {
+          ["I"] = "toggle_hidden",
+        },
+      },
+    },
+    event_handlers = {
+      {
+        event = "file_opened",
+        handler = function(_)
+          require("neo-tree.command").execute({
+            action = "close",
+            source = "filesystem",
+          })
+        end,
+      },
+    },
     default_component_configs = {
       icon = {
         provider = function(icon, node) -- setup a custom icon provider
@@ -63,33 +102,6 @@ return {
           local mini_icons = require("mini.icons")
           icon.text, icon.highlight = mini_icons.get("lsp", node.extra.kind.name)
         end,
-      },
-    },
-    sources = {
-      "filesystem",
-      "buffers",
-      "git_status",
-      "document_symbols",
-    },
-    window = {
-      mappings = {
-        ["o"] = "toggle_node",
-        ["<C-x>"] = "open_split",
-        ["<C-v>"] = "open_vsplit",
-        ['/'] = "noop",
-      },
-    },
-    document_symbols = {
-      follow_cursor = true,
-      window = {
-        position = "right",
-      },
-    },
-    filesystem = {
-      window = {
-        mappings = {
-          ["I"] = "toggle_hidden",
-        },
       },
     },
   },

@@ -4,9 +4,6 @@ return {
   lazy = false,
   opts = {
     bigfile = {},
-    explorer = {
-      replace_netrw = true
-    },
     indent = {
       indent = {
         hl = "NonText",
