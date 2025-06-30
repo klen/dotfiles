@@ -20,7 +20,7 @@
         - iina # Video player
         - ilya-birman-typography-layout # Keyboard layout
         - istat-menus # Activity Monitor
-        - iterm2 # Terminal
+        - ghostty # Terminal
         - karabiner-elements # Keyboard tuner
         - keepingyouawake # Keep Mac awake
         - latest # Update installed apps
