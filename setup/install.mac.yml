@@ -12,6 +12,7 @@
   homebrew:
     name:
       - tmux
+      - tmuxp
       - bash # shell
       - bash-completion # shell-completion
       - coreutils
