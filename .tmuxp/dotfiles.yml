@@ -1,0 +1,20 @@
+session_name: dotfiles
+start_directory: ~/dotfiles/
+windows:
+  - window_name: dotfiles
+    focus: true
+
+  - window_name: nvim
+    start_directory: ./.config/nvim
+    panes:
+      - shell_command: nvim init.lua
+
+  - window_name: bash
+    start_directory: ./.config/bash
+    panes:
+      - shell_command: nvim bashrc
+
+  - window_name: tmux
+    start_directory: ./.config/tmux
+    panes:
+      - shell_command: nvim tmux.conf

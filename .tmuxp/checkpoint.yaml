@@ -1,0 +1,12 @@
+session_name: checkpoint
+start_directory: ~/projects/ticketscloud.org/checkpoint/
+windows:
+  - window_name: api
+    focus: true
+    panes:
+      - shell_command: nvim checkpoint/__init__.py
+
+  - window_name: dev
+    shell_command_before: docker start postgres redis
+    panes:
+      - shell_command: make dev

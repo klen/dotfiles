@@ -1,0 +1,15 @@
+session_name: vibe-api
+start_directory: ~/projects/ticketscloud.org/vibe-api/
+windows:
+  - window_name: api
+    focus: true
+    panes:
+      - shell_command: nvim vibe/__init__.py
+
+  - window_name: dev
+    shell_command_before: docker start postgres redis
+    panes:
+      - shell_command: make dev
+
+  - window_name: devops
+    start_directory: ~/projects/ticketscloud.org/vibe-devops/

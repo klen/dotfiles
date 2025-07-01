@@ -9,7 +9,6 @@
   tasks:
     - community.general.homebrew_cask: name={{item}}
       with_items:
-        - alfred # UI tool
         - appcleaner # Uninstaller
         - calibre # Books Manager
         - clop # Clipboard Manager

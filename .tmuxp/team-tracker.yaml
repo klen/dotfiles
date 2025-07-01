@@ -1,0 +1,18 @@
+session_name: team-tracker
+start_directory: ~/projects/team-tracker
+windows:
+  - window_name: web
+    focus: true
+    start_directory: ./web
+    panes:
+      - shell_command: nvim pages/index.page.tsx
+
+  - window_name: api
+    start_directory: ./api
+    panes:
+      - shell_command: nvim app/__init__.py
+
+  - window_name: dev
+    shell_command_before: docker start postgres redis
+    panes:
+      - shell_command: make dev
