@@ -19,11 +19,7 @@ return {
   },
 
   -- Icon Provider
-  {
-    "echasnovski/mini.icons",
-    lazy = true,
-    opts = {},
-  },
+  require "plugins.mini.icons",
 
   -- Navigate with brackets
   {

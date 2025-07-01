@@ -1,6 +1,7 @@
-font-size = 15
-font-feature = -liga
-font-family = "Geist Mono"
+font-size = 14
+# font-family = "Geist Mono"
+font-family = "Monaco"
+font-feature = -calt, -liga, -dlig
 
 theme = vesper
 theme = covid19

@@ -44,7 +44,7 @@ return {
     window = {
       mappings = {
         ["o"] = "toggle_node",
-        ["<C-x>"] = "open_split",
+        ["<C-s>"] = "open_split",
         ["<C-v>"] = "open_vsplit",
         ['/'] = "noop",
       },

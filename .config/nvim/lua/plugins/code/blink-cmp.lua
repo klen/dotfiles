@@ -17,18 +17,22 @@ return {
   },
   event = "InsertEnter",
   opts = {
+    -- Disable cmdline
+    cmdline = { enabled = false },
+    -- Disable chat
     enabled = function()
       return not vim.tbl_contains({ 'copilot-chat' }, vim.bo.filetype)
     end,
-    -- sources = {
-    --   default = { 'copilot', 'lsp', 'buffer' },
-    --   providers = {
-    --     copilot = {
-    --       name = "copilot",
-    --       module = "blink-copilot",
-    --     },
-    --   },
-    -- },
+    sources = {
+      default = { 'lsp' },
+      --   default = { 'copilot', 'lsp', 'buffer' },
+      --   providers = {
+      --     copilot = {
+      --       name = "copilot",
+      --       module = "blink-copilot",
+      --     },
+      --   },
+    },
     keymap = {
       ['<C-y>'] = {
         function(cmp)
@@ -45,7 +49,7 @@ return {
       keyword = { range = "prefix" },
       accept = {
         auto_brackets = {
-          enabled = true,
+          enabled = false,
         }
       },
       menu = {
