@@ -3,13 +3,15 @@
 cd "${1:-$PWD}"
 
 if git rev-parse --is-inside-work-tree &>/dev/null; then
-  # Определяем имя ветки
+  # Имя ветки
   branch_name=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
 
   # Проверяем локальные изменения
   if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+    has_local_changes=1
     dirty=" *"
   else
+    has_local_changes=0
     dirty=""
   fi
 
@@ -23,18 +25,21 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
     right=${diff##*	}
 
     if [[ "$left" -ne 0 || "$right" -ne 0 ]]; then
-      # отличается от origin ➔ красный
+      # Отличия с origin ➔ красный
       branch="#[fg=red,bold]${branch_name}"
+    elif [[ "$has_local_changes" -eq 1 ]]; then
+      # Локальные изменения, но без расхождений ➔ жёлтый
+      branch="#[fg=yellow,bold]${branch_name}"
     else
-      # совпадает с origin ➔ зелёный
-      branch="#[fg=green,bold]${branch_name}"
+      # Нет изменений и расхождений ➔ default (без цвета)
+      branch="${branch_name}"
     fi
   else
-    # нет upstream ➔ серый
+    # Нет upstream ➔ серый
     branch="#[fg=grey,bold]${branch_name}"
   fi
 
-  # Выводим итог
+  # Выводим
   echo "${branch}#[default]${dirty} | "
 else
   echo ""
