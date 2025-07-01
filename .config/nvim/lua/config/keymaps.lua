@@ -50,6 +50,11 @@ keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 --- File Operations ---
 -- Save the current file.
 keymap.set("n", "<CR>", function()
+  local buftype = vim.bo.buftype
+  if buftype == "terminal" then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", true)
+    return
+  end
   vim.cmd "write"
 end, { desc = "Save file" })
 

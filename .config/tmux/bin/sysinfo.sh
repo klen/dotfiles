@@ -22,10 +22,10 @@ if [ "$(uname)" = "Darwin" ]; then
   mem_total_bytes=$(sysctl -n hw.memsize)
   mem_total_mb=$((mem_total_bytes / 1024 / 1024))
 
-  mem_usage="${mem_used_mb}M/${mem_total_mb}M"
+  ram_usage="${mem_used_mb}M/${mem_total_mb}M"
 else
   # Linux: используем free
-  mem_usage=$(free -m | awk '/Mem:/ { printf "%dM used / %dM free / %dM total", $3, $4, $2 }')
+  ram_usage=$(free -m | awk '/Mem:/ { printf "%dM used / %dM free / %dM total", $3, $4, $2 }')
 fi
 
-echo "CPU: ${cpu_usage} | RAM: ${mem_usage}"
+echo "CPU: ${cpu_usage} | RAM: ${ram_usage}"
