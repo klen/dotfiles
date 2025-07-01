@@ -1,55 +1,55 @@
 ---
-
 - homebrew: update_homebrew=yes
 
 - name: Install setup utils
   homebrew:
     name:
-    - cowsay
-    - fortune
-    - stow
+      - cowsay
+      - fortune
+      - stow
 
 - name: Install terminal utils
   homebrew:
     name:
-    - bash              # shell
-    - bash-completion   # shell-completion
-    - coreutils
-    - pass
-    - ripgrep
-    - terminal-notifier
-    - zoxide            # replacement for cd
+      - tmux
+      - bash # shell
+      - bash-completion # shell-completion
+      - coreutils
+      - pass
+      - ripgrep
+      - terminal-notifier
+      - zoxide # replacement for cd
 
 - name: Install editors
   homebrew:
     name:
-    - vim
-    - neovim
+      - vim
+      - neovim
 
 - name: Install languages / packages
   homebrew:
     name:
-    - golang
-    - tcl-tk    # Required by pyenv
-    - pyenv     # Python versions manager
-    - nodenv    # Node versions manager
-    - luarocks  # Lua package/versions manager
-    - poetry    # Python packaging and dependency management
+      - golang
+      - tcl-tk # Required by pyenv
+      - pyenv # Python versions manager
+      - nodenv # Node versions manager
+      - luarocks # Lua package/versions manager
+      - poetry # Python packaging and dependency management
 
-    - rust
-    - yarn
+      - rust
+      - yarn
 
 - name: Install other tools
   homebrew:
     name:
-    - ctags
-    - fzf
-    - git-flow
-    - htop-osx
-    - httpie
-    - mplayer
-    - mpv
-    - rsc_2fa
-    - stylua
-    - unzip
-    - wget
+      - ctags
+      - fzf
+      - git-flow
+      - htop-osx
+      - httpie
+      - mplayer
+      - mpv
+      - rsc_2fa
+      - stylua
+      - unzip
+      - wget
