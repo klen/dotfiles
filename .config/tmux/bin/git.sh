@@ -3,19 +3,17 @@
 cd "${1:-$PWD}"
 
 if git rev-parse --is-inside-work-tree &>/dev/null; then
-  branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
+  # Определяем имя ветки
+  branch_name=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
 
-  # Цвет ветки (по желанию)
-  branch="#[fg=green]${branch}#[default]"
-
-  # Локальные изменения (жёлтый)
+  # Проверяем локальные изменения
   if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
-    dirty="#[fg=yellow]*#[default]"
+    dirty=" *"
   else
     dirty=""
   fi
 
-  # Проверяем отличия с origin (красный)
+  # Проверяем отличия с origin
   git fetch --quiet origin &>/dev/null
   upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
 
@@ -25,15 +23,19 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
     right=${diff##*	}
 
     if [[ "$left" -ne 0 || "$right" -ne 0 ]]; then
-      diverged="#[fg=red][div]#[default]"
+      # отличается от origin ➔ красный
+      branch="#[fg=red,bold]${branch_name}"
     else
-      diverged=""
+      # совпадает с origin ➔ зелёный
+      branch="#[fg=green,bold]${branch_name}"
     fi
   else
-    diverged=""
+    # нет upstream ➔ серый
+    branch="#[fg=grey,bold]${branch_name}"
   fi
 
-  echo "${branch}${dirty}${diverged} |"
+  # Выводим итог
+  echo "${branch}#[default]${dirty} | "
 else
   echo ""
 fi
