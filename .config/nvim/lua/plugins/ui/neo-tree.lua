@@ -37,8 +37,6 @@ return {
     close_if_last_window = true, -- close Neo-tree if it is the last window
     sources = {
       "filesystem",
-      "buffers",
-      "git_status",
       "document_symbols",
     },
     window = {
@@ -47,6 +45,11 @@ return {
         ["<C-s>"] = "open_split",
         ["<C-v>"] = "open_vsplit",
         ['/'] = "noop",
+        ['<cr>'] = "noop",
+        ["l"] = function(state)
+          require("neo-tree.sources.common.commands").open(state)
+          require("neo-tree.command").execute({ action = "close" })
+        end
       },
     },
     document_symbols = {
@@ -60,17 +63,6 @@ return {
         mappings = {
           ["I"] = "toggle_hidden",
         },
-      },
-    },
-    event_handlers = {
-      {
-        event = "file_opened",
-        handler = function(_)
-          require("neo-tree.command").execute({
-            action = "close",
-            source = "filesystem",
-          })
-        end,
       },
     },
     default_component_configs = {
