@@ -109,3 +109,5 @@
 [branch "develop"]
     remote = origin
     merge = refs/heads/develop
+[http]
+	postBuffer = 157286400

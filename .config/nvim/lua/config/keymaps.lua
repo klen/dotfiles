@@ -56,6 +56,7 @@ keymap.set("n", "<CR>", function()
     return
   end
   vim.cmd "write"
+  vim.notify("File saved", vim.log.levels.INFO)
 end, { desc = "Save file" })
 
 -- Fast save (assuming `tools.fast_save` handles this)
