@@ -18,3 +18,8 @@ windows:
     start_directory: ./.config/tmux
     panes:
       - shell_command: nvim tmux.conf
+
+  - window_name: ghostty
+    start_directory: ./.config/ghostty
+    panes:
+      - shell_command: nvim config

@@ -1,0 +1,5 @@
+session_name: ticketscloud
+start_directory: ~/projects/ticketscloud.org
+windows:
+  - window_name: common
+    focus: true
