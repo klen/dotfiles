@@ -140,12 +140,6 @@ wk.add {
   { "<leader>g",  group = "Git" },
   { "<leader>gh", "<cmd>!gh browse<cr>",             desc = "Browse current Git repo on GitHub" },
 
-  -- Window Management
-  { "<leader>h",  "<cmd>wincmd h<cr>",               desc = "Go to left window" },
-  { "<leader>j",  "<cmd>wincmd j<cr>",               desc = "Go to down window" },
-  { "<leader>k",  "<cmd>wincmd k<cr>",               desc = "Go to up window" },
-  { "<leader>l",  "<cmd>wincmd l<cr>",               desc = "Go to right window" },
-
   { "<leader>c",  group = "Close Window" },
   { "<leader>ch", "<cmd>wincmd h<cr><cmd>close<cr>", desc = "Close left window" },
   { "<leader>cj", "<cmd>wincmd j<cr><cmd>close<cr>", desc = "Close down window" },

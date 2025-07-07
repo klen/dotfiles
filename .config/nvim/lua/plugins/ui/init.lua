@@ -36,4 +36,9 @@ return {
   -- symbols (functions, classes, variables) in the current file, often
   -- using LSP information. It's currently disabled.
   -- require "plugins/ui/symbols-outline",
+  --
+  {
+    "aserowy/tmux.nvim",
+    opts = {}
+  }
 }
