@@ -6,14 +6,14 @@ hash git 2>/dev/null && {
   GIT_PS1_SHOWSTASHSTATE=1
   PS1=$PS1$GREEN'$(__git_ps1 " (%s)")'$NC
 
-  alias gs ='git status --short --branch'
-  alias gd ='git diff'
-  alias gl ='git log'
-  alias gb ='git branch'
+  alias gs='git status --short --branch'
+  alias gd='git diff'
+  alias gl='git log'
+  alias gb='git branch'
 
-  alias ga ='git add'
-  alias gc ='git commit'
+  alias ga='git add'
+  alias gc='git commit'
 
-  alias gp ='git pull'
-  alias gP ='git push'
+  alias gp='git pull'
+  alias gP='git push'
 }
