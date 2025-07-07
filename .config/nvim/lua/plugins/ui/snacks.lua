@@ -13,6 +13,7 @@ return {
   lazy = false,
   opts = {
     bigfile = {},
+    quickfile = {},
     indent = {
       indent = {
         hl = "NonText",
@@ -34,7 +35,29 @@ return {
         },
       }
     },
-    picker = {},
+    picker = {
+      win = {
+        input = {
+          keys = {
+            ["<C-j>"] = { "focus_list", mode = { "i", "n" } },
+            ["<C-l>"] = { "focus_preview", mode = { "i", "n" } },
+          }
+        },
+        list = {
+          keys = {
+            ["<C-k>"] = { "focus_input", mode = { "i", "n" } },
+            ["<C-l>"] = { "focus_preview", mode = { "i", "n" } },
+            ["<C-c>"] = { "close", mode = { "i", "n" } },
+          }
+        },
+        preview = {
+          keys = {
+            ["<C-h>"] = { "focus_input", mode = { "i", "n" } },
+            ["<C-c>"] = { "close", mode = { "i", "n" } },
+          }
+        },
+      }
+    },
     styles = {},
     lazygit = {
       win = {
