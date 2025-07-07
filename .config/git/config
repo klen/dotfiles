@@ -1,0 +1,167 @@
+# ---------------------------------------------
+# USER IDENTITY
+# ---------------------------------------------
+[user]
+  name = Kirill Klenov
+  email = horneds@gmail.com
+  editor = nvim  # Use Neovim as default editor for git commands
+  pager = less -FX  # No paging for short output
+
+# [commit]
+#   gpgSign = true  # Sign commits with GPG
+
+# ---------------------------------------------
+# CORE BEHAVIOR
+# ---------------------------------------------
+[core]
+  autocrlf = input  # Convert CRLF to LF on commit (recommended on Unix systems)
+  preloadindex = true  # Speed up 'git status' by preloading index
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol  # Auto-fix whitespace issues
+
+# HTTP settings
+[http]
+  postBuffer = 157286400  # Increase POST buffer to ~150MB to prevent large push failures
+
+# ---------------------------------------------
+# INIT DEFAULTS
+# ---------------------------------------------
+[init]
+  defaultBranch = main  # Use 'main' instead of 'master' as default branch
+  templatedir = ~/.config/git/templates  # Custom templates for new repositories
+
+# ---------------------------------------------
+# PUSH / PULL BEHAVIOR
+# ---------------------------------------------
+
+[fetch]
+  prune = true  # Automatically prune deleted branches on fetch
+  pruneTags = true  # Prune deleted tags
+
+# Push settings
+[push]
+  followTags = true  # Typo: should be 'followTags'. Consider removing; 'git push --follow-tags' is explicit.
+  default = current  # Push current branch by default
+  autoSetupRemote = true  # Automatically set upstream on push (added in newer git versions)
+
+# Rebase settings
+[rebase]
+  autoStash = true  # Auto-stash before rebase
+  missingCommitsCheck = warn
+
+# Rerere (reuse recorded resolution) settings
+[rerere]
+  enabled = true
+  autoUpdate = true
+
+# ---------------------------------------------
+# UI SETTINGS
+# ---------------------------------------------
+#
+# Status display options
+[status]
+  branch = true
+  showStash = true
+  showUntrackedFiles = all
+
+# Pager overrides
+[pager]
+  diff = diff-so-fancy | $PAGER  # Pipe diff output to diff-so-fancy
+  tag = false
+  branch = false
+
+# Branch sorting
+[branch]
+  sort = -committerdate  # Sort branches by last commit date descending
+
+# Tag sorting
+[tag]
+  sort = -taggerdate
+
+# Help behavior
+[help]
+  autocorrect = 1  # Auto-correct mistyped git commands after a short delay
+
+[color "diff"]
+  meta = yellow
+  frag = cyan
+  old = red
+  whitespace = yellow reverse
+
+[color "branch"]
+  current = brightgreen
+  local = default
+  remote = yellow
+  upstream = magenta
+  plain = blue
+
+[color "status"]
+  added = green bold
+  changed = yellow
+  untracked = red
+  nobranch = red bold reverse
+
+# ---------------------------------------------
+# DIFF SETTINGS
+# ---------------------------------------------
+
+[diff]
+  context = 3  # Number of context lines in diffs
+  tool = vimdiff  # Use vimdiff as merge tool
+  renames = copies  # Detect copies as renames
+  interHunkContext = 10  # Lines between hunks to combine them
+
+[diff-so-fancy]
+  markEmptyLines = false
+  rulerWidth = 80
+
+[interactive]
+  singlekey = true  # Single key selection in interactive mode
+  diffFilter = diff-so-fancy --patch
+
+# ---------------------------------------------
+# URL SHORTCUTS
+# ---------------------------------------------
+[url "git@github.com:klen/"]
+  insteadOf = "klen:"
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+
+# ---------------------------------------------
+# ALIASES FOR PRODUCTIVITY
+# ---------------------------------------------
+[alias]
+
+  # Common abbreviations
+  co = checkout
+  ci = commit
+  cia = commit -a
+  st = status -sb
+  br = branch
+
+  # Logs and diffs
+  ls = log --pretty=format:"%C(yellow)%h\\ %Cblue[%cn]\\%Cred%d\\ %Creset%s" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --stat
+  diff = diff --word-diff
+
+  # Git flow support
+  hotfix = flow hotfix
+  feature = flow feature
+  release = flow release
+
+  # Undo operations
+  amend = commit --amend -C HEAD
+  undo = reset --soft HEAD^
+
+# Branch tracking setup
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
+
+[branch "main"]
+  remote = origin
+  merge = refs/heads/main
+
+[branch "develop"]
+  remote = origin
+  merge = refs/heads/develop
