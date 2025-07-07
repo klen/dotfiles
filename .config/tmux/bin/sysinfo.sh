@@ -18,14 +18,16 @@ if [ "$(uname)" = "Darwin" ]; then
 
   pages_used=$((pages_active + pages_wired + pages_compressed))
 
-  mem_used_mb=$((pages_used * page_size / 1024 / 1024))
+  mem_used_mb=$((pages_used * page_size / 1024 / 1024 / 1024))
   mem_total_bytes=$(sysctl -n hw.memsize)
-  mem_total_mb=$((mem_total_bytes / 1024 / 1024))
+  mem_total_mb=$((mem_total_bytes / 1024 / 1024 / 1024))
 
-  ram_usage="${mem_used_mb}M/${mem_total_mb}M"
+  ram_usage="${mem_used_mb}Gb/${mem_total_mb}Gb"
+  bat_usage=$(pmset -g batt | grep -Eo '[0-9]+%' | head -n 1)
 else
   # Linux: используем free
   ram_usage=$(free -m | awk '/Mem:/ { printf "%dM used / %dM free / %dM total", $3, $4, $2 }')
+  bat_usage=$(acpi -b | grep -Eo '[0-9]+%' | head -n 1)
 fi
 
-echo "CPU: ${cpu_usage} | RAM: ${ram_usage}"
+echo "CPU: ${cpu_usage} | RAM: ${ram_usage} | BAT: ${bat_usage}"
