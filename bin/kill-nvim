@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# kill-nvim-embed-tree-force
+
+echo "Force killing orphaned nvim --embed processes and their children..."
+
+# Получаем PIDs nvim --embed
+NVIM_PIDS=$(ps -eo pid,ppid,command | grep 'nvim --embed' | grep -v grep | awk '{print $1}')
+
+for PID in $NVIM_PIDS; do
+  echo "Killing nvim --embed PID: $PID"
+
+  # Убиваем детей сначала
+  CHILDREN=$(pgrep -P $PID)
+  for CPID in $CHILDREN; do
+    echo "  Killing child PID: $CPID"
+    kill -9 $CPID
+  done
+
+  # Потом сам процесс nvim --embed
+  kill -9 $PID
+done
+
+echo "Done."

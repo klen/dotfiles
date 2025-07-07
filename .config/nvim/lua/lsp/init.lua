@@ -10,6 +10,15 @@ vim.api.nvim_create_autocmd(
   { pattern = "*", callback = utils.diagnostics, group = "lsp" }
 )
 
+-- Stop all LSP servers on exit
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    for _, client in pairs(vim.lsp.get_clients()) do
+      client.stop(true)
+    end
+  end
+})
+
 -- Add root markers for all LSP servers
 vim.lsp.config("*", {
   root_markers = { ".git", "Cargo.toml", "package.json", "pyproject.toml" },

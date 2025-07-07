@@ -1,5 +1,5 @@
 #!/bin/bash
-SESSION_NAME="ghostty"
+SESSION_NAME="default"
 
 # Check if the session already exists
 /opt/homebrew/bin/tmux has-session -t $SESSION_NAME 2>/dev/null

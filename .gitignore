@@ -1,13 +1,14 @@
 *.retry
+/.config/env.local
 /.config/karabiner/automatic_backups/
+/.config/pypoetry/poetry.lock
+/.config/pypoetry/pyproject.toml
 /.config/pyradio/*.date
 /.config/pyradio/*.ver
 /.config/pyradio/data/*
 /.config/zsh/.zcompdump
 /.config/zsh/.zsh_history
 /.config/zsh/plugins
-/.config/pypoetry/poetry.lock
-/.config/pypoetry/pyproject.toml
 /.smartcd/inodes
 /.smartcd/scripts
 /todo.txt

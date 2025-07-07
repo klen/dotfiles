@@ -8,32 +8,38 @@
 #   <other> - Navigate to the specified directory under config home
 #   (no argument) - Go to ~/dotfiles directory
 
+DOTFILES_DIR="$HOME/dotfiles"
+
 dotfiles() {
   if [ $1 ]; then
     echo "Setting up dotfiles for $1"
     case $1 in
     nvim)
-      cd $XDG_CONFIG_HOME/nvim
-      nvim $XDG_CONFIG_HOME/nvim/init.lua
+      cd $DOTFILES_DIR/.config/nvim
+      nvim $DOTFILES_DIR/.config/nvim/init.lua
       ;;
     vim)
-      cd $XDG_CONFIG_HOME/vim
-      vim $XDG_CONFIG_HOME/vim/init.vim
+      cd $DOTFILES_DIR/.config/vim
+      vim $DOTFILES_DIR/.config/vim/init.vim
       ;;
     bin)
-      cd $HOME/bin
-      nvim $HOME/bin
+      cd $DOTFILES_DIR/bin
+      nvim $DOTFILES_DIR/bin
       ;;
     env)
-      cd $XDG_CONFIG_HOME
-      nvim $XDG_CONFIG_HOME/env.local
+      cd $DOTFILES_DIR/.config
+      nvim $DOTFILES_DIR/.config/env.local
       ;;
     bash)
-      cd $XDG_CONFIG_HOME/bash
-      nvim $XDG_CONFIG_HOME/bash/bashrc
+      cd $DOTFILES_DIR/.config/bash
+      nvim $DOTFILES_DIR/.config/bash/bashrc
+      ;;
+    tmux)
+      cd $DOTFILES_DIR/.config/tmux
+      nvim $DOTFILES_DIR/.config/tmux/tmux.conf
       ;;
     *)
-      cd $XDG_CONFIG_HOME/$1
+      cd $DOTFILES_DIR/.config/$1
       ;;
     esac
   else
