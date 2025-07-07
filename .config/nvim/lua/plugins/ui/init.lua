@@ -2,6 +2,7 @@ return {
   require('plugins/ui/incline'),
   require('plugins/ui/snacks'),
   require('plugins/ui/nvim-ufo'),
+  require('plugins/ui/tmux'),
 
   --- File Explorer ---
   require("plugins/ui/neo-tree"),
@@ -36,9 +37,4 @@ return {
   -- symbols (functions, classes, variables) in the current file, often
   -- using LSP information. It's currently disabled.
   -- require "plugins/ui/symbols-outline",
-  --
-  {
-    "aserowy/tmux.nvim",
-    opts = {}
-  }
 }
