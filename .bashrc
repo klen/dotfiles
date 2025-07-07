@@ -8,3 +8,6 @@
 
 # Read main configuration
 source $HOME/.config/bash/bashrc
+
+# Stop LM Studio to modify PATH
+# export PATH="$PATH:/Users/horneds/.lmstudio/bin"
