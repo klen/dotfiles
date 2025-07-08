@@ -8,7 +8,7 @@ if command -v docker >/dev/null 2>&1; then
 
   # List all Docker containers
   dps() {
-    docker ps --format="table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" "$@"
+    docker ps --format="table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" "$@"
   }
 
   # View logs of a running container
