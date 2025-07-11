@@ -43,6 +43,9 @@
   default = current  # Push current branch by default
   autoSetupRemote = true  # Automatically set upstream on push (added in newer git versions)
 
+[pull]
+  rebase = false
+
 # Rebase settings
 [rebase]
   autoStash = true  # Auto-stash before rebase
