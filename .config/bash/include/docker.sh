@@ -23,12 +23,11 @@ if command -v docker >/dev/null 2>&1; then
   # Exec into a running container
   dexec() {
     if [ -z "$1" ]; then
-      echo "Usage: dexec <container-name> [shell]"
+      echo "Usage: dexec <container-name> command"
       return 1
     fi
 
-    local shell="${2:-/bin/bash}"
-    docker exec -it "$1" "$shell"
+    docker exec -it "$1" "${@:2}"
   }
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
