@@ -1,5 +1,6 @@
 session_name: team-tracker
 start_directory: ~/projects/team-tracker
+
 windows:
   - window_name: web
     focus: true
@@ -12,7 +13,10 @@ windows:
     panes:
       - shell_command: nvim app/__init__.py
 
-  - window_name: dev
+  - window_name: devops
+    start_directory: ./devops
+
+  - window_name: serve
     shell_command_before: docker start postgres redis
     panes:
       - shell_command: make dev
