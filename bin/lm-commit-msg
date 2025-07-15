@@ -41,7 +41,9 @@ GIT_HOOK=$(
   cat <<EOF
 #!/bin/bash
 
-if [[ -z "\$2" ]]; then
+MESSAGE=\$(cat "\$1")
+
+if [[ -z "\$2" || "\$MESSAGE" == "." ]]; then
   $(realpath "$0") --hook "\$1" || true
 fi
 EOF)
