@@ -20,29 +20,36 @@ macos-titlebar-style = "hidden"
 window-save-state = "always"
 quit-after-last-window-closed = true
 
+# Rebind default keybindings to tmux
+# ----------------------------------
+
+keybind = super+t=esc:t
+keybind = super+1=esc:1
+keybind = super+2=esc:2
+keybind = super+3=esc:3
+keybind = super+4=esc:4
+keybind = super+5=esc:5
+keybind = super+6=esc:6
+keybind = super+7=esc:7
+keybind = super+8=esc:8
+keybind = super+9=esc:9
+keybind = super+0=esc:0
+keybind = super+l=esc:l
+keybind = super+r=esc:r
+keybind = super+d=esc:d
+keybind = super+shift+d=esc:D
+
 # Disable some default keybindings (because of tmux)
-# --------------------------------------------------
+# -------------------------------------------------
 
 # I don't use Ghosty tabs
-keybind = super+t=unbind
-keybind = super+0=unbind
-keybind = super+1=unbind
-keybind = super+2=unbind
-keybind = super+3=unbind
-keybind = super+4=unbind
-keybind = super+5=unbind
-keybind = super+6=unbind
-keybind = super+7=unbind
-keybind = super+8=unbind
-keybind = super+0=unbind
 keybind = super+shift+bracket_left=unbind
 keybind = super+shift+bracket_right=unbind
 keybind = super+alt+w=unbind
 keybind = ctrl+shift+tab=unbind
 
-# I don't use Ghosty splits
-keybind = super+d=unbind
-keybind = super+shift+d=unbind
+# # I don't use Ghosty splits
+keybind = super+ctrl+equal=unbind
 keybind = super+bracket_left=unbind
 keybind = super+bracket_right=unbind
 keybind = super+alt+arrow_left=unbind
