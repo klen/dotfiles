@@ -2,6 +2,8 @@ return {
   require('plugins/ui/incline'),
   require('plugins/ui/snacks'),
   require('plugins/ui/nvim-ufo'),
+
+  --- Tmux Integration ---
   require('plugins/ui/tmux'),
 
   --- File Explorer ---

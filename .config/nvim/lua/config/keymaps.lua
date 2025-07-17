@@ -16,10 +16,12 @@ keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left
   { desc = "Replace word under cursor globally" })
 
 --- Window Splitting ---
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
+keymap.set("n", "<C-s>", "<C-w>s", { desc = "Split window horizontally", noremap = true, nowait = true })
+keymap.set("n", "<M-=>", "<C-w>=", { desc = "Make splits equal size", noremap = true, nowait = true })
+keymap.set("n", "<M-,>", "<C-w><", { desc = "Decrease split width", noremap = true, nowait = true })
+keymap.set("n", "<M-.>", "<C-w>>", { desc = "Increase split width", noremap = true, nowait = true })
+keymap.set("n", "<M-->", "<C-w>-", { desc = "Decrease split height", noremap = true, nowait = true })
+keymap.set("n", "<M-+>", "<C-w>+", { desc = "Increase split height", noremap = true, nowait = true })
 
 --- General Navigation ---
 -- Map 'k' and 'j' to 'gk' and 'gj' respectively.
@@ -109,6 +111,11 @@ api.nvim_create_user_command("Reload", function(args)
   tools.reload(args.args)
 end, { nargs = 1, desc = "Reload Neovim configuration" })
 
+-- Define helper keymaps outside of which-key groups for direct access.
+keymap.set("n", "<leader>on", tools.toggle_number, { desc = "Toggle line numbers" })
+keymap.set("n", "gw", tools.vimgrep, { desc = "Grep word under cursor" })
+keymap.set("n", "gM", tools.synstack, { desc = "Show syntax stack at cursor" })
+
 --- Plugin Integrations (which-key) ---
 -- Load which-key plugin, if available.
 local ok, wk = pcall(require, "which-key")
@@ -116,11 +123,6 @@ if not ok then
   vim.notify("which-key plugin not found. Some keymaps may not be displayed.", vim.log.levels.WARN)
   return
 end
-
--- Define helper keymaps outside of which-key groups for direct access.
-keymap.set("n", "<leader>on", tools.toggle_number, { desc = "Toggle line numbers" })
-keymap.set("n", "gw", tools.vimgrep, { desc = "Grep word under cursor" })
-keymap.set("n", "gM", tools.synstack, { desc = "Show syntax stack at cursor" })
 
 -- Add keymaps to which-key for discoverability.
 wk.add {
@@ -132,7 +134,7 @@ wk.add {
 
   -- Explore (prefix for various exploration/navigation tools)
   { "<leader>d",  group = "Explore" },
-  { "<leader>dt", "<cmd>bo vsplit | terminal<cr>",   desc = "Open terminal in new bottom split" },
+  { "<leader>dt", "<cmd>bo split | terminal<cr>",    desc = "Open terminal in new bottom split" },
   { "<leader>dl", "<cmd>lopen<cr>",                  desc = "Open location list" },
   { "<leader>dq", "<cmd>copen<cr>",                  desc = "Open quickfix list" },
 
@@ -146,12 +148,6 @@ wk.add {
   { "<leader>ck", "<cmd>wincmd k<cr><cmd>close<cr>", desc = "Close up window" },
   { "<leader>cl", "<cmd>wincmd l<cr>close<cr>",      desc = "Close right window" },
   { "<leader>cc", "<cmd>close<cr>",                  desc = "Close current window" },
-
-  { "<leader>r",  group = "Resize Window" },
-  { "<leader>rk", "<cmd>resize -5<cr>",              desc = "Shrink window height" },
-  { "<leader>rj", "<cmd>resize +5<cr>",              desc = "Expand window height" },
-  { "<leader>rl", "<C-W>5>",                         desc = "Expand window width" },
-  { "<leader>rh", "<C-W>5<",                         desc = "Shrink window width" },
 
   -- Tests (often integrated with vim-test or similar plugins)
   { "<leader>t",  group = "Tests" },
