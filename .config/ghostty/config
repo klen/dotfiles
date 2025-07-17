@@ -34,7 +34,7 @@ keybind = super+7=esc:7
 keybind = super+8=esc:8
 keybind = super+9=esc:9
 keybind = super+0=esc:0
-keybind = super+l=esc:l
+keybind = super+s=esc:s
 keybind = super+r=esc:r
 keybind = super+d=esc:d
 keybind = super+shift+d=esc:D
