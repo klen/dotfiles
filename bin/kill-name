@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+NAME=$1
+if [ -z "$NAME" ]; then
+  echo "Usage: $0 <name>"
+  exit 1
+fi
+PIDS=$(ps -eo pid,ppid,command | grep "$NAME" | grep -v grep | awk '{print $1}')
+
+echo "Force killing processes with name: $NAME"
+for PID in $PIDS; do
+  echo "Killing $NAME --embed PID: $PID"
+
+  # Убиваем детей сначала
+  CHILDREN=$(pgrep -P $PID)
+  for CPID in $CHILDREN; do
+    echo "  Killing child PID: $CPID"
+    kill -9 $CPID
+  done
+
+  kill -9 $PID
+done
+
+echo "Done."
