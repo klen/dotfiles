@@ -30,4 +30,4 @@ else
   bat_usage=$(acpi -b | grep -Eo '[0-9]+%' | head -n 1)
 fi
 
-echo "CPU: ${cpu_usage} | RAM: ${ram_usage} | BAT: ${bat_usage}"
+echo "CPU ${cpu_usage} | RAM ${ram_usage} | BAT ${bat_usage}"

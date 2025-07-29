@@ -26,21 +26,21 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
 
     if [[ "$left" -ne 0 || "$right" -ne 0 ]]; then
       # Отличия с origin ➔ красный
-      branch="#[fg=red,bold]${branch_name}"
+      branch="#[fg=red]${branch_name}"
     elif [[ "$has_local_changes" -eq 1 ]]; then
       # Локальные изменения, но без расхождений ➔ жёлтый
-      branch="#[fg=yellow,bold]${branch_name}"
+      branch="#[fg=yellow]${branch_name}"
     else
       # Нет изменений и расхождений ➔ default (без цвета)
       branch="${branch_name}"
     fi
   else
     # Нет upstream ➔ серый
-    branch="#[fg=grey,bold]${branch_name}"
+    branch="#[fg=grey]${branch_name}"
   fi
 
   # Выводим
-  echo "${branch}#[default]${dirty} | "
+  echo "${branch^^}#[default]${dirty} | "
 else
   echo ""
 fi
