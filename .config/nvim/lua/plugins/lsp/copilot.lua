@@ -25,4 +25,16 @@ return {
       markdown = true,
     },
   },
+  init = function()
+    vim.api.nvim_create_augroup("copilot", { clear = true })
+
+    -- Automatically dismiss Copilot suggestions when leaving Insert mode
+    vim.api.nvim_create_autocmd("InsertLeave", {
+      pattern = "*",
+      group = "copilot",
+      callback = function()
+        require("copilot.suggestion").dismiss()
+      end,
+    })
+  end,
 }
