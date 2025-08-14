@@ -5,6 +5,13 @@ local keymap = vim.keymap      -- Alias for vim.keymap.set
 --- Global & Utility Mappings ---
 -- Clear search highlights.
 keymap.set("n", "<C-c>", ":nohl<CR>", { desc = "Clear search highlights", silent = true })
+keymap.set("i", "<C-c>", function()
+  if vim.fn.pumvisible() == 1 then
+    return "<C-e><Esc>"
+  else
+    return "<Esc>"
+  end
+end, { expr = true, noremap = true, desc = "Exit insert mode or close completion menu" })
 
 -- Delete character under cursor without copying it to register.
 -- This prevents overwriting your paste buffer with single character deletes.
