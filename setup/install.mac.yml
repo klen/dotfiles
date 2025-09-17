@@ -43,7 +43,6 @@
 - name: Install other tools
   homebrew:
     name:
-      - ctags
       - fzf
       - git-flow
       - htop-osx
@@ -54,3 +53,4 @@
       - stylua
       - unzip
       - wget
+      - copyparty

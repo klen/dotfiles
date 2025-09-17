@@ -10,6 +10,7 @@
     - community.general.homebrew_cask: name={{item}}
       with_items:
         - appcleaner # Uninstaller
+        - pearcleaner # Disk cleaner
         - calibre # Books Manager
         - clop # Clipboard Manager
         # - docker # Utilities
