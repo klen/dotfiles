@@ -36,6 +36,7 @@ epel:
 
 .PHONY: stow
 stow:
+	@rm -rf ~/.bashrc
 	@stow -v -t $(HOME) .
 
 .PHONY: unstow
