@@ -43,6 +43,7 @@ source $XDG_CONFIG_HOME/bash/include/homebrew.sh
 source $XDG_CONFIG_HOME/bash/include/llm.sh
 source $XDG_CONFIG_HOME/bash/include/lua.sh
 source $XDG_CONFIG_HOME/bash/include/node.sh
+source $XDG_CONFIG_HOME/bash/include/bun.sh
 source $XDG_CONFIG_HOME/bash/include/pass.sh
 source $XDG_CONFIG_HOME/bash/include/python.sh
 source $XDG_CONFIG_HOME/bash/include/tmux.sh
