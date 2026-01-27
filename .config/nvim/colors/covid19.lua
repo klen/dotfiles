@@ -51,37 +51,37 @@
 
 ---@diagnostic disable: undefined-global
 
-local lush = require "lush"
+local lush = require("lush")
 local hsl = lush.hsl
 
-local total_black = hsl "#000000"
-local total_white = hsl "#ffffff"
+local total_black = hsl("#000000")
+local total_white = hsl("#ffffff")
 
-local foreground = hsl "#c7c7c7"
-local background = hsl "#121212"
+local foreground = hsl("#c7c7c7")
+local background = hsl("#121212")
 
-local eerie_black = hsl "#1c1c1c"
-local cocoa_brown = hsl "#262626"
-local jet = hsl "#3a3a3a"
-local onyx = hsl "#444444"
-local dim_gray = hsl "#606060"
-local battleship_grey = hsl "#878787"
-local cadet_blue = hsl "#bcbcbc"
+local eerie_black = hsl("#1c1c1c")
+local cocoa_brown = hsl("#262626")
+local jet = hsl("#3a3a3a")
+local onyx = hsl("#444444")
+local dim_gray = hsl("#606060")
+local battleship_grey = hsl("#878787")
+local cadet_blue = hsl("#bcbcbc")
 
-local dark_red = hsl "#870000"
-local fuzzy_wuzzy = hsl "#d75f5f"
-local light_pink = hsl "#ffafaf"
-local mellow_apricot = hsl "#ffb964"
-local mantis = hsl "#5faf5f"
-local bud_green = hsl "#87af5f"
-local steel_teal = hsl "#5f8787"
-local cool_grey = hsl "#8787af"
-local iceberg = hsl "#87afd7"
-local baby_blue_eyes = hsl "#afd7ff"
-local mauve = hsl "#d7afff"
+local dark_red = hsl("#870000")
+local fuzzy_wuzzy = hsl("#d75f5f")
+local light_pink = hsl("#ffafaf")
+local mellow_apricot = hsl("#ffb964")
+local mantis = hsl("#5faf5f")
+local bud_green = hsl("#87af5f")
+local steel_teal = hsl("#5f8787")
+local cool_grey = hsl("#8787af")
+local iceberg = hsl("#87afd7")
+local baby_blue_eyes = hsl("#afd7ff")
+local mauve = hsl("#d7afff")
 
 -- TODO: Not used
-local brandy = hsl "#d7d787"
+local brandy = hsl("#d7d787")
 -- local blue_sapphire = hsl "#005f87"
 -- local midnight = hsl "#5f005f"
 
@@ -366,6 +366,12 @@ local theme = lush(function(injected_functions)
     GitSignsAdd { fg = mantis },
     GitSignsChange { fg = iceberg },
     GitSignsDelete { fg = fuzzy_wuzzy },
+
+    --MiniStatusline
+    MiniStatuslineModeNormal { fg = total_black, bg = bud_green },
+    MiniStatuslineModeInsert { MiniStatuslineModeNormal, bg = iceberg },
+    MiniStatuslineModeCommand { MiniStatuslineModeNormal, bg = fuzzy_wuzzy },
+    MiniStatuslineModeOther { MiniStatuslineModeNormal, bg = mellow_apricot },
 
     -- IndentBlanklineIndent
     IndentBlanklineChar { fg = cocoa_brown, gui = "nocombine" },
