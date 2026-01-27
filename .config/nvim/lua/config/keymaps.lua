@@ -6,7 +6,7 @@ local utils = require("utils")
 local lv = require("lazyvim.util")
 local map = lv.safe_keymap_set
 
--- clear search, diff update and redraw
+-- Clear search, diff update and redraw
 map("n", "<C-c>", function()
   vim.cmd("nohlsearch")
   vim.cmd("diffupdate")
@@ -27,7 +27,7 @@ end, { desc = "Save File" })
 -- Fast save (assuming `tools.fast_save` handles this)
 map("n", "<S-CR>", utils.fast_save, { desc = "Save File (no prompts)" })
 
--- Windows
+-- Manage windows
 map("n", "<C-w>cc", "<cmd>close<cr>", { desc = "Close current window" })
 map("n", "<C-w>ck", "<cmd>wincmd k<cr><cmd>close<cr>", { desc = "Close window up" })
 map("n", "<C-w>cj", "<cmd>wincmd j<cr><cmd>close<cr>", { desc = "Close window down" })
@@ -49,3 +49,15 @@ map("n", "<leader>ll", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>lL", "<cmd>Lazy log<cr>", { desc = "Lazy Log" })
 map("n", "<leader>lc", "<cmd>Lazy check<cr>", { desc = "Lazy Check" })
 map("n", "<leader>lx", "<cmd>LazyExtras<cr>", { desc = "Lazy Extras" })
+
+-- When using '*', only highlight occurrences, do not jump to the next match.
+map("n", "*", "*N", { desc = "Highlight all occurrences of word under cursor" })
+
+-- Delete character under cursor without copying it to register.
+-- This prevents overwriting your paste buffer with single character deletes.
+map("n", "x", '"_x', { desc = "Delete character under cursor without copying it", noremap = true, silent = true })
+
+-- Keep search results centered on the screen.
+-- 'zz' centers the screen, 'zv' makes sure the cursor line is visible.
+map("n", "n", "nzzzv", { desc = "Next search match (centered)" })
+map("n", "N", "Nzzzv", { desc = "Previous search match (centered)" })

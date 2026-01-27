@@ -1,5 +1,6 @@
 return {
   "folke/snacks.nvim",
+
   keys = {
     {
       "<leader>fn",
@@ -9,6 +10,7 @@ return {
       desc = "Notification History",
     },
   },
+
   opts = {
     dashboard = require("plugins/editor/snacks-nvim/dashboard"),
     indent = require("plugins/editor/snacks-nvim/indent"),
@@ -28,4 +30,11 @@ return {
       enabled = false,
     },
   },
+  init = function()
+    local Snacks = require("snacks")
+
+    Snacks.util.set_hl({
+      Dir = "Directory",
+    }, { prefix = "SnacksPicker", default = true })
+  end,
 }
