@@ -1,3 +1,3 @@
 clean:
-	rm -rf ~/.cache/lazyvim
-	rm -rf ~/.local/share/lazyvim
+	rm -rf ~/.cache/nvim
+	rm -rf ~/.local/share/nvim
