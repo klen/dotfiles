@@ -3,3 +3,15 @@
 -- Add any additional options here
 
 vim.g.ai_cmp = false
+
+vim.opt.signcolumn = "number" -- Show signcolumn alongside line numbers
+
+-- Restore VIM defaults
+vim.opt.fillchars = {
+  foldopen = "-",
+  foldclose = "+",
+  fold = "·",
+  foldsep = "|",
+  diff = "-",
+  eob = "~",
+}

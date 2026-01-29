@@ -5,9 +5,20 @@ return {
     {
       "<leader>fn",
       function()
+        local Snacks = require("snacks")
+
         Snacks.picker.notifications()
       end,
       desc = "Notification History",
+    },
+    {
+      "<leader>fh",
+      function()
+        local Snacks = require("snacks")
+
+        Snacks.picker.help()
+      end,
+      desc = "Help Pages",
     },
   },
 

@@ -11,4 +11,8 @@ return {
   -- I don't like venv selector
   -- https://github.com/linux-cultist/venv-selector.nvim
   { "linux-cultist/venv-selector.nvim", enabled = false },
+  {
+    "lewis6991/gitsigns.nvim",
+    enabled = false,
+  },
 }

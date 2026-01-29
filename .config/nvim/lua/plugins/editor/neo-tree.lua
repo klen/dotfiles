@@ -13,7 +13,10 @@ return {
     {
       "<leader>fe",
       function()
-        require("neo-tree.command").execute({ reveal = true })
+        local cmd = require("neo-tree.command")
+        local nofile = vim.bo.buftype == "nofile"
+
+        cmd.execute({ toggle = nofile, reveal = not nofile })
       end,
       desc = "Explorer NeoTree (Root Dir)",
     },
