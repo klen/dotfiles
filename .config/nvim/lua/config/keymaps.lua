@@ -24,6 +24,11 @@ map("n", "<CR>", function()
   vim.cmd("write")
 end, { desc = "Save File" })
 
+-- Reload the current buffer from disk.
+map("n", "<leader>br", function()
+  vim.cmd("edit!")
+end, { desc = "Reload Buffer from Disk" })
+
 -- Fast save (assuming `tools.fast_save` handles this)
 map("n", "<S-CR>", utils.fast_save, { desc = "Save File (no prompts)" })
 
@@ -61,3 +66,7 @@ map("n", "x", '"_x', { desc = "Delete character under cursor without copying it"
 -- 'zz' centers the screen, 'zv' makes sure the cursor line is visible.
 map("n", "n", "nzzzv", { desc = "Next search match (centered)" })
 map("n", "N", "Nzzzv", { desc = "Previous search match (centered)" })
+
+--- Terminal Mode ---
+-- Exit terminal mode and return to Normal mode.
+map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })

@@ -17,7 +17,17 @@ api.nvim_create_augroup("config", { clear = true })
 -- When a terminal buffer is opened, automatically enter insert mode
 -- and disable line numbers for a cleaner terminal experience.
 autocmd({ "TermOpen" }, {
+  group = "config",
   pattern = "*",
   command = "startinsert | setlocal nonumber norelativenumber",
-  group = "config",
+})
+
+-- Disable spell checking and enable line wrapping for specific file types
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("lazyvim_wrap_spell", { clear = true }),
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = false
+  end,
 })

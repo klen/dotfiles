@@ -10,6 +10,7 @@ return {
       json = { "biome-check" },
       css = { "biome-check" },
       html = { "biome-check" },
+      markdown = { "rumdl" },
     },
   },
 }

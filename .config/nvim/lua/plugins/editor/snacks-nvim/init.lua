@@ -5,21 +5,19 @@ return {
     {
       "<leader>fn",
       function()
-        local Snacks = require("snacks")
-
-        Snacks.picker.notifications()
+        require("snacks").picker.notifications()
       end,
       desc = "Notification History",
     },
     {
       "<leader>fh",
       function()
-        local Snacks = require("snacks")
-
-        Snacks.picker.help()
+        require("snacks").picker.help()
       end,
       desc = "Help Pages",
     },
+    -- Keep fugitive shortcuts
+    { "<leader>gs", "<cmd>Git<cr>", desc = "Git Status" },
   },
 
   opts = {
