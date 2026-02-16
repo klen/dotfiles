@@ -60,7 +60,7 @@ end
 -- The function will open the file if it's not already open and move the cursor to the specified position.
 -- If the location format is invalid, it will print an error message.
 function M.jump_location(loc, offset_encoding)
-  local bufnr = vim.uri_to_bufnr(loc.uri)
+  local bufnr = vim.uri_to_bufnr(loc.uri or loc.targetUri)
   local curbuf = vim.api.nvim_get_current_buf()
   if bufnr ~= curbuf then
     vim.cmd("abo split")
