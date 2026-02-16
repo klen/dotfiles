@@ -23,11 +23,18 @@ autocmd({ "TermOpen" }, {
 })
 
 -- Disable spell checking and enable line wrapping for specific file types
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("lazyvim_wrap_spell", { clear = true }),
+autocmd("FileType", {
+  group = api.nvim_create_augroup("lazyvim_wrap_spell", { clear = true }),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = false
   end,
+})
+
+-- Fix snippet not exiting insert mode properly by stopping any active snippets when leaving insert mode
+autocmd("InsertLeave", {
+  group = "config",
+  pattern = "*",
+  callback = vim.snippet.stop,
 })

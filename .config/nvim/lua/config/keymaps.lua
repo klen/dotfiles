@@ -12,6 +12,7 @@ map("n", "<C-c>", function()
   vim.cmd("diffupdate")
   vim.api.nvim_command("redraw")
   vim.api.nvim_buf_clear_namespace(0, 0, 0, -1)
+  vim.snippet.stop()
 end, { desc = "Redraw / Clear hlsearch / Diff Update" })
 
 -- Save the current file.
