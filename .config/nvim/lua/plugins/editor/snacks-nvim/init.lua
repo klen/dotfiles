@@ -18,7 +18,7 @@ return {
     },
     -- Keep fugitive shortcuts
     { "<leader>gs", "<cmd>Git<cr>", desc = "Git Status" },
-    { "<leader>gd", "<cmd>Gdiffsplit<cr>", desc = "Git Diff" },
+    { "<leader>gd", "<cmd>Gvdiffsplit<cr>", desc = "Git Diff" },
   },
 
   opts = {

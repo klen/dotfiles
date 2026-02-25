@@ -45,14 +45,21 @@ function M.local_plugin(dir, url, opts)
 end
 
 function M.qf_from_cmd(title, cmd, efm)
-  local qf_cmd = string.format("%s 2>&1 | tee", cmd)
-  local lines = vim.fn.systemlist(qf_cmd)
-  if vim.v.shell_error ~= 0 then
-    print("Error running command: " .. cmd)
+  local lines = vim.fn.systemlist(cmd .. " 2>&1")
+  local code = vim.v.shell_error
+
+  if #lines == 0 and code ~= 0 then
+    vim.notify(("Error running command (%d): %s"):format(code, cmd), vim.log.levels.ERROR)
     return
   end
+
   vim.fn.setqflist({}, " ", { title = title, lines = lines, efm = efm })
-  vim.cmd("copen")
+  if #vim.fn.getqflist() > 0 then
+    vim.cmd("copen")
+  else
+    vim.cmd("cclose")
+    vim.notify(title .. ": no issues", vim.log.levels.INFO)
+  end
 end
 
 -- Jumps to a location specified by an LSP location object.

@@ -21,6 +21,22 @@ return {
       vim.lsp.buf.references,
       desc = "Go to references",
     },
+    {
+      "<leader>sS",
+      function()
+        Snacks.picker.lsp_symbols({ filter = LazyVim.config.kind_filter })
+      end,
+      desc = "LSP Symbols",
+      has = "documentSymbol",
+    },
+    {
+      "<leader>ss",
+      function()
+        Snacks.picker.lsp_workspace_symbols({ filter = LazyVim.config.kind_filter })
+      end,
+      desc = "LSP Workspace Symbols",
+      has = "workspace/symbols",
+    },
   },
   handlers = {
     ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
