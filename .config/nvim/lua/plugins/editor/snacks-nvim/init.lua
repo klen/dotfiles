@@ -16,9 +16,18 @@ return {
       end,
       desc = "Help Pages",
     },
+    {
+      "<leader>gh",
+      function()
+        require("snacks").gitbrowse()
+      end,
+      desc = "Git Browse",
+    },
     -- Keep fugitive shortcuts
     { "<leader>gs", "<cmd>Git<cr>", desc = "Git Status" },
     { "<leader>gd", "<cmd>Gvdiffsplit<cr>", desc = "Git Diff" },
+    { "<leader>gl", "<cmd>Gclog -- %<cr>", desc = "Git Buffer History" },
+    { "<leader>gL", "<cmd>Gclog<cr>", desc = "Git History" },
   },
 
   opts = {

@@ -76,12 +76,17 @@ function M.jump_location(loc, offset_encoding)
 end
 
 function M.lsp_on_list(result)
+  if not result.items or (#result.items == 0) then
+    vim.notify("No results found", vim.log.levels.INFO)
+    return
+  end
+
   if #result.items == 1 then
     ---@diagnostic disable-next-line: param-type-mismatch
     local clients = vim.lsp.get_clients(result)
     M.jump_location(result.items[1].user_data, clients[1].offset_encoding)
   else
-    vim.lsp.util.set_qflist(result.items)
+    vim.fn.setqflist(result.items)
     vim.api.nvim_command("copen")
   end
 end
