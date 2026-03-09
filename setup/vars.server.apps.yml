@@ -4,9 +4,9 @@ apps_stack_dir: "{{ apps_home }}/.local/share/server-apps"
 
 nextcloud_data_dir: "{{ apps_home }}/Documents/nextcloud"
 
-media_movies_dir: "{{ apps_home }}/Movies"
-media_tv_dir: "{{ apps_home }}/Movies/TV"
-media_downloads_dir: "{{ apps_home }}/Downloads"
+media_movies_dir: "{{ apps_home }}/media/movies"
+media_tv_dir: "{{ apps_home }}/media/series"
+media_downloads_dir: "{{ apps_home }}/media/downloads"
 
 nextcloud_db_name: nextcloud
 nextcloud_db_user: nextcloud
