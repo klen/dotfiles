@@ -1,0 +1,27 @@
+:80 {
+  encode zstd gzip
+
+  handle_path /jellyfin* {
+    reverse_proxy jellyfin:8096
+  }
+
+  handle_path /qbittorrent* {
+    reverse_proxy qbittorrent:8081
+  }
+
+  handle_path /sonarr* {
+    reverse_proxy sonarr:8989
+  }
+
+  handle_path /radarr* {
+    reverse_proxy radarr:7878
+  }
+
+  handle_path /prowlarr* {
+    reverse_proxy prowlarr:9696
+  }
+
+  handle {
+    reverse_proxy nextcloud:80
+  }
+}

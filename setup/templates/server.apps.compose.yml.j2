@@ -1,4 +1,15 @@
 services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - {{ apps_stack_dir }}/Caddyfile:/etc/caddy/Caddyfile:ro
+      - {{ apps_home }}/.local/share/caddy/data:/data
+      - {{ apps_home }}/.local/share/caddy/config:/config
+
   postgres:
     image: postgres:16-alpine
     container_name: postgres
@@ -49,6 +60,7 @@ services:
       REDIS_HOST: redis
       NEXTCLOUD_DATA_DIR: /var/www/html/data
       NEXTCLOUD_TRUSTED_DOMAINS: {{ nextcloud_trusted_domains }}
+      TRUSTED_PROXIES: caddy
       TZ: {{ server_timezone }}
     volumes:
       - {{ apps_home }}/.local/share/nextcloud/html:/var/www/html

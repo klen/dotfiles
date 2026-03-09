@@ -36,6 +36,8 @@
         mode: "{{ item.mode }}"
       loop:
         - { path: "{{ apps_stack_dir }}", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/caddy/data", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/caddy/config", mode: "0755" }
         - { path: "{{ apps_home }}/.local/share/jellyfin/config", mode: "0755" }
         - { path: "{{ apps_home }}/.local/share/jellyfin/cache", mode: "0755" }
         - { path: "{{ apps_home }}/.local/share/nextcloud/html", mode: "0755" }
@@ -54,6 +56,12 @@
       ansible.builtin.template:
         src: templates/server.apps.compose.yml.j2
         dest: "{{ apps_stack_dir }}/docker-compose.yml"
+        mode: "0644"
+
+    - name: Render Caddyfile
+      ansible.builtin.template:
+        src: templates/server.apps.Caddyfile.j2
+        dest: "{{ apps_stack_dir }}/Caddyfile"
         mode: "0644"
 
     - name: Start app stack
