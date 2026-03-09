@@ -31,6 +31,18 @@ apps:
 	@command -v ansible-playbook || make ansible-install
 	@ansible-playbook -i inventory setup/server.apps.yml -c local
 
+.PHONY: nextcloud-reset
+# target: nextcloud-reset - Reset Nextcloud data and database
+nextcloud-reset:
+	@test -f "$(HOME)/.local/share/server-apps/docker-compose.yml" || (printf "Compose file not found. Run make apps first.\n" && exit 1)
+	@printf "This will DELETE Nextcloud data and DB. Continue? [y/N] " && read ans && ([ "$$ans" = "y" ] || [ "$$ans" = "Y" ] || (printf "Aborted.\n" && exit 1))
+	@docker compose -f "$(HOME)/.local/share/server-apps/docker-compose.yml" stop nextcloud postgres redis
+	@docker compose -f "$(HOME)/.local/share/server-apps/docker-compose.yml" rm -f nextcloud postgres redis
+	@rm -rf "$(HOME)/.local/share/nextcloud/html" "$(HOME)/Documents/nextcloud" "$(HOME)/.local/share/postgres/data" "$(HOME)/.local/share/redis/data"
+	@mkdir -p "$(HOME)/Documents/nextcloud" "$(HOME)/.local/share/nextcloud/html" "$(HOME)/.local/share/postgres/data" "$(HOME)/.local/share/redis/data"
+	@chmod 0770 "$(HOME)/Documents/nextcloud"
+	@docker compose -f "$(HOME)/.local/share/server-apps/docker-compose.yml" up -d postgres redis nextcloud
+
 desktop:
 	@command -v ansible-playbook || make ansible-install
 	@ansible-playbook -i inventory setup/desktop.yml -c local
