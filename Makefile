@@ -19,6 +19,12 @@ ansible:
 	@command -v ansible-playbook || make ansible-install
 	@ansible-playbook -i inventory setup/playbook.yml -c local -k
 
+.PHONY: server
+# target: server - Setup macOS server profile
+server:
+	@command -v ansible-playbook || make ansible-install
+	@ansible-playbook -i inventory setup/server.mac.yml -c local
+
 desktop:
 	@command -v ansible-playbook || make ansible-install
 	@ansible-playbook -i inventory setup/desktop.yml -c local
