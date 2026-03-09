@@ -1,0 +1,49 @@
+---
+- hosts: all
+
+  vars_files:
+    - vars.yml
+    - vars.server.apps.yml
+
+  pre_tasks:
+    - name: Ensure Docker is installed
+      ansible.builtin.command: docker --version
+      changed_when: false
+
+    - name: Ensure Docker Compose plugin is available
+      ansible.builtin.command: docker compose version
+      changed_when: false
+
+  tasks:
+    - name: Ensure app data directories exist
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ apps_stack_dir }}"
+        - "{{ apps_home }}/.local/share/jellyfin/config"
+        - "{{ apps_home }}/.local/share/jellyfin/cache"
+        - "{{ apps_home }}/.local/share/nextcloud/html"
+        - "{{ apps_home }}/.local/share/postgres/data"
+        - "{{ apps_home }}/.local/share/redis/data"
+        - "{{ apps_home }}/.local/share/qbittorrent/config"
+        - "{{ apps_home }}/.local/share/sonarr/config"
+        - "{{ apps_home }}/.local/share/radarr/config"
+        - "{{ nextcloud_data_dir }}"
+        - "{{ media_movies_dir }}"
+        - "{{ media_tv_dir }}"
+        - "{{ media_downloads_dir }}"
+
+    - name: Render Docker Compose file
+      ansible.builtin.template:
+        src: templates/server.apps.compose.yml.j2
+        dest: "{{ apps_stack_dir }}/docker-compose.yml"
+        mode: "0644"
+
+    - name: Start app stack
+      ansible.builtin.command: docker compose up -d
+      args:
+        chdir: "{{ apps_stack_dir }}"
+      register: compose_up
+      changed_when: "'Started' in compose_up.stdout or 'Recreated' in compose_up.stdout or 'Created' in compose_up.stdout"

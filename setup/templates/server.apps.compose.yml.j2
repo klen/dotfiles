@@ -1,0 +1,115 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: {{ nextcloud_db_name }}
+      POSTGRES_USER: {{ nextcloud_db_user }}
+      POSTGRES_PASSWORD: {{ nextcloud_db_password }}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+      TZ: {{ server_timezone }}
+    volumes:
+      - {{ apps_home }}/.local/share/postgres/data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U {{ nextcloud_db_user }} -d {{ nextcloud_db_name }}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - {{ apps_home }}/.local/share/redis/data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nextcloud:
+    image: nextcloud:latest
+    container_name: nextcloud
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: {{ nextcloud_db_name }}
+      POSTGRES_USER: {{ nextcloud_db_user }}
+      POSTGRES_PASSWORD: {{ nextcloud_db_password }}
+      REDIS_HOST: redis
+      NEXTCLOUD_DATA_DIR: /var/www/html/data
+      NEXTCLOUD_TRUSTED_DOMAINS: {{ nextcloud_trusted_domains }}
+      TZ: {{ server_timezone }}
+    volumes:
+      - {{ apps_home }}/.local/share/nextcloud/html:/var/www/html
+      - {{ nextcloud_data_dir }}:/var/www/html/data
+
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    ports:
+      - "8096:8096"
+    environment:
+      TZ: {{ server_timezone }}
+    volumes:
+      - {{ apps_home }}/.local/share/jellyfin/config:/config
+      - {{ apps_home }}/.local/share/jellyfin/cache:/cache
+      - {{ media_movies_dir }}:/movies:ro
+      - {{ media_tv_dir }}:/tv:ro
+      - {{ media_downloads_dir }}:/downloads:ro
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      PUID: "{{ ansible_facts['user_uid'] }}"
+      PGID: "{{ ansible_facts['user_gid'] }}"
+      TZ: {{ server_timezone }}
+      WEBUI_PORT: "8081"
+    volumes:
+      - {{ apps_home }}/.local/share/qbittorrent/config:/config
+      - {{ media_downloads_dir }}:/downloads
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: unless-stopped
+    ports:
+      - "8989:8989"
+    environment:
+      PUID: "{{ ansible_facts['user_uid'] }}"
+      PGID: "{{ ansible_facts['user_gid'] }}"
+      TZ: {{ server_timezone }}
+    volumes:
+      - {{ apps_home }}/.local/share/sonarr/config:/config
+      - {{ media_tv_dir }}:/tv
+      - {{ media_downloads_dir }}:/downloads
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    ports:
+      - "7878:7878"
+    environment:
+      PUID: "{{ ansible_facts['user_uid'] }}"
+      PGID: "{{ ansible_facts['user_gid'] }}"
+      TZ: {{ server_timezone }}
+    volumes:
+      - {{ apps_home }}/.local/share/radarr/config:/config
+      - {{ media_movies_dir }}:/movies
+      - {{ media_downloads_dir }}:/downloads

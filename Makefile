@@ -25,6 +25,12 @@ server:
 	@command -v ansible-playbook || make ansible-install
 	@ansible-playbook -i inventory setup/server.mac.yml -c local -K
 
+.PHONY: apps
+# target: apps - Run media and cloud apps stack
+apps:
+	@command -v ansible-playbook || make ansible-install
+	@ansible-playbook -i inventory setup/server.apps.yml -c local
+
 desktop:
 	@command -v ansible-playbook || make ansible-install
 	@ansible-playbook -i inventory setup/desktop.yml -c local

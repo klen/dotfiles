@@ -1,0 +1,20 @@
+---
+apps_home: "{{ ansible_facts['env']['HOME'] }}"
+apps_stack_dir: "{{ apps_home }}/.local/share/server-apps"
+
+nextcloud_data_dir: "{{ apps_home }}/Documents/nextcloud"
+
+media_movies_dir: "{{ apps_home }}/Movies"
+media_tv_dir: "{{ apps_home }}/Movies/TV"
+media_downloads_dir: "{{ apps_home }}/Downloads"
+
+nextcloud_db_name: nextcloud
+nextcloud_db_user: nextcloud
+nextcloud_db_password: change-me-nextcloud-db-password
+postgres_password: change-me-postgres-password
+
+server_timezone: Europe/Prague
+
+nextcloud_trusted_domains: >-
+  localhost 127.0.0.1 {{ ansible_facts['hostname'] }}
+  {{ ansible_facts['default_ipv4']['address'] | default('') }}
