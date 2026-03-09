@@ -1,5 +1,7 @@
 ---
-- homebrew: update_homebrew=yes
+- name: Update homebrew
+  homebrew:
+    update_homebrew: true
 
 - name: Install setup utils
   homebrew:
@@ -19,7 +21,6 @@
       - pass
       - ripgrep
       - terminal-notifier
-      - zoxide # replacement for cd
 
 - name: Install editors
   homebrew:
@@ -35,10 +36,8 @@
       - pyenv # Python versions manager
       - nodenv # Node versions manager
       - luarocks # Lua package/versions manager
-      - poetry # Python packaging and dependency management
-
+      - uv
       - rust
-      - yarn
 
 - name: Install other tools
   homebrew:
@@ -50,7 +49,6 @@
       - mplayer
       - mpv
       - rsc_2fa
-      - stylua
       - unzip
       - wget
       - copyparty

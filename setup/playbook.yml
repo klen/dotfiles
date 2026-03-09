@@ -3,34 +3,48 @@
 - hosts: all
 
   vars_files:
-  - vars.yml
+    - vars.yml
 
   tasks:
 
-  - import_tasks: install.yum.yml
-    when: ansible_os_family == "RedHat"
-    become: true
+    - name: RedHat
+      import_tasks: install.yum.yml
+      when: ansible_os_family == "RedHat"
+      become: true
 
-  - import_tasks: install.deb.yml
-    when: ansible_os_family == "Debian"
-    become: true
+    - name: Debian
+      import_tasks: install.deb.yml
+      when: ansible_os_family == "Debian"
+      become: true
 
-  - import_tasks: install.mac.yml
-    when: ansible_os_family == "Darwin"
+    - name: Darwin
+      import_tasks: install.mac.yml
+      when: ansible_os_family == "Darwin"
 
-  - name: Setup ssh - pt. 1
-    file: state=directory dest=~{{home_user}}/.ssh owner={{home_user}}
+    - name: Setup ssh - pt. 1
+      ansible.builtin.file:
+        path: "/home/{{ home_user }}/.ssh"
+        state: directory
+        owner: "{{ home_user }}"
+        group: "{{ home_user }}"
+        mode: "0700"
 
-  - name: Setup ssh - pt. 2
-    lineinfile: >
-      dest=~{{home_user}}/.ssh/authorized_keys
-      line="{{item}}"
-      create=yes
-    with_items: "{{home_authorized_keys}}"
+    - name: Setup ssh - pt. 2
+      ansible.builtin.lineinfile:
+        path: "/home/{{ home_user }}/.ssh/authorized_keys"
+        line: "{{ item }}"
+        create: true
+        owner: "{{ home_user }}"
+        group: "{{ home_user }}"
+        mode: "0600"
+      loop: "{{ home_authorized_keys }}"
 
-  - name: Setup ssh - pt. 3
-    lineinfile: >
-      dest=~{{home_user}}/.ssh/known_hosts
-      line="{{item}}"
-      create=yes
-    with_items: "{{home_fingerprints}}"
+    - name: Setup ssh - pt. 3
+      ansible.builtin.lineinfile:
+        path: "/home/{{ home_user }}/.ssh/known_hosts"
+        line: "{{ item }}"
+        create: true
+        owner: "{{ home_user }}"
+        group: "{{ home_user }}"
+        mode: "0644"
+      loop: "{{ home_fingerprints }}"
