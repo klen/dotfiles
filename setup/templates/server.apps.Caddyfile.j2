@@ -2,7 +2,9 @@
   encode zstd gzip
 
   redir /jelly /jelly/
-  reverse_proxy /jelly/* jellyfin:8096
+  handle /jelly/* {
+    reverse_proxy jellyfin:8096
+  }
 
   redir /qbt /qbt/
   handle_path /qbt/* {
