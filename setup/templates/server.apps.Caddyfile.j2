@@ -5,8 +5,14 @@
     reverse_proxy jellyfin:8096
   }
 
-  handle /qbittorrent* {
-    reverse_proxy qbittorrent:8081
+  redir /qbt /qbt/
+  handle_path /qbt/* {
+    reverse_proxy qbittorrent:8081 {
+      header_up Host qbittorrent:8081
+      header_up X-Forwarded-Host {hostport}
+      header_up -Origin
+      header_up -Referer
+    }
   }
 
   handle /sonarr* {
