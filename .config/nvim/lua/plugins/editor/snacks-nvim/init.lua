@@ -19,9 +19,16 @@ return {
     {
       "<leader>gh",
       function()
-        require("snacks").gitbrowse()
+        require("snacks").gitbrowse({ what = "repo" })
       end,
       desc = "Git Browse",
+    },
+    {
+      "<leader>gr",
+      function()
+        require("utils").open_repo_actions()
+      end,
+      desc = "Git Actions",
     },
     -- Keep fugitive shortcuts
     { "<leader>gs", "<cmd>Git<cr>", desc = "Git Status" },

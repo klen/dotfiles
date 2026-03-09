@@ -31,3 +31,4 @@ alias la='ll $LS_OPTIONS -FlAh'
 alias tml='tmuxp load -y'
 alias vi='vim'
 alias myip='dig +short txt ch whoami.cloudflare @1.0.0.1'
+alias oc=opencode

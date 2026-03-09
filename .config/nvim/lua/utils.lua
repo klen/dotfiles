@@ -91,4 +91,38 @@ function M.lsp_on_list(result)
   end
 end
 
+local function normalize_git_remote(url)
+  if not url or url == "" then
+    return nil
+  end
+
+  local normalized = url:gsub("%.git$", "")
+  normalized = normalized:gsub("^git@", "")
+  normalized = normalized:gsub("^ssh://git@", "")
+  normalized = normalized:gsub("^https?://", "")
+  normalized = normalized:gsub(":", "/", 1)
+
+  if not normalized:match("/") then
+    return nil
+  end
+
+  return "https://" .. normalized
+end
+
+function M.open_repo_actions()
+  local remote = vim.fn.systemlist("git remote get-url origin")[1]
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Git remote not found", vim.log.levels.WARN)
+    return
+  end
+
+  local repo_url = normalize_git_remote(remote)
+  if not repo_url then
+    vim.notify("Unable to parse git remote URL", vim.log.levels.WARN)
+    return
+  end
+
+  vim.ui.open(repo_url .. "/actions")
+end
+
 return M

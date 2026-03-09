@@ -1,0 +1,52 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "small_model": "opencode/glm-4.7-free",
+  "autoupdate": true,
+  "plugin": [
+    "@franlol/opencode-md-table-formatter@0.0.3",
+  ],
+  "mcp": {
+    // Documentation search
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "ctx7sk-643a92fc-9e04-445c-b170-436f50674d92"
+      },
+      "enabled": true
+    },
+    // Code search
+    "grep_app": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "oauth": false,
+      "enabled": true,
+    }
+  },
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1",
+        "apiKey": "sk-lm-0H1Df69W:zr4roM6VF1fwRUNbzfkZ"
+      },
+      "models": {
+        "openai/gpt-oss-20b": {
+          "name": "GPT-OSS 20B",
+          "limit": {
+            "context": 8192,
+            "output": 2048
+          }
+        },
+        "qwen2.5-coder-14b-instruct-mlx": {
+          "name": "Qwen2.5 Coder 14B Instruct MLX",
+          "limit": {
+            "context": 16384,
+            "output": 4096
+          }
+        }
+      }
+    },
+  }
+}
