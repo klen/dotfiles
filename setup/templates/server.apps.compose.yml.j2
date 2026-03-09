@@ -84,6 +84,19 @@ services:
       - {{ apps_home }}/.local/share/qbittorrent/config:/config
       - {{ media_downloads_dir }}:/downloads
 
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: unless-stopped
+    ports:
+      - "9696:9696"
+    environment:
+      PUID: "{{ ansible_facts['user_uid'] }}"
+      PGID: "{{ ansible_facts['user_gid'] }}"
+      TZ: {{ server_timezone }}
+    volumes:
+      - {{ apps_home }}/.local/share/prowlarr/config:/config
+
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
