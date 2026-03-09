@@ -14,6 +14,20 @@
       ansible.builtin.command: docker compose version
       changed_when: false
 
+    - name: Check Docker daemon availability
+      ansible.builtin.command: docker info
+      register: docker_info
+      changed_when: false
+      failed_when: false
+
+    - name: Fail when Docker daemon is not running
+      ansible.builtin.fail:
+        msg: >-
+          Docker daemon is not running or unreachable.
+          Start OrbStack/Docker Desktop and retry `make apps`.
+          Details: {{ docker_info.stderr | default('docker info failed') }}
+      when: docker_info.rc != 0
+
   tasks:
     - name: Ensure app data directories exist
       ansible.builtin.file:

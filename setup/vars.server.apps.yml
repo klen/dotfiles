@@ -11,7 +11,6 @@ media_downloads_dir: "{{ apps_home }}/Downloads"
 nextcloud_db_name: nextcloud
 nextcloud_db_user: nextcloud
 nextcloud_db_password: change-me-nextcloud-db-password
-postgres_password: change-me-postgres-password
 
 server_timezone: Europe/Prague
 
