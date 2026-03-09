@@ -1,7 +1,8 @@
 :80 {
   encode zstd gzip
 
-  handle /jellyfin* {
+  redir /jelly /jelly/
+  handle_path /jelly/* {
     reverse_proxy jellyfin:8096
   }
 
