@@ -13,6 +13,9 @@ nextcloud_db_user: nextcloud
 nextcloud_db_password: change-me-nextcloud-db-password
 
 server_timezone: Europe/Prague
+sonarr_url_base: /sonarr
+radarr_url_base: /radarr
+prowlarr_url_base: /prowlarr
 
 nextcloud_trusted_domains: >-
   localhost 127.0.0.1 {{ ansible_facts['hostname'] }}

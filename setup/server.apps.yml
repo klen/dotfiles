@@ -70,3 +70,63 @@
         chdir: "{{ apps_stack_dir }}"
       register: compose_up
       changed_when: "'Started' in compose_up.stdout or 'Recreated' in compose_up.stdout or 'Created' in compose_up.stdout"
+
+    - name: Wait for Sonarr config file
+      ansible.builtin.wait_for:
+        path: "{{ apps_home }}/.local/share/sonarr/config/config.xml"
+        timeout: 60
+
+    - name: Set Sonarr URL base
+      ansible.builtin.lineinfile:
+        path: "{{ apps_home }}/.local/share/sonarr/config/config.xml"
+        regexp: '^\s*<UrlBase>.*</UrlBase>\s*$'
+        line: "  <UrlBase>{{ sonarr_url_base }}</UrlBase>"
+        insertbefore: '^\s*</Config>\s*$'
+      register: sonarr_url_base_config
+
+    - name: Restart Sonarr when URL base changes
+      ansible.builtin.command: docker compose restart sonarr
+      args:
+        chdir: "{{ apps_stack_dir }}"
+      changed_when: true
+      when: sonarr_url_base_config.changed
+
+    - name: Wait for Radarr config file
+      ansible.builtin.wait_for:
+        path: "{{ apps_home }}/.local/share/radarr/config/config.xml"
+        timeout: 60
+
+    - name: Set Radarr URL base
+      ansible.builtin.lineinfile:
+        path: "{{ apps_home }}/.local/share/radarr/config/config.xml"
+        regexp: '^\s*<UrlBase>.*</UrlBase>\s*$'
+        line: "  <UrlBase>{{ radarr_url_base }}</UrlBase>"
+        insertbefore: '^\s*</Config>\s*$'
+      register: radarr_url_base_config
+
+    - name: Restart Radarr when URL base changes
+      ansible.builtin.command: docker compose restart radarr
+      args:
+        chdir: "{{ apps_stack_dir }}"
+      changed_when: true
+      when: radarr_url_base_config.changed
+
+    - name: Wait for Prowlarr config file
+      ansible.builtin.wait_for:
+        path: "{{ apps_home }}/.local/share/prowlarr/config/config.xml"
+        timeout: 60
+
+    - name: Set Prowlarr URL base
+      ansible.builtin.lineinfile:
+        path: "{{ apps_home }}/.local/share/prowlarr/config/config.xml"
+        regexp: '^\s*<UrlBase>.*</UrlBase>\s*$'
+        line: "  <UrlBase>{{ prowlarr_url_base }}</UrlBase>"
+        insertbefore: '^\s*</Config>\s*$'
+      register: prowlarr_url_base_config
+
+    - name: Restart Prowlarr when URL base changes
+      ansible.builtin.command: docker compose restart prowlarr
+      args:
+        chdir: "{{ apps_stack_dir }}"
+      changed_when: true
+      when: prowlarr_url_base_config.changed
