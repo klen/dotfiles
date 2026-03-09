@@ -23,7 +23,7 @@ ansible:
 # target: server - Setup macOS server profile
 server:
 	@command -v ansible-playbook || make ansible-install
-	@ansible-playbook -i inventory setup/server.mac.yml -c local
+	@ansible-playbook -i inventory setup/server.mac.yml -c local -K
 
 desktop:
 	@command -v ansible-playbook || make ansible-install
