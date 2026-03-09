@@ -31,23 +31,23 @@
   tasks:
     - name: Ensure app data directories exist
       ansible.builtin.file:
-        path: "{{ item }}"
+        path: "{{ item.path }}"
         state: directory
-        mode: "0755"
+        mode: "{{ item.mode }}"
       loop:
-        - "{{ apps_stack_dir }}"
-        - "{{ apps_home }}/.local/share/jellyfin/config"
-        - "{{ apps_home }}/.local/share/jellyfin/cache"
-        - "{{ apps_home }}/.local/share/nextcloud/html"
-        - "{{ apps_home }}/.local/share/postgres/data"
-        - "{{ apps_home }}/.local/share/redis/data"
-        - "{{ apps_home }}/.local/share/qbittorrent/config"
-        - "{{ apps_home }}/.local/share/sonarr/config"
-        - "{{ apps_home }}/.local/share/radarr/config"
-        - "{{ nextcloud_data_dir }}"
-        - "{{ media_movies_dir }}"
-        - "{{ media_tv_dir }}"
-        - "{{ media_downloads_dir }}"
+        - { path: "{{ apps_stack_dir }}", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/jellyfin/config", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/jellyfin/cache", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/nextcloud/html", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/postgres/data", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/redis/data", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/qbittorrent/config", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/sonarr/config", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/radarr/config", mode: "0755" }
+        - { path: "{{ nextcloud_data_dir }}", mode: "0770" }
+        - { path: "{{ media_movies_dir }}", mode: "0755" }
+        - { path: "{{ media_tv_dir }}", mode: "0755" }
+        - { path: "{{ media_downloads_dir }}", mode: "0755" }
 
     - name: Render Docker Compose file
       ansible.builtin.template:
