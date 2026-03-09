@@ -23,14 +23,14 @@
 
     - name: Setup ssh - pt. 1
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.ssh"
+        path: "{{ ansible_facts['env']['HOME'] }}/.ssh"
         state: directory
         owner: "{{ home_user }}"
         mode: "0700"
 
     - name: Setup ssh - pt. 2
       ansible.builtin.lineinfile:
-        path: "{{ ansible_env.HOME }}/.ssh/authorized_keys"
+        path: "{{ ansible_facts['env']['HOME'] }}/.ssh/authorized_keys"
         line: "{{ item }}"
         create: true
         owner: "{{ home_user }}"
@@ -39,7 +39,7 @@
 
     - name: Setup ssh - pt. 3
       ansible.builtin.lineinfile:
-        path: "{{ ansible_env.HOME }}/.ssh/known_hosts"
+        path: "{{ ansible_facts['env']['HOME'] }}/.ssh/known_hosts"
         line: "{{ item }}"
         create: true
         owner: "{{ home_user }}"
