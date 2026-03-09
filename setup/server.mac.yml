@@ -65,6 +65,7 @@
     - name: Disable photoanalysisd launch agent
       ansible.builtin.command: launchctl disable gui/{{ ansible_facts['user_uid'] }}/com.apple.photoanalysisd
       changed_when: false
+      failed_when: false
 
     - name: Increase launchctl maxfiles limits
       ansible.builtin.command: launchctl limit maxfiles 65536 200000
