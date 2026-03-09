@@ -7,33 +7,41 @@
 
   tasks:
 
-    - name: Install packages for OS
-      ansible.builtin.include_tasks: "install/{{ ansible_facts.os_family }}.yml"
+    - name: RedHat
+      ansible.builtin.import_tasks: install/RedHat.yml
+      when: ansible_facts['os_family'] == "RedHat"
+      become: true
+
+    - name: Debian
+      ansible.builtin.import_tasks: install/Debian.yml
+      when: ansible_facts['os_family'] == "Debian"
+      become: true
+
+    - name: Darwin
+      ansible.builtin.import_tasks: install/Darwin.yml
+      when: ansible_facts['os_family'] == "Darwin"
 
     - name: Setup ssh - pt. 1
       ansible.builtin.file:
-        path: "/home/{{ home_user }}/.ssh"
+        path: "{{ ansible_env.HOME }}/.ssh"
         state: directory
         owner: "{{ home_user }}"
-        group: "{{ home_user }}"
         mode: "0700"
 
     - name: Setup ssh - pt. 2
       ansible.builtin.lineinfile:
-        path: "/home/{{ home_user }}/.ssh/authorized_keys"
+        path: "{{ ansible_env.HOME }}/.ssh/authorized_keys"
         line: "{{ item }}"
         create: true
         owner: "{{ home_user }}"
-        group: "{{ home_user }}"
         mode: "0600"
       loop: "{{ home_authorized_keys }}"
 
     - name: Setup ssh - pt. 3
       ansible.builtin.lineinfile:
-        path: "/home/{{ home_user }}/.ssh/known_hosts"
+        path: "{{ ansible_env.HOME }}/.ssh/known_hosts"
         line: "{{ item }}"
         create: true
         owner: "{{ home_user }}"
-        group: "{{ home_user }}"
         mode: "0644"
       loop: "{{ home_fingerprints }}"
