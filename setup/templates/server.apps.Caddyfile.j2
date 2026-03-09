@@ -16,6 +16,11 @@
     }
   }
 
+  redir /seerr /seerr/
+  handle_path /seerr/* {
+    reverse_proxy seerr:5055
+  }
+
   handle /sonarr* {
     reverse_proxy sonarr:8989
   }

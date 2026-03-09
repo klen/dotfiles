@@ -43,7 +43,11 @@
         - { path: "{{ apps_home }}/.local/share/nextcloud/html", mode: "0755" }
         - { path: "{{ apps_home }}/.local/share/postgres/data", mode: "0755" }
         - { path: "{{ apps_home }}/.local/share/redis/data", mode: "0755" }
-        - { path: "{{ apps_home }}/.local/share/qbittorrent/config", mode: "0755" }
+        - { path: "{{ apps_home }}/.local/share/seerr/config", mode: "0755" }
+        - {
+            path: "{{ apps_home }}/.local/share/qbittorrent/config",
+            mode: "0755",
+          }
         - { path: "{{ apps_home }}/.local/share/prowlarr/config", mode: "0755" }
         - { path: "{{ apps_home }}/.local/share/sonarr/config", mode: "0755" }
         - { path: "{{ apps_home }}/.local/share/radarr/config", mode: "0755" }
