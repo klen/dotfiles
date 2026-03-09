@@ -109,6 +109,16 @@ services:
     volumes:
       - {{ apps_home }}/.local/share/prowlarr/config:/config
 
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    ports:
+      - "8191:8191"
+    environment:
+      TZ: {{ server_timezone }}
+      LOG_LEVEL: info
+
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
