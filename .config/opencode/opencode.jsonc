@@ -11,7 +11,7 @@
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "ctx7sk-643a92fc-9e04-445c-b170-436f50674d92"
+        "CONTEXT7_API_KEY": "{file:~/.private/keys/context7.txt}"
       },
       "enabled": true
     },
@@ -29,7 +29,7 @@
       "name": "LM Studio (local)",
       "options": {
         "baseURL": "http://127.0.0.1:1234/v1",
-        "apiKey": "sk-lm-0H1Df69W:zr4roM6VF1fwRUNbzfkZ"
+        "apiKey": "{file:~/.private/keys/lmstudio-local.txt}"
       },
       "models": {
         "openai/gpt-oss-20b": {
