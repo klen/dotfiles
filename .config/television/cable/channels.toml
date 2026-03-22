@@ -1,0 +1,29 @@
+[metadata]
+name = "channels"
+description = "A channel to find and select other channels"
+
+[source]
+command = "tv list-channels"
+
+[preview]
+command = "bat -n --color=always ~/.config/television/cable/'{}'.toml"
+
+[keybindings]
+enter = "actions:zap"
+ctrl-backspace = "actions:delete"
+ctrl-e = "actions:edit"
+
+[actions.delete]
+description = "Delete the channel"
+command = "rm ~/.config/television/cable/'{}'.toml"
+mode = "fork"
+
+[actions.zap]
+description = "Switch to the channel"
+command = "tv '{}'"
+mode = "execute"
+
+[actions.edit]
+description = "Edit the channel configuration"
+command = "nvim ~/.config/television/cable/'{}'.toml"
+mode = "execute"

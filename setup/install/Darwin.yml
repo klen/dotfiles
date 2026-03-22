@@ -19,7 +19,9 @@
       - bash-completion # shell-completion
       - coreutils
       - pass
-      - ripgrep
+      - ripgrep # Search tool like grep and The Silver Searcher
+      - fd # Simple, fast and user-friendly alternative to find
+      - television # General purpose fuzzy finder TUI
       - terminal-notifier
 
 - name: Install editors
