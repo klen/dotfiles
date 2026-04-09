@@ -1,6 +1,6 @@
 # About Me
 
-**Name:** Kiro **Role:** Software developer with a background in product management Czechia, Prague
+**Name:** Kiro **Role:** Software developer
 
 ## Language Preferences
 

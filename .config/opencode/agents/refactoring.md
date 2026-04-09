@@ -33,8 +33,10 @@ and implement refactoring that preserves functionality while improving quality.
 ### 1. Understand Scope
 
 - User must provide $ARGUMENTS context specifying what files/components/modules to refactor
-- What's the goal? (clarity, patterns, performance)
-- Any constraints? (must preserve behavior, no breaking changes)
+- What's the goal?
+  (clarity, patterns, performance)
+- Any constraints?
+  (must preserve behavior, no breaking changes)
 
 ### 2. Analyze Code
 
