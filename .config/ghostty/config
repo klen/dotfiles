@@ -37,6 +37,8 @@ keybind = super+0=esc:0
 keybind = super+s=esc:s
 keybind = super+r=esc:r
 keybind = super+d=esc:d
+keybind = super+o=esc:o
+keybind = super+z=esc:z
 keybind = super+shift+d=esc:D
 
 # Disable some default keybindings (because of tmux)

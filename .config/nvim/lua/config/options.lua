@@ -3,6 +3,7 @@
 -- Add any additional options here
 
 vim.g.ai_cmp = false
+vim.g.root_spec = { "cwd" }
 
 -- Line Numbers
 vim.opt.number = true
