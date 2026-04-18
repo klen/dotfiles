@@ -10,13 +10,15 @@ RED=''
 WHITE=''
 YELLOW=''
 
-if [ -t 1 ] || [ $(tput colors) -ge 8 ]; then
-    BLUE=$(tput setaf 12)
-    CYAN=$(tput setaf 14)
-    GREEN=$(tput setaf 10)
-    MAGENTA=$(tput setaf 13)
-    NC=$(tput sgr 0)
-    RED=$(tput setaf 9)
-    WHITE=$(tput setaf 15)
-    YELLOW=$(tput setaf 11)
+if [ -t 1 ] && [ "$(tput colors)" -ge 8 ]; then
+  BLUE=$(tput setaf 4)
+  CYAN=$(tput setaf 6)
+  GREEN=$(tput setaf 2)
+  MAGENTA=$(tput setaf 5)
+  RED=$(tput setaf 1)
+  YELLOW=$(tput setaf 3)
+  WHITE=$(tput setaf 7)
 fi
+
+NC=$(tput sgr0)
+DIM=$(tput dim)
