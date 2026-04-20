@@ -11,6 +11,7 @@ Guidance for coding agents working in this dotfiles repository.
   - `bin/` — small shell/python/perl helper scripts
   - `.config/**` — app configs (Neovim, zsh, git, tmux, kitty, ghostty, etc.)
   - `.vim/**` — Vim config and plugins
+  - `.pi/**` — pi agent config, prompts, sessions, and project-local extensions
   - `setup/**` — Ansible playbooks, vars, and templates
   - `Makefile` — operational entrypoints
 
@@ -89,6 +90,9 @@ If `stylua` is available:
 - `setup/vars.yml` contains user-specific SSH/home settings; do not change those casually.
 - There is no obvious CI in `.github/workflows/`;
   rely on targeted syntax checks instead of assuming a full test suite.
+- Treat `.pi/**` in this repo as real, managed dotfiles (stow/home overlay semantics apply here too).
+  Changes to `.pi/agent/**` and `.pi/extensions/**` are intentional local configuration changes,
+  not temporary scratch data.
 
 ## Good defaults for agents
 
