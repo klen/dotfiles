@@ -1,138 +1,98 @@
 # AGENTS.md
 
-This repository contains personal dotfiles plus a Neovim configuration.
-Use the guidance below when making changes.
+Guidance for coding agents working in this dotfiles repository.
 
-## Quick Orientation
+## Repository snapshot
 
-- Primary repo root: `/Users/horneds/dotfiles`
-- Neovim config: `.config/nvim/`
-- Setup playbooks: `setup/`
-- Package config: `package.json`
+- Personal dotfiles repo managed primarily with **GNU Stow** and **Ansible**.
+- The repo root acts like a `$HOME` overlay: files such as `.zshrc`, `.vimrc`, `.config/**`,
+  `.local/**`, and `bin/**` are intended to be symlinked into the real home directory.
+- Main areas:
+  - `bin/` — small shell/python/perl helper scripts
+  - `.config/**` — app configs (Neovim, zsh, git, tmux, kitty, ghostty, etc.)
+  - `.vim/**` — Vim config and plugins
+  - `setup/**` — Ansible playbooks, vars, and templates
+  - `Makefile` — operational entrypoints
 
-## Build / Lint / Test Commands
+## High-risk commands
 
-There is no single build/test pipeline. Use the commands below depending on
-what you changed.
+Do **not** run these unless the user explicitly asks,
+because they modify the real machine or can delete data:
 
-### Repo Maintenance
+- `make`
+- `make update` — fetches and rebases against `origin/master`
+- `make ansible`
+- `make stow` / `make unstow`
+- `make desktop`
+- `make server`
+- `make apps`
+- `make apps-reset` — destructive; deletes app configs/databases
+- Any `ansible-playbook` command without `--syntax-check`
+- Any command that writes into `$HOME`, changes macOS defaults, or manages Docker containers
 
-- Install/update dotfiles: `make`
-- Update repo and submodules: `make update`
-- Run ansible provisioning: `make ansible`
-- Install desktop casks: `make desktop`
-- Stow into home directory: `make stow`
-- Unstow (remove symlinks): `make unstow`
+Prefer static inspection and syntax checks.
 
-### Neovim Cache Cleanup
+## Safe validation
 
-- Clear Neovim cache and data: `make -C .config/nvim clean`
+Use focused checks for the files you changed.
 
-### JavaScript / TypeScript Linting
+### Shell / zsh
 
-ESLint and Prettier are configured, but there are no npm scripts.
-Run them directly in the repo root if needed:
+- Bash script: `bash -n path/to/script`
+- Zsh config/script: `zsh -n path/to/file`
 
-- ESLint (example): `npx eslint <path>`
-- Prettier check/format (example): `npx prettier --check <path>`
+### Ansible
 
-### Lua Formatting
+- Main playbook: `ansible-playbook -i inventory setup/playbook.yml --syntax-check`
+- Desktop profile: `ansible-playbook -i inventory setup/desktop.yml --syntax-check`
+- macOS server profile: `ansible-playbook -i inventory setup/server.mac.yml --syntax-check`
+- Apps stack: `ansible-playbook -i inventory setup/server.apps.yml --syntax-check`
 
-Stylua config exists for Neovim Lua files:
+### Lua formatting
 
-- Format Lua (example): `stylua .config/nvim/lua`
+If `stylua` is available:
 
-### Test Commands
+- `stylua --check path/to/file.lua`
 
-There is no standard test runner configured at the repo level.
-If you are working in the Neovim config, tests are typically run via the
-Neovim test plugin with editor commands (not CLI):
+## Editing guidelines
 
-- Nearest test: `:TestNearest`
-- File tests: `:TestFile`
-- Full suite: `:TestSuite`
+- Preserve the existing structure where repo paths mirror final paths in `$HOME`.
+  - Example: if a file should end up at `~/.config/foo/config.toml`,
+    store it here as `.config/foo/config.toml`.
+- Keep changes minimal and local; this repo mixes many tools and personal preferences.
+- Match the style already used in the surrounding file.
+- Prefer updating existing configs/scripts over adding new tooling.
+- When changing shell scripts, keep them portable and dependency-light
+  unless the script already depends on a specific tool.
+- When changing Ansible, keep tasks idempotent and avoid adding noisy `shell` usage
+  when a module exists.
+- Preserve executable bits for scripts in `bin/` if you rewrite them.
 
-When asked for a single-test CLI command, state that none is defined and
-suggest the editor-based `:TestNearest` flow.
+## Files and directories to avoid unless explicitly requested
 
-## Code Style and Conventions
+- `.config/env.local` — local machine-specific environment/secrets
+- `.config/smartcd/` — git submodule
+- `.vim/plugged/` — vendored plugins
+- `.config/opencode/node_modules/` and any `node_modules/`
+- `.rumdl_cache/`, `.ansible/collections/`, `.ansible/roles/` if changes are not clearly intended
+- `.config/nvim-old/` — legacy config archive; prefer `.config/nvim/`
+- `.DS_Store` files and other machine-generated artifacts
 
-### General
+## Repo-specific notes
 
-- Follow `.editorconfig` for indentation and newlines.
-- Use LF line endings, trim trailing whitespace, and keep a final newline.
-- Keep changes minimal and in the existing style of each file.
+- `Makefile` is operational, not just build tooling.
+  Treat targets as machine-management tasks.
+- `setup/server.apps.yml` manages a local Docker-based media/cloud stack
+  and writes under `~/.local/share/server-apps`.
+- `setup/vars.server.apps.yml` contains local defaults like paths, URL bases,
+  and placeholder passwords; avoid changing them without user confirmation.
+- `setup/vars.yml` contains user-specific SSH/home settings; do not change those casually.
+- There is no obvious CI in `.github/workflows/`;
+  rely on targeted syntax checks instead of assuming a full test suite.
 
-### Formatting Defaults
+## Good defaults for agents
 
-- Indent: 2 spaces for most files.
-- Indent: 4 spaces for `*.py` and `*.rs`.
-- Tabs in Makefiles.
-
-### Lua (Neovim Config)
-
-- Style: 2-space indent, 120 column width (see `stylua.toml`).
-- Prefer local requires at top of file.
-- Use `return { ... }` module tables for plugin specs.
-- Keep keymaps grouped by feature, with concise `desc` strings.
-- Avoid unnecessary comments; use them only for non-obvious logic.
-
-### JavaScript / TypeScript
-
-- ESLint config: `.eslintrc.json`.
-- Prettier config: `.prettierrc.json` (no semicolons, trailing commas).
-- Prefer named exports where already used; stay consistent with file style.
-- Keep React JSX filename extensions to `.js` or `.jsx` where configured.
-
-### Imports
-
-- Keep import ordering consistent with existing files.
-- Group standard library, external, and local imports when a file already
-  follows that pattern.
-- Avoid unused imports; remove as needed.
-
-### Naming
-
-- Lua: use `snake_case` for locals and functions, `PascalCase` for modules
-  only when already used.
-- JS/TS: use `camelCase` for variables/functions, `PascalCase` for React
-  components.
-- Keep keymap identifiers consistent (`<leader>...` patterns already used).
-
-### Types
-
-- Lua: prefer runtime checks and simple tables; avoid heavy metatable tricks.
-- JS/TS: if adding TS files, favor explicit types on exported functions.
-
-### Error Handling
-
-- Prefer early returns for invalid/empty inputs (example: LSP list handlers).
-- Use `vim.notify` for user-facing Neovim messages.
-- Avoid silent failures; provide a small hint in the message when useful.
-
-### Neovim Plugin Conventions
-
-- Plugin specs are defined under `.config/nvim/lua/plugins/**`.
-- Keep options under `opts = { ... }` when the plugin supports it.
-- Use `keys = { ... }` for keymaps; keep descriptions short and clear.
-
-### YAML / Ansible
-
-- Preserve existing spacing and playbook structure.
-- Keep tasks small and idempotent where possible.
-
-## Repository-Specific Notes
-
-- This repo is a personal dotfiles collection; avoid adding heavy dependencies
-  or unrelated tooling without a clear reason.
-- Prefer small, focused changes that do not alter user workflows unexpectedly.
-
-## Cursor / Copilot Rules
-
-No Cursor rules found in `.cursor/rules/` or `.cursorrules`.
-No Copilot instructions found in `.github/copilot-instructions.md`.
-
-## When in Doubt
-
-- Read existing files in the same directory and match their patterns.
-- Ask a single, targeted question only if blocked by ambiguity.
+1. Inspect first.
+2. Edit only the relevant config/script.
+3. Run the narrowest possible syntax check.
+4. Report any command you skipped because it is machine-affecting or destructive.

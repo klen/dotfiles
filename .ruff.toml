@@ -25,7 +25,7 @@ exclude = [".venv", "assets", "build", "dist", "node_modules", "templates"]
 line-length = 100
 
 # The Python version to target
-target-version = "py311"
+target-version = "py314"
 
 [per-file-ignores]
 "test*.py" = ["ARG"]

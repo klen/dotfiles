@@ -10,7 +10,11 @@
 /.config/zsh/.zsh_history
 /.config/zsh/plugins
 /.config/nvim-old
+/.config/opencode/.rumdl_cache/
+/.config/opencode/opencode.jsonc.bak
 /.smartcd/inodes
 /.smartcd/scripts
 /todo.txt
 /node_modules
+/.pi/agent/auth.json
+/.pi/agent/sessions/
