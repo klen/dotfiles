@@ -7,7 +7,6 @@
     "@babel/eslint-parser": "^7.28.6",
     "@babel/preset-env": "^7.29.2",
     "@babel/preset-react": "^7.28.5",
-    "@mariozechner/pi-coding-agent": "^0.67.68",
     "@types/lodash": "^4.17.24",
     "@types/node": "^17.0.45",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -20,6 +19,8 @@
     "prettier": "^2.8.8"
   },
   "dependencies": {
+    "@mariozechner/pi-coding-agent": "^0.68.0",
+    "@tobilu/qmd": "^2.1.0",
     "bash-language-server": "^5.6.0",
     "eslint_d": "^12.2.1",
     "pyright": "^1.1.409",
