@@ -1,3 +1,13 @@
+# A list of file patterns to exclude from linting.
+exclude = [".venv", "assets", "build", "dist", "node_modules", "templates"]
+
+# The line length to use when enforcing long-lines violations (like E501).
+line-length = 100
+
+# The Python version to target
+target-version = "py314"
+
+[lint]
 # A list of rule codes or prefixes to enable
 select = ["ALL"]
 
@@ -18,18 +28,9 @@ ignore = [
   "INP001",
 ]
 
-# A list of file patterns to exclude from linting.
-exclude = [".venv", "assets", "build", "dist", "node_modules", "templates"]
-
-# The line length to use when enforcing long-lines violations (like E501).
-line-length = 100
-
-# The Python version to target
-target-version = "py314"
-
-[per-file-ignores]
+[lint.per-file-ignores]
 "test*.py" = ["ARG"]
 
-[isort]
+[lint.isort]
 # Add the specified import line to all files.
 required-imports = ["from __future__ import annotations"]

@@ -1,15 +1,15 @@
 {
-	"lastChangelogVersion": "0.68.1",
-	"defaultProvider": "opencode-go",
-	"defaultModel": "kimi-k2.6",
-	"defaultThinkingLevel": "low",
-	"theme": "covid19",
-	"packages": [],
-	"enabledModels": [
-		"opencode-go/qwen3.6-plus",
-		"opencode-go/qwen3.5-plus",
-		"opencode-go/minimax-m2.7",
-		"opencode-go/kimi-k2.6",
-		"opencode-go/glm-5.1"
-	]
+  "lastChangelogVersion": "0.68.1",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "kimi-k2.6",
+  "defaultThinkingLevel": "medium",
+  "theme": "covid19",
+  "packages": [],
+  "enabledModels": [
+    "opencode-go/qwen3.6-plus",
+    "opencode-go/qwen3.5-plus",
+    "opencode-go/minimax-m2.7",
+    "opencode-go/kimi-k2.6",
+    "opencode-go/glm-5.1"
+  ]
 }

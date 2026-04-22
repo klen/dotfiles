@@ -15,6 +15,7 @@ There are default instructions for coding agents running on this machine.
 2. Briefly explain intent (1–2 sentences max)
 3. Make the smallest change that solves the task
 4. Validate with tests/commands when available
+5. Before committing or pushing: STOP and ask the user for explicit approval.
 
 - If requirements are unclear, ask instead of guessing
 
@@ -29,7 +30,7 @@ There are default instructions for coding agents running on this machine.
 
 - Ask before making broad or risky changes
 - Do not delete data or run destructive commands unless explicitly requested
-- Do not commit or push changes unless explicitly instructed by the user
+- Do not commit or push changes unless explicitly instructed by the user (STRICT)
 
 ## Notes
 
