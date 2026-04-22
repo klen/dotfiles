@@ -4,27 +4,32 @@ There are default instructions for coding agents running on this machine.
 
 ## General
 
-- Be consice and practical
+- Be concise and practical
 - Prefer small, focused changes
 - Avoid unrelated refactors
+- Do not expand scope beyond the task
 
 ## Workflow
 
 1. Read relevant files before editing
-2. Explain intent briefly
-3. Make the smallest change thah solves the task
+2. Briefly explain intent (1–2 sentences max)
+3. Make the smallest change that solves the task
 4. Validate with tests/commands when available
+
+- If requirements are unclear, ask instead of guessing
 
 ## Code quality
 
 - Keep naming clear and code readable
 - Update docs when changing behavior
 - Preserve existing style unless asked otherwise
+- Do not break existing behavior unless explicitly requested
 
 ## Safety
 
+- Ask before making broad or risky changes
 - Do not delete data or run destructive commands unless explicitly requested
-- Aks before making broad or risky changes
+- Do not commit or push changes unless explicitly instructed by the user
 
 ## Notes
 
