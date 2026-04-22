@@ -47,7 +47,7 @@ return {
       },
     },
     window = {
-      width = 28,
+      width = 34,
       mappings = {
         ["o"] = "toggle_node",
         ["<C-s>"] = "open_split",
