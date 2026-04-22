@@ -1,0 +1,6 @@
+{
+  "name": "pi-ollama-web",
+  "version": "1.0.0",
+  "description": "Pi extension providing websearch and webfetch tools via Ollama web APIs",
+  "type": "module"
+}
