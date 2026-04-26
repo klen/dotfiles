@@ -18,6 +18,10 @@ export default function (pi: ExtensionAPI) {
   let currentContextWindow = 0;
   let currentContextPercent: number | null = null;
 
+  // Track tokens per second
+  let messageStartTime: number | null = null;
+  let currentTokensPerSecond: number | null = null;
+
   function refreshContext(ctx: { getContextUsage: () => { percent?: number | null; contextWindow?: number } | null | undefined; model?: { contextWindow?: number } | null }) {
     const usage = ctx.getContextUsage();
     currentContextPercent = usage?.percent ?? null;
@@ -62,8 +66,8 @@ export default function (pi: ExtensionAPI) {
 
           let stats = contextPercent;
 
-          // Get usage stats
-          const usageStats = statsUsage(manager!);
+          // Get usage stats with tokens per second
+          const usageStats = statsUsage(manager!, currentTokensPerSecond);
 
           // Get the current model
           const model = currentModelId;
@@ -73,16 +77,16 @@ export default function (pi: ExtensionAPI) {
           const thinkingLevel = sessionContext?.thinkingLevel ?? "off";
           const think = theme.fg(
             (thinkingColors[thinkingLevel] as any) || "dim",
-            thinkingLevel.toUpperCase(),
+            thinkingLevel
           );
+          const statsModel = `${model}[${think}${theme.fg("dim", "]")}`;
 
           stats = buildLine(
-            [stats, usageStats, `${model} / ${think}`],
+            [stats, usageStats, statsModel],
             width,
             theme,
           );
 
-          // Colorize
           const lines = [pwd, stats];
 
           // Add extension statuses on a single line, sorted by key alphabetically
@@ -108,8 +112,30 @@ export default function (pi: ExtensionAPI) {
     currentContextWindow = event.model.contextWindow ?? 0;
   });
 
-  pi.on("message_end", (_event, ctx) => {
+  pi.on("message_start", (event, _ctx) => {
+    // Only track assistant messages for tokens/sec calculation
+    if (event.message?.role === "assistant") {
+      messageStartTime = Date.now();
+    }
+  });
+
+  pi.on("message_end", (event, ctx) => {
     refreshContext(ctx);
+
+    // Calculate tokens per second for assistant messages
+    if (messageStartTime && event.message?.role === "assistant") {
+      const endTime = Date.now();
+      const duration = (endTime - messageStartTime) / 1000; // Convert to seconds
+
+      // Use streaming token count if available, otherwise fall back to usage stats
+      const outputTokens = event.message.usage?.output;
+
+      if (outputTokens && duration > 0) {
+        currentTokensPerSecond = Math.round(outputTokens / duration);
+      }
+
+      messageStartTime = null;
+    }
   });
 
 }

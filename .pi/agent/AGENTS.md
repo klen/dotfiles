@@ -1,5 +1,3 @@
-# Global AGENTS.md
-
 There are default instructions for coding agents running on this machine.
 
 ## General

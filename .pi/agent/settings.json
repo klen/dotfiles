@@ -1,15 +1,18 @@
 {
-  "lastChangelogVersion": "0.69.0",
+  "defaultModel": "qwen3.6-plus",
   "defaultProvider": "opencode-go",
-  "defaultModel": "kimi-k2.6",
   "defaultThinkingLevel": "medium",
-  "theme": "covid19",
-  "packages": [],
   "enabledModels": [
     "opencode-go/qwen3.6-plus",
-    "opencode-go/qwen3.5-plus",
     "opencode-go/minimax-m2.7",
     "opencode-go/kimi-k2.6",
-    "opencode-go/glm-5.1"
-  ]
+    "ollama/gemma4:26b",
+    "ollama/llama3.1:8b"
+  ],
+  "lastChangelogVersion": "0.70.2",
+  "packages": [
+    "git:github.com/earendil-works/pi-review",
+    "npm:@ollama/pi-web-search"
+  ],
+  "theme": "covid19"
 }

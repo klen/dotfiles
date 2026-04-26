@@ -1,7 +1,6 @@
 ---
 description: Commit and push
 ---
-# Action: Save Changes
 
 Commit and push all changes to the repository.
 
