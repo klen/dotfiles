@@ -73,6 +73,16 @@ type SessionFileChange = {
   lastTimestamp: number;
 };
 
+type DiffTool = { kind: "vscode" } | { kind: "nvim"; cmd: string };
+
+const detectDiffTool = (): DiffTool | null => {
+  const editor = (process.env.VISUAL || process.env.EDITOR || "").toLowerCase();
+  if (editor.includes("nvim") || editor.includes("vim")) {
+    return { kind: "nvim", cmd: process.env.VISUAL || process.env.EDITOR! };
+  }
+  return { kind: "vscode" };
+};
+
 const FILE_TAG_REGEX = /<file\s+name=["']([^"']+)["']>/g;
 const FILE_URL_REGEX = /file:\/\/[^\s"'<>]+/g;
 const PATH_REGEX = /(?:^|[\s"'`([{<])((?:~|\/)[^\s"'`<>)}\]]+)/g;
@@ -631,10 +641,11 @@ const getEditableContent = (target: FileEntry): EditCheckResult => {
 
 const showActionSelector = async (
   ctx: ExtensionContext,
-  options: { canQuickLook: boolean; canEdit: boolean; canDiff: boolean },
+  options: { canQuickLook: boolean; canEdit: boolean; diffTool: DiffTool | null },
 ): Promise<"reveal" | "quicklook" | "open" | "edit" | "addToPrompt" | "diff" | null> => {
+  const diffLabel = options.diffTool?.kind === "nvim" ? "Diff in nvim" : "Diff in VS Code";
   const actions: SelectItem[] = [
-    ...(options.canDiff ? [{ value: "diff", label: "Diff in VS Code" }] : []),
+    ...(options.diffTool ? [{ value: "diff", label: diffLabel }] : []),
     { value: "reveal", label: "Reveal in Finder" },
     { value: "open", label: "Open" },
     { value: "addToPrompt", label: "Add to prompt" },
@@ -794,7 +805,13 @@ const quickLookPath = async (pi: ExtensionAPI, ctx: ExtensionContext, target: Fi
   }
 };
 
-const openDiff = async (pi: ExtensionAPI, ctx: ExtensionContext, target: FileEntry, gitRoot: string | null): Promise<void> => {
+const openDiff = async (
+  pi: ExtensionAPI,
+  ctx: ExtensionContext,
+  target: FileEntry,
+  gitRoot: string | null,
+  diffTool: DiffTool,
+): Promise<void> => {
   if (!gitRoot) {
     ctx.ui.notify("Git repository not found", "warning");
     return;
@@ -821,6 +838,28 @@ const openDiff = async (pi: ExtensionAPI, ctx: ExtensionContext, target: FileEnt
   if (!existsSync(target.resolvedPath)) {
     workingPath = path.join(tmpDir, `pi-files-working-${path.basename(target.displayPath)}`);
     writeFileSync(workingPath, "", "utf8");
+  }
+
+  if (diffTool.kind === "nvim") {
+    await ctx.ui.custom<void>((tui, theme, _kb, done) => {
+      const status = new Text(theme.fg("dim", `Opening ${diffTool.cmd}...`));
+      queueMicrotask(() => {
+        try {
+          tui.stop();
+          const [editor, ...editorArgs] = diffTool.cmd.split(" ");
+          spawnSync(editor, [...editorArgs, "-d", tmpFile, workingPath], { stdio: "inherit" });
+        } finally {
+          try {
+            unlinkSync(tmpFile);
+          } catch {}
+          tui.start();
+          tui.requestRender(true);
+        }
+        done();
+      });
+      return status;
+    });
+    return;
   }
 
   const openResult = await pi.exec("code", ["--diff", tmpFile, workingPath], { cwd: gitRoot });
@@ -988,15 +1027,17 @@ const runFileBrowser = async (pi: ExtensionAPI, ctx: ExtensionContext): Promise<
     const editCheck = getEditableContent(selected);
     const canDiff = selected.isTracked && !selected.isDirectory && Boolean(gitRoot);
 
+    const diffTool = detectDiffTool();
+
     if (quickAction === "diff") {
-      await openDiff(pi, ctx, selected, gitRoot);
+      await openDiff(pi, ctx, selected, gitRoot, diffTool);
       continue;
     }
 
     const action = await showActionSelector(ctx, {
       canQuickLook,
       canEdit: editCheck.allowed,
-      canDiff,
+      diffTool: canDiff ? diffTool : null,
     });
     if (!action) {
       continue;
@@ -1020,7 +1061,7 @@ const runFileBrowser = async (pi: ExtensionAPI, ctx: ExtensionContext): Promise<
         addFileToPrompt(ctx, selected);
         break;
       case "diff":
-        await openDiff(pi, ctx, selected, gitRoot);
+        await openDiff(pi, ctx, selected, gitRoot, diffTool);
         break;
       default:
         await revealPath(pi, ctx, selected);

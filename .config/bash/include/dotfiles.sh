@@ -49,16 +49,21 @@ dotfiles() {
 
 # Setup dotfiles completion
 _dotfiles_completion() {
-  local cur prev opts
+  local cur prev
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
   prev="${COMP_WORDS[COMP_CWORD - 1]}"
 
-  opts="bash bin env nvim vim"
+  # Hardcoded known targets
+  local opts="bash bin env nvim vim tmux"
+  # Dynamically add directories from $DOTFILES_DIR/.config/
+  local config_dirs dir
+  for dir in "$DOTFILES_DIR/.config"/*/; do
+    dir=${dir%/} && config_dirs+="${dir##*/} "
+  done
+  opts="$opts $config_dirs"
 
-  if [[ "$cur" == * ]]; then
-    COMPREPLY=($(compgen -W "${opts}" -- "${cur}"))
-    return 0
-  fi
+  COMPREPLY=($(compgen -W "${opts}" -- "${cur}"))
+  return 0
 }
 complete -F _dotfiles_completion dotfiles

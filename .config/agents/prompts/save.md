@@ -1,5 +1,7 @@
 ---
 description: Commit and push
+model: deepseek-v4-flash
+thinking: off
 ---
 
 Commit and push all changes to the repository.

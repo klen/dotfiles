@@ -1,5 +1,30 @@
 {
   "providers": {
+    "lms": {
+      "api": "openai-completions",
+      "apiKey": "lms",
+      "baseUrl": "http://localhost:1234/v1",
+      "models": [
+        {
+          "id": "qwen3.6-35b-a3b-ud-mlx",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 128000
+        },
+        {
+          "id": "qwen/qwen3-vl-4b",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 32000
+        }
+      ]
+    },
     "ollama": {
       "api": "openai-completions",
       "apiKey": "ollama",
@@ -32,38 +57,6 @@
             "text"
           ],
           "_launch": true
-        }
-      ]
-    },
-    "opencode-go": {
-      "models": [
-        {
-          "id": "deepseek-v4-flash",
-          "name": "DeepSeek V4 Flash (OpenCode)",
-          "reasoning": true,
-          "input": ["text"],
-          "contextWindow": 1000000,
-          "maxTokens": 384000,
-          "cost": {
-            "input": 0.14,
-            "output": 0.28,
-            "cacheRead": 0.028,
-            "cacheWrite": 0
-          }
-        },
-        {
-          "id": "deepseek-v4-pro",
-          "name": "DeepSeek V4 Pro (OpenCode)",
-          "reasoning": true,
-          "input": ["text"],
-          "contextWindow": 1000000,
-          "maxTokens": 384000,
-          "cost": {
-            "input": 1.74,
-            "output": 3.48,
-            "cacheRead": 0.145,
-            "cacheWrite": 0
-          }
         }
       ]
     }
