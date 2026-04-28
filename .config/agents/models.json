@@ -15,13 +15,13 @@
           "contextWindow": 128000
         },
         {
-          "id": "qwen/qwen3-vl-4b",
+          "id": "qwen3.5-4b-mlx",
           "reasoning": true,
           "input": [
             "text",
             "image"
           ],
-          "contextWindow": 32000
+          "contextWindow": 64000
         }
       ]
     },
