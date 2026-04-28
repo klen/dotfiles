@@ -2,3 +2,4 @@ archive/
 auth.json
 git/
 sessions/
+dist/
