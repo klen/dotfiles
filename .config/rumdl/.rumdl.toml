@@ -3,7 +3,7 @@
 # Global configuration options
 [global]
 # List of rules to disable (uncomment and modify as needed)
-# disable = ["MD013", "MD033"]
+disable = ["MD041"]
 
 # List of rules to enable exclusively (if provided, only these rules will run)
 # enable = ["MD001", "MD003", "MD004"]
@@ -17,17 +17,17 @@
 
 # List of file/directory patterns to exclude from linting
 exclude = [
-    # Common directories to exclude
-    ".git",
-    ".github",
-    "node_modules",
-    "vendor",
-    "dist",
-    "build",
+  # Common directories to exclude
+  ".git",
+  ".github",
+  "node_modules",
+  "vendor",
+  "dist",
+  "build",
 
-    # Specific files or patterns
-    "CHANGELOG.md",
-    "LICENSE.md",
+  # Specific files or patterns
+  "CHANGELOG.md",
+  "LICENSE.md",
 ]
 
 # Respect .gitignore files when scanning directories (default: true)
@@ -35,7 +35,7 @@ respect-gitignore = true
 
 # Markdown flavor/dialect (uncomment to enable)
 # Options: standard (default), gfm, commonmark, mkdocs, mdx, quarto
-# flavor = "mkdocs"
+flavor = "mkdocs"
 
 # Rule-specific configurations (uncomment and modify as needed)
 
@@ -49,7 +49,10 @@ respect-gitignore = true
 # indent = 4  # Unordered list indentation
 
 [MD013]
-line-length = 100  # Line length
-code-blocks = false # Ignore code blocks
-reflow = true  # Enable reflowing of text
+line-length = 120                    # Line length
+code-blocks = false                  # Ignore code blocks
+reflow = true                        # Enable reflowing of text
 reflow-mode = "semantic-line-breaks"
+
+[MD041]
+first-line-heading = false # Require first line to be a heading
