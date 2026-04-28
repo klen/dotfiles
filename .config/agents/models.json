@@ -37,8 +37,7 @@
           "input": [
             "text",
             "image"
-          ],
-          "_launch": true
+          ]
         },
         {
           "id": "qwen3.6:27b-coding-mxfp8",
@@ -47,16 +46,14 @@
           "input": [
             "text",
             "image"
-          ],
-          "_launch": true
+          ]
         },
         {
           "id": "llama3.1:8b",
           "contextWindow": 16000,
           "input": [
             "text"
-          ],
-          "_launch": true
+          ]
         }
       ]
     }
