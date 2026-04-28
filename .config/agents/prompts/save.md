@@ -1,6 +1,6 @@
 ---
 description: Commit and push
-model: deepseek-v4-flash
+model: alias/tiny
 thinking: off
 ---
 
