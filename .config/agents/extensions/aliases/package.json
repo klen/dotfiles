@@ -1,0 +1,19 @@
+{
+  "name": "pi-extension-aliases",
+  "version": "1.0.0",
+  "description": "Model Aliases extension for pi-coding-agent — define models in one place, use them everywhere (presets, commands, CLI flags, other extensions)",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.test.json",
+    "test": "node --test dist/index.test.js",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["pi", "pi-coding-agent", "extension", "model-aliases"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.9.0"
+  }
+}

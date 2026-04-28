@@ -34,39 +34,18 @@ import { join } from "node:path";
 import type { ExtensionAPI, ExtensionContext } from "@mariozechner/pi-coding-agent";
 import { getAgentDir } from "@mariozechner/pi-coding-agent";
 
-interface AliasesConfig {
-  [name: string]: string; // alias → "provider/model"
-}
-
-function loadAliases(cwd: string): AliasesConfig {
-  const globalPath = join(getAgentDir(), "aliases.json");
-  const projectPath = join(cwd, ".pi", "aliases.json");
-
-  function loadFile(path: string): AliasesConfig {
-    if (!existsSync(path)) return {};
-    try {
-      const raw = JSON.parse(readFileSync(path, "utf-8"));
-      // Strip keys starting with "//" or "_" (comment conventions)
-      const result: AliasesConfig = {};
-      for (const [key, value] of Object.entries(raw)) {
-        if (key.startsWith("//") || key.startsWith("_")) continue;
-        if (typeof value !== "string") continue;
-        result[key] = value;
-      }
-      return result;
-    } catch (err) {
-      console.error(`Failed to load aliases from ${path}: ${err}`);
-      return {};
-    }
-  }
-
-  return { ...loadFile(globalPath), ...loadFile(projectPath) };
-}
+import type { AliasesConfig } from "./types";
+import { loadAliases } from "./utils";
 
 export default function (pi: ExtensionAPI) {
   // Load aliases during startup so they appear in --list-models.
   // Use process.cwd() here; session_start will refresh with ctx.cwd later.
   const aliases: AliasesConfig = loadAliases(process.cwd());
+
+  // Cache resolved models per alias so we don't re-resolve on every turn.
+  // This also prevents the alias from silently switching targets if a
+  // provider is added/removed mid-session.
+  const resolved: Record<string, { provider: string; modelId: string }> = {};
 
   // Register the aliases provider immediately (factory phase).
   // This ensures models are available before session_start and to --list-models.
@@ -90,11 +69,26 @@ export default function (pi: ExtensionAPI) {
   }
   registerProvider();
 
-  // Resolve alias to actual model and switch, returning success
+  // Resolve alias to actual model and switch, returning success.
+  // Caches the resolved target so re-resolution on every turn is avoided,
+  // and a broken alias fails loudly (blocked) rather than silently.
   async function resolveAlias(
     aliasName: string,
     ctx: ExtensionContext,
   ): Promise<boolean> {
+    // Return cached resolution if the target hasn't changed.
+    const cached = resolved[aliasName];
+    if (cached) {
+      const currentTarget = aliases[aliasName];
+      if (
+        currentTarget === `${cached.provider}/${cached.modelId}` &&
+        ctx.model?.provider === cached.provider &&
+        ctx.model?.id === cached.modelId
+      ) {
+        return true; // already resolved and still valid
+      }
+    }
+
     const target = aliases[aliasName];
     if (!target) return false;
 
@@ -120,6 +114,7 @@ export default function (pi: ExtensionAPI) {
     }
 
     await pi.setModel(actualModel);
+    resolved[aliasName] = { provider: targetProvider, modelId: targetModelId };
     return true;
   }
 
@@ -128,13 +123,10 @@ export default function (pi: ExtensionAPI) {
   // (Ctrl+P) iterates through all aliases without position jumps.
   pi.on("before_agent_start", async (event, ctx) => {
     if (ctx.model?.provider !== "alias") return;
-    const resolved = await resolveAlias(ctx.model.id, ctx);
-    if (!resolved) {
-      return {
-        systemPrompt:
-          event.systemPrompt +
-          "\n\n[System note: failed to resolve model alias. The assistant may not be able to respond.]",
-      };
+    const ok = await resolveAlias(ctx.model.id, ctx);
+    if (!ok) {
+      // Block the turn so the user knows resolution failed.
+      return { block: true, reason: `Failed to resolve alias "${ctx.model.id}" — check ~/.config/agents/aliases.json or .pi/aliases.json` };
     }
   });
 
@@ -162,11 +154,13 @@ export default function (pi: ExtensionAPI) {
     },
   });
 
-  // Reload aliases on each new session (picks up cwd changes and edits)
+  // Reload aliases on each new session (picks up cwd changes and edits).
+  // Also clear the resolution cache so stale targets are re-resolved.
   pi.on("session_start", async (_event, ctx) => {
     const loaded = loadAliases(ctx.cwd);
     for (const key of Object.keys(aliases)) delete aliases[key];
     Object.assign(aliases, loaded);
     registerProvider();
+    for (const key of Object.keys(resolved)) delete resolved[key];
   });
 }
