@@ -1,16 +1,16 @@
 {
   "defaultModel": "deepseek-v4-flash",
   "defaultProvider": "opencode-go",
-  "defaultThinkingLevel": "off",
+  "defaultThinkingLevel": "medium",
   "enabledModels": [
-    "ollama/gemma4:26b",
-    "ollama/llama3.1:8b",
+    "alias/tiny",
+    "alias/coder",
+    "alias/plan",
     "opencode-go/deepseek-v4-flash",
     "opencode-go/deepseek-v4-pro",
     "opencode-go/kimi-k2.6",
     "opencode-go/qwen3.6-plus",
-    "lms/qwen3.6-35b-a3b-ud-mlx",
-    "lms/qwen/qwen3-vl-4b"
+    "lms/qwen3.6-35b-a3b-ud-mlx"
   ],
   "lastChangelogVersion": "0.70.6",
   "packages": [
