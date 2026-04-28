@@ -38,6 +38,9 @@ dotfiles() {
       cd $DOTFILES_DIR/.config/tmux
       nvim $DOTFILES_DIR/.config/tmux/tmux.conf
       ;;
+    pi)
+      cd $DOTFILES_DIR/.pi
+      ;;
     *)
       cd $DOTFILES_DIR/.config/$1
       ;;

@@ -1,18 +1,20 @@
 {
-  "defaultModel": "qwen3.6-plus",
+  "defaultModel": "deepseek-v4-pro",
   "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
-    "opencode-go/qwen3.6-plus",
-    "opencode-go/minimax-m2.7",
-    "opencode-go/kimi-k2.6",
     "ollama/gemma4:26b",
-    "ollama/llama3.1:8b"
+    "ollama/llama3.1:8b",
+    "opencode-go/deepseek-v4-flash",
+    "opencode-go/deepseek-v4-pro",
+    "opencode-go/kimi-k2.6",
+    "opencode-go/qwen3.6-plus"
   ],
-  "lastChangelogVersion": "0.70.2",
+  "lastChangelogVersion": "0.70.5",
   "packages": [
     "git:github.com/earendil-works/pi-review",
     "npm:@ollama/pi-web-search"
   ],
-  "theme": "covid19"
+  "theme": "covid19",
+  "editorPaddingX": 1
 }

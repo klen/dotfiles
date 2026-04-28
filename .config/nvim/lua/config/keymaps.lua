@@ -6,6 +6,9 @@ local utils = require("utils")
 local lv = require("lazyvim.util")
 local map = lv.safe_keymap_set
 
+-- Restart NVIM
+map("n", "<leader>rs", "<cmd>restart<cr>", { desc = "Restart NVIM (:restart)" })
+
 -- Clear search, diff update and redraw
 map("n", "<C-c>", function()
   vim.cmd("nohlsearch")

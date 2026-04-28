@@ -53,8 +53,8 @@ return {
         ["<C-s>"] = "open_split",
         ["<C-v>"] = "open_vsplit",
         ["/"] = "noop",
-        ["l"] = "open",
-        ["<cr>"] = function(state)
+        ["<cr>"] = "open",
+        ["l"] = function(state)
           ---@diagnostic disable-next-line
           require("neo-tree.sources.common.commands").open(state)
           require("neo-tree.command").execute({ action = "close" })

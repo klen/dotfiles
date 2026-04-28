@@ -24,6 +24,7 @@
     "bash-language-server": "^5.6.0",
     "eslint_d": "^12.2.1",
     "pyright": "^1.1.409",
+    "typebox": "^1.1.33",
     "yaml-language-server": "^1.22.0"
   },
   "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"

@@ -10,6 +10,7 @@ import { type ExtensionAPI, type ExtensionContext } from "@mariozechner/pi-codin
 
 let activeFrame = 0
 let currentWindowId: string | undefined;
+let originalTitle: string | undefined;
 const frames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 
 /* ─── Extension ─── */
@@ -22,6 +23,12 @@ export default function (pi: ExtensionAPI) {
   let isWorking = false;
   let loader: NodeJS.Timeout | undefined;
   let activeTool: string | undefined;
+
+  /* ─── Capture original title ─── */
+  (async () => {
+    const result = await tmuxExec(pi, ["display-message", "-p", "#{window_name}"]);
+    if (result.code === 0) originalTitle = result.stdout.trim();
+  })();
 
   /* ─── Title Events ─── */
 
@@ -63,12 +70,16 @@ export default function (pi: ExtensionAPI) {
     activeTool = undefined;
     loader && clearInterval(loader);
     title = getTitle(ctx, activeTool)
-    updateTitle(pi, title);
-    await tmuxExec(pi, ["display-message", "-d 2000", `     === Pi finished ===`]);
+    await updateTitle(pi, title);
+    // await tmuxExec(pi, ["display-message", "-d 2000", `     === Pi finished ===`]);
+    // Send bell to /dev/tty directly — pi.exec pipes stdout so output
+    // never reaches the terminal otherwise.
+    await pi.exec("sh", ["-c", "printf '\\a' >/dev/tty"]);
   });
 
   pi.on("session_shutdown", async (_event, ctx) => {
-    await setTmuxWindowTitle(pi, "PI");
+    const curDir = getProjectName(ctx.cwd);
+    await setTmuxWindowTitle(pi, originalTitle || curDir);
   });
 
 }
@@ -98,10 +109,10 @@ async function getCurrentWindowId(pi: ExtensionAPI, cwd: string): Promise<string
 
 /* ─── 1. Dynamic Titles ─── */
 
-function setTmuxWindowTitle(pi: ExtensionAPI, title: string) {
+async function setTmuxWindowTitle(pi: ExtensionAPI, title: string) {
   const winId = currentWindowId;
   if (winId) {
-    tmuxExec(pi, ["rename-window", "-t", winId, title]);
+    await tmuxExec(pi, ["rename-window", "-t", winId, title]);
   }
 }
 
@@ -112,8 +123,8 @@ function getTitle(ctx: ExtensionContext, tool?: string): string | undefined {
   return parts.join(" - ");
 }
 
-function updateTitle(pi: ExtensionAPI, title?: string, working?: boolean) {
+async function updateTitle(pi: ExtensionAPI, title?: string, working?: boolean) {
   if (!title) return;
   const frame = working ? " " + frames[activeFrame++ % frames.length] : "";
-  setTmuxWindowTitle(pi, title + frame);
+  await setTmuxWindowTitle(pi, title + frame);
 }
