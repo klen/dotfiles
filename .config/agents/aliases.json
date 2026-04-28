@@ -1,5 +1,5 @@
 {
-  "//": "Model aliases. Format: \"alias-name\": \"provider/model-id\"",
   "tiny": "opencode-go/deepseek-v4-flash",
-  "coder": "opencode-go/kimi-k2.5"
+  "coder": "opencode-go/kimi-k2.5",
+  "plan": "opencode-go/deepseek-v4-pro"
 }
