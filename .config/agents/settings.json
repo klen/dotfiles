@@ -1,5 +1,5 @@
 {
-  "defaultModel": "deepseek-v4-flash",
+  "defaultModel": "deepseek-v4-pro",
   "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
@@ -10,13 +10,15 @@
     "opencode-go/deepseek-v4-pro",
     "opencode-go/kimi-k2.6",
     "opencode-go/qwen3.6-plus",
-    "lms/qwen3.6-35b-a3b-ud-mlx",
+    "lms/qwen3.6-35b-a3b",
+    "lms/qwen3.5-9b-mlx",
     "lms/qwen3.5-4b-mlx"
   ],
   "lastChangelogVersion": "0.70.6",
   "packages": [
     "git:github.com/earendil-works/pi-review",
-    "npm:@ollama/pi-web-search"
+    "npm:@alexanderfortin/pi-tavily-tools",
+    "npm:@alexanderfortin/pi-loaded-tools"
   ],
   "theme": "covid19",
   "editorPaddingX": 1
