@@ -16,5 +16,3 @@
 /.smartcd/scripts
 /todo.txt
 /node_modules
-/.pi/agent/auth.json
-/.pi/agent/sessions/

@@ -34,6 +34,7 @@ source $XDG_CONFIG_HOME/bash/ps.sh
 source /etc/bash_completion 2>/dev/null || source $XDG_CONFIG_HOME/bash/include/bash-completion
 
 # Setup tools
+source $XDG_CONFIG_HOME/bash/include/agents.sh
 source $XDG_CONFIG_HOME/bash/include/android.sh
 source $XDG_CONFIG_HOME/bash/include/conda.sh
 source $XDG_CONFIG_HOME/bash/include/docker.sh

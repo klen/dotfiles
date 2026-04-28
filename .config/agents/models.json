@@ -1,0 +1,71 @@
+{
+  "providers": {
+    "ollama": {
+      "api": "openai-completions",
+      "apiKey": "ollama",
+      "baseUrl": "http://127.0.0.1:11434/v1",
+      "models": [
+        {
+          "id": "gemma4:26b",
+          "reasoning": true,
+          "contextWindow": 32000,
+          "input": [
+            "text",
+            "image"
+          ],
+          "_launch": true
+        },
+        {
+          "id": "qwen3.6:27b-coding-mxfp8",
+          "reasoning": true,
+          "contextWindow": 32000,
+          "input": [
+            "text",
+            "image"
+          ],
+          "_launch": true
+        },
+        {
+          "id": "llama3.1:8b",
+          "contextWindow": 16000,
+          "input": [
+            "text"
+          ],
+          "_launch": true
+        }
+      ]
+    },
+    "opencode-go": {
+      "models": [
+        {
+          "id": "deepseek-v4-flash",
+          "name": "DeepSeek V4 Flash (OpenCode)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 1000000,
+          "maxTokens": 384000,
+          "cost": {
+            "input": 0.14,
+            "output": 0.28,
+            "cacheRead": 0.028,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "deepseek-v4-pro",
+          "name": "DeepSeek V4 Pro (OpenCode)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 1000000,
+          "maxTokens": 384000,
+          "cost": {
+            "input": 1.74,
+            "output": 3.48,
+            "cacheRead": 0.145,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    }
+  }
+}
