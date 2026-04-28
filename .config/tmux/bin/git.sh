@@ -40,7 +40,7 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
   fi
 
   # Выводим
-  echo "${branch^^}#[default]${dirty} | "
+  echo "${branch^^}#[fg=default]${dirty} | "
 else
   echo ""
 fi
