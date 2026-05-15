@@ -16,3 +16,5 @@
 /.smartcd/scripts
 /todo.txt
 /node_modules
+package-lock.json
+bun.lock
