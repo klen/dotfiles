@@ -3,7 +3,7 @@ vim.pack.add({
 })
 
 
-require('bqf').setup({
+return require('bqf').setup({
   func_map = {
     vsplit = "<C-v>",
     split = "<C-s>",

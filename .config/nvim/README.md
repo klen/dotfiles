@@ -17,42 +17,27 @@ Locked plugin versions are tracked in `nvim-pack-lock.json`.
 - Neovim ≥ 0.11
 - Optional: `ripgrep`, `fd`, `lazygit`, `tmux` (for integration plugins)
 
+## Features
+
+- Native plugin management via `vim.pack.add()` — no lazy-loader
+- LSP: Mason installer + `vim.lsp.enable()` + built-in completion
+- Fuzzy finder: fzf.lua (files, buffers, grep, LSP symbols)
+- Git: gitsigns (inline blame/diffs) + lazygit integration
+- UI: mini.nvim (statusline, starter, pairs, surround, comment) + snacks.nvim (dashboard, indent, terminal)
+- Tree-sitter syntax highlighting
+- GitHub Copilot
+- Test runner (nvim-test) + HTTP client (kulala)
+- Persistent undo
+- Tmux pane navigation
+
 ## Structure
 
-```
-init.lua                    -- Entry point
-lua/
-  config/                   -- Core settings (no plugins)
-    init.lua                -- Requires options + keymaps + auto
-    options.lua             -- vim.opt, diagnostics, UI
-    keymaps.lua             -- Global keymaps (leader = <Space>)
-    auto.lua                -- Autocommands
-    ui.lua                  -- Colorscheme & appearance
-  lsp/                      -- LSP setup (separate from plugins)
-    init.lua                -- Entry point
-    config.lua              -- Server lists (ensure_installed + enabled)
-    keymaps.lua             -- LSP keymaps under <leader>l
-    auto.lua                -- LSP autocommands
-  plugins/                  -- Plugin install + config
-    init.lua                -- Requires all plugin files
-    mini/                   -- mini.nvim submodules (statusline, starter, pairs, …)
-    snacks/                 -- snacks.nvim submodules (dashboard, indent, terminal, …)
-    builtin/                -- Built-in plugin enhancements (undotree, difftool)
-    treesitter.lua          -- Tree-sitter
-    mason.lua               -- LSP/formatter/linter installer
-    lspconfig.lua           -- vim.lsp.enable()
-    fzf.lua                 -- Fuzzy finder
-    git.lua                 -- Git integration (gitsigns + lazygit)
-    copilot.lua             -- GitHub Copilot
-    nvim-test.lua           -- Test runner
-    kulala.lua              -- HTTP client
-    tmux.lua                -- Tmux navigation
-    lush.lua                -- Colorscheme authoring (covid19)
-    bqf.lua                 -- Better quickfix
-  utils.lua                 -- Shared utilities
-after/ftplugin/             -- Filetype-specific overrides
-colors/                     -- Colorscheme files
-```
+- **`init.lua`** — entry point, loads `config`, `plugins`, `lsp`, and `ui`.
+- **`lua/config/`** — editor settings: options, global keymaps, autocommands, colorscheme.
+- **`lua/lsp/`** — LSP setup: server list, keymaps (`<leader>l`), autocommands.
+- **`lua/plugins/`** — plugin install and config, one file per plugin or group.
+- **`after/ftplugin/`** — filetype-specific overrides (json, python, typescript).
+- **`colors/`** — colorscheme files.
 
 ## Keymaps
 

@@ -1,22 +1,21 @@
-
 local starter = require('mini.starter')
 local new_section = function(name, action, section)
   return { name = name, action = action, section = section or "Actions" }
 end
-local fzf = require('fzf-lua')
+local picker = require('snacks.picker')
 
 
 starter.setup {
   content_hooks = {
-    starter.gen_hook.adding_bullet(), -- Adds a bullet point before each item
+    starter.gen_hook.adding_bullet(),              -- Adds a bullet point before each item
     starter.gen_hook.aligning("center", "center"), -- Centers content both horizontally and vertically
   },
   items = {
     -- Recent files
     starter.sections.recent_files(5, true),
     new_section("New file", "ene | startinsert"),
-    new_section("Find file", fzf.files),
-    new_section("Find text", fzf.live_grep),
+    new_section("Find file", picker.files),
+    new_section("Find text", picker.grep),
     new_section("Quit", "qa"),
   },
   header = function()
@@ -30,4 +29,3 @@ starter.setup {
     return ("Good %s, %s!"):format(day_part, username) .. "\n\n" .. (fortune or "Welcome to Neovim!")
   end,
 }
-

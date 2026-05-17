@@ -19,8 +19,8 @@ map("n", "<leader>/", function()
 end, { desc = "Grep word" })
 
 map("n", "<leader>fh", function()
-  fzf.history()
-end, { desc = "Find history" })
+  fzf.helptags()
+end, { desc = "Find help tags" })
 
 map("n", "<leader>fb", function()
   fzf.buffers()
@@ -37,3 +37,23 @@ end, { desc = "Resume last search" })
 map("n", "<leader>fl", function()
   fzf.lsp_live_workspace_symbols()
 end, { desc = "Find LSP symbols" })
+
+map('n', '<leader>fw', function()
+  fzf.grep_cword()
+end, { desc = "Grep word under cursor" })
+
+map('n', '<leader>fW', function()
+  fzf.grep_cWORD()
+end, { desc = "Grep WORD under cursor" })
+
+map('n', '<leader>gl', function()
+  fzf.git_bcommits()
+end, { desc = "Git commits (file)" })
+
+map('n', '<leader>gL', function()
+  fzf.git_commits()
+end, { desc = "Git commits (project)" })
+
+map('n', '<leader>fm', function()
+  fzf.keymaps()
+end, { desc = "Find keymaps" })

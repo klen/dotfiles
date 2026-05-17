@@ -60,5 +60,48 @@ end, { desc = 'Check for non active plugins' })
 
 vim.keymap.set('n', '<leader>p', '', { desc = '+plugins' })
 vim.keymap.set('n', '<leader>pu', function() vim.cmd.PackUpdate() end, { desc = 'Update plugins' })
-vim.keymap.set('n', '<leader>pl', function() vim.cmd.PackGet() end, { desc = 'List plugins' })
 vim.keymap.set('n', '<leader>pc', function() vim.cmd.PackCheck() end, { desc = 'Check plugins' })
+vim.keymap.set('n', '<leader>pl', function() vim.cmd.PackGet() end, { desc = 'List plugins' })
+
+-- Integration with snacks picker
+-- Plugins list
+
+local utils = require "utils"
+local pack_utils = require "plugins.builtin.pack.utils"
+
+vim.schedule(function()
+  utils.safe_require('snacks.picker', function(picker)
+    vim.keymap.set('n', '<leader>pl', function()
+      picker({
+        title = 'Plugins',
+        items = pack_utils.list_plugins(),
+        preview = 'file',
+        format = function(item) return { { item.name } } end,
+        actions = {
+          plugin_remove = function(_, item)
+            vim.pack.remove(item.plugin_path)
+            vim.notify('Removed plugin: ' .. item.name, vim.log.levels.INFO)
+          end,
+          plugin_update = function(_, item)
+            vim.pack.update(item.plugin_path)
+            vim.notify('Updated plugin: ' .. item.name, vim.log.levels.INFO)
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ['<C-r>'] = { 'plugin_remove', mode = { 'n', 'i' } },
+              ['<C-u>'] = { 'plugin_update', mode = { 'n', 'i' } },
+            },
+          },
+          list = {
+            keys = {
+              ['<C-r>'] = 'plugin_remove',
+              ['<C-u>'] = 'plugin_update',
+            },
+          },
+        },
+      })
+    end, { desc = 'List plugins' })
+  end)
+end)
