@@ -1,115 +1,78 @@
-# Project Agent
+# AGENTS.md — nvim-naked
 
-**Workspace Path:** `/Users/horneds/dotfiles/.config/nvim`
-_(Note to Pi: Your file write/edit tools run in a different directory by default._
-_You MUST use absolute paths starting with the Workspace Path above for ALL file operations!)_
+A minimal, modern Neovim configuration using Neovim 0.11+ built-in `vim.pack.add()` for plugin management. No lazy-loader — plugins are required eagerly on startup.
 
-**Generated:** 2026-04-22
+## Repository structure
 
-## Stack
-
-- **Editor:** Neovim (Lua config)
-- **Distro:** [LazyVim](https://www.lazyvim.org/) — plugin spec framework built on `lazy.nvim`
-- **Plugin Manager:** `lazy.nvim` (auto-cloned on first boot)
-- **Colorscheme DSL:** `lush.nvim` — custom "covid19" theme defined in Lua HSL
-- **Formatter:** `stylua` (2 spaces, 120 column width)
-- **Langs / Tooling:** Lua, Python (pyrefly LSP), TypeScript, Zig, Ansible, SQL, YAML, TOML, JSON
-
-## Structure
-
-```text
-.
-├── init.lua                    -- Bootstraps lazy.nvim, imports config.lazy
-├── lua/config/
-│   ├── lazy.lua                -- lazy.nvim setup, LazyVim import, performance rtp tweaks
-│   ├── options.lua             -- vim.opt overrides (signcolumn=number, virtualedit=all, etc.)
-│   ├── keymaps.lua             -- Custom keymaps (window mgmt, diagnostics, terminal, etc.)
-│   └── autocmds.lua            -- Autocmds (terminal insert mode, spell/wrap tweaks, snippet cleanup)
-├── lua/plugins/
-│   ├── disabled.lua            -- Disables bufferline, lualine, flash, gitsigns, venv-selector
-│   ├── colors.lua              -- LazyVim opts: sets colorscheme "covid19", custom icons
-│   ├── ai/                     -- copilot.lua config
-│   ├── coding/                 -- blink-cmp, mini-surround
-│   ├── editor/                 -- neo-tree, which-key, tmux-nvim, snacks.nvim, vim-fugitive, mason
-│   │   └── snacks-nvim/        -- dashboard, indent, notifier, picker, toggle sub-modules
-│   ├── formatting/             -- conform.nvim
-│   ├── lsp/                    -- nvim-lspconfig, server configs (lua_ls, common)
-│   ├── rest/                   -- kulala (HTTP client)
-│   ├── test/                   -- nvim-test (bun runner)
-│   └── ui/                     -- noice, bqf, incline, mini-starter, mini-statusline, scrollview
-├── lua/utils.lua               -- Shared helpers: fast_save, diagnostic_goto, qf_from_cmd, pprint, etc.
-├── colors/covid19.lua          -- Custom lush.nvim colorscheme (dark, HSL-based)
-├── after/ftplugin/
-│   ├── python.lua              -- colorcolumn=100, toggle breakpoint, Ruff/Pyrefly/Mypy QF commands
-│   └── typescript.lua          -- BiomeQF, TSQF quickfix commands
-├── lazyvim.json                -- Enabled LazyVim extras (see below)
-├── stylua.toml                 -- 2-space indent, 120 col width
-└── Makefile                    -- `make clean` nukes ~/.cache/nvim & ~/.local/share/nvim
+```
+init.lua                    -- Entry point; enables vim.loader, requires config + plugins
+lua/config/
+  init.lua                  -- Requires options, keymaps, auto
+  options.lua               -- vim.opt, vim.g, diagnostics, UI settings
+  keymaps.lua               -- Global keymaps (leader = space)
+  auto.lua                  -- Autocommands (e.g., yank highlight)
+lua/plugins/
+  init.lua                  -- Requires all plugin files
+  <name>.lua                -- One file per plugin / plugin group
+  mini/
+    init.lua                -- Installs mini.nvim, requires submodules
+    *.lua                   -- Individual mini module configs
+lua/utils.lua               -- Shared Lua utilities (fast_save, etc.)
+nvim-pack-lock.json         -- Locked plugin versions (managed by nvim-pack)
 ```
 
-## Commands
+## Editing guidelines
 
-| Action  | Command                                           |
-| ------- | ------------------------------------------------- |
-| Install | Open nvim; `lazy.nvim` bootstraps automatically   |
-| Update  | `:Lazy update` or `<leader>ll` → Lazy UI → update |
-| Check   | `:Lazy check` or `<leader>lc`                     |
-| Clean   | `make clean` (deletes cache + local share)        |
-| Format  | `stylua .` (if installed)                         |
+- **Indentation:** 2 spaces, no tabs.
+- **Strings:** Prefer single quotes for regular strings; use double quotes only when escaping single quotes is awkward.
+- **Plugin files:** Use `vim.pack.add({ src = 'https://github.com/...' })` to install. Place setup/config code below the install block.
+- **Mini submodules:** Add new mini configs in `lua/plugins/mini/<module>.lua`, then require it from `lua/plugins/mini/init.lua`.
+- **Keymaps:** Add global keymaps in `lua/config/keymaps.lua`. Use `desc` in options. Prefix plugin keymaps with `<leader>` where appropriate.
+- **No `return` in plugin files** — they execute directly, unlike lazy.nvim specs.
+- **LSP servers:** Register in `lua/plugins/mason.lua` (`ensure_installed`) and `lua/plugins/nvim-lspconfig.lua` (`vim.lsp.enable({...})`). Keep them in sync.
 
-## Conventions
+## Safe validation
 
-- **LazyVim plugin spec style** —
-  each plugin is a Lua table returned from a file under `lua/plugins/**`.
-- **Modular imports** — `init.lua` files in subdirectories aggregate `require("plugins.X.spec")`
-  entries.
-- **Stylua formatting** — 2 spaces, 120-column limit.
-  Use `-- stylua: ignore start/end` sparingly for DSL blocks (e.g., lush themes).
-- **Keymaps** — use `require("lazyvim.util").safe_keymap_set` (aliased as `map`)
-  and prefer `desc` fields.
-- **Custom utils** — shared logic lives in `lua/utils.lua`; expose globals cautiously (e.g.,
-  `_G.pprint`).
-- **Quickfix helpers** — language-specific commands (`RuffQF`, `TSQF`, `BiomeQF`, `PyreflyQF`,
-  `MypyQF`) use `utils.qf_from_cmd`.
-- **No bufferline / lualine** — intentionally disabled in favor of `mini-statusline`.
+- **Syntax / load check:**
+  ```bash
+  nvim --headless -u init.lua -c 'qa' 2>&1
+  ```
+  If this exits 0 and prints nothing, the config loads cleanly.
+- **Lua syntax check (single file):**
+  ```bash
+  luac -p lua/config/options.lua
+  ```
+- **Format check (if stylua is installed):**
+  ```bash
+  stylua --check .
+  ```
 
-## Key Files
+## High-risk commands
 
-| File                            | Purpose                                                                                         |
-| ------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `lua/config/lazy.lua`           | lazy.nvim bootstrap + LazyVim integration, performance settings                                 |
-| `lua/config/options.lua`        | Core vim options (signcolumn, virtualedit, fillchars, python LSP choice)                        |
-| `lua/config/keymaps.lua`        | All custom normal/visual/terminal keybindings                                                   |
-| `lua/utils.lua`                 | fast_save, diagnostic_goto, qf_from_cmd, pprint, local_plugin, jump_location, open_repo_actions |
-| `lua/plugins/disabled.lua`      | Explicitly disabled LazyVim default plugins                                                     |
-| `colors/covid19.lua`            | Custom lush.nvim colorscheme (HSL definitions, treesitter + LSP diagnostic highlights)          |
-| `lazyvim.json`                  | LazyVim extras list (copilot, mini-surround, neo-tree, biome, python, typescript, zig, etc.)    |
-| `after/ftplugin/python.lua`     | Python-specific mappings + QF commands                                                          |
-| `after/ftplugin/typescript.lua` | TypeScript-specific QF commands                                                                 |
+- **Do not run `nvim` interactively** in agent shells — it will hang waiting for a TTY.
+- **Do not delete `~/.local/share/nvim/` or `~/.cache/nvim/`** — this destroys installed plugins and persistent undo history.
+- **Do not edit `nvim-pack-lock.json` manually** — it is managed by the built-in package manager. If you add/remove plugins, update the Lua files and let nvim regenerate the lock.
+- **Avoid `git clean -fdx`** — could remove untracked work or local plugin state if paths overlap.
 
-## What to Avoid
+## Files and directories to avoid
 
-- **Do not re-enable** `bufferline.nvim`, `lualine.nvim`, `flash.nvim`, `gitsigns.nvim`,
-  or `venv-selector.nvim` without discussion.
-- **Do not change** `vim.g.lazyvim_python_lsp` away from `"pyrefly"` unless there's a strong reason.
-- **Avoid adding heavy startup-time plugins** without lazy-loading —
-  the config sets `lazy = false` by default for custom plugins.
-- **Do not delete** `lua/utils.lua` functions without checking cross-references in ftplugins
-  and plugin configs.
+| Path | Why |
+|------|-----|
+| `nvim-pack-lock.json` | Auto-generated lockfile; manual edits will be overwritten |
+| `~/.cache/nvim/undo/` | User's persistent undo history |
+| `~/.local/share/nvim/site/pack/` | Installed plugin sources (managed by nvim) |
 
-## Notes
+## Repo-specific notes
 
-- **LazyVim extras enabled** (`lazyvim.json`): `ai.copilot`, `coding.mini-surround`,
-  `editor.neo-tree`, `formatting.biome`, `lang.ansible`, `lang.json`, `lang.python`, `lang.sql`,
-  `lang.toml`, `lang.typescript`, `lang.yaml`, `lang.zig`, `ui.mini-starter`.
-- **Copilot integration**: Uses `zbirenbaum/copilot.lua` (not the default LazyVim copilot extra
-  directly).
-  Suggestion keymaps: `<C-n>` next, `<C-p>` prev, `<C-e>` dismiss.
-  Accept is disabled (managed by `blink-cmp`).
-- **LSP server configs**: `lua/plugins/lsp/servers/lua_ls.lua`
-  and `common.lua` hold server-specific settings.
-- **Custom fillchars** set in `options.lua` give a classic vim aesthetic (`foldopen = "-"`,
-  `foldclose = "+",`eob = "~"`).
-- **No `.cursorrules` or `CLAUDE.md`** found in this workspace.
-- **Dotfiles context**: This is part of a personal dotfiles repo managed with GNU Stow.
-  See repo-root `AGENTS.md` for global conventions.
+- **Package manager:** Uses Neovim 0.11 native `vim.pack.add()`, not lazy.nvim or packer. Plugins are downloaded on first startup and tracked in `nvim-pack-lock.json`.
+- **LSP:** Mason installs servers; `vim.lsp.enable()` activates them. Both lists must be kept in sync.
+- **Mini.nvim:** Many UI niceties (starter, statusline, files, pairs, surround, comment, clue, bufremove) come from this single plugin.
+- **Leader key:** Space (` `). Plugin keymaps should respect this.
+- **Clipboard:** `unnamedplus` is set; yank/delete interact with the system clipboard.
+
+## Good defaults for agents
+
+- When adding a plugin, create `lua/plugins/<plugin>.lua`, require it from `lua/plugins/init.lua`, and keep the same structure: install block at top, setup/config below.
+- When adding an autocommand, place it in `lua/config/auto.lua` inside the `config` augroup.
+- When adding a utility function, export it from `lua/utils.lua` and require where needed.
+- Preserve existing style: concise, minimal, no unnecessary abstractions.

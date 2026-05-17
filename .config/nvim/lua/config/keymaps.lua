@@ -1,13 +1,10 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
 local utils = require("utils")
-local lv = require("lazyvim.util")
-local map = lv.safe_keymap_set
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
 
 -- Restart NVIM
-map("n", "<leader>rs", "<cmd>restart<cr>", { desc = "Restart NVIM (:restart)" })
+map("n", "<leader>dr", "<cmd>restart<cr>", { desc = "Restart NVIM" })
 
 -- Clear search, diff update and redraw
 map("n", "<C-c>", function()
@@ -28,11 +25,6 @@ map("n", "<CR>", function()
   vim.cmd("write")
 end, { desc = "Save File" })
 
--- Reload the current buffer from disk.
-map("n", "<leader>br", function()
-  vim.cmd("edit!")
-end, { desc = "Reload Buffer from Disk" })
-
 -- Fast save (assuming `tools.fast_save` handles this)
 map("n", "<S-CR>", utils.fast_save, { desc = "Save File (no prompts)" })
 
@@ -44,33 +36,58 @@ map("n", "<C-w>ch", "<cmd>wincmd h<cr><cmd>close<cr>", { desc = "Close window le
 map("n", "<C-w>cl", "<cmd>wincmd l<cr><cmd>close<cr>", { desc = "Close window right" })
 map("n", "<C-s>", "<C-w>s", { desc = "Split window horizontally" })
 
--- Diagnostics
-map("n", "<C-n>", utils.diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "<C-p>", utils.diagnostic_goto(false), { desc = "Prev Diagnostic" })
-
--- Command mode navigation
-map("c", "<C-A>", "<Home>", { desc = "Go to beginning of command line" })
-map("c", "<C-E>", "<End>", { desc = "Go to end of command line" })
-
--- Lazy
-map("", "<leader>l", "<Nop>", { desc = "lazy" })
-map("n", "<leader>ll", "<cmd>Lazy<cr>", { desc = "Lazy" })
-map("n", "<leader>lL", "<cmd>Lazy log<cr>", { desc = "Lazy Log" })
-map("n", "<leader>lc", "<cmd>Lazy check<cr>", { desc = "Lazy Check" })
-map("n", "<leader>lx", "<cmd>LazyExtras<cr>", { desc = "Lazy Extras" })
-
 -- When using '*', only highlight occurrences, do not jump to the next match.
 map("n", "*", "*N", { desc = "Highlight all occurrences of word under cursor" })
 
 -- Delete character under cursor without copying it to register.
 -- This prevents overwriting your paste buffer with single character deletes.
-map("n", "x", '"_x', { desc = "Delete character under cursor without copying it", noremap = true, silent = true })
+map("n", "x", '"_x',
+  { desc = "Delete character under cursor without copying it", noremap = true, silent = true })
 
 -- Keep search results centered on the screen.
 -- 'zz' centers the screen, 'zv' makes sure the cursor line is visible.
 map("n", "n", "nzzzv", { desc = "Next search match (centered)" })
 map("n", "N", "Nzzzv", { desc = "Previous search match (centered)" })
 
---- Terminal Mode ---
--- Exit terminal mode and return to Normal mode.
-map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+map("n", "<leader>qq", '<cmd>qa<cr>', { desc = "Quit Nvim" })
+
+-- Map 'k' and 'j' to 'gk' and 'gj' respectively.
+-- This makes vertical movement consistent across wrapped and unwrapped lines.
+map({ "n", "v" }, "j", function() return vim.v.count == 0 and "gj" or "j" end, { expr = true })
+map({ "n", "v" }, "k", function() return vim.v.count == 0 and "gk" or "k" end, { expr = true })
+
+-- C+Space to trigger completion menu
+map("i", "<C-Space>", function()
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true),
+    "n",
+    true
+  )
+end, { expr = true, desc = "Trigger completion menu" })
+
+-- Terminal mode
+map("t", "<Esc>", [[<C-\\><C-n>]], { desc = "Exit terminal mode" })
+map("t", "<C-[>", [[<C-\\><C-n>]], { desc = "Exit terminal mode" })
+map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
+map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
+map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
+map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
+
+-- remap "p" in visual mode to delete the highlighted text without overwriting your yanked/copied text, and then paste the content from the unnamed register.
+map("v", "p", '"_dP', opts)
+
+-- Stay in indent mode
+map("v", "<", "<gv", opts)
+map("v", ">", ">gv", opts)
+
+-- Reload the current buffer from disk.
+map('n', '<leader>b', '', { desc = "+buffers" })
+map("n", "<leader>br", function()
+  vim.cmd("edit!")
+end, { desc = "Reload Buffer from Disk" })
+
+-- Diff shortcuts
+map('n', '<leader>d', '', { desc = '+debug/diff' })
+map('n', '<leader>dt', ':diffthis<CR>', { desc = 'Diff this' })
+map('n', '<leader>dp', ':diffput<CR>', { desc = 'Diff put' })
+map('n', '<leader>dg', ':diffget<CR>', { desc = 'Diff get' })

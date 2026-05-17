@@ -1,5 +1,15 @@
 local M = {} -- Module table to export functions
 
+-- Pretty print any number of arguments using vim.inspect.
+M.pprint = function(...)
+  local args = { ... }
+  local output = {}
+  for _, arg in ipairs(args) do
+    table.insert(output, vim.inspect(arg))
+  end
+  print(table.concat(output, " "))
+end
+
 --- Saves the current file without triggering autocommands if modified.
 -- @return boolean: True if the file was saved (and expanded path is not empty), false otherwise.
 M.fast_save = function()
@@ -10,38 +20,23 @@ M.fast_save = function()
   return vim.fn.expand("%") ~= ""
 end
 
--- Navigates to the next or previous diagnostic message with optional severity filtering.
--- @param next boolean: If true, go to the next diagnostic; if false, go to the previous.
--- @param severity string|nil: Optional severity level to filter diagnostics (e.g., "ERROR", "WARN", "INFO", "HINT").
--- @return function:
-M.diagnostic_goto = function(next, severity)
-  return function()
-    vim.diagnostic.jump({
-      count = (next and 1 or -1) * vim.v.count1,
-      severity = severity and vim.diagnostic.severity[severity] or nil,
-      float = true,
-    })
+-- Safely require a module and apply a function to it if successful.
+M.safe_require = function(module_name, fn)
+  local status, module = pcall(require, module_name)
+  if not status then
+    vim.notify("Failed to load module: " .. module_name, vim.log.levels.ERROR)
+    return nil
   end
+  return fn(module)
 end
 
--- Pretty-prints a Lua table for debugging purposes.
--- @param tbl table: The table to be printed.
-M.pprint = function(tbl)
-  print(vim.inspect(tbl))
-end
+M.augroups = {}
 
-_G.pprint = M.pprint -- Make pprint globally accessible for convenience
-
---- Conditionally configures a plugin to be loaded from a local path or a remote URL.
--- This is useful for developing plugins locally while maintaining the option to use
--- the remote version in other environments.
-function M.local_plugin(dir, url, opts)
-  -- If the local path exists and is a directory, use it; otherwise, use the remote source.
-  return vim.tbl_extend(
-    "force", -- Forces overwrite for conflicting keys
-    opts or {}, -- Start with provided options (or empty table)
-    (vim.fn.isdirectory(vim.fn.expand(dir)) == 1) and { dir = dir } or { url = url }
-  )
+M.autogroup = function(name, opts)
+  if not M.augroups[name] then
+    M.augroups[name] = vim.api.nvim_create_augroup('user_' .. name, opts or { clear = true })
+  end
+  return M.augroups[name]
 end
 
 function M.qf_from_cmd(title, cmd, efm)
@@ -60,69 +55,6 @@ function M.qf_from_cmd(title, cmd, efm)
     vim.cmd("cclose")
     vim.notify(title .. ": no issues", vim.log.levels.INFO)
   end
-end
-
--- Jumps to a location specified by an LSP location object.
--- @param loc table: An LSP location object containing 'uri' and 'range' fields.
--- The function will open the file if it's not already open and move the cursor to the specified position.
--- If the location format is invalid, it will print an error message.
-function M.jump_location(loc, offset_encoding)
-  local bufnr = vim.uri_to_bufnr(loc.uri or loc.targetUri)
-  local curbuf = vim.api.nvim_get_current_buf()
-  if bufnr ~= curbuf then
-    vim.cmd("abo split")
-  end
-  vim.lsp.util.show_document(loc, offset_encoding)
-end
-
-function M.lsp_on_list(result)
-  if not result.items or (#result.items == 0) then
-    vim.notify("No results found", vim.log.levels.INFO)
-    return
-  end
-
-  if #result.items == 1 then
-    ---@diagnostic disable-next-line: param-type-mismatch
-    local clients = vim.lsp.get_clients(result)
-    M.jump_location(result.items[1].user_data, clients[1].offset_encoding)
-  else
-    vim.fn.setqflist(result.items)
-    vim.api.nvim_command("copen")
-  end
-end
-
-local function normalize_git_remote(url)
-  if not url or url == "" then
-    return nil
-  end
-
-  local normalized = url:gsub("%.git$", "")
-  normalized = normalized:gsub("^git@", "")
-  normalized = normalized:gsub("^ssh://git@", "")
-  normalized = normalized:gsub("^https?://", "")
-  normalized = normalized:gsub(":", "/", 1)
-
-  if not normalized:match("/") then
-    return nil
-  end
-
-  return "https://" .. normalized
-end
-
-function M.open_repo_actions()
-  local remote = vim.fn.systemlist("git remote get-url origin")[1]
-  if vim.v.shell_error ~= 0 then
-    vim.notify("Git remote not found", vim.log.levels.WARN)
-    return
-  end
-
-  local repo_url = normalize_git_remote(remote)
-  if not repo_url then
-    vim.notify("Unable to parse git remote URL", vim.log.levels.WARN)
-    return
-  end
-
-  vim.ui.open(repo_url .. "/actions")
 end
 
 return M

@@ -3,7 +3,6 @@ local utils = require("utils")
 vim.wo.colorcolumn = "100"
 
 -- Toggle a breakpoint on the current line. If a breakpoint already exists, it will be removed.
---
 local breakpoint_template = "breakpoint()"
 
 local function breakpoint()

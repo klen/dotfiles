@@ -51,7 +51,9 @@
 
 ---@diagnostic disable: undefined-global
 
-local lush = require("lush")
+local ok, lush = pcall(require, "lush")
+if not ok then return end
+
 local hsl = lush.hsl
 
 local total_black = hsl("#000000")
