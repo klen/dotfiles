@@ -1,6 +1,11 @@
 *.retry
+/.ansible
 /.config/env.local
 /.config/karabiner/automatic_backups/
+/.config/nvim-lazy
+/.config/nvim-old
+/.config/opencode/.rumdl_cache/
+/.config/opencode/opencode.jsonc.bak
 /.config/pypoetry/poetry.lock
 /.config/pypoetry/pyproject.toml
 /.config/pyradio/*.date
@@ -9,12 +14,9 @@
 /.config/zsh/.zcompdump
 /.config/zsh/.zsh_history
 /.config/zsh/plugins
-/.config/nvim-old
-/.config/opencode/.rumdl_cache/
-/.config/opencode/opencode.jsonc.bak
 /.smartcd/inodes
 /.smartcd/scripts
-/todo.txt
 /node_modules
-package-lock.json
+/todo.txt
 bun.lock
+package-lock.json
