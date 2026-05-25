@@ -7,7 +7,7 @@ miniFiles.setup {
     synchronize = "<CR>",
   },
   content = {
-    filter = utils.filter_dotfiles,
+    filter = utils.filter,
   },
 }
 
@@ -20,7 +20,8 @@ vim.keymap.set("n", "<leader>ff", function()
 end, { desc = "File browser (current)" })
 
 vim.keymap.set("n", "<leader>fe", function()
-  miniFiles.open(nil, false)
+  -- miniFiles.open(nil, false)
+  miniFiles.open()
 end, { desc = "File browser (root)" })
 
 -- Autocmds
@@ -30,12 +31,20 @@ vim.api.nvim_create_autocmd("User", {
   callback = function(args)
     local buf_id = args.data.buf_id
 
-    -- Toggle showing dotfiles
+    -- Toggle dotfiles
     vim.keymap.set(
       "n",
       "<M-h>",
-      utils.toggle_dotfiles,
+      function() utils.toggle_filter('dotfiles') end,
       { buffer = buf_id, desc = "Toggle dotfiles" }
+    )
+
+    -- Toggle gitignore
+    vim.keymap.set(
+      "n",
+      "<M-i>",
+      function() utils.toggle_filter('gitignore') end,
+      { buffer = buf_id, desc = "Toggle gitignore" }
     )
 
     -- Split window and open file in it, then close explorer
@@ -54,5 +63,12 @@ vim.api.nvim_create_autocmd("User", {
     config.anchor = "SW"
     config.row = vim.o.lines - vim.o.cmdheight - 1
     vim.api.nvim_win_set_config(win_id, config)
+  end,
+})
+
+-- Reset cache when changing directory
+vim.api.nvim_create_autocmd("DirChanged", {
+  callback = function()
+    utils.reset_cache()
   end,
 })

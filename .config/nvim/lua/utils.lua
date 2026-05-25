@@ -27,7 +27,7 @@ M.safe_require = function(module_name, fn, fallback)
     if fallback then
       return fallback()
     end
-    vim.notify("Failed to load module: " .. module_name, vim.log.levels.ERROR)
+    vim.notify("Failed to load module: " .. module_name, vim.log.levels.WARN)
     return nil
   end
   return fn(module)

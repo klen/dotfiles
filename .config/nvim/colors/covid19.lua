@@ -377,6 +377,9 @@ local theme = lush(function(injected_functions)
 
     -- IndentBlanklineIndent
     IndentBlanklineChar { fg = cocoa_brown, gui = "nocombine" },
+
+    -- Snacks Picker
+    SnacksPickerDir { Directory }
   }
   -- stylua: ignore end
 end)

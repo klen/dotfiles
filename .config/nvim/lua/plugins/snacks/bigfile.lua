@@ -1,6 +1,7 @@
 return {
   enabled = true,
-  size = 1.5 * 1024 * 1024, -- 1.5 MiB
+  size = 5 * 1024 * 1024,        -- 5 MiB
+  line_length = 5 * 1024 * 1024, -- 5 KiB
   setup = function(ctx)
     vim.cmd("syntax clear")
     vim.treesitter.stop(ctx.buf)

@@ -5,8 +5,12 @@ vim.pack.add {
 require("kulala").setup {
   global_keymaps = true,
   global_keymaps_prefix = '<leader>h',
-  -- Optional: Set the theme to 'dark' or 'light'
-  theme = 'dark',
+  ui = {
+    max_response_size = 1024 * 1024, -- 1MB
+  },
+  lsp = {
+    enabled = false,
+  }
 }
 
 vim.keymap.set('n', '<leader>h', '', { desc = "+http" })

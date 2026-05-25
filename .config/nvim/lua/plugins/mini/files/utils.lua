@@ -21,20 +21,60 @@ M.map_split = function(buf_id, lhs, direction)
   vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
 end
 
-local show_dotfiles = false
-
-M.filter_dotfiles = function(entry)
-  if show_dotfiles then
-    return true
+M.filter = function(entry)
+  for _, filter in pairs(M.filters) do
+    if filter.enabled and not filter.filter(entry) then
+      return false
+    end
   end
-  return not vim.startswith(entry.name, ".")
+
+  return true
 end
 
-M.toggle_dotfiles = function()
-  show_dotfiles = not show_dotfiles
-  miniFiles.refresh {
-    content = { filter = M.filter_dotfiles },
-  }
+M.toggle_filter = function(name)
+  local filter = M.filters[name]
+  if filter then
+    filter.enabled = not filter.enabled
+    vim.notify((filter.enabled and "Enabled" or "Disabled") .. " filter: " .. name, vim.log.levels.INFO,
+      { title = "MiniFiles" })
+  end
+
+  miniFiles.refresh({
+    content = {
+      filter = M.filter,
+    },
+  })
 end
+
+M.cache = {
+  gitignore = {},
+}
+
+M.reset_cache = function()
+  M.cache.gitignore = {}
+end
+
+M.filters = {
+  dotfiles = {
+    enabled = true,
+    filter = function(entry)
+      return not vim.startswith(entry.name, ".")
+    end,
+  },
+  gitignore = {
+    enabled = true,
+    filter = function(entry)
+      -- vim.fn.system({ 'git', 'check-ignore', '--quiet', entry.path })
+      -- return vim.v.shell_error ~= 0
+      -- Cache results to avoid calling git for every file
+      if M.cache.gitignore[entry.path] == nil then
+        local result = vim.fn.system(
+          { 'git', 'check-ignore', '--quiet', entry.path })
+        M.cache.gitignore[entry.path] = vim.v.shell_error ~= 0
+      end
+      return M.cache.gitignore[entry.path]
+    end,
+  },
+}
 
 return M

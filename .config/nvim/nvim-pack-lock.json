@@ -5,7 +5,7 @@
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "kulala.nvim": {
-      "rev": "6656c9d332735ca6a27725e0fb45a1715c4372d9",
+      "rev": "31e95b278b7e4fce1bbb19983c6221f6bce47c9f",
       "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "lush.nvim": {
@@ -17,11 +17,11 @@
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
-      "rev": "8e921c2b68571e978db5d4d3fef9c9a7f8755473",
+      "rev": "cbf8d285e1462dd24acf3507817be2bbcb035919",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "18797ed18f347d0d0da27fec28a67979b1207f70",
+      "rev": "6791615e48801cbf5b2baefadcea77a7760de3f4",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-bqf": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/kevinhwang91/nvim-bqf"
     },
     "nvim-lspconfig": {
-      "rev": "f9349d4d99e7d66403ae8bf4fbd357b154dca7a7",
+      "rev": "deb0df61b2d6691e745b16a42755e10ad38218e9",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-test": {
@@ -51,6 +51,10 @@
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "vim-moonfly-colors": {
+      "rev": "4ed07bc0c6083cdd547c63f5c245e02c068b0c45",
+      "src": "https://github.com/bluz71/vim-moonfly-colors"
     }
   }
 }
