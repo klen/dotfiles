@@ -13,7 +13,9 @@ There are default instructions for coding agents running on this machine.
 2. Briefly explain intent (1–2 sentences max)
 3. Make the smallest change that solves the task
 4. Validate with tests/commands when available
-5. Before committing or pushing: STOP and ask the user for explicit approval.
+5. Before any commit, push, merge, or pull request action,
+    STOP and request explicit approval from the user for that specific action.
+    Do not infer approval from previous messages.
 
 - If requirements are unclear, ask instead of guessing
 

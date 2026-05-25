@@ -1,5 +1,5 @@
 {
-  "defaultModel": "deepseek-v4-pro",
+  "defaultModel": "kimi-k2.6",
   "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "medium",
   "enabledModels": [
@@ -14,12 +14,23 @@
     "lms/qwen3.5-9b-mlx",
     "lms/qwen3.5-4b-mlx"
   ],
-  "lastChangelogVersion": "0.70.6",
+  "lastChangelogVersion": "0.75.5",
   "packages": [
     "git:github.com/earendil-works/pi-review",
     "npm:@alexanderfortin/pi-tavily-tools",
-    "npm:@alexanderfortin/pi-loaded-tools"
+    {
+      "source": "../../projects/pi/bash-guard",
+      "extensions": [
+        "-index.ts"
+      ]
+    }
   ],
   "theme": "covid19",
-  "editorPaddingX": 1
+  "editorPaddingX": 1,
+  "skills": [
+    "+skills/debug/SKILL.md"
+  ],
+  "extensions": [
+    "-extensions/go-to-bed.ts"
+  ]
 }

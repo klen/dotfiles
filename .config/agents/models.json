@@ -1,5 +1,30 @@
 {
   "providers": {
+    "maples.lan": {
+      "api": "openai-completions",
+      "apiKey": "lms",
+      "baseUrl": "http://maples.lan:1234/v1",
+      "models": [
+        {
+          "id": "qwen3.5-4b-mlx",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 64532
+        },
+        {
+          "id": "qwen3.5-9b-mlx",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 32266
+        }
+      ]
+    },
     "lms": {
       "api": "openai-completions",
       "apiKey": "lms",
