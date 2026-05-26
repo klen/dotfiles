@@ -60,6 +60,7 @@ opt.shiftround = true  -- Round indent to the nearest 'shiftwidth'
 -- Wrapping & Scrolling
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+opt.wrap = false       -- Do not wrap long lines
 opt.linebreak = true   -- Wrap lines at word boundaries instead of characters
 opt.scrolloff = 4      -- Keep at least 4 lines visible above/below the cursor
 opt.sidescrolloff = 10 -- Same for horizontal scrolling
