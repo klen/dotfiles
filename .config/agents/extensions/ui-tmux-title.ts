@@ -15,7 +15,7 @@ const frames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "
 
 /* ─── Extension ─── */
 
-export default function (pi: ExtensionAPI) {
+export default function(pi: ExtensionAPI) {
   // Not in tmux, no-op extension
   if (!process.env.TMUX) return;
 
@@ -80,6 +80,10 @@ export default function (pi: ExtensionAPI) {
   pi.on("session_shutdown", async (_event, ctx) => {
     const curDir = getProjectName(ctx.cwd);
     await setTmuxWindowTitle(pi, originalTitle || curDir);
+    if (currentWindowId) {
+      // Unset local automatic-rename so the window reverts to global config
+      await tmuxExec(pi, ["set-window-option", "-t", currentWindowId, "-u", "automatic-rename"]);
+    }
   });
 
 }
