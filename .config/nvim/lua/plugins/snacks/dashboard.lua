@@ -2,9 +2,26 @@ local snacks = require("snacks")
 
 vim.keymap.set("n", "<leader>dd", function() snacks.dashboard() end, { desc = "Open Dashboard" })
 
+-- adaptive dashboard width based on available columns
+local orig_open = snacks.dashboard.open
+function snacks.dashboard.open(opts)
+  opts = opts or {}
+  opts.width = math.min(100, math.max(60, vim.o.columns - 8))
+  local self = orig_open(opts)
+  local orig_update = self.update
+  function self.update()
+    self.opts.width = math.min(120, math.max(60, vim.o.columns - 8))
+    ---@diagnostic disable-next-line: redundant-parameter
+    orig_update(self)
+  end
+
+  return self
+end
+
 return {
   enabled = true,
   sections = {
+    -- Greet the user based on the time of day
     function()
       local hour = tonumber(vim.fn.strftime("%H"))
       -- [04:00, 12:00) - morning, [12:00, 20:00) - day, [20:00, 04:00) - evening
@@ -17,17 +34,19 @@ return {
         title = { header, hl = "Bold" },
       }
     end,
+    -- Recent files, sessions, and actions
     { title = { { "Recent Files", hl = "functioncall" } }, padding = { 1, 2 } },
     { section = "recent_files",                            indent = 2,        cwd = true },
     { title = { { "Sessions", hl = "functioncall" } },     padding = { 1, 2 } },
     { section = "projects",                                indent = 2, },
     { title = { { "Actions", hl = "functioncall" } },      padding = { 1, 2 } },
     { section = "keys",                                    indent = 2 },
+    -- A random fortune cookie message
     function()
       local fortune = vim.fn.system("fortune -s 2>/dev/null"):gsub("%s+$", "") or 'Welcome to Neovim!'
       return {
         title = { fortune, hl = "Comment" },
-        padding = { 0, 4 },
+        padding = { 0, 2 },
       }
     end,
   },
