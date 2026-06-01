@@ -1,5 +1,5 @@
 {
-  "defaultModel": "deepseek-v4-flash",
+  "defaultModel": "kimi-k2.6",
   "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "high",
   "enabledModels": [
