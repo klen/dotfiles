@@ -118,8 +118,10 @@ vim.diagnostic.config({
   update_in_insert = false,
   float = { source = true, prefix = '' },
   jump = { float = true },
+  severity = { min = vim.diagnostic.severity.WARN },
+  signs = { severity = { min = vim.diagnostic.severity.WARN } },
   virtual_text = {
-    severity = { min = vim.diagnostic.severity.INFO },
+    severity = { min = vim.diagnostic.severity.WARN },
   },
 })
 

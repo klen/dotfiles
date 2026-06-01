@@ -13,6 +13,24 @@ return function(bufnr, client)
     })
   end
 
+  -- Auto fixAll on save
+  if client:supports_method('textDocument/codeAction') then
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = utils.autogroup('lsp', {}),
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.code_action({
+          context = {
+            only = { 'source.fixAll' },
+            diagnostics = {},
+          },
+          apply = true,
+        })
+      end,
+      desc = 'Auto fixAll on save',
+    })
+  end
+
   -- Autocompletion
   if client:supports_method('textDocument/completion') then
     vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })

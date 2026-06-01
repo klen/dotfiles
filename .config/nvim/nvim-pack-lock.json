@@ -1,11 +1,11 @@
 {
   "plugins": {
     "copilot.lua": {
-      "rev": "407349117f176789df6ec1c23bca72f34e15b4e8",
+      "rev": "393fd009c39b24dfc4cb4bf6f632288c64b13258",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "kulala.nvim": {
-      "rev": "31e95b278b7e4fce1bbb19983c6221f6bce47c9f",
+      "rev": "87601ddef556f21888c59e0a2713873ad73f9c29",
       "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "lush.nvim": {
@@ -17,11 +17,11 @@
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
-      "rev": "cbf8d285e1462dd24acf3507817be2bbcb035919",
+      "rev": "bb639d4bf385a4d89f478b83af4d770be05ab7eb",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "6791615e48801cbf5b2baefadcea77a7760de3f4",
+      "rev": "44657837c7338e52727facc85c1d95bec1f6bd7c",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-bqf": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/kevinhwang91/nvim-bqf"
     },
     "nvim-lspconfig": {
-      "rev": "deb0df61b2d6691e745b16a42755e10ad38218e9",
+      "rev": "a4ed4e761c400849e8c9f8bda33e5083f890268c",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-test": {
@@ -41,7 +41,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "snacks.nvim": {
-      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
+      "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tmux.nvim": {
@@ -53,7 +53,7 @@
       "src": "https://github.com/tpope/vim-fugitive"
     },
     "vim-moonfly-colors": {
-      "rev": "4ed07bc0c6083cdd547c63f5c245e02c068b0c45",
+      "rev": "1c0a9994bb6bb5b43859c67924aabd061c4b7905",
       "src": "https://github.com/bluz71/vim-moonfly-colors"
     }
   }

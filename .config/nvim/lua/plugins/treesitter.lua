@@ -11,6 +11,7 @@ ts.install {
   'diff',
   'dockerfile',
   'go',
+  'graphql',
   'haskell',
   'html',
   'htmldjango',
