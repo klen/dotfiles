@@ -32,7 +32,7 @@ autocmd({ "TermOpen" }, {
 autocmd({ "FileType" }, {
   group = utils.autogroup('config'),
   pattern = {
-    'help', 'qf', 'checkhealth', 'nvim-pack', 'nvim-undotree'
+    'help', 'qf', 'checkhealth', 'nvim-pack', 'nvim-undotree', 'log'
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
