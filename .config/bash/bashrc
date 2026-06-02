@@ -34,25 +34,28 @@ source $XDG_CONFIG_HOME/bash/ps.sh
 source /etc/bash_completion 2>/dev/null || source $XDG_CONFIG_HOME/bash/include/bash-completion
 
 # Setup tools
+source $XDG_CONFIG_HOME/bash/include/homebrew/index.sh
+source $XDG_CONFIG_HOME/bash/include/dotfiles.sh
+source $XDG_CONFIG_HOME/bash/include/bash.sh
+
+source $XDG_CONFIG_HOME/bash/include/fzf.sh
+
 source $XDG_CONFIG_HOME/bash/include/agents.sh
 source $XDG_CONFIG_HOME/bash/include/android.sh
-source $XDG_CONFIG_HOME/bash/include/conda.sh
-source $XDG_CONFIG_HOME/bash/include/docker.sh
-source $XDG_CONFIG_HOME/bash/include/dotfiles.sh
-source $XDG_CONFIG_HOME/bash/include/git.sh
-source $XDG_CONFIG_HOME/bash/include/homebrew.sh
 source $XDG_CONFIG_HOME/bash/include/llm.sh
-source $XDG_CONFIG_HOME/bash/include/lua.sh
-source $XDG_CONFIG_HOME/bash/include/node.sh
-source $XDG_CONFIG_HOME/bash/include/bun.sh
-source $XDG_CONFIG_HOME/bash/include/pass.sh
-source $XDG_CONFIG_HOME/bash/include/python.sh
-source $XDG_CONFIG_HOME/bash/include/tmux.sh
 source $XDG_CONFIG_HOME/bash/include/yandex.sh
-hash go 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/go.sh
-hash rustc 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/rust.sh
-hash ruby 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/ruby.sh
-hash uv 2>/dev/null && source $XDG_CONFIG_HOME/bash/include/uv.sh
+
+source $XDG_CONFIG_HOME/bash/include/docker.sh
+source $XDG_CONFIG_HOME/bash/include/git.sh
+source $XDG_CONFIG_HOME/bash/include/pass.sh
+source $XDG_CONFIG_HOME/bash/include/tmux.sh
+
+# Languages
+source $XDG_CONFIG_HOME/bash/include/go.sh
+source $XDG_CONFIG_HOME/bash/include/lua.sh
+source $XDG_CONFIG_HOME/bash/include/python.sh
+source $XDG_CONFIG_HOME/bash/include/rust.sh
+source $XDG_CONFIG_HOME/bash/include/ruby.sh
 
 # Aliases
 source $XDG_CONFIG_HOME/bash/aliases.sh
@@ -60,7 +63,7 @@ source $XDG_CONFIG_HOME/bash/aliases.sh
 # Show login screen
 source $XDG_CONFIG_HOME/bash/login.sh
 
-# Close promt
+# Close prompt
 PS1="${PS1}\n$ "
 
 # Smartcd
@@ -69,7 +72,7 @@ source $XDG_CONFIG_HOME/bash/smartcd.sh
 # Auto run tmux on remote servers
 hash tmux 2>/dev/null && {
   if [ ! -z "$SSH_CLIENT" ] && [ -z $TMUX ]; then
-    exec tmux
+    exec tmux new-session -A -s ssh
   fi
 }
 

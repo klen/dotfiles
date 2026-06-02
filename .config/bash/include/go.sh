@@ -1,7 +1,10 @@
-hash go 2>/dev/null && {
+type -P go >/dev/null 2>&1 && {
 
     mkdir -p $HOME/go
     export GOPATH=$HOME/go
-    export PATH=$PATH:$GOPATH/bin
+    case ":${PATH}:" in
+      *:"$GOPATH/bin":*) ;;
+      *) export PATH="${PATH:+$PATH:}$GOPATH/bin" ;;
+    esac
 
 }

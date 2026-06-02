@@ -3,7 +3,10 @@ setup () {
     # RVM support
     [ -d $HOME/.rvm ] && {
 
-        PATH=$PATH:$HOME/.rvm/bin
+        case ":${PATH}:" in
+          *:"$HOME/.rvm/bin":*) ;;
+          *) PATH="${PATH:+$PATH:}$HOME/.rvm/bin" ;;
+        esac
 
         source "$HOME/.rvm/scripts/rvm"
         source "$HOME/.rvm/scripts/completion"
@@ -11,14 +14,19 @@ setup () {
     }
 
     # RBEnv support
-    hash rbenv 2>/dev/null && eval "$(rbenv init - bash)"
+    type -P rbenv >/dev/null 2>&1 && eval "$(rbenv init - bash)"
 
     local commands="cap gem"
     # for n in $commands; do
     #     hash $n 2>/dev/null && source $XDG_CONFIG_HOME/bash/completion/${n}.sh
     # done
 
-    [ -d /usr/local/opt/ruby/bin ] && PATH=/usr/local/opt/ruby/bin:$PATH
+    if [ -d "$HOMEBREW_PREFIX/opt/ruby/bin" ]; then
+      case ":${PATH}:" in
+        *:"$HOMEBREW_PREFIX/opt/ruby/bin":*) ;;
+        *) PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH" ;;
+      esac
+    fi
     # [ -d /usr/local/lib/ruby/gems/3.0.0/bin/ ] && PATH=/usr/local/lib/ruby/gems/3.0.0/bin:$PATH
 }
 

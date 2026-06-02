@@ -28,7 +28,10 @@ hh() {
 }
 
 # Find file by template
-ff() { find . -type f -iname '*'$*'*' -ls; }
+ff() {
+  local pat="$*"
+  find . -type f -iname "*${pat}*" -ls
+}
 
 # find file by template and execute command
 ffe() { find . -type f -iname '*'$1'*' -exec "${2:-file}" {} \;; }
@@ -59,9 +62,11 @@ ffs() {
 
 # find and replace string in files
 ffr() {
-  local CMD=grep -rl $1 $3 | xargs sed -i "s/$1/$2/g"
-  echo $CMD
-  $CMD
+  if [ "$#" -lt 2 ]; then
+    echo "Usage: ffr STRING1 STRING2 [FILE_PATTERN]"
+    return 1
+  fi
+  grep -rl "$1" --include="${3:-*}" . | xargs sed -i '' "s/$1/$2/g"
 }
 
 # Show current user processes
@@ -80,8 +85,8 @@ killps() {
     return
   fi
   if [ $# = 2 ]; then sig=$1; fi
-  for pid in $(mps | awk '!/awk/ && $0~pat { print $1 }' pat=${!#}); do
-    pname=$(mps | awk '$1~var { print $5 }' var=$pid)
+  for pid in $(psm | awk '!/awk/ && $0~pat { print $1 }' pat=${!#}); do
+    pname=$(psm | awk '$1~var { print $5 }' var=$pid)
     if _ask "Send signal $sig to process $pid <$pname>?"; then
       kill $sig $pid
     fi
@@ -220,13 +225,11 @@ cdp() { cd $1; }
 _ask() {
   echo "$* [y/n]?"
   read ans
-  if [ $ans = y -o $ans = Y -o $ans = yes -o $ans = Yes -o $ans = YES ]; then
-    return 0
-  fi
-
-  if [ $ans = n -o $ans = N -o $ans = no -o $ans = No -o $ans = NO ]; then
-    return 1
-  fi
+  case "$ans" in
+    [yY] | [yY][eE][sS]) return 0 ;;
+    [nN] | [nN][oO] | "") return 1 ;;
+    *) return 1 ;;
+  esac
 }
 
 # vim:fdm=indent

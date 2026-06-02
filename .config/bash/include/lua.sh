@@ -1,7 +1,10 @@
 LUA_VERSION="5.4"
 
 [ -d "$HOME/.luarocks/bin/" ] && {
-    export PATH=$PATH:$HOME/.luarocks/bin
+    case ":${PATH}:" in
+      *:"$HOME/.luarocks/bin":*) ;;
+      *) export PATH="${PATH:+$PATH:}$HOME/.luarocks/bin" ;;
+    esac
 }
 
 # [ -d "/usr/local/share/lua/${LUA_VERSION}" ] && {

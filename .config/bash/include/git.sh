@@ -1,4 +1,4 @@
-hash git 2>/dev/null && {
+type -P git >/dev/null 2>&1 && {
 
   source $XDG_CONFIG_HOME/bash/include/git-promt.sh
 

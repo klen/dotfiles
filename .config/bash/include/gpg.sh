@@ -1,4 +1,4 @@
-hash gpg 2>/dev/null && {
+type -P gpg >/dev/null 2>&1 && {
 
     [ ! -r $HOME/.gnupg/trustdb.gpg  ] && {
 

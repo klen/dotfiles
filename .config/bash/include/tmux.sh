@@ -1,4 +1,4 @@
-hash tmuxp 2>/dev/null && {
+type -P tmuxp >/dev/null 2>&1 && {
   alias tml='tmuxp load -y'
 
   _tml_completions() {

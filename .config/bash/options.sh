@@ -26,6 +26,9 @@ set -o ignoreeof
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
+# Append history immediately to avoid losing it on crash
+PROMPT_COMMAND='history -a'
+
 export PAGER="less"
 export LESS="\
     --RAW-CONTROL-CHARS \

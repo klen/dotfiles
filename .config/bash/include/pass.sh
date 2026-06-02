@@ -1,5 +1,5 @@
 # pass
-hash pass 2>/dev/null && {
+type -P pass >/dev/null 2>&1 && {
   export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
   # Support for pass otp (https://github.com/betabrandao/simple-totp)

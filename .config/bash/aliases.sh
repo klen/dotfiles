@@ -23,12 +23,21 @@ alias hsync='rsync -lrtvpC .'
 # Common
 
 # ls
-alias ls='ls $LS_OPTIONS -Fh'
-alias ll='ls $LS_OPTIONS -goAh'
-alias la='ll $LS_OPTIONS -FlAh'
+if type -P gls >/dev/null 2>&1; then
+    alias ls='gls --color=auto -Fh'
+    alias ll='gls --color=auto -lFh'
+    alias la='gls --color=auto -lAFh'
+elif ls --color=auto /dev/null >/dev/null 2>&1; then
+    alias ls='ls --color=auto -Fh'
+    alias ll='ls --color=auto -lFh'
+    alias la='ls --color=auto -lAFh'
+else
+    alias ls='ls -Fh'
+    alias ll='ls -lFh'
+    alias la='ls -lAFh'
+fi
 
 # others
-alias tml='tmuxp load -y'
 alias vi='vim'
 alias myip='dig +short txt ch whoami.cloudflare @1.0.0.1'
 alias oc=opencode

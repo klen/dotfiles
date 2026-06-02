@@ -1,7 +1,10 @@
 [ -d "$HOME/Library/Android/sdk" ] && {
     export ANDROID_HOME=$HOME/Library/Android/sdk
-    export PATH=$PATH:$ANDROID_HOME/emulator
-    export PATH=$PATH:$ANDROID_HOME/tools
-    export PATH=$PATH:$ANDROID_HOME/tools/bin
-    export PATH=$PATH:$ANDROID_HOME/platform-tools
+    for d in "$ANDROID_HOME/emulator" "$ANDROID_HOME/tools" "$ANDROID_HOME/tools/bin" "$ANDROID_HOME/platform-tools"; do
+        case ":${PATH}:" in
+          *:"$d":*) ;;
+          *) PATH="${PATH:+$PATH:}$d" ;;
+        esac
+    done
+    export PATH
 }

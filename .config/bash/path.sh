@@ -1,11 +1,19 @@
-[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
-[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
-[ -d "/usr/local/bin" ] && PATH=/usr/local/bin:$PATH
-[ -d "/usr/local/sbin" ] && PATH=/usr/local/sbin:$PATH
+case ":${PATH}:" in
+  *:"$HOME/bin":*) ;;
+  *) [ -d "$HOME/bin" ] && PATH="$HOME/bin${PATH:+:$PATH}" ;;
+esac
 
-# NodeJS integration
-[ -d $HOME/node_modules/.bin ] && PATH=$HOME/node_modules/.bin:$PATH
-[ -d $XDG_DATA_HOME/npm/bin/ ] && PATH=$XDG_DATA_HOME/npm/bin:$PATH
+case ":${PATH}:" in
+  *:"$HOME/.local/bin":*) ;;
+  *) [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin${PATH:+:$PATH}" ;;
+esac
 
-# Haskel cabal
-[ -d "$HOME/.cabal/bin/" ] && PATH=$HOME/.cabal/bin:$PATH
+case ":${PATH}:" in
+  *:"/usr/local/bin":*) ;;
+  *) [ -d "/usr/local/bin" ] && PATH="/usr/local/bin${PATH:+:$PATH}" ;;
+esac
+
+case ":${PATH}:" in
+  *:"/usr/local/sbin":*) ;;
+  *) [ -d "/usr/local/sbin" ] && PATH="/usr/local/sbin${PATH:+:$PATH}" ;;
+esac

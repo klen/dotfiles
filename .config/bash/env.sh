@@ -16,10 +16,11 @@ export EDITOR=nvim
 export PAGER=less
 
 # Bash history
-export HISTSIZE=
-export HISTFILESIZE=
+export HISTSIZE=100000
+export HISTFILESIZE=100000
 export HISTIGNORE="&:cd:ls:[bf]g:exit:bash:la:deactivate:tox:detox:history"
 export HISTCONTROL=ignoreboth:erasedups
+export HISTTIMEFORMAT='%F %T '
 
 # Debian package settings
 export DEBFULLNAME="Kirill Klenov"
@@ -31,7 +32,6 @@ export GPGKEY=7000E266
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export CLICOLOR=1
-export LS_OPTIONS=--color
 # export LSCOLORS=Hxfxcxdxbxegedabagacad
 
 # for the love of god don't offer to autocomplete this shit
@@ -39,10 +39,6 @@ export FIGNORE="#:~:DS_Store:.pyc:.swp:.swo"
 
 # Ansible
 export ANSIBLE_NOCOWS=1
-
-# Tools
-type pyenv &>/dev/null && eval "$(pyenv init --path)"
-type zoxide &>/dev/null && eval "$(zoxide init bash)"
 
 # Load user-specific environment variables
 [ -f "$XDG_CONFIG_HOME/env.local" ] && source "$XDG_CONFIG_HOME/env.local"
