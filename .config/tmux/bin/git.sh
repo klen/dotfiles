@@ -3,10 +3,10 @@
 cd "${1:-$PWD}"
 
 if git rev-parse --is-inside-work-tree &>/dev/null; then
-  # Имя ветки
+  # Branch name
   branch_name=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
 
-  # Проверяем локальные изменения
+  # Check local changes
   if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
     has_local_changes=1
     dirty=" *"
@@ -15,8 +15,7 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
     dirty=""
   fi
 
-  # Проверяем отличия с origin
-  git fetch --quiet origin &>/dev/null
+  # Check divergence from upstream
   upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
 
   if [[ -n "$upstream" ]]; then
@@ -25,22 +24,22 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
     right=${diff##*	}
 
     if [[ "$left" -ne 0 || "$right" -ne 0 ]]; then
-      # Отличия с origin ➔ красный
+      # Diverged from origin → red
       branch="#[fg=red]${branch_name}"
     elif [[ "$has_local_changes" -eq 1 ]]; then
-      # Локальные изменения, но без расхождений ➔ жёлтый
+      # Local changes, no divergence → yellow
       branch="#[fg=yellow]${branch_name}"
     else
-      # Нет изменений и расхождений ➔ default (без цвета)
+      # Clean, no divergence → default (no colour)
       branch="${branch_name}"
     fi
   else
-    # Нет upstream ➔ серый
+    # No upstream → grey
     branch="#[fg=grey]${branch_name}"
   fi
 
-  # Выводим
-  echo "${branch^^}#[fg=default]${dirty} | "
+  # Print result
+  echo "$(echo "$branch" | tr '[:lower:]' '[:upper:]')#[fg=default]${dirty} | "
 else
   echo ""
 fi
