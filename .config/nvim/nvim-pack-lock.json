@@ -40,6 +40,10 @@
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
+    "pi.nvim": {
+      "rev": "4ba6db0dd30406995a2e46e4f1ae39377e66e733",
+      "src": "https://github.com/pablopunk/pi.nvim"
+    },
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"

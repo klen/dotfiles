@@ -23,7 +23,8 @@
       "extensions": [
         "-index.ts"
       ]
-    }
+    },
+    "git:github.com/code-yeongyu/pi-bash-timeout"
   ],
   "theme": "covid19",
   "editorPaddingX": 1,

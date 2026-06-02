@@ -11,9 +11,9 @@ require("plugins/copilot")
 require("plugins/nvim-test")
 require("plugins/git")
 require("plugins/kulala")
+require("plugins/pi")
 
 -- UI
--- require("plugins/fzf")
 require("plugins/bqf")
 require("plugins/tmux")
 require("plugins/mini")
