@@ -44,7 +44,21 @@ keybind = super+ctrl+arrow_down=unbind
 # Rebind default keybindings to tmux
 # ----------------------------------
 
+# new window
 keybind = super+t=esc:t
+# new session
+keybind = super+n=esc:n
+# select session
+keybind = super+s=esc:s
+# split horizontally
+keybind = super+d=esc:d
+# Split vertically
+keybind = super+shift+d=esc:D
+# Resize pane
+keybind = super+z=esc:z
+# Reload tmux config
+keybind = super+r=esc:r
+# Toggle windows
 keybind = super+digit_1=esc:1
 keybind = super+digit_2=esc:2
 keybind = super+digit_3=esc:3
@@ -55,9 +69,3 @@ keybind = super+digit_7=esc:7
 keybind = super+digit_8=esc:8
 keybind = super+digit_9=esc:9
 keybind = super+digit_0=esc:0
-keybind = super+s=esc:s
-keybind = super+r=esc:r
-keybind = super+d=esc:d
-keybind = super+o=esc:o
-keybind = super+z=esc:z
-keybind = super+shift+d=esc:D
