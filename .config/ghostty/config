@@ -27,6 +27,8 @@ keybind = super+shift+bracket_left=unbind
 keybind = super+shift+bracket_right=unbind
 keybind = super+alt+w=unbind
 keybind = ctrl+shift+tab=unbind
+keybind = super+[=unbind
+keybind = super+]=unbind
 
 # # I don't use Ghostty splits
 keybind = super+ctrl+equal=unbind
@@ -58,6 +60,9 @@ keybind = super+shift+d=esc:D
 keybind = super+z=esc:z
 # Reload tmux config
 keybind = super+r=esc:r
+# Move windows
+keybind = super+shift+left_bracket=text:\x1b{
+keybind = super+shift+right_bracket=text:\x1b}
 # Toggle windows
 keybind = super+digit_1=esc:1
 keybind = super+digit_2=esc:2
