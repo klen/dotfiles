@@ -2,7 +2,10 @@
 # Kill all nvim instances in a tmux session, then kill the session itself.
 
 # Ensure tmux and other tools are found when run-shell launches a minimal shell
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+if ! command -v tmux &>/dev/null; then
+    [[ -d /opt/homebrew/bin ]] && PATH="/opt/homebrew/bin:$PATH"
+    [[ -d /usr/local/bin ]]    && PATH="/usr/local/bin:$PATH"
+fi
 
 # If no argument given, infer the current tmux session
 SESSION="${1:-$(tmux display-message -p '#{session_name}' 2>/dev/null)}"

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Reload tmux and ghostty configs
+
+# Add homebrew to PATH only if tmux isn't already found
+if ! command -v tmux &>/dev/null; then
+    [[ -d /opt/homebrew/bin ]] && PATH="/opt/homebrew/bin:$PATH"
+    [[ -d /usr/local/bin ]]    && PATH="/usr/local/bin:$PATH"
+fi
+
+tmux source-file ~/.config/tmux/tmux.conf
+
+if pgrep -q ghostty 2>/dev/null; then
+    pkill -USR2 ghostty
+fi
+
+tmux display-message 'Reload config'
