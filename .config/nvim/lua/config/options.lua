@@ -36,7 +36,7 @@ opt.matchpairs:append('<:>')      -- Add <> to the list of matchable pairs
 -- Completion
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-opt.autocomplete = true
+opt.autocomplete = false
 opt.complete = { 'o', '.' } -- Omni completion and completion from the current buffer
 opt.pumborder = 'rounded'
 opt.pumheight = 10          -- Limit the height of the popup menu
@@ -118,11 +118,6 @@ vim.diagnostic.config({
   update_in_insert = false,
   float = { source = true, prefix = '' },
   jump = { float = true },
-  severity = { min = vim.diagnostic.severity.WARN },
-  signs = { severity = { min = vim.diagnostic.severity.WARN } },
-  virtual_text = {
-    severity = { min = vim.diagnostic.severity.WARN },
-  },
 })
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

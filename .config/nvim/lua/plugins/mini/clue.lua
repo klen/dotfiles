@@ -1,3 +1,4 @@
+-- https://github.com/nvim-mini/mini.clue
 local clue = require('mini.clue')
 
 clue.setup {
@@ -43,5 +44,8 @@ clue.setup {
   },
   window = {
     delay = 100,
+    config = {
+      width = 'auto',
+    },
   }
 }

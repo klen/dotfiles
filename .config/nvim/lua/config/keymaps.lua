@@ -121,9 +121,17 @@ map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 map("i", "<C-Space>", function()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  for _, client in ipairs(clients) do
+    if client:supports_method("textDocument/completion") then
+      vim.lsp.completion.get()
+      return
+    end
+  end
+  -- No LSP: fall back to buffer keyword completion
   vim.api.nvim_feedkeys(
-    vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true),
+    vim.api.nvim_replace_termcodes("<C-x><C-n>", true, false, true),
     "n",
     true
   )
-end, { expr = true, desc = "Trigger completion menu" })
+end, { desc = "Trigger completion menu" })

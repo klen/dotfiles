@@ -6,7 +6,9 @@ M.ensure_installed = {
   "marksman",
   "pyrefly",
   "ruff",
+  "rust_analyzer",
   "ts_ls",
+  "zls",
 }
 
 M.enabled = {
@@ -15,7 +17,9 @@ M.enabled = {
   "marksman",
   "pyrefly",
   "ruff",
+  "rust_analyzer",
   "ts_ls",
+  "zls",
 }
 
 return M
