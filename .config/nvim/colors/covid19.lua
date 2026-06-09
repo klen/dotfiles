@@ -84,8 +84,8 @@ local mauve = hsl("#d7afff")
 
 -- TODO: Not used
 local brandy = hsl("#d7d787")
--- local blue_sapphire = hsl "#005f87"
--- local midnight = hsl "#5f005f"
+local blue_sapphire = hsl "#005f87"
+local midnight = hsl "#5f005f"
 
 local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
@@ -115,10 +115,7 @@ local theme = lush(function(injected_functions)
     TermCursor { fg = background, bg = mellow_apricot },  -- cursor in a focused terminal
     TermCursorNC { TermCursor },                          -- cursor in an unfocused terminal
     Directory { fg = iceberg },                           -- directory names (and other special names in listings)
-    DiffAdd { fg = mantis },                              -- diff mode: Added line |diff.txt|
-    DiffChange { fg = iceberg },                          -- diff mode: Changed line |diff.txt|
-    DiffDelete { fg = fuzzy_wuzzy },                      -- diff mode: Deleted line |diff.txt|
-    DiffText { fg = iceberg, bg = total_black },          -- diff mode: Changed text within a changed line |diff.txt|
+
     EndOfBuffer { fg = background },                      -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     ErrorMsg { bg = dark_red },                           -- error messages on the command line
     VertSplit { fg = battleship_grey, bg = cocoa_brown }, -- the column separating vertically split windows
@@ -211,6 +208,11 @@ local theme = lush(function(injected_functions)
     Underlined { gui = "underline" }, -- (preferred) text that stands out, HTML links
     Bold { gui = "bold" },
     Italic { gui = "italic" },
+
+    DiffAdd { fg = mantis },                    -- diff mode: Added line |diff.txt|
+    DiffChange { fg = mellow_apricot },         -- diff mode: Changed line |diff.txt|
+    DiffDelete { fg = fuzzy_wuzzy },            -- diff mode: Deleted line |diff.txt|
+    DiffText { fg = brandy, bg = total_black }, -- diff mode: Changed text within a changed line |diff.txt|
 
     -- ("Ignore", below, may be invisible...)
     -- Ignore         { }, -- (preferred) left blank, hidden  |hl-Ignore|

@@ -14,22 +14,13 @@ vim.lsp.config("*", {
   capabilities = capabilities,
 })
 
--- Configure lua_ls for Neovim Lua development
-vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      runtime = { version = "LuaJIT" },
-      completion = {
-        callSnippet = "Disable",
-        keywordSnippet = "Disable",
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = { vim.env.VIMRUNTIME },
-      },
-    },
-  },
-})
+for _, server in ipairs(servers_enabled) do
+  local ok, custom_config = pcall(require, "lsp.servers." .. server)
+  if ok and custom_config then
+    vim.lsp.config(server, custom_config)
+  end
+end
+
 
 -- LSP
 vim.lsp.enable(servers_enabled)
