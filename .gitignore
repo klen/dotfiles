@@ -20,3 +20,4 @@
 /todo.txt
 bun.lock
 package-lock.json
+/.config/agents/trust.json
