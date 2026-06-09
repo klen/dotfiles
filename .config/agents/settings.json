@@ -1,5 +1,5 @@
 {
-  "defaultModel": "kimi-k2.6",
+  "defaultModel": "deepseek-v4-flash",
   "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "high",
   "enabledModels": [
@@ -14,7 +14,7 @@
     "lms/qwen3.5-9b-mlx",
     "lms/qwen3.5-4b-mlx"
   ],
-  "lastChangelogVersion": "0.78.1",
+  "lastChangelogVersion": "0.79.0",
   "packages": [
     "git:github.com/earendil-works/pi-review",
     "npm:@alexanderfortin/pi-tavily-tools",
