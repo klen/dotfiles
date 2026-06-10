@@ -1,3 +1,3 @@
-[submodule "common/.config/smartcd"]
-	path = common/.config/smartcd
+[submodule "common/.config/smartcd/source"]
+	path = common/.config/smartcd/source
 	url = https://github.com/cxreg/smartcd.git

@@ -31,20 +31,20 @@ vim.api.nvim_create_autocmd("User", {
   callback = function(args)
     local buf_id = args.data.buf_id
 
-    -- Toggle dotfiles
+    -- Toggle hidden
     vim.keymap.set(
       "n",
       "<M-h>",
-      function() utils.toggle_filter('dotfiles') end,
-      { buffer = buf_id, desc = "Toggle dotfiles" }
+      function() utils.toggle_filter('hidden') end,
+      { buffer = buf_id, desc = "Toggle hidden" }
     )
 
-    -- Toggle gitignore
+    -- Toggle ignore
     vim.keymap.set(
       "n",
       "<M-i>",
-      function() utils.toggle_filter('gitignore') end,
-      { buffer = buf_id, desc = "Toggle gitignore" }
+      function() utils.toggle_filter('ignore') end,
+      { buffer = buf_id, desc = "Toggle ignore" }
     )
 
     -- Split window and open file in it, then close explorer

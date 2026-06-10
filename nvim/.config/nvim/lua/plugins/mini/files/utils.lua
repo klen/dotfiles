@@ -55,13 +55,13 @@ M.reset_cache = function()
 end
 
 M.filters = {
-  dotfiles = {
-    enabled = true,
+  hidden = {
+    enabled = false,
     filter = function(entry)
       return not vim.startswith(entry.name, ".")
     end,
   },
-  gitignore = {
+  ignore = {
     enabled = true,
     filter = function(entry)
       -- vim.fn.system({ 'git', 'check-ignore', '--quiet', entry.path })

@@ -61,6 +61,11 @@ local function safe_setqflist(items, opts)
 end
 
 return {
+  sources = {
+    files = {
+      hidden = true,
+    },
+  },
   win = {
     input = {
       keys = {

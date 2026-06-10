@@ -5,6 +5,7 @@ vim.pack.add {
 local snacks = require "snacks"
 
 snacks.setup {
+  ---@diagnostic disable-next-line: different-requires
   picker = require('plugins.snacks.picker'),       -- A fuzzy finder for Neovim's built-in pickers
   bigfile = require('plugins.snacks.bigfile'),     -- Disable plugins and filetype detection for large files
   terminal = require('plugins.snacks.terminal'),   -- Toggle a terminal with <leader>t

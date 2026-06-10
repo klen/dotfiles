@@ -1,8 +1,9 @@
 *.retry
+
 /.ansible
-/.config/env.local
-/.config/nvim-lazy
-/.config/nvim-old
+/.bundle
+/.local
+/.rumdl_cache
 
 /.smartcd/inodes
 /.smartcd/scripts
