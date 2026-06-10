@@ -1,9 +1,4 @@
-[ -d /opt/homebrew ] && HOMEBREW_PREFIX="/opt/homebrew" || HOMEBREW_PREFIX="/usr/local"
-
-case ":${PATH}:" in
-  *:"${HOMEBREW_PREFIX}/bin":*) ;;
-  *) PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}" ;;
-esac
+source $XDG_CONFIG_HOME/bash/include/homebrew/path.sh
 
 HOMEBREW_CELLAR="${HOMEBREW_PREFIX}/Cellar";
 HOMEBREW_REPOSITORY="${HOMEBREW_PREFIX}";

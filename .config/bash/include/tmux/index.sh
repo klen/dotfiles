@@ -1,3 +1,14 @@
+
+type -P tmux >/dev/null && {
+  # # Make tmux use the same PATH as the shell
+  # tmux set-environment -g PATH "$PATH"
+
+  # Auto run tmux on remote servers
+  if [ ! -z "$SSH_CLIENT" ] && [ -z $TMUX ]; then
+    exec tmux new-session -A -s ssh
+  fi
+}
+
 type -P tmuxp >/dev/null 2>&1 && {
   alias tml='tmuxp load -y'
 

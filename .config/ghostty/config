@@ -1,4 +1,4 @@
-command = ~/bin/tmux-start.sh
+command = ~/.config/bash/include/tmux/start.sh
 
 link-url = true
 maximize = true
@@ -46,6 +46,12 @@ keybind = super+ctrl+arrow_down=unbind
 # Rebind default keybindings to tmux
 # ----------------------------------
 
+# tmux prefix
+keybind = super+a=text:\x01
+keybind = super+p=esc:p
+# copy-mode
+keybind = super+[=esc:[
+keybind = super+/=esc:/
 # new window
 keybind = super+t=esc:t
 # new session

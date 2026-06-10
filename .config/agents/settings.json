@@ -14,7 +14,7 @@
     "lms/qwen3.5-9b-mlx",
     "lms/qwen3.5-4b-mlx"
   ],
-  "lastChangelogVersion": "0.79.0",
+  "lastChangelogVersion": "0.79.1",
   "packages": [
     "git:github.com/earendil-works/pi-review",
     "npm:@alexanderfortin/pi-tavily-tools",
