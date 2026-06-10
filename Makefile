@@ -57,6 +57,19 @@ epel:
 	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
 	sudo rpm -Uvh epel-release-7*.rpm
 
+stow-new:
+	@stow -v -t $(HOME) agents
+	@stow -v -t $(HOME) bash
+	@stow -v -t $(HOME) common
+	@stow -v -t $(HOME) ghostty
+	@stow -v -t $(HOME) git
+	@stow -v -t $(HOME) js
+	@stow -v -t $(HOME) nvim
+	@stow -v -t $(HOME) python
+	@stow -v -t $(HOME) tmux
+	@stow -v -t $(HOME) vim
+	@stow -v -t $(HOME) zsh
+
 .PHONY: stow
 stow:
 	@rm -rf ~/.bashrc

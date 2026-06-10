@@ -1,6 +1,0 @@
-session_name: lazygit
-windows:
-  - window_name: lazygit
-    focus: true
-    panes:
-      - shell_command: "lazygit; exit"
