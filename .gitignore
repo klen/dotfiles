@@ -3,7 +3,7 @@
 /.ansible
 /.bundle
 /.local
-/.rumdl_cache
+.rumdl_cache
 
 /.smartcd/inodes
 /.smartcd/scripts
