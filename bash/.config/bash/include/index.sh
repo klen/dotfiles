@@ -10,7 +10,7 @@ source $XDG_CONFIG_HOME/bash/include/yandex.sh
 # Languages
 source $XDG_CONFIG_HOME/bash/include/go.sh
 source $XDG_CONFIG_HOME/bash/include/lua.sh
-source $XDG_CONFIG_HOME/bash/include/python.sh
+source $XDG_CONFIG_HOME/python.sh
 source $XDG_CONFIG_HOME/bash/include/rust.sh
 source $XDG_CONFIG_HOME/bash/include/ruby.sh
 
