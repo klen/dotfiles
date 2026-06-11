@@ -1,11 +1,10 @@
 #!/bin/bash
 
 SOURCE=$@
-echo "Previewing $SOURCE"
 
 [[ -f "$SOURCE/README.md" ]] && {
-  bat "$SOURCE/README.md"
+  bat --color=always "$SOURCE/README.md"
   return
 }
 
-ls -la "$SOURCE"
+(command -v gls >/dev/null && gls --color=always -1 --group-directories-first "$SOURCE" || CLICOLOR_FORCE=1 ls -G -1 "$SOURCE")
