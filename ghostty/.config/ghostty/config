@@ -1,4 +1,4 @@
-command = ~/.config/bash/include/tmux/start.sh
+command = ~/.config/tmux/bin/shell.sh
 
 link-url = true
 maximize = true

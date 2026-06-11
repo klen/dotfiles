@@ -33,30 +33,8 @@ source $XDG_CONFIG_HOME/bash/ps.sh
 # Setup completions
 source /etc/bash_completion 2>/dev/null || source $XDG_CONFIG_HOME/bash/include/bash-completion
 
-# Setup tools
-source $XDG_CONFIG_HOME/bash/include/homebrew/index.sh
-source $XDG_CONFIG_HOME/bash/include/dotfiles.sh
-
-source $XDG_CONFIG_HOME/bash/include/agents.sh
-source $XDG_CONFIG_HOME/bash/include/android.sh
-source $XDG_CONFIG_HOME/bash/include/llm.sh
-source $XDG_CONFIG_HOME/bash/include/yandex.sh
-
-# Languages
-source $XDG_CONFIG_HOME/bash/include/go.sh
-source $XDG_CONFIG_HOME/bash/include/lua.sh
-source $XDG_CONFIG_HOME/bash/include/python.sh
-source $XDG_CONFIG_HOME/bash/include/rust.sh
-source $XDG_CONFIG_HOME/bash/include/ruby.sh
-
-# Apps
-source $XDG_CONFIG_HOME/bash/include/docker.sh
-source $XDG_CONFIG_HOME/bash/include/fzf.sh
-source $XDG_CONFIG_HOME/bash/include/git.sh
-source $XDG_CONFIG_HOME/bash/include/pass.sh
-source $XDG_CONFIG_HOME/bash/include/zoxide.sh
-
-source $XDG_CONFIG_HOME/bash/include/tmux/index.sh
+# Setup tools and apps
+source $XDG_CONFIG_HOME/bash/include/index.sh
 
 # Aliases
 source $XDG_CONFIG_HOME/bash/aliases.sh

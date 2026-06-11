@@ -60,7 +60,7 @@ epel:
 STOW_CMD = stow -v -t $(HOME)
 .PHONY: stow
 stow:
-	@rm -rf ~/.bashrc
+	@if [ -e "$(HOME)/.bashrc" ] && [ ! -L "$(HOME)/.bashrc" ]; then rm -f "$(HOME)/.bashrc"; fi
 	@$(STOW_CMD) agents
 	@$(STOW_CMD) bash
 	@$(STOW_CMD) common
