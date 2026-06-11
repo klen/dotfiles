@@ -1,0 +1,55 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+blacklist = ["scratch"]
+
+[default_session]
+startup_command = "ls -la"
+preview_command = "~/.config/sesh/preview.sh {}"
+
+
+[[session]]
+name = "bash"
+path = "~/dotfiles/bash/.config/bash"
+startup_command = "nvim bashrc"
+
+[[session]]
+name = "ghostty"
+path = "~/dotfiles/ghostty/.config/ghostty"
+startup_command = "nvim config"
+
+[[session]]
+name = "nvim"
+path = "~/dotfiles/nvim/.config/nvim"
+startup_command = "nvim init.lua"
+
+[[session]]
+name = "tmux"
+path = "~/dotfiles/tmux/.config/tmux"
+startup_command = "nvim tmux.conf"
+
+[[session]]
+name = "sesh"
+path = "~/dotfiles/tmux/.config/sesh"
+startup_command = "nvim sesh.toml"
+
+[[session]]
+name = "agents"
+path = "~/dotfiles/agents/.config/agents"
+
+# Personal projects
+[[session]]
+name = "team-tracker"
+path = "~/projects/team-tracker"
+windows = ["api", "web"]
+
+[[window]]
+name = "api"
+path = "~/projects/team-tracker/api"
+
+[[window]]
+name = "web"
+path = "~/projects/team-tracker/web"
+
+[[session]]
+name = "vibe"
+path = "~/projects/ticketscloud"

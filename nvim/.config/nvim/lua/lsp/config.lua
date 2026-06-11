@@ -7,6 +7,7 @@ M.ensure_installed = {
   "pyrefly",
   "ruff",
   "rust_analyzer",
+  "taplo",
   "ts_ls",
   "zls",
 }
@@ -18,6 +19,7 @@ M.enabled = {
   "pyrefly",
   "ruff",
   "rust_analyzer",
+  "taplo",
   "ts_ls",
   "zls",
 }

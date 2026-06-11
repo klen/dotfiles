@@ -1,5 +1,5 @@
 {
-  "defaultModel": "deepseek-v4-flash",
+  "defaultModel": "qwen3.6-plus",
   "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "high",
   "enabledModels": [
@@ -27,6 +27,7 @@
     "git:github.com/code-yeongyu/pi-bash-timeout"
   ],
   "theme": "covid19",
+  "quietStartup": true,
   "editorPaddingX": 1,
   "skills": [
     "+skills/debug/SKILL.md"
