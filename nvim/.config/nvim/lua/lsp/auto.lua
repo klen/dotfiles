@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = group,
   callback = function(ev)
     local bufnr = ev.buf
-    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if not client then return end
 
     -- Enable document color if supported by the LSP server
@@ -37,6 +37,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Auto fixAll on save
     if client:supports_method('textDocument/codeAction') then
+      -- Check if the server supports 'source.fixAll' code actions
+      local cap = client.server_capabilities.codeActionProvider
+
+      if type(cap) == 'table' and cap.codeActionKinds then
+        if not vim.tbl_contains(cap.codeActionKinds, 'source.fixAll') then
+          return
+        end
+      end
+
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = group,
         buffer = bufnr,
