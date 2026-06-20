@@ -31,6 +31,7 @@ Your tasks:
     * split tests that verify too many things;
     * remove duplication;
     * make the Arrange / Act / Assert flow obvious through code structure, naming, and spacing;
+    * do not add comments such as `Arrange`, `Act`, `Assert` or similar section markers;
     * avoid explanatory comments where the code can be made self-explanatory.
 4. Keep the existing test framework and project style.
 5. Do not change production behavior unless a small change is strictly necessary for testability.
