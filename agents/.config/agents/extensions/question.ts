@@ -6,7 +6,7 @@
  */
 
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import { Editor, type EditorTheme, Key, matchesKey, Text, truncateToWidth } from "@mariozechner/pi-tui";
+import { Editor, type EditorTheme, Key, matchesKey, Text, truncateToWidth, visibleWidth, wrapTextWithAnsi } from "@mariozechner/pi-tui";
 import { Type } from "@sinclair/typebox";
 
 // Types
@@ -306,7 +306,14 @@ export default function question(pi: ExtensionAPI) {
 								add(prefix + theme.fg(color, `${i + 1}. ${opt.label}`));
 							}
 							if (opt.description) {
-								add(`     ${theme.fg("muted", opt.description)}`);
+								const descPrefix = "     ";
+								const descPrefixWidth = visibleWidth(descPrefix);
+								const descWidth = width - descPrefixWidth;
+								const wrappedDesc = wrapTextWithAnsi(theme.fg("muted", opt.description), descWidth);
+								const continuationPrefix = " ".repeat(descPrefixWidth);
+								for (let j = 0; j < wrappedDesc.length; j++) {
+									add(j === 0 ? descPrefix + wrappedDesc[j] : continuationPrefix + wrappedDesc[j]);
+								}
 							}
 						}
 					}
