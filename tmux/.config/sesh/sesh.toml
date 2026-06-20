@@ -40,7 +40,7 @@ path = "~/dotfiles/agents/.config/agents"
 [[session]]
 name = "team-tracker"
 path = "~/projects/team-tracker"
-windows = ["api", "web"]
+windows = ["api", "web", "devops"]
 
 [[window]]
 name = "api"
@@ -49,6 +49,10 @@ path = "~/projects/team-tracker/api"
 [[window]]
 name = "web"
 path = "~/projects/team-tracker/web"
+
+[[window]]
+name = "devops"
+path = "~/projects/team-tracker/devops"
 
 [[session]]
 name = "vibe"
