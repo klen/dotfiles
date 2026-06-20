@@ -1,5 +1,6 @@
 {
-  "tiny": "opencode-go/deepseek-v4-flash",
+  "tiny": "opencode/deepseek-v4-flash-free",
   "coder": "opencode-go/kimi-k2.5",
-  "plan": "opencode-go/deepseek-v4-pro"
+  "plan": "opencode-go/deepseek-v4-pro",
+  "local": "lms/google/gemma-4-26b-a4b-qat"
 }

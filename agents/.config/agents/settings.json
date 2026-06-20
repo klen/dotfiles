@@ -1,20 +1,21 @@
 {
-  "defaultModel": "qwen3.6-plus",
-  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4-flash-free",
+  "defaultProvider": "opencode",
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "alias/tiny",
     "alias/coder",
     "alias/plan",
-    "opencode-go/deepseek-v4-flash",
+    "alias/local",
+    "opencode/deepseek-v4-flash-free",
     "opencode-go/deepseek-v4-pro",
-    "opencode-go/kimi-k2.6",
-    "opencode-go/qwen3.6-plus",
+    "opencode-go/kimi-k2.7-code",
+    "opencode-go/qwen3.7-plus",
     "lms/qwen3.6-35b-a3b",
     "lms/qwen3.5-9b-mlx",
     "lms/qwen3.5-4b-mlx"
   ],
-  "lastChangelogVersion": "0.79.1",
+  "lastChangelogVersion": "0.79.8",
   "packages": [
     "git:github.com/earendil-works/pi-review",
     "npm:@alexanderfortin/pi-tavily-tools",
