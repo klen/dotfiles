@@ -14,14 +14,14 @@ map('n', '<leader>gd', ':Gdiffsplit<CR>', { desc = 'Git diff' })
 map('n', '<leader>gb', ':Git blame<CR>', { desc = 'Git blame' })
 map('n', '<leader>gh', ':Git browse<CR>', { desc = 'Git browse' })
 
--- Set up an autocommand to close the fugitive buffer with 'q'
-local utils = require('utils')
-
-vim.api.nvim_create_autocmd('FileType', {
-  group = utils.autogroup('git'),
-  pattern = 'fugitive',
+-- Fugitive status buffer mappings (fires after full initialisation)
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'FugitiveIndex',
+  group = vim.api.nvim_create_augroup('git', { clear = true }),
   callback = function()
-    vim.opt_local.bufhidden = 'delete'
-    vim.keymap.set('n', 'q', "<cmd>close<cr>", { buffer = true, desc = "Close test output" })
+    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = true, desc = 'Close fugitive buffer' })
+    -- Reuse fugitive-native mappings: 'o' = split, 'gO' = vsplit
+    vim.keymap.set("n", "<C-s>", "o", { buffer = true, remap = true, desc = "Open in horizontal split" })
+    vim.keymap.set("n", "<C-v>", "gO", { buffer = true, remap = true, desc = "Open in vertical split" })
   end,
 })
