@@ -37,8 +37,9 @@ return {
     -- Recent files, sessions, and actions
     { title = { { "Recent Files", hl = "functioncall" } }, padding = { 1, 2 } },
     { section = "recent_files",                            indent = 2,        cwd = true },
-    { title = { { "Sessions", hl = "functioncall" } },     padding = { 1, 2 } },
-    { section = "projects",                                indent = 2, },
+    -- Projects section
+    -- { title = { { "Sessions", hl = "functioncall" } },     padding = { 1, 2 } },
+    -- { section = "projects",                                indent = 2, },
     { title = { { "Actions", hl = "functioncall" } },      padding = { 1, 2 } },
     { section = "keys",                                    indent = 2 },
     -- A random fortune cookie message
