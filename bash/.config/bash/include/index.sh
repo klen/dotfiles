@@ -18,7 +18,7 @@ source $XDG_CONFIG_HOME/python.sh
 source $XDG_CONFIG_HOME/docker.sh
 source $XDG_CONFIG_HOME/fzf.sh
 source $XDG_CONFIG_HOME/git/init.sh
-source $XDG_CONFIG_HOME/pass.sh
+source $XDG_CONFIG_HOME/pass/init.sh
 source $XDG_CONFIG_HOME/pi/init.sh
 source $XDG_CONFIG_HOME/zoxide.sh
 

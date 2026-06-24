@@ -10,7 +10,7 @@ help:
 # target: update - Setup the system with ansible
 update:
 	@git fetch origin
-	@git rebase origin/master
+	@git rebase origin/main
 	@git submodule update --init
 
 .PHONY: ansible
@@ -68,6 +68,7 @@ stow:
 	@$(STOW_CMD) git
 	@$(STOW_CMD) js
 	@$(STOW_CMD) nvim
+	@$(STOW_CMD) pass
 	@$(STOW_CMD) python
 	@$(STOW_CMD) tmux
 	@$(STOW_CMD) vim
@@ -82,6 +83,7 @@ unstow:
 	@$(STOW_CMD) -D git
 	@$(STOW_CMD) -D js
 	@$(STOW_CMD) -D nvim
+	@$(STOW_CMD) -D pass
 	@$(STOW_CMD) -D python
 	@$(STOW_CMD) -D tmux
 	@$(STOW_CMD) -D vim
