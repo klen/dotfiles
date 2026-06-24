@@ -109,8 +109,8 @@ map("n", "<leader>dg", ":diffget<CR>", { desc = "Diff get" })
 -- Terminal
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-map("t", "<Esc>", [[<C-\\><C-n>]], { desc = "Exit terminal mode" })
-map("t", "<C-[>", [[<C-\\><C-n>]], { desc = "Exit terminal mode" })
+-- Terminal exit: use default <C-\><C-n>
+map("t", "<C-[>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
 map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
 map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
