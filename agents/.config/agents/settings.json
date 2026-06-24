@@ -1,6 +1,6 @@
 {
-  "defaultModel": "deepseek-v4-flash-free",
-  "defaultProvider": "opencode",
+  "defaultModel": "deepseek-v4-pro",
+  "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "alias/tiny",
