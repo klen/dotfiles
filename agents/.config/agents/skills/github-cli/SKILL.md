@@ -1,6 +1,7 @@
 ---
 name: github-cli
 description: Use the `gh` CLI for all GitHub interactions — issues, PRs, discussions, releases, repos, Actions, and API calls. Prefer `gh` over direct web browsing, web search, or raw git/HTTPS API calls whenever the target is on GitHub. Avoid cloning repos to read files; use `gh api` or `gh repo view` instead.
+user-invocable: false
 ---
 
 # GitHub CLI (`gh`)

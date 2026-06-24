@@ -8,7 +8,7 @@ M.ensure_installed = {
   "ruff",
   "rust_analyzer",
   "taplo",
-  "ts_ls",
+  "vtsls",
   "zls",
 }
 
@@ -20,7 +20,7 @@ M.enabled = {
   "ruff",
   "rust_analyzer",
   "taplo",
-  "ts_ls",
+  "vtsls",
   "zls",
 }
 

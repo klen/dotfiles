@@ -2,6 +2,7 @@
 name: coverage
 description: "Evaluate test coverage and fill real gaps with high-value tests."
 user-invocable: true
+disable-model-invocation: true
 argument-hint: "[optional: file path or module to evaluate]"
 ---
 
