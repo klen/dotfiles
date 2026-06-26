@@ -64,6 +64,7 @@ stow:
 	@$(STOW_CMD) agents
 	@$(STOW_CMD) bash
 	@$(STOW_CMD) common
+	@$(STOW_CMD) docker
 	@$(STOW_CMD) ghostty
 	@$(STOW_CMD) git
 	@$(STOW_CMD) js
@@ -79,6 +80,7 @@ unstow:
 	@$(STOW_CMD) -D agents
 	@$(STOW_CMD) -D bash
 	@$(STOW_CMD) -D common
+	@$(STOW_CMD) -D docker
 	@$(STOW_CMD) -D ghostty
 	@$(STOW_CMD) -D git
 	@$(STOW_CMD) -D js
