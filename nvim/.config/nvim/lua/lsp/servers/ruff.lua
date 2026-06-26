@@ -1,5 +1,3 @@
-local utils = require('lsp.utils')
-
 return {
   -- Only activate LSP for files inside a project (git repo or pyproject.toml).
   -- Files outside any project (temp dirs, netrw, etc.) are silently skipped.
@@ -9,7 +7,4 @@ return {
       on_dir(root)
     end
   end,
-  handlers = {
-    ["textDocument/publishDiagnostics"] = utils.filter_diagnostics(vim.diagnostic.severity.INFO),
-  },
 }
