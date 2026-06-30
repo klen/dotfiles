@@ -67,7 +67,7 @@ keybind = super+z=esc:z
 # Reload tmux config
 keybind = super+r=esc:r
 # Close window/pane
-keybind = super+w=esc:X
+keybind = super+w=esc:x
 # Move windows
 keybind = super+shift+left_bracket=text:\x1b{
 keybind = super+shift+right_bracket=text:\x1b}
