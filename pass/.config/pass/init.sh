@@ -13,6 +13,6 @@ __password_store_extension_complete_otp() {
 }
 
 # Create a symlink .password-store/.extensions -> ~/.config/pass/.extensions if not already exists
-if [[ ! -L "$HOME/.password-store/.extensions" ]]; then
+if [[ -d "$HOME/.password-store" && ! -L "$HOME/.password-store/.extensions" ]]; then
   ln -s "$HOME/.config/pass/.extensions" "$HOME/.password-store/.extensions"
 fi

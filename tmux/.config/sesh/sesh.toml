@@ -6,7 +6,6 @@ blacklist = ["scratch"]
 startup_command = "ls -la"
 preview_command = "~/.config/sesh/preview.sh {}"
 
-
 [[session]]
 name = "bash"
 path = "~/dotfiles/bash/.config/bash"
@@ -36,7 +35,14 @@ startup_command = "nvim sesh.toml"
 name = "agents"
 path = "~/dotfiles/agents/.config/agents"
 
-# Personal projects
+[[session]]
+name = "vibe"
+path = "~/projects/ticketscloud.org/vibe-api"
+
+[[session]]
+name = "checkpoint"
+path = "~/projects/ticketscloud.org/checkpoint"
+
 [[session]]
 name = "team-tracker"
 path = "~/projects/team-tracker"
@@ -53,7 +59,3 @@ path = "~/projects/team-tracker/web"
 [[window]]
 name = "devops"
 path = "~/projects/team-tracker/devops"
-
-[[session]]
-name = "vibe"
-path = "~/projects/ticketscloud"
