@@ -12,7 +12,6 @@
 bun.lock
 package-lock.json
 
-/agents/.config/agents/trust.json
 /common/.config/karabiner/automatic_backups/
 /common/.config/opencode/.rumdl_cache/
 /common/.config/opencode/opencode.jsonc.bak

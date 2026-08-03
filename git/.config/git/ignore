@@ -21,6 +21,7 @@
 .vimrc.lua
 .ropeproject
 .tags
+.pi-tavily-temp
 
 # Compiled Python files
 # ---------------------
