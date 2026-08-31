@@ -4,7 +4,7 @@ type -P tmux >/dev/null && {
   # tmux set-environment -g PATH "$PATH"
 
   # Auto run tmux on remote servers
-  if [ ! -z "$SSH_CLIENT" ] && [ -z $TMUX ]; then
+  if [ -n "$SSH_CLIENT" ] && [ -z "$TMUX" ]; then
     exec tmux new-session -A -s ssh
   fi
 }
