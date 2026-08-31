@@ -13,4 +13,56 @@ M.filter_diagnostics = function(min_severity)
   end
 end
 
+-- True if the client advertises `kind` or any `kind.*` sub-kind (e.g. 'source.fixAll.ruff').
+M.client_supports_kind = function(client, kind)
+  if not client:supports_method('textDocument/codeAction') then
+    return false
+  end
+  local provider = client.server_capabilities.codeActionProvider
+  if type(provider) ~= 'table' then
+    return false
+  end
+  for _, k in ipairs(provider.codeActionKinds or {}) do
+    if k == kind or vim.startswith(k, kind .. '.') then
+      return true
+    end
+  end
+  return false
+end
+
+-- Request and apply a code action of `kind` synchronously, resolving stubs if needed.
+M.apply_code_action = function (bufnr, kind)
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+    if M.client_supports_kind(client, kind) then
+      local params = {
+        textDocument = vim.lsp.util.make_text_document_params(bufnr),
+        range = {
+          start = { line = 0, character = 0 },
+          ['end'] = { line = vim.api.nvim_buf_line_count(bufnr), character = 0 },
+        },
+        context = { only = { kind }, diagnostics = {} },
+      }
+
+      local res = client:request_sync('textDocument/codeAction', params, 3000, bufnr)
+      if res and not res.err and res.result then
+        for _, action in ipairs(res.result) do
+          -- Some servers (ruff) return a stub without edit/command that must be resolved.
+          if not action.edit and not action.command and client:supports_method('codeAction/resolve') then
+            local resolved = client:request_sync('codeAction/resolve', action, 3000, bufnr)
+            if resolved and not resolved.err and resolved.result then
+              action = resolved.result
+            end
+          end
+          if action.edit then
+            vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+          end
+          if action.command then
+            client:exec_cmd(action.command, { bufnr = bufnr, client_id = client.id })
+          end
+        end
+      end
+    end
+  end
+end
+
 return M

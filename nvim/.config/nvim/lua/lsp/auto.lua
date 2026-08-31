@@ -1,4 +1,5 @@
 local utils = require('utils')
+local lsp_utils = require('lsp.utils')
 local group = utils.autogroup('lsp', {})
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -23,35 +24,28 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    -- Autoformat and fixAll on save if supported by the LSP server
-    local has_formatting = client:supports_method('textDocument/formatting')
-    local has_fix_all = client:supports_method('textDocument/codeAction') and
-        client.server_capabilities.codeActionProvider and
-        vim.tbl_contains(client.server_capabilities.codeActionProvider.codeActionKinds or {}, 'source.fixAll')
-
-    if has_formatting or has_fix_all then
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        group = group,
-        buffer = bufnr,
-        callback = function()
-          if has_formatting then
-            vim.lsp.buf.format { async = false, bufnr = bufnr, id = client.id, timeout_ms = 3000 }
-          end
-          if has_fix_all then
-            vim.lsp.buf.code_action({
-              context = {
-                only = { 'source.fixAll' },
-                diagnostics = {},
-              },
-              apply = true,
-            })
-          end
-        end,
-        desc = 'Autoformat and fixAll on save',
-      })
-    end
-
-    -- Bind LSP-related keymaps
+    -- Bind LSP-related keymaps (per client)
     require('lsp.keymaps')(bufnr, client)
+
+    -- Register the save hook only once per buffer: multiple LSP clients can
+    -- attach (e.g. pyrefly + ruff), but we want a single deterministic pass.
+    if vim.b[bufnr].lsp_save_hook then return end
+    vim.b[bufnr].lsp_save_hook = true
+
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = group,
+      buffer = bufnr,
+      callback = function()
+        -- 1) sort imports, then 2) apply lint fixes — both synchronously
+        lsp_utils.apply_code_action(bufnr, 'source.organizeImports')
+        lsp_utils.apply_code_action(bufnr, 'source.fixAll')
+
+        -- 3) formatting last, synchronous so it's the final pass before write
+        if #vim.lsp.get_clients({ bufnr = bufnr, method = 'textDocument/formatting' }) > 0 then
+          vim.lsp.buf.format { async = false, bufnr = bufnr, timeout_ms = 3000 }
+        end
+      end,
+      desc = 'FixAll and format on save',
+    })
   end,
 })

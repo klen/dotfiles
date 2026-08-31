@@ -1,10 +1,10 @@
 local utils = require('utils')
 local keymaps = {
   -- LSP actions
-  { keys = "gd",          func = vim.lsp.buf.definition,              desc = "Goto Definition",        has = "definitionProvider",    nowait = true },
+  { keys = "gd",          func = vim.lsp.buf.definition,              desc = "Goto Definition",        has = "definitionProvider",     nowait = true },
   { keys = "gy",          func = vim.lsp.buf.type_definition,         desc = "Goto Type Definition",   has = "typeDefinitionProvider", nowait = true },
   { keys = "gi",          func = vim.lsp.buf.implementation,          desc = "Goto Implementation",    has = "implementationProvider", nowait = true },
-  { keys = "gr",          func = vim.lsp.buf.references,              desc = "Goto References",        has = "referencesProvider",    nowait = true },
+  { keys = "gr",          func = vim.lsp.buf.references,              desc = "Goto References",        has = "referencesProvider",     nowait = true },
   { keys = "<leader>cs",  func = vim.lsp.buf.signature_help,          desc = "Signature Help",         has = "signatureHelpProvider" },
   { keys = "gl",          func = vim.lsp.codelens.run,                desc = "Run CodeLens Action",    has = "codeLensProvider" },
   { keys = "K",           func = vim.lsp.buf.hover,                   desc = "Hover Documentation",    has = "hoverProvider" },
