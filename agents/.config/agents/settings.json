@@ -7,12 +7,12 @@
     "alias/coder",
     "alias/plan",
     "alias/local",
-    "opencode/deepseek-v4-flash-free",
+    "opencode/deepseek-v4-flash",
     "opencode-go/deepseek-v4-pro",
     "opencode-go/kimi-k3",
     "maples-lan/qwen3.5-4b-mlx"
   ],
-  "lastChangelogVersion": "0.83.0",
+  "lastChangelogVersion": "0.84.4",
   "packages": [
     "git:github.com/earendil-works/pi-review",
     "npm:@alexanderfortin/pi-tavily-tools",
