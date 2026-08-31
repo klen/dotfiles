@@ -10,7 +10,6 @@ snacks.setup {
   bigfile = require('plugins.snacks.bigfile'),     -- Disable plugins and filetype detection for large files
   terminal = require('plugins.snacks.terminal'),   -- Toggle a terminal with <leader>t
   dashboard = require('plugins.snacks.dashboard'), -- A startup screen with a random header and some buttons
-  indent = require('plugins.snacks.indent'),       -- Show indent lines
   toggle = require('plugins.snacks.toggle'),       -- Toggle options with <leader>to
   notifier = require('plugins.snacks.notifier'),   -- A notification manager
   scroll = {},                                     -- Smooth scrolling

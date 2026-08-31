@@ -23,42 +23,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    -- Autoformat on save
-    if client:supports_method('textDocument/formatting') then
+    -- Autoformat and fixAll on save if supported by the LSP server
+    local has_formatting = client:supports_method('textDocument/formatting')
+    local has_fix_all = client:supports_method('textDocument/codeAction') and
+        client.server_capabilities.codeActionProvider and
+        vim.tbl_contains(client.server_capabilities.codeActionProvider.codeActionKinds or {}, 'source.fixAll')
+
+    if has_formatting or has_fix_all then
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = group,
         buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format { async = false, bufnr = bufnr, id = client.id, timeout_ms = 3000 }
+          if has_formatting then
+            vim.lsp.buf.format { async = false, bufnr = bufnr, id = client.id, timeout_ms = 3000 }
+          end
+          if has_fix_all then
+            vim.lsp.buf.code_action({
+              context = {
+                only = { 'source.fixAll' },
+                diagnostics = {},
+              },
+              apply = true,
+            })
+          end
         end,
-        desc = 'Autoformat on save',
-      })
-    end
-
-    -- Auto fixAll on save
-    if client:supports_method('textDocument/codeAction') then
-      -- Check if the server supports 'source.fixAll' code actions
-      local cap = client.server_capabilities.codeActionProvider
-
-      if type(cap) == 'table' and cap.codeActionKinds then
-        if not vim.tbl_contains(cap.codeActionKinds, 'source.fixAll') then
-          return
-        end
-      end
-
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        group = group,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.code_action({
-            context = {
-              only = { 'source.fixAll' },
-              diagnostics = {},
-            },
-            apply = true,
-          })
-        end,
-        desc = 'Auto fixAll on save',
+        desc = 'Autoformat and fixAll on save',
       })
     end
 
