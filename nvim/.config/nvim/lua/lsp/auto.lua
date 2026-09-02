@@ -35,9 +35,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = group,
       buffer = bufnr,
+
+      -- Run the following in order on save
       callback = function()
-        -- 1) sort imports, then 2) apply lint fixes — both synchronously
+        -- 1) sort imports
         lsp_utils.apply_code_action(bufnr, 'source.organizeImports')
+
+        -- 2) apply all available fixes (e.g. ruff, eslint, etc.)
         lsp_utils.apply_code_action(bufnr, 'source.fixAll')
 
         -- 3) formatting last, synchronous so it's the final pass before write

@@ -13,16 +13,32 @@ M.filter_diagnostics = function(min_severity)
   end
 end
 
+-- Collect the code action kinds a client advertises, from both static capabilities
+-- and dynamically registered ones (registered via client/registerCapability).
+M.client_code_action_kinds = function(client)
+  local kinds = {}
+
+  local provider = client.server_capabilities.codeActionProvider
+  if type(provider) == 'table' then
+    vim.list_extend(kinds, provider.codeActionKinds or {})
+  end
+
+  for _, reg in ipairs(client.registrations.codeActionProvider or {}) do
+    local opts = reg.registerOptions
+    if type(opts) == 'table' then
+      vim.list_extend(kinds, opts.codeActionKinds or {})
+    end
+  end
+
+  return kinds
+end
+
 -- True if the client advertises `kind` or any `kind.*` sub-kind (e.g. 'source.fixAll.ruff').
 M.client_supports_kind = function(client, kind)
   if not client:supports_method('textDocument/codeAction') then
     return false
   end
-  local provider = client.server_capabilities.codeActionProvider
-  if type(provider) ~= 'table' then
-    return false
-  end
-  for _, k in ipairs(provider.codeActionKinds or {}) do
+  for _, k in ipairs(M.client_code_action_kinds(client)) do
     if k == kind or vim.startswith(k, kind .. '.') then
       return true
     end
@@ -31,7 +47,7 @@ M.client_supports_kind = function(client, kind)
 end
 
 -- Request and apply a code action of `kind` synchronously, resolving stubs if needed.
-M.apply_code_action = function (bufnr, kind)
+M.apply_code_action = function(bufnr, kind)
   for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
     if M.client_supports_kind(client, kind) then
       local params = {
