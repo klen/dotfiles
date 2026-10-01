@@ -22,7 +22,10 @@ map("n", "<leader>fr", function() picker.recent() end, { desc = "Find recent fil
 map('n', '<leader>gl', function() picker.git_log_file() end, { desc = "Git commits (file)" })
 map('n', '<leader>gL', function() picker.git_log() end, { desc = "Git commits (project)" })
 
-map("n", "<leader>fs", function() picker.lsp_workspace_symbols() end, { desc = "Find LSP symbols" })
+-- Some servers (e.g. pyrefly) return the same symbol multiple times; drop exact duplicates.
+map("n", "<leader>fs", function()
+  picker.lsp_workspace_symbols({ transform = require('lsp.utils').dedup_symbols })
+end, { desc = "Find LSP symbols" })
 
 -- Workaround for snacks.nvim setqflist crash when item.buf references an invalid buffer.
 -- Grep and some other pickers may leave item.buf as a stale or invalid bufnr,

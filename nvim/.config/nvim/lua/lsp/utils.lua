@@ -13,6 +13,17 @@ M.filter_diagnostics = function(min_severity)
   end
 end
 
+-- Picker transform: drop items that duplicate an earlier one (same name/file/position).
+-- Some LSP servers (e.g. pyrefly) return the same workspace symbol multiple times.
+M.dedup_symbols = function(item, ctx)
+  ctx.meta.dedup = ctx.meta.dedup or {}
+  local key = table.concat({ item.name or '', item.file or '', item.pos[1], item.pos[2] }, '\0')
+  if ctx.meta.dedup[key] then
+    return false
+  end
+  ctx.meta.dedup[key] = true
+end
+
 -- Collect the code action kinds a client advertises, from both static capabilities
 -- and dynamically registered ones (registered via client/registerCapability).
 M.client_code_action_kinds = function(client)
