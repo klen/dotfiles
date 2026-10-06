@@ -59,3 +59,8 @@ path = "~/projects/team-tracker/web"
 [[window]]
 name = "devops"
 path = "~/projects/team-tracker/devops"
+
+[[session]]
+name = "pyradio"
+startup_command = "pyradio"
+path = "~/dotfiles/common/.config/pyradio"

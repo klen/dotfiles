@@ -7,7 +7,7 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
   branch_name=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
 
   # Check local changes
-  if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+  if [[ -n $(git --no-optional-locks status --porcelain 2>/dev/null) ]]; then
     has_local_changes=1
     dirty=" *"
   else
