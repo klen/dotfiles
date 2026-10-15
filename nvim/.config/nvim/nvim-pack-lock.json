@@ -1,11 +1,11 @@
 {
   "plugins": {
     "copilot.lua": {
-      "rev": "7df55b20b5b653941f0bcff87e559cabb6fafeb0",
+      "rev": "84c129a0fe6841743ad7180fb714d4018e132f1e",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "kulala.nvim": {
-      "rev": "a627ebcafe2d053fa395b2d324dc9f6cbb61495e",
+      "rev": "eebe4464c8937ad7313008a8b690e63d140d6638",
       "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "lush.nvim": {
@@ -13,7 +13,7 @@
       "src": "https://github.com/rktjmp/lush.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "21c5b3ebeaa0412e28096bb0701434c51c1fbf76",
+      "rev": "00b5473cca4db5b410ff4bae724e3b6e21f2687f",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "c594be5b095204e99473825ec2dee872e7409a4d",
+      "rev": "8831fa150fa26492cfe135801fa498132f1491d2",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-bqf": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/kevinhwang91/nvim-bqf"
     },
     "nvim-lspconfig": {
-      "rev": "bfcc0171a43f22afa61d927ffe9fcb6cb85dc99e",
+      "rev": "ac062d0d01c019c0dbdb798968f3e5d8b35c3853",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-test": {
@@ -37,11 +37,11 @@
       "src": "https://github.com/klen/nvim-test"
     },
     "nvim-treesitter": {
-      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "rev": "ca581c3436fc2b236847f5b739ebc263739e5ca6",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "pi.nvim": {
-      "rev": "4458f7cef8923ba396728e7218d66002fa07426e",
+      "rev": "0ef8a23f4705cb62c299a27b79942ca2c7fba59f",
       "src": "https://github.com/pablopunk/pi.nvim"
     },
     "snacks.nvim": {
@@ -49,7 +49,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tmux.nvim": {
-      "rev": "32ceaf2793582955ef9576809730878c4d2d9426",
+      "rev": "8d79b15bc8f115c956f467788db58b827afd0764",
       "src": "https://github.com/aserowy/tmux.nvim"
     },
     "vim-fugitive": {
@@ -57,7 +57,7 @@
       "src": "https://github.com/tpope/vim-fugitive"
     },
     "vim-moonfly-colors": {
-      "rev": "261664f92ed51cf0c077555b2d4b2530307eac17",
+      "rev": "2c883835f5b7b380a0a9e80695c420f7efebdfe4",
       "src": "https://github.com/bluz71/vim-moonfly-colors"
     }
   }

@@ -6,10 +6,7 @@ vim.pack.add {
 local map = vim.keymap.set
 
 map('n', '<leader>g', '', { desc = '+git' })
-map('n', '<leader>gs', function()
-  vim.cmd('above Git')
-  vim.cmd('resize 18')
-end, { desc = 'Git status' })
+map('n', '<leader>gs', ':Git<CR>', { desc = 'Git status' })
 map('n', '<leader>gd', ':Gdiffsplit<CR>', { desc = 'Git diff' })
 map('n', '<leader>gb', ':Git blame<CR>', { desc = 'Git blame' })
 map('n', '<leader>gh', ':Git browse<CR>', { desc = 'Git browse' })

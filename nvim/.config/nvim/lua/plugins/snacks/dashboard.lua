@@ -51,6 +51,17 @@ return {
       }
     end,
   },
+  preset = {
+    keys = {
+      { key = "e", desc = "New file",     action = ":ene | startinsert" },
+      { key = "f", desc = "Find file",    action = ":lua Snacks.dashboard.pick('files')" },
+      { key = "r", desc = "Recent files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+      { key = "g", desc = "Grep text",    action = ":lua Snacks.dashboard.pick('live_grep')" },
+      { key = "p", desc = "Plugins",      action = ":PackUpdate" },
+      { key = "q", desc = "Quit",         action = ":qa" },
+
+    },
+  },
   formats = {
     icon = function() return { "", width = 0 } end,
     key = function(item)
