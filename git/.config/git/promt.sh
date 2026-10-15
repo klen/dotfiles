@@ -537,8 +537,8 @@ __git_ps1 ()
 		if [ -n "${GIT_PS1_SHOWDIRTYSTATE-}" ] &&
 		   [ "$(git config --bool bash.showDirtyState)" != "false" ]
 		then
-			git diff --no-ext-diff --quiet || w="*"
-			git diff --no-ext-diff --cached --quiet || i="+"
+			git diff-files --quiet || w="*"
+			git diff-index --quiet --cached HEAD -- || i="+"
 			if [ -z "$short_sha" ] && [ -z "$i" ]; then
 				i="#"
 			fi
