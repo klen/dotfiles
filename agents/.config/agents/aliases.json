@@ -1,6 +1,5 @@
 {
-  "tiny": "opencode/deepseek-v4-flash-free",
-  "coder": "opencode-go/deepseek-v4-pro",
-  "plan": "opencode-go/deepseek-v4-pro",
-  "local": "maples-lan/qwen3.5-4b-mlx"
+  "free": "opencode-go/space-bunny-free",
+  "tiny": "opencode-go/deepseek-v4.1-flash",
+  "main": "opencode-go/deepseek-v4-pro"
 }

@@ -1,20 +1,17 @@
 {
-  "defaultModel": "deepseek-v4-pro",
+  "defaultModel": "deepseek-v4.1-flash",
   "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "high",
   "enabledModels": [
+    "alias/free",
     "alias/tiny",
-    "alias/coder",
-    "alias/plan",
-    "alias/local",
-    "opencode/deepseek-v4-flash",
+    "alias/main",
+    "opencode-go/deepseek-v4.1-flash",
     "opencode-go/deepseek-v4-pro",
-    "opencode-go/kimi-k3",
-    "maples-lan/qwen3.5-4b-mlx"
+    "opencode-go/space-bunny-free"
   ],
-  "lastChangelogVersion": "0.84.4",
+  "lastChangelogVersion": "1.3.0",
   "packages": [
-    "git:github.com/earendil-works/pi-review",
     "npm:@alexanderfortin/pi-tavily-tools",
     {
       "source": "../../projects/pi/bash-guard",
@@ -22,7 +19,8 @@
         "-index.ts"
       ]
     },
-    "git:github.com/code-yeongyu/pi-bash-timeout"
+    "git:github.com/code-yeongyu/pi-bash-timeout",
+    "npm:pi-trim"
   ],
   "theme": "covid19",
   "quietStartup": true,

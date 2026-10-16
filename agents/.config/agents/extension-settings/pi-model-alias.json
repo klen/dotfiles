@@ -1,0 +1,14 @@
+{
+  "$schema": "./schemas/pi-model-alias.schema.json",
+  "aliases": [
+    {
+      "provider": "opencode-go",
+      "model": "space-bunny-free",
+      "alias": "free",
+      "name": "Free"
+    }
+
+  ],
+  "providerAliases": [],
+  "stableProviderColumn": true
+}
