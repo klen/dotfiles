@@ -1,5 +1,5 @@
 {
-  "free": "opencode-go/space-bunny-free",
+  "free": "opencode-go/minimax-m3.1-flash-free",
   "tiny": "opencode-go/deepseek-v4.1-flash",
   "main": "opencode-go/deepseek-v4-pro"
 }

@@ -1,6 +1,6 @@
 ---
 description: Refactor tests in the specified file according to FIRST principles from Clean Code by Robert C. Martin.
-model: alias/coder
+model: alias/tiny
 thinking: medium
 argument-hint: <FILEPATHS>
 ---
