@@ -1,0 +1,62 @@
+# covid19 - based on the covid19 Neovim colorscheme
+# (~/dotfiles/nvim/.config/nvim/colors/covid19.lua)
+# Normal { fg = #c7c7c7 bg = #121212 }
+
+# Main foreground and background
+Stations            #c7c7c7 #121212
+
+# Playing station text color
+# (background color will come from Stations)
+Active Station      #87af5f
+
+# Status bar foreground and background
+# (StatusLine: fg = total_black, bg = foreground)
+Status Bar          #000000 #c7c7c7
+
+# Normal cursor foreground and background
+# (cool_grey)
+Normal Cursor       #121212 #8787af
+
+# Cursor foreground and background
+# when cursor on playing station
+# (iceberg)
+Active Cursor       #121212 #87afd7
+
+# Cursor foreground and background
+# This is the Line Editor cursor
+# (IncSearch: fg = background, bg = brandy)
+Edit Cursor         #121212 #d7d787
+
+# Text color for extra function indication
+# and jump numbers within the status bar
+# (background color will come from Stations)
+Extra Func          #d75f5f
+
+# Text color for URL
+# (background color will come from Stations)
+# (Function: fg = iceberg)
+PyRadio URL         #87afd7
+
+# Border color for the Main Window
+# (background color will come from Stations)
+# (cool_grey)
+Border              #8787af
+
+# Luminance Color Factor
+# The factor to lighten or darken Stations background
+# color, to get a calculated color used as background
+# for secondary windows
+# Valid values: 0 - 0.2
+Color Factor        0.06
+
+# Message window border foreground and background.
+# The background color can be left unset.
+# (Identifier: fg = mauve)
+Messages Border     #d7afff
+
+# Theme Transparency
+# Values are:
+#   0: No transparency
+#   1: Theme is transparent
+#   2: Obey config setting (default)
+transparency        0
