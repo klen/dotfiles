@@ -9,6 +9,16 @@ local keymaps = {
   { keys = "gl",          func = vim.lsp.codelens.run,                desc = "Run CodeLens Action",    has = "codeLensProvider" },
   { keys = "K",           func = vim.lsp.buf.hover,                   desc = "Hover Documentation",    has = "hoverProvider" },
 
+  -- Display
+  {
+    keys = "<leader>lh",
+    func = function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+    end,
+    desc = "Toggle Inlay Hints",
+    has = "inlayHintProvider",
+  },
+
   -- Workspace management
   { keys = "<leader>lw",  func = '',                                  desc = "+workspace" },
   { keys = "<leader>lwa", func = vim.lsp.buf.add_workspace_folder,    desc = "Add Workspace Folder" },
