@@ -5,3 +5,22 @@ panes:
   - command: <agent>
     focus: true
   - split: horizontal
+theme:
+  scheme: default
+  mode: dark
+  custom:
+    text: "#c7c7c7"
+    dimmed: "#878787"
+    border: "#3a3a3a"
+    help_border: "#3a3a3a"
+    help_muted: "#606060"
+    header: "#87afd7"
+    keycap: "#d7afff"
+    info: "#87afd7"
+    success: "#87af5f"
+    warning: "#ffb964"
+    danger: "#d75f5f"
+    accent: "#ffb964"
+    current_row_bg: "#1c1c1c"
+    highlight_row_bg: "#444444"
+    current_worktree_fg: "#ffb964"
