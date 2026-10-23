@@ -1,0 +1,4 @@
+#!/bin/sh
+# Exit 0 if the foreground process of the given pane tty ($1) is a vi-like editor.
+# Lets tmux decide whether <C-hjkl> belongs to the editor or to pane navigation.
+ps -o state= -o comm= -t "$1" | grep -iqE '^[^TXZ ]+ +(\S+/)?g?\.?(view|n?vim?x?)(-wrapped)?(diff)?$'
