@@ -1,5 +1,5 @@
 ---
-name: review
+name: review-begin
 description: >
   Quality review of a change: is the logic right, is it safe, does it hold
   under real load, is risky code tested, is it fast enough, and is every line
@@ -96,3 +96,4 @@ Nothing found: `What this change does:`, then `Looks good. Ship.` and one line
 on what you checked.
 
 Lists findings, changes no code.
+
