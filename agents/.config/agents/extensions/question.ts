@@ -223,12 +223,12 @@ export default function question(pi: ExtensionAPI) {
 					}
 
 					// Option navigation
-					if (matchesKey(data, Key.up)) {
+					if (matchesKey(data, Key.up) || data === "k") {
 						optionIndex = Math.max(0, optionIndex - 1);
 						refresh();
 						return;
 					}
-					if (matchesKey(data, Key.down)) {
+					if (matchesKey(data, Key.down) || data === "j") {
 						optionIndex = Math.min(opts.length - 1, optionIndex + 1);
 						refresh();
 						return;
@@ -250,7 +250,7 @@ export default function question(pi: ExtensionAPI) {
 					}
 
 					// Cancel
-					if (matchesKey(data, Key.escape)) {
+					if (matchesKey(data, Key.escape) || data === "q") {
 						submit(true);
 					}
 				}
@@ -360,8 +360,8 @@ export default function question(pi: ExtensionAPI) {
 					lines.push("");
 					if (!inputMode) {
 						const help = isMulti
-							? " Tab/←→ navigate • ↑↓ select • Enter confirm • Esc cancel"
-							: " ↑↓ navigate • Enter select • Esc cancel";
+							? " Tab/←→ navigate • ↑↓/jk select • Enter confirm • q/Esc cancel"
+							: " ↑↓/jk navigate • Enter select • q/Esc cancel";
 						add(theme.fg("dim", help));
 					}
 					add(theme.fg("accent", "─".repeat(width)));

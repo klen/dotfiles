@@ -17,23 +17,24 @@ const frames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "
 
 export default function(pi: ExtensionAPI) {
   // Not in tmux, no-op extension
-  if (!process.env.TMUX) return;
+  if (!process.env.TMUX || !process.env.TMUX_PANE) return;
 
   let title: string | undefined;
   let isWorking = false;
   let loader: NodeJS.Timeout | undefined;
   let activeTool: string | undefined;
 
-  /* ─── Capture original title ─── */
-  (async () => {
-    const result = await tmuxExec(pi, ["display-message", "-p", "#{window_name}"]);
-    if (result.code === 0) originalTitle = result.stdout.trim();
-  })();
-
   /* ─── Title Events ─── */
 
   pi.on("session_start", async (_event, ctx) => {
-    currentWindowId = await getCurrentWindowId(pi, ctx.cwd);
+    // Target our own pane: without it tmux resolves to the session's active
+    // window, so background agents would rename the calling window.
+    const info = await tmuxExec(pi, ["display-message", "-p", "-t", process.env.TMUX_PANE!, "#{window_id} #{window_name}"]);
+    if (info.code === 0) {
+      const [winId, ...name] = info.stdout.trim().split(" ");
+      currentWindowId = winId;
+      originalTitle = name.join(" ");
+    }
     title = getTitle(ctx)
     updateTitle(pi, title);
   });
@@ -102,14 +103,6 @@ async function tmuxExec(pi: ExtensionAPI, args: string[]): Promise<{ stdout: str
   }
 }
 
-
-async function getCurrentWindowId(pi: ExtensionAPI, cwd: string): Promise<string | undefined> {
-  const result = await tmuxExec(pi, ["display-message", "-p", "#{window_id}"]);
-  if (result.code === 0) {
-    return result.stdout.trim();
-  }
-  return undefined;
-}
 
 /* ─── 1. Dynamic Titles ─── */
 
