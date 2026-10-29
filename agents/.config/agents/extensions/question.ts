@@ -198,13 +198,13 @@ export default function question(pi: ExtensionAPI) {
 
 					// Tab navigation (multi-question only)
 					if (isMulti) {
-						if (matchesKey(data, Key.tab) || matchesKey(data, Key.right)) {
+						if (matchesKey(data, Key.tab) || matchesKey(data, Key.right) || data === "l") {
 							currentTab = (currentTab + 1) % totalTabs;
 							optionIndex = 0;
 							refresh();
 							return;
 						}
-						if (matchesKey(data, Key.shift("tab")) || matchesKey(data, Key.left)) {
+						if (matchesKey(data, Key.shift("tab")) || matchesKey(data, Key.left) || data === "h") {
 							currentTab = (currentTab - 1 + totalTabs) % totalTabs;
 							optionIndex = 0;
 							refresh();
@@ -360,7 +360,7 @@ export default function question(pi: ExtensionAPI) {
 					lines.push("");
 					if (!inputMode) {
 						const help = isMulti
-							? " Tab/←→ navigate • ↑↓/jk select • Enter confirm • q/Esc cancel"
+							? " Tab/hl/←→ navigate • ↑↓/jk select • Enter confirm • q/Esc cancel"
 							: " ↑↓/jk navigate • Enter select • q/Esc cancel";
 						add(theme.fg("dim", help));
 					}
