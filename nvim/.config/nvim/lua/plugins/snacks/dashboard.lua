@@ -57,6 +57,7 @@ return {
       { key = "f", desc = "Find file",    action = ":lua Snacks.dashboard.pick('files')" },
       { key = "r", desc = "Recent files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
       { key = "g", desc = "Grep text",    action = ":lua Snacks.dashboard.pick('live_grep')" },
+      { key = "s", desc = "Git status",   action = ":Git | only" },
       { key = "p", desc = "Plugins",      action = ":PackUpdate" },
       { key = "q", desc = "Quit",         action = ":qa" },
 
