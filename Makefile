@@ -60,7 +60,7 @@ epel:
 STOW_CMD = stow -v -t $(HOME)
 .PHONY: stow
 stow:
-	@if [ -e "$(HOME)/.bashrc" ] && [ ! -L "$(HOME)/.bashrc" ]; then rm -f "$(HOME)/.bashrc"; fi
+	@for f in .bashrc .bash_profile; do if [ -e "$(HOME)/$$f" ] && [ ! -L "$(HOME)/$$f" ]; then mv -f "$(HOME)/$$f" "$(HOME)/$$f.bak"; fi; done
 	@$(STOW_CMD) agents
 	@$(STOW_CMD) bash
 	@$(STOW_CMD) common
