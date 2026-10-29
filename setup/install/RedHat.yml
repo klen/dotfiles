@@ -1,13 +1,14 @@
 ---
 
 - yum:
-    name:
-    - ctags-etags
-    - gitflow
-    - htop
-    - mercurial
-    - python-pip
-    - screen
-    - unzip
-    - wget
+    update_cache: true
 
+- yum:
+    name:
+    - "@Development Tools" # Debian: build-essential
+    - htop
+    - python3-pip
+    - screen
+    - stow # EPEL
+    - unzip
+    - vim-enhanced # Debian: vim-nox
