@@ -5,6 +5,7 @@
 - apt: name=python3-pip
 - apt: name=screen
 - apt: name=stow
+- apt: name=tmux
 - apt: name=unzip
 - apt: name=vim-nox
 # vim:sw=2

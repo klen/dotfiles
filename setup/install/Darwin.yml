@@ -13,10 +13,11 @@
 - name: Install terminal utils
   homebrew:
     name:
-      - tmux
-      - tmuxp
       - bash # shell
       - bash-completion # shell-completion
+      - tmux
+      - workmux
+      - sesh
       - coreutils
       - pass
       - ripgrep # Search tool like grep and The Silver Searcher

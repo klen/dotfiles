@@ -10,5 +10,6 @@
     - python3-pip
     - screen
     - stow # EPEL
+    - tmux
     - unzip
     - vim-enhanced # Debian: vim-nox
