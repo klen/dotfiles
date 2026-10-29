@@ -62,6 +62,30 @@ map("n", "n", "nzzzv", { desc = "Next search match (centered)" })
 map("n", "N", "Nzzzv", { desc = "Previous search match (centered)" })
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-- Copy
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+-- Copy location as `path:line (name)`; in visual mode the selected line range.
+local function copy_location(text)
+  vim.fn.setreg("+", text)
+  vim.notify("Copied: " .. text, vim.log.levels.INFO)
+end
+
+map("n", "<leader>cc", function()
+  local line, col = vim.fn.line("."), vim.fn.col(".")
+  local under = vim.fn.getline("."):sub(col, col)
+  local name = under:match("[%w_]") and vim.fn.expand("<cword>")
+  copy_location(("%s:%d%s"):format(vim.fn.expand("%:."), line, name and (" (" .. name .. ")") or ""))
+end, { desc = "Copy location (path:line (name))" })
+
+map("x", "<leader>cc", function()
+  local a, b = vim.fn.line("v"), vim.fn.line(".")
+  if a > b then a, b = b, a end
+  copy_location(a == b and ("%s:%d"):format(vim.fn.expand("%:."), a)
+    or ("%s:%d-%d"):format(vim.fn.expand("%:."), a, b))
+end, { desc = "Copy location (path:line-line)" })
+
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Editing
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
