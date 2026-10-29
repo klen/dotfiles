@@ -36,15 +36,6 @@ name = "agents"
 path = "~/dotfiles/agents/.config/agents"
 
 [[session]]
-name = "vibe"
-path = "~/projects/ticketscloud.org/vibe-api"
-windows = ["vb-devops"]
-
-[[window]]
-name = "vb-devops"
-path = "~/projects/ticketscloud.org/vibe-devops"
-
-[[session]]
 name = "tc"
 path = "~/projects/ticketscloud.org/deploy"
 
@@ -52,6 +43,21 @@ path = "~/projects/ticketscloud.org/deploy"
 name = "team-tracker"
 path = "~/projects/team-tracker"
 windows = ["tt-api", "tt-web", "tt-devops"]
+
+[[session]]
+name = "pyradio"
+startup_command = "pyradio"
+path = "~/dotfiles/common/.config/pyradio"
+
+# Projects
+
+## TicketsCloud
+
+[[window]]
+name = "tc-devops"
+path = "~/projects/ticketscloud.org/deploy"
+
+## Team Tracker
 
 [[window]]
 name = "tt-api"
@@ -65,7 +71,13 @@ path = "~/projects/team-tracker/web"
 name = "tt-devops"
 path = "~/projects/team-tracker/devops"
 
+## Vibeapp
+
 [[session]]
-name = "pyradio"
-startup_command = "pyradio"
-path = "~/dotfiles/common/.config/pyradio"
+name = "vibe"
+path = "~/projects/ticketscloud.org/vibe-api"
+windows = ["vb-devops"]
+
+[[window]]
+name = "vb-devops"
+path = "~/projects/ticketscloud.org/vibe-devops"

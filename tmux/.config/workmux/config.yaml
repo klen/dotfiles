@@ -4,7 +4,6 @@ agent: pi
 panes:
   - command: <agent>
     focus: true
-  - split: horizontal
 theme:
   scheme: default
   mode: dark
