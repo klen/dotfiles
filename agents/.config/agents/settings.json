@@ -9,7 +9,7 @@
     "opencode-go/deepseek-v4.1-flash",
     "opencode-go/deepseek-v4-pro"
   ],
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "packages": [
     "npm:@alexanderfortin/pi-tavily-tools",
     {
@@ -29,5 +29,10 @@
   ],
   "extensions": [
     "-extensions/go-to-bed.ts"
-  ]
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:@alexanderfortin/pi-tavily-tools\",\"scope\":\"user\"}": "0.7.4",
+    "{\"source\":\"git:github.com/code-yeongyu/pi-bash-timeout\",\"scope\":\"user\"}": "0.1.2",
+    "{\"source\":\"npm:pi-trim\",\"scope\":\"user\"}": "0.2.1"
+  }
 }
