@@ -264,6 +264,14 @@ export default function question(pi: ExtensionAPI) {
 
 					// Helper to add truncated line
 					const add = (s: string) => lines.push(truncateToWidth(s, width));
+					// Wrap long text, keeping the prefix on the first line and aligning the rest
+					const addWrapped = (s: string, prefix = " ") => {
+						const prefixWidth = visibleWidth(prefix);
+						const wrapped = wrapTextWithAnsi(s, Math.max(1, width - prefixWidth));
+						for (let i = 0; i < wrapped.length; i++) {
+							add((i === 0 ? prefix : " ".repeat(prefixWidth)) + wrapped[i]);
+						}
+					};
 
 					add(theme.fg("accent", "─".repeat(width)));
 
@@ -301,26 +309,19 @@ export default function question(pi: ExtensionAPI) {
 							const color = selected ? "accent" : "text";
 							// Mark "Type something" differently when in input mode
 							if (isOther && inputMode) {
-								add(prefix + theme.fg("accent", `${i + 1}. ${opt.label} ✎`));
+								addWrapped(theme.fg("accent", `${i + 1}. ${opt.label} ✎`), prefix);
 							} else {
-								add(prefix + theme.fg(color, `${i + 1}. ${opt.label}`));
+								addWrapped(theme.fg(color, `${i + 1}. ${opt.label}`), prefix);
 							}
 							if (opt.description) {
-								const descPrefix = "     ";
-								const descPrefixWidth = visibleWidth(descPrefix);
-								const descWidth = width - descPrefixWidth;
-								const wrappedDesc = wrapTextWithAnsi(theme.fg("muted", opt.description), descWidth);
-								const continuationPrefix = " ".repeat(descPrefixWidth);
-								for (let j = 0; j < wrappedDesc.length; j++) {
-									add(j === 0 ? descPrefix + wrappedDesc[j] : continuationPrefix + wrappedDesc[j]);
-								}
+								addWrapped(theme.fg("muted", opt.description), "     ");
 							}
 						}
 					}
 
 					// Content
 					if (inputMode && q) {
-						add(theme.fg("text", ` ${q.prompt}`));
+						addWrapped(theme.fg("text", q.prompt));
 						lines.push("");
 						// Show options for reference
 						renderOptions();
@@ -338,7 +339,7 @@ export default function question(pi: ExtensionAPI) {
 							const answer = answers.get(question.id);
 							if (answer) {
 								const prefix = answer.wasCustom ? "(wrote) " : "";
-								add(`${theme.fg("muted", ` ${question.label}: `)}${theme.fg("text", prefix + answer.label)}`);
+								addWrapped(`${theme.fg("muted", `${question.label}: `)}${theme.fg("text", prefix + answer.label)}`);
 							}
 						}
 						lines.push("");
@@ -352,7 +353,7 @@ export default function question(pi: ExtensionAPI) {
 							add(theme.fg("warning", ` Unanswered: ${missing}`));
 						}
 					} else if (q) {
-						add(theme.fg("text", ` ${q.prompt}`));
+						addWrapped(theme.fg("text", q.prompt));
 						lines.push("");
 						renderOptions();
 					}
