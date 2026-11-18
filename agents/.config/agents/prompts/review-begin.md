@@ -17,6 +17,11 @@ This is a report the user asked for, so give it in full.
 - Review what the user names: uncommitted or staged changes, a branch, a PR
   link, or files. Nothing named: the uncommitted changes, or the last commit
   if there are none.
+- The PR, branch, commits or description may link a task. Read it before the
+  diff, and its parent or epic when it has one: the task says what was asked,
+  the parent says why. `gh issue view <number> --comments` for GitHub issues,
+  otherwise open the link. If the task cannot be read, say so under
+  `Not checked`.
 - Read the diff, then the code it touches: callers of every changed function,
   the functions it calls, the tests, the README.
 - Trace the real flow: where data comes in, what is stored, what goes out.
@@ -30,7 +35,8 @@ This is a report the user asked for, so give it in full.
 
 1. **Bug:** wrong result, crash, missed edge case (empty, zero, last item,
    rounding, time zones), a caller broken by the change, a fix applied in one
-   caller while the shared function stays broken.
+   caller while the shared function stays broken, a requirement from the
+   linked task that is missing or not done as asked.
 2. **Risk:** security holes (injection, weak randomness, secrets, missing
    checks on input from users), data loss (errors swallowed, writes in the
    wrong order, no transaction).
