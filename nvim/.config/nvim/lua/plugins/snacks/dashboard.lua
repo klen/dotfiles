@@ -53,7 +53,7 @@ return {
   },
   preset = {
     keys = {
-      { key = "e", desc = "New file",     action = ":ene | startinsert" },
+      { key = "n", desc = "New file",     action = ":ene | startinsert" },
       { key = "f", desc = "Find file",    action = ":lua Snacks.dashboard.pick('files')" },
       { key = "r", desc = "Recent files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
       { key = "g", desc = "Grep text",    action = ":lua Snacks.dashboard.pick('live_grep')" },

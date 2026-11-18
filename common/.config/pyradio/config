@@ -2,6 +2,6 @@
 # To get a full list of options execute: pyradio -pc
 # or examine the file: /Users/horneds/.local/pipx/venvs/pyradio/lib/python3.14/site-packages/pyradio/config
 #
-default_station = 10
+default_station = 20
 enable_notifications = 0
 theme = covid19
