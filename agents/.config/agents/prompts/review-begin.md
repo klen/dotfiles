@@ -14,14 +14,21 @@ This is a report the user asked for, so give it in full.
 
 ## 1. Understand first
 
+- Reviewing a branch or PR: start by merging `develop` into it, so you review
+  the code as it will land. `git fetch origin`, then merge `origin/develop`
+  (the remote, not a stale local copy). Resolve conflicts and report each one as
+  a finding when the right side is not obvious. If the merge cannot be done
+  cleanly, say why and review the branch as it is.
 - Review what the user names: uncommitted or staged changes, a branch, a PR
   link, or files. Nothing named: the uncommitted changes, or the last commit
   if there are none.
-- The PR, branch, commits or description may link a task. Read it before the
-  diff, and its parent or epic when it has one: the task says what was asked,
-  the parent says why. `gh issue view <number> --comments` for GitHub issues,
-  otherwise open the link. If the task cannot be read, say so under
-  `Not checked`.
+- A PR, branch, commit or description that links a task **must** be reviewed
+  together with that task. Read it before the diff, and its parent or epic when
+  it has one: the task says what was asked, the parent says why. `gh issue view
+  <number> --comments` for GitHub issues, otherwise open the link. Never skip
+  it because the tracker is not GitHub or the page looks tedious. Only "no task
+  linked" excuses a review without one; a link you could not open goes under
+  `Not checked`, with the reason.
 - Read the diff, then the code it touches: callers of every changed function,
   the functions it calls, the tests, the README.
 - Trace the real flow: where data comes in, what is stored, what goes out.
@@ -61,6 +68,8 @@ This is a report the user asked for, so give it in full.
 
 ## 3. Check before you report
 
+- A linked task was read, and every requirement in it was compared line by
+  line with the change. A review that skipped the task is not finished.
 - Every finding needs a concrete case: "this input or situation leads to this
   wrong result". No case, no finding.
 - Re-read the lines and confirm: the caller exists, the value can really be
@@ -101,5 +110,5 @@ End with:
 Nothing found: `What this change does:`, then `Looks good. Ship.` and one line
 on what you checked.
 
-Lists findings, changes no code.
+Lists findings; the develop merge is the only change it makes.
 
