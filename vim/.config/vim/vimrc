@@ -1,34 +1,26 @@
-" ================================
-" .vimrc klen <horneds@gmail.com>
-" ================================
+" Vim config
+"
+" Layout:
+"   config/               editor settings (options, keymaps, autocmds, filetypes, colorscheme)
+"   lsp/                  LSP setup (options, servers, keymaps, autocmds)
+"   plugins/              one file per plugin + the package manager
+"   autoload/helpers.vim  shared helper functions
 
 scriptencoding utf-8
 
-" Options
-source $HOME/.config/vim/opts.vim
+let mapleader = ' '
+let maplocalleader = ' '
 
-" Open help in a vsplit rather than a split
-command! -nargs=? -complete=help Help :vertical help <args>
-cabbrev h h<C-\>esubstitute(getcmdline(), '^h\>', 'Help', '')<CR>
+let s:dir = expand('<sfile>:p:h')
 
-" Enable extended matchit
-runtime macros/matchit.vim
+" Editor: options, keymaps, autocommands, filetypes
+execute 'source' fnameescape(s:dir . '/config/init.vim')
 
-" Key maps
-source $HOME/.config/vim/keymaps.vim
+" Plugins: packages, install/update, per-plugin config
+execute 'source' fnameescape(s:dir . '/plugins/init.vim')
 
-" Plugins
-source $HOME/.config/vim/plugins/init.vim
-
-" Color theme
-if !exists('g:colors_name')
-    set background=dark
-    try
-        colorscheme codedark
-    catch /.*/
-        colorscheme default
-    endtry
-endif
+" Colorscheme last, so plugin-provided schemes are available
+execute 'source' fnameescape(s:dir . '/config/ui.vim')
 
 " must be written at the last.  see :help 'secure'.
 set secure

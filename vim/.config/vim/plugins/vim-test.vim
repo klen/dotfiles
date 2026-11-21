@@ -1,12 +1,13 @@
-" Run tests
-Plug 'janko-m/vim-test', {'on': ['TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit']}
+" Test runner (vim-test)
 
-nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>tt :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
+scriptencoding utf-8
 
-let test#python#runner = 'pytest'
-let g:test#python#pytest#file_pattern = '\v(test[^/]+|[^/]+test)\.py$'
+let g:test#strategy = 'terminal'
+let g:test#python#runner = 'pytest'
+let test#python#pytest#file_pattern = '\v(test[^/]+|[^/]+test)\.py$'
 
+nnoremap <silent> <leader>tn :TestNearest<CR>
+nnoremap <silent> <leader>tf :TestFile<CR>
+nnoremap <silent> <leader>tl :TestLast<CR>
+nnoremap <silent> <leader>tt :TestSuite<CR>
+nnoremap <silent> <leader>tv :TestVisit<CR>
