@@ -1,10 +1,11 @@
 # dotfiles - Quickly navigate to and edit various dotfiles and configuration directories.
-# Usage: dotfiles [nvim|vim|bin|env|bash|<other>]
+# Usage: dotfiles [nvim|vim|bin|env|bash|update|<other>]
 #   nvim  - Open Neovim config directory and init.lua in nvim
 #   vim   - Open Vim config directory and init.vim in vim
 #   bin   - Open user's bin directory in nvim
 #   env   - Open env.local in config home with nvim
 #   bash  - Open bashrc in bash config directory with nvim
+#   update - Pull the latest dotfiles (make update)
 #   <other> - Navigate to the specified directory under config home
 #   (no argument) - Go to ~/dotfiles directory
 
@@ -38,6 +39,9 @@ dotfiles() {
       cd $DOTFILES_DIR/tmux/.config/tmux
       nvim $DOTFILES_DIR/tmux/.config/tmux/tmux.conf
       ;;
+    update)
+      make -C "$DOTFILES_DIR" update
+      ;;
     *)
       cd $DOTFILES_DIR/$1
       [[ -d .config/$1 ]] && cd .config/$1
@@ -56,7 +60,7 @@ _dotfiles_completion() {
   prev="${COMP_WORDS[COMP_CWORD - 1]}"
 
   # Hardcoded known targets
-  local opts="bash bin env nvim vim tmux"
+  local opts="bash bin env nvim vim tmux update"
   # Dynamically add directories from $DOTFILES_DIR/.config/
   local config_dirs dir
   for dir in $DOTFILES_DIR/*/; do
