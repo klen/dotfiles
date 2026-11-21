@@ -1,11 +1,11 @@
 {
   "plugins": {
     "copilot.lua": {
-      "rev": "9d23575513f1d934c28b9f933b9dd680c0dcd9e3",
+      "rev": "ba6c1c7e7b2b6b0a93838097bd09c7c83afa30d3",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "kulala.nvim": {
-      "rev": "125751ea9f41c1ee966c5c7e3032e3539dd2f33e",
+      "rev": "de0e6370e4ffa1a8da95cb4ff9b8a3057e0ac6e5",
       "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "lush.nvim": {
@@ -13,7 +13,7 @@
       "src": "https://github.com/rktjmp/lush.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "c4ef013d41f6db041b283eef55a63e579d76763f",
+      "rev": "761d376b5fbe6b21f659432ffadc1205c660176c",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "a6e23131010b800ecbab85fa6adc0ff38eae2c2d",
+      "rev": "b8a0af521530f8ee68c738657429eab59de6a2ae",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-bqf": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/kevinhwang91/nvim-bqf"
     },
     "nvim-lspconfig": {
-      "rev": "77b7432d4770d23b277d37923e5a08a442d8bb07",
+      "rev": "4648fd8ba5c678d7e2db75ae44ffac269bb589d8",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-test": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/klen/nvim-test"
     },
     "nvim-treesitter": {
-      "rev": "29212d826054bb2948fa9d3a99eca9bf6a050eb2",
+      "rev": "37e52c733ada9d8d544d53a763140ef1ba404353",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "pi.nvim": {
@@ -49,7 +49,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tmux.nvim": {
-      "rev": "c597dd163e6c0cc013e53c92f02218e1858dd27d",
+      "rev": "5971292e1322c1ae1c305bd6df58e6d1bf7527bb",
       "src": "https://github.com/aserowy/tmux.nvim"
     },
     "vim-fugitive": {
