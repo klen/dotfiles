@@ -1,6 +1,7 @@
 ---
 - apt: update_cache=yes cache_valid_time=2678400
 - apt: name=build-essential
+- apt: name=fzf
 - apt: name=htop
 - apt: name=python3-pip
 - apt: name=screen

@@ -6,6 +6,7 @@
 - yum:
     name:
     - "@Development Tools" # Debian: build-essential
+    - fzf # EPEL
     - htop
     - python3-pip
     - screen
