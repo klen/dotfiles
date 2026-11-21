@@ -5,7 +5,7 @@
 #   bin   - Open user's bin directory in nvim
 #   env   - Open env.local in config home with nvim
 #   bash  - Open bashrc in bash config directory with nvim
-#   update - Pull the latest dotfiles (make update)
+#   update - Pull the latest dotfiles, then reload bash and tmux configs
 #   <other> - Navigate to the specified directory under config home
 #   (no argument) - Go to ~/dotfiles directory
 
@@ -40,7 +40,9 @@ dotfiles() {
       nvim $DOTFILES_DIR/tmux/.config/tmux/tmux.conf
       ;;
     update)
-      make -C "$DOTFILES_DIR" update
+      make -C "$DOTFILES_DIR" update || return
+      source "$HOME/.bashrc"
+      if tmux list-sessions >/dev/null 2>&1; then "$HOME/.config/tmux/bin/reload"; fi
       ;;
     *)
       cd $DOTFILES_DIR/$1
