@@ -1,13 +1,8 @@
 local utils = require('utils')
 local keymaps = {
   -- LSP actions
-  { keys = "gd",          func = vim.lsp.buf.definition,              desc = "Goto Definition",        has = "definitionProvider",     nowait = true },
-  { keys = "gy",          func = vim.lsp.buf.type_definition,         desc = "Goto Type Definition",   has = "typeDefinitionProvider", nowait = true },
-  { keys = "gi",          func = vim.lsp.buf.implementation,          desc = "Goto Implementation",    has = "implementationProvider", nowait = true },
-  { keys = "gr",          func = vim.lsp.buf.references,              desc = "Goto References",        has = "referencesProvider",     nowait = true },
-  { keys = "<leader>cs",  func = vim.lsp.buf.signature_help,          desc = "Signature Help",         has = "signatureHelpProvider" },
-  { keys = "gl",          func = vim.lsp.codelens.run,                desc = "Run CodeLens Action",    has = "codeLensProvider" },
-  { keys = "K",           func = vim.lsp.buf.hover,                   desc = "Hover Documentation",    has = "hoverProvider" },
+  { keys = "grd",         func = vim.lsp.buf.definition,              desc = "Goto Definition",        has = "definitionProvider",     nowait = true },
+  { keys = "grs",         func = vim.lsp.buf.signature_help,          desc = "Signature Help",         has = "signatureHelpProvider" },
 
   -- Display
   {
@@ -32,11 +27,9 @@ local keymaps = {
   },
 
   -- Code actions
-  { keys = "<leader>cr", func = vim.lsp.buf.rename,                                 desc = "Rename Symbol" },
-  { keys = "<leader>ca", func = vim.lsp.buf.code_action,                            desc = "Code Action",           mode = { "n", "v" } },
-  { keys = "<leader>cf", func = function() vim.lsp.buf.format { async = true } end, desc = "Format Buffer with LSP" },
+  { keys = "grf",         func = function() vim.lsp.buf.format { async = true } end, desc = "Format Buffer with LSP" },
   {
-    keys = "<leader>cl",
+    keys = "grl",
     func = function()
       vim.lsp.buf.code_action({
         context = {
@@ -71,7 +64,7 @@ return function(bufnr, client)
         km.mode or "n",
         km.keys,
         km.func,
-        { buffer = bufnr, desc = "LSP: " .. km.desc, nowait = km.nowait }
+        { buffer = bufnr, desc = km.desc, nowait = km.nowait }
       )
     end
   end

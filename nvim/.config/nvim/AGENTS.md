@@ -13,7 +13,7 @@ lua/config/
   auto.lua                  -- Autocommands (e.g., yank highlight)
 lua/plugins/
   init.lua                  -- Requires all plugin files
-  <name>.lua                -- One file per plugin / plugin group
+  <name>.lua                -- One file per plugin (see naming convention below)
   mini/
     init.lua                -- Installs mini.nvim, requires submodules
     *.lua                   -- Individual mini module configs
@@ -26,10 +26,11 @@ nvim-pack-lock.json         -- Locked plugin versions (managed by nvim-pack)
 - **Indentation:** 2 spaces, no tabs.
 - **Strings:** Prefer single quotes for regular strings; use double quotes only when escaping single quotes is awkward.
 - **Plugin files:** Use `vim.pack.add({ src = 'https://github.com/...' })` to install. Place setup/config code below the install block.
+- **Plugin file naming:** one file per plugin, named after the plugin's repository name without the `.nvim`/`.lua` suffix: `lua/plugins/<name>.lua` or `lua/plugins/<name>/init.lua`. Examples: `nvim-treesitter` → `nvim-treesitter.lua`, `kulala.nvim` → `kulala.lua`, `mini.nvim` → `mini/init.lua`. `<leader>pl` + `<CR>` relies on this to jump to a plugin's config, so keep the names in sync.
 - **Mini submodules:** Add new mini configs in `lua/plugins/mini/<module>.lua`, then require it from `lua/plugins/mini/init.lua`.
 - **Keymaps:** Add global keymaps in `lua/config/keymaps.lua`. Use `desc` in options. Prefix plugin keymaps with `<leader>` where appropriate.
 - **No `return` in plugin files** — they execute directly, unlike lazy.nvim specs.
-- **LSP servers:** Register in `lua/plugins/mason.lua` (`ensure_installed`) and `lua/plugins/nvim-lspconfig.lua` (`vim.lsp.enable({...})`). Keep them in sync.
+- **LSP servers:** Register in `lua/plugins/mason-lspconfig.lua` (`ensure_installed`) and `lua/plugins/nvim-lspconfig.lua` (`vim.lsp.enable({...})`). Keep them in sync.
 
 ## Safe validation
 
@@ -66,13 +67,13 @@ nvim-pack-lock.json         -- Locked plugin versions (managed by nvim-pack)
 
 - **Package manager:** Uses Neovim 0.11 native `vim.pack.add()`, not lazy.nvim or packer. Plugins are downloaded on first startup and tracked in `nvim-pack-lock.json`.
 - **LSP:** Mason installs servers; `vim.lsp.enable()` activates them. Both lists must be kept in sync.
-- **Mini.nvim:** Many UI niceties (starter, statusline, files, pairs, surround, comment, clue, bufremove) come from this single plugin.
+- **Mini.nvim:** UI niceties (clue, files, pairs, statusline, surround) come from this single plugin. Commenting uses the built-in `gcc`/`gc`.
 - **Leader key:** Space (` `). Plugin keymaps should respect this.
 - **Clipboard:** `unnamedplus` is set; yank/delete interact with the system clipboard.
 
 ## Good defaults for agents
 
-- When adding a plugin, create `lua/plugins/<plugin>.lua`, require it from `lua/plugins/init.lua`, and keep the same structure: install block at top, setup/config below.
+- When adding a plugin, create `lua/plugins/<name>.lua` (per the naming convention), require it from `lua/plugins/init.lua`, and keep the same structure: install block at top, setup/config below.
 - When adding an autocommand, place it in `lua/config/auto.lua` inside the `config` augroup.
 - When adding a utility function, export it from `lua/utils.lua` and require where needed.
 - Preserve existing style: concise, minimal, no unnecessary abstractions.

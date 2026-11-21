@@ -1,4 +1,3 @@
-vim.opt.showtabline = 1 -- Show tabline only when there are at least two tabs
 vim.opt.tabline = "%!v:lua.tabline()"
 
 function _G.tabline()

@@ -24,6 +24,9 @@ clue.setup {
     -- Window commands
     { mode = 'n',          keys = '<C-w>' },
 
+    -- Built-in LSP group (`grn`, `gra`, `grr`, ...)
+    { mode = 'n',          keys = 'gr' },
+
     -- `z` key
     { mode = { 'n', 'x' }, keys = 'z' },
 
@@ -49,3 +52,17 @@ clue.setup {
     },
   }
 }
+
+-- Built-in `gr*` mappings carry raw API names as descriptions ("vim.lsp.buf.rename()").
+for keys, desc in pairs {
+  grn = 'Rename symbol',
+  gra = 'Code action',
+  grr = 'References',
+  gri = 'Implementation',
+  grt = 'Type definition',
+  grx = 'Run codelens',
+} do
+  if vim.fn.maparg(keys, 'n') ~= '' then
+    clue.set_mapping_desc('n', keys, desc)
+  end
+end

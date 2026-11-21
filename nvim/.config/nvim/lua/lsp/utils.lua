@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.filter_diagnostics = function(min_severity)
   local orig_diagnostics_publish = vim.lsp.handlers["textDocument/publishDiagnostics"]

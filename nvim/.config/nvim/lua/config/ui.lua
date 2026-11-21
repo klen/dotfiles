@@ -1,6 +1,5 @@
 -- Set colorscheme
-vim.opt.background = 'dark'    -- Set the background to dark for better color scheme support
-vim.cmd.colorscheme('covid19') -- Set the colorscheme to cat
+vim.cmd.colorscheme('covid19')
 
 -- Enable the new UI features in Neovim 0.10+
 if vim.fn.has("nvim-0.12") == 1 then

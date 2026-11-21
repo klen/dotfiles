@@ -8,7 +8,6 @@ local fn = vim.fn   -- for vim's built-in functions (stdpath, mkdir, etc.)
 opt.termguicolors = true  -- Enable 24-bit True Color support
 opt.cursorline = true     -- Highlight the current line
 opt.showmode = false      -- Disable the default mode indicator
-opt.laststatus = 2        -- Always show the statusline
 opt.winborder = 'rounded' -- Use rounded borders for floating windows
 opt.conceallevel = 2      -- Hide concealed text unless it has a custom replacement character
 opt.listchars = { tab = '⇥ ', trail = '·', extends = '⋯', precedes = '⋯', eol = '$', nbsp = '~' }
@@ -36,7 +35,6 @@ opt.matchpairs:append('<:>')      -- Add <> to the list of matchable pairs
 -- Completion
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-opt.autocomplete = false
 opt.complete = { 'o', '.' } -- Omni completion and completion from the current buffer
 opt.pumborder = 'rounded'
 opt.pumheight = 10          -- Limit the height of the popup menu
@@ -71,7 +69,7 @@ opt.sidescrolloff = 10 -- Same for horizontal scrolling
 
 opt.ignorecase = true -- Ignore case when searching
 opt.smartcase = true  -- But, if the search pattern contains uppercase, be case-sensitive
-opt.path = '**'       -- Allow searching in all subdirectories for file-finding commands
+opt.path:append('**') -- Also search all subdirectories (keeps the default `.,,`)
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Window Management
@@ -86,7 +84,6 @@ opt.winminwidth = 0   -- Allow windows to shrink to 0 columns
 -- Files / Backup
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-opt.backup = false      -- Do not create a backup file
 opt.writebackup = false -- Do not write to a backup file
 opt.swapfile = false    -- Do not create a swapfile
 

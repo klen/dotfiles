@@ -21,12 +21,9 @@ M.fast_save = function()
 end
 
 -- Safely require a module and apply a function to it if successful.
-M.safe_require = function(module_name, fn, fallback)
-  local status, module = pcall(require, module_name)
-  if not status then
-    if fallback then
-      return fallback()
-    end
+M.safe_require = function(module_name, fn)
+  local ok, module = pcall(require, module_name)
+  if not ok then
     vim.notify("Failed to load module: " .. module_name, vim.log.levels.WARN)
     return nil
   end

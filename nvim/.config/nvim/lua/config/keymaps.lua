@@ -1,6 +1,5 @@
 local utils = require("utils")
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- General
@@ -13,8 +12,7 @@ map("n", "<leader>dr", "<cmd>restart<cr>", { desc = "Restart NVIM" })
 map("n", "<C-c>", function()
   vim.cmd("nohlsearch")
   vim.cmd("diffupdate")
-  vim.api.nvim_command("redraw")
-  vim.api.nvim_buf_clear_namespace(0, 0, 0, -1)
+  vim.cmd("redraw")
   vim.snippet.stop()
 end, { desc = "Redraw / Clear hlsearch / Diff Update" })
 
@@ -90,16 +88,15 @@ end, { desc = "Copy location (path:line-line)" })
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 -- Delete character under cursor without copying it to register.
-map("n", "x", '"_x',
-  { desc = "Delete character under cursor without copying it", noremap = true, silent = true })
+map("n", "x", '"_x', { desc = "Delete character under cursor without copying it" })
 
 -- Remap "p" in visual mode to delete the highlighted text without overwriting
 -- your yanked/copied text, and then paste the content from the unnamed register.
-map("v", "p", '"_dP', opts)
+map("v", "p", '"_dP')
 
 -- Stay in indent mode
-map("v", "<", "<gv", opts)
-map("v", ">", ">gv", opts)
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -- Windows
