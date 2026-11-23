@@ -6,6 +6,7 @@
 scriptencoding utf-8
 
 function! lsp#keymaps#attach() abort
+    nnoremap <buffer> <silent> gd <Cmd>LspGotoDefinition<CR>
     nnoremap <buffer> <silent> grd <Cmd>LspGotoDefinition<CR>
     nnoremap <buffer> <silent> grs <Cmd>LspShowSignature<CR>
     nnoremap <buffer> <silent> grn <Cmd>LspRename<CR>
@@ -36,7 +37,7 @@ function! lsp#keymaps#attach() abort
 endfunction
 
 function! lsp#keymaps#detach() abort
-    let keys = ['grd', 'grs', 'grn', 'gra', 'grf', 'grl', 'grr', 'gri', 'grt', 'grx',
+    let keys = ['gd', 'grd', 'grs', 'grn', 'gra', 'grf', 'grl', 'grr', 'gri', 'grt', 'grx',
                 \ 'K', '<C-n>', '<C-p>', '<leader>lh',
                 \ '<leader>lwa', '<leader>lwr', '<leader>lwl',
                 \ '<leader>cd', '<leader>cq', '<leader>li', '<leader>lr', '<leader>ls']
