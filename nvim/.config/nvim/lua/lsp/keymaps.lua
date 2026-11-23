@@ -1,6 +1,7 @@
 local utils = require('utils')
 local keymaps = {
   -- LSP actions
+  { keys = "gd",          func = vim.lsp.buf.definition,              desc = "Goto Definition",        has = "definitionProvider",     nowait = true },
   { keys = "grd",         func = vim.lsp.buf.definition,              desc = "Goto Definition",        has = "definitionProvider",     nowait = true },
   { keys = "grs",         func = vim.lsp.buf.signature_help,          desc = "Signature Help",         has = "signatureHelpProvider" },
 
