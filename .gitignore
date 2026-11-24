@@ -15,6 +15,7 @@ package-lock.json
 /common/.config/karabiner/automatic_backups/
 /common/.config/opencode/.rumdl_cache/
 /common/.config/opencode/opencode.jsonc.bak
+/common/.config/opencode/.workmux-status.json
 /common/.config/pyradio/*.date
 /common/.config/pyradio/*.ver
 /common/.config/pyradio/data/*

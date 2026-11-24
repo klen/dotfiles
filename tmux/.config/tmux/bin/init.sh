@@ -22,7 +22,3 @@ type -P tmuxp >/dev/null 2>&1 && {
 
   complete -F _tml_completions tml
 }
-
-type -P workmux >/dev/null 2>&1 && {
-  alias wm='workmux'
-}

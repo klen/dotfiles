@@ -73,6 +73,7 @@ stow:
 	@$(STOW_CMD) python
 	@$(STOW_CMD) tmux
 	@$(STOW_CMD) vim
+	@$(STOW_CMD) workmux
 	@$(STOW_CMD) zsh
 
 .PHONY: unstow
@@ -89,6 +90,7 @@ unstow:
 	@$(STOW_CMD) -D python
 	@$(STOW_CMD) -D tmux
 	@$(STOW_CMD) -D vim
+	@$(STOW_CMD) -D workmux
 	@$(STOW_CMD) -D zsh
 
 .PHONY: eslint

@@ -23,3 +23,4 @@ source $XDG_CONFIG_HOME/agents.sh
 source $XDG_CONFIG_HOME/zoxide.sh
 
 source $XDG_CONFIG_HOME/tmux/bin/init.sh
+source $XDG_CONFIG_HOME/bash/include/workmux.sh

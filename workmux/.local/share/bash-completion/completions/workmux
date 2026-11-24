@@ -1,0 +1,2 @@
+# Generated on first use so completions match the installed workmux version.
+command -v workmux >/dev/null && eval "$(workmux completions bash)"

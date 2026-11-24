@@ -1,0 +1,3 @@
+# The wm alias needs its own entry: bash does not complete aliases.
+command -v workmux >/dev/null && eval "$(workmux completions bash)"
+eval "$(complete -p workmux 2>/dev/null | sed 's/ workmux$/ workmux wm/')"
