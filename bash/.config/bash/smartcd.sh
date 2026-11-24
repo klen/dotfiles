@@ -11,7 +11,9 @@
     smartcd setup completion
 
     [ -d $HOME/.smartcd/templates ] || {
-      mkdir $HOME/.smartcd >&- || true
-      ln -s $XDG_CONFIG_HOME/smartcd/templates $HOME/.smartcd/templates
-  }
+      # old setups symlinked ~/.smartcd into dotfiles; drop it if the target is gone
+      [ -L $HOME/.smartcd ] && [ ! -e $HOME/.smartcd ] && rm $HOME/.smartcd
+      mkdir -p $HOME/.smartcd
+      ln -sfn $XDG_CONFIG_HOME/smartcd/templates $HOME/.smartcd/templates
+    }
 }
