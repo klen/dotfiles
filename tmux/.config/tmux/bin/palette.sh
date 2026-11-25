@@ -31,6 +31,7 @@ window: new|new-window
 window: next|next-window
 window: previous|prev-window
 window: last|last-window
+window: list|list-windows
 window: swap with previous|swap-prev-window
 window: swap with next|swap-next-window
 window: rename|rename-window
@@ -45,8 +46,10 @@ kill: pane|kill-pane
 kill: other panes in window|kill-others
 kill: window|kill-window
 kill: session|kill-session
+session: new|new-session
 session: switch|switch-session
 session: rename|rename-session
+tmux: command line|command-line
 tmux: reload config|reload
 EOF
 )
@@ -96,10 +99,18 @@ clear-history)   t clear-history -t "$pane" ;;
 respawn-pane)    confirm "restart pane $pane?" && t respawn-pane -k -t "$pane" ;;
 kill-others)     confirm "kill other panes in this window?" && t kill-pane -a -t "$pane" ;;
 rename-window)   read -r -p "window name: " name && t rename-window -t "$pane" "$name" ;;
+new-session)
+  read -r -p "session name: " name || exit 0
+  [ -n "$name" ] || exit 0
+  tmux has-session -t "=$name" 2>/dev/null || t new-session -d -s "$name" -c "$dir"
+  t switch-client -t "$name"
+  ;;
 switch-session)  ~/.config/tmux/bin/session-picker.sh ;;
 rename-session)  read -r -p "session name: " name && t rename-session -t "$session" "$name" ;;
+list-windows)    t list-windows -t "$session" ;;
 kill-pane)       confirm "kill pane $pane?" && t kill-pane -t "$pane" ;;
 kill-window)     confirm "kill current window?" && t kill-window -t "$pane" ;;
 kill-session)    confirm "kill session $session?" && t kill-session -t "$session" ;;
+command-line)    read -r -p "tmux: " cmd && t $cmd ;;   # word-split on purpose
 reload)          t source-file ~/.config/tmux/tmux.conf ;;
 esac
