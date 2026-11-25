@@ -11,6 +11,7 @@ import { type ExtensionAPI, type ExtensionContext } from "@mariozechner/pi-codin
 let activeFrame = 0
 let currentWindowId: string | undefined;
 let originalTitle: string | undefined;
+let originalAutoRename: string | undefined;
 const frames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 
 /* ─── Extension ─── */
@@ -29,38 +30,39 @@ export default function(pi: ExtensionAPI) {
   pi.on("session_start", async (_event, ctx) => {
     // Target our own pane: without it tmux resolves to the session's active
     // window, so background agents would rename the calling window.
-    const info = await tmuxExec(pi, ["display-message", "-p", "-t", process.env.TMUX_PANE!, "#{window_id} #{window_name}"]);
+    const info = await tmuxExec(pi, ["display-message", "-p", "-t", process.env.TMUX_PANE!, "#{window_id} #{automatic-rename} #{window_name}"]);
     if (info.code === 0) {
-      const [winId, ...name] = info.stdout.trim().split(" ");
+      const [winId, autoRename, ...name] = info.stdout.trim().split(" ");
       currentWindowId = winId;
+      originalAutoRename = autoRename;
       originalTitle = name.join(" ");
     }
-    title = getTitle(ctx)
+    title = getTitle(ctx, false)
     updateTitle(pi, title);
   });
 
   pi.on("model_select", async (_event, ctx) => {
-    title = getTitle(ctx, activeTool)
+    title = getTitle(ctx, isWorking, activeTool)
     updateTitle(pi, title, isWorking);
   });
 
   pi.on("tool_execution_start", async (event, ctx) => {
     ctx.ui.notify("Tool started: " + event.toolName);
     activeTool = event.toolName;
-    title = getTitle(ctx, activeTool)
+    title = getTitle(ctx, isWorking, activeTool)
     updateTitle(pi, title, isWorking);
   });
 
   pi.on("tool_execution_end", async (_event, ctx) => {
     ctx.ui.notify("Tool finished");
     activeTool = undefined;
-    title = getTitle(ctx, activeTool)
+    title = getTitle(ctx, isWorking, activeTool)
     updateTitle(pi, title, isWorking);
   });
 
   pi.on("agent_start", async (_event, ctx) => {
     isWorking = true;
-    title = getTitle(ctx, activeTool)
+    title = getTitle(ctx, isWorking, activeTool)
     loader = setInterval(() => {
       updateTitle(pi, title, true);
     }, 80);
@@ -70,7 +72,7 @@ export default function(pi: ExtensionAPI) {
     isWorking = false;
     activeTool = undefined;
     loader && clearInterval(loader);
-    title = getTitle(ctx, activeTool)
+    title = getTitle(ctx, isWorking)
     await updateTitle(pi, title);
     // await tmuxExec(pi, ["display-message", "-d 2000", `     === Pi finished ===`]);
     // Send bell to /dev/tty directly — pi.exec pipes stdout so output
@@ -81,8 +83,9 @@ export default function(pi: ExtensionAPI) {
   pi.on("session_shutdown", async (_event, ctx) => {
     const curDir = getProjectName(ctx.cwd);
     await setTmuxWindowTitle(pi, originalTitle || curDir);
-    if (currentWindowId) {
-      // Unset local automatic-rename so the window reverts to global config
+    if (currentWindowId && originalAutoRename === "1") {
+      // Only re-enable when it was automatic: rename-window turned it off, and
+      // unsetting it on a manually named window would overwrite that name.
       await tmuxExec(pi, ["set-window-option", "-t", currentWindowId, "-u", "automatic-rename"]);
     }
   });
@@ -113,11 +116,11 @@ async function setTmuxWindowTitle(pi: ExtensionAPI, title: string) {
   }
 }
 
-function getTitle(ctx: ExtensionContext, tool?: string): string | undefined {
+function getTitle(ctx: ExtensionContext, working: boolean, tool?: string): string | undefined {
   if (!ctx.hasUI) return; // Only set titles if UI is active
-  const parts = [getProjectName(ctx.cwd)]
-  parts.push(tool || ctx.model?.id || "no-model");
-  return parts.join(" - ");
+  const project = getProjectName(ctx.cwd);
+  // Model and tool are noise while idle, so they only appear mid-run.
+  return working ? `${project} - ${tool || ctx.model?.id || "no-model"}` : project;
 }
 
 async function updateTitle(pi: ExtensionAPI, title?: string, working?: boolean) {

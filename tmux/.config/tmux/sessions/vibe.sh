@@ -6,6 +6,7 @@
 # No `set -e` or `exit` here — this is your shell.
 
 tmux rename-window api
+
 cd ~/projects/ticketscloud.org/vibe-api
 
 tmux new-window -n devops -c ~/projects/ticketscloud.org/vibe-devops

@@ -14,11 +14,14 @@ This is a report the user asked for, so give it in full.
 
 ## 1. Understand first
 
-- Reviewing a branch or PR: start by merging `develop` into it, so you review
-  the code as it will land. `git fetch origin`, then merge `origin/develop`
-  (the remote, not a stale local copy). Resolve conflicts and report each one as
-  a finding when the right side is not obvious. If the merge cannot be done
-  cleanly, say why and review the branch as it is.
+- Reviewing a branch or PR: find the PR on GitHub before anything else:
+  `gh pr list --head <branch> --state all`, or `gh pr view <branch>`. Read its
+  description and comments; if there is none, say so and go on with the branch.
+  Then merge `develop` into it, so you review the code as it will land.
+  `git fetch origin`, then merge `origin/develop` (the remote, not a stale local
+  copy). Resolve conflicts and report each one as a finding when the right side
+  is not obvious. If the merge cannot be done cleanly, say why and review the
+  branch as it is.
 - Review what the user names: uncommitted or staged changes, a branch, a PR
   link, or files. Nothing named: the uncommitted changes, or the last commit
   if there are none.

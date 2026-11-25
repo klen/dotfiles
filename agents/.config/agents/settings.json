@@ -2,6 +2,9 @@
   "defaultModel": "deepseek-v4.1-flash",
   "defaultProvider": "opencode-go",
   "defaultThinkingLevel": "high",
+  "defaultTools": [
+    "+codemode"
+  ],
   "enabledModels": [
     "alias/free",
     "alias/tiny",
@@ -9,7 +12,7 @@
     "opencode-go/deepseek-v4.1-flash",
     "opencode-go/deepseek-v4-pro"
   ],
-  "lastChangelogVersion": "1.5.2",
+  "lastChangelogVersion": "1.6.1",
   "packages": [
     "npm:@alexanderfortin/pi-tavily-tools",
     {

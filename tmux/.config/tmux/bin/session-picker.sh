@@ -7,7 +7,7 @@
 # A layout is a plain bash file in sessions/. The picker creates the session and
 # sources the file in its first window's shell (env s = session name), so its
 # lines act like typed commands: cd sticks, tmux lines need -t "$s:". A directory
-# pick uses sessions/<dirname>.sh, else sessions/_default.sh, else a bare shell.
+# pick uses <dir>/.tmux.sh, else sessions/<dirname>.sh, else sessions/_default.sh.
 # Existing sessions are reused instead of rebuilt.
 # ─────────────────────────────────────────────
 
@@ -47,7 +47,8 @@ if [ "${1:-}" = "--dirs" ]; then
   if [ -f "$target" ]; then
     layout=$target dir=$PWD
   else
-    layout=$sessions/$name.sh                  # layout named after the dir
+    layout=$target/.tmux.sh                    # layout shipped with the project
+    [ -f "$layout" ] || layout=$sessions/$name.sh
     [ -f "$layout" ] || layout=$sessions/_default.sh
     dir=$target
   fi

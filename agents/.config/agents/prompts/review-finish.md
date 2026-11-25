@@ -8,7 +8,8 @@ satisfied. Do not bypass required checks or branch protection rules.
 
 After a successful merge:
 
-Move the linked task to Testing, if one exists.
+Move the linked task to Testing, if one exists. Leave the detailed comment (see
+report below)
 
 Switch to develop and update it from the remote using a fast-forward pull.
 
