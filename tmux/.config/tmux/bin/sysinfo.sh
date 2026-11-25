@@ -23,13 +23,11 @@ if [ "$(uname)" = "Darwin" ]; then
   pages_used=$((pages_active + pages_wired + pages_compressed))
 
   mem_used_mb=$((pages_used * page_size / 1024 / 1024 / 1024))
-  mem_total_bytes=$(sysctl -n hw.memsize)
-  mem_total_mb=$((mem_total_bytes / 1024 / 1024 / 1024))
 
-  ram_usage="${mem_used_mb}Gb/${mem_total_mb}Gb"
+  ram_usage="${mem_used_mb}GB"
 else
-  # Linux: used/total in Gb (one decimal)
-  ram_usage=$(free -m | awk '/Mem:/ { printf "%.1fGb/%.1fGb", $3/1024, $2/1024 }')
+  # Linux: used in GB
+  ram_usage=$(free -m | awk '/Mem:/ { printf "%.0fGB", $3/1024 }')
 fi
 
 # Battery (macOS only; skip on SSH)
