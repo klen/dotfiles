@@ -1,1 +1,3 @@
-command -v register-python-argcomplete >/dev/null && eval "$(register-python-argcomplete muffin)"
+# argcomplete lives in the venv/pyenv version where muffin is installed; skip it silently
+# where it is missing instead of letting the pyenv shim fail on every completion.
+command -v register-python-argcomplete >/dev/null && eval "$(register-python-argcomplete muffin 2>/dev/null)"
