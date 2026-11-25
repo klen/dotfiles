@@ -30,10 +30,18 @@ else
   ram_usage=$(free -m | awk '/Mem:/ { printf "%.0fGB", $3/1024 }')
 fi
 
-# Battery (macOS only; skip on SSH)
+# Battery (macOS only; skipped on SSH and on machines without one)
+status="CPU ${cpu_usage} / RAM ${ram_usage}"
 if [ "$(uname)" = "Darwin" ] && [ -z "$SSH_TTY" ]; then
-  bat_usage=$(pmset -g batt | grep -Eo '[0-9]+%' | head -n 1)
-  echo "CPU ${cpu_usage} | RAM ${ram_usage} | BAT ${bat_usage}"
-else
-  echo "CPU ${cpu_usage} | RAM ${ram_usage}"
+  batt=$(pmset -g batt)
+  if [[ $batt == *InternalBattery* ]]; then
+    pct=$(grep -Eo '[0-9]+%' <<<"$batt" | head -n 1)
+    if [[ $pct == 100% && $batt == *"AC Power"* ]]; then
+      status+=" / POW"
+    else
+      status+=" / BAT ${pct}"
+    fi
+  fi
 fi
+
+echo "$status"

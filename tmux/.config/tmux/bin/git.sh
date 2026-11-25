@@ -39,7 +39,7 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
   fi
 
   # Print result
-  echo "$(echo "$branch" | tr '[:lower:]' '[:upper:]')#[fg=default]${dirty} | "
+  echo "$(echo "$branch" | tr '[:lower:]' '[:upper:]')#[fg=default]${dirty} / "
 else
   echo ""
 fi
