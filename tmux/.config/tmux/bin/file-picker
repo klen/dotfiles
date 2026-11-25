@@ -217,11 +217,22 @@ main() {
 
 	local selected_files_str
 	if [[ ${#search_dirs[@]} -eq 1 ]]; then
-		# Single directory: cd into it for cleaner relative paths in fzf
-		selected_files_str=$(
-			cd "${search_dirs[0]}"
-			"$fd_cmd" "${fd_flags[@]}" | fzf --multi --reverse --tiebreak=index --preview "$preview_cmd" || true
-		)
+		# Single directory: cd into it for cleaner relative paths in fzf.
+		# `../` heads the list: picking it reruns fzf one level up, and
+		# search_dirs follows so relative paths stay correct.
+		while :; do
+			selected_files_str=$(
+				cd "${search_dirs[0]}" || exit 1
+				{ printf '../\n'; "$fd_cmd" "${fd_flags[@]}"; } |
+					fzf --multi --reverse --tiebreak=index \
+						--preview "[ -d {} ] && ls -ap {} || $preview_cmd" || true
+			)
+			if grep -qx '\.\./' <<<"$selected_files_str"; then
+				search_dirs[0]=$(dirname "${search_dirs[0]}")
+				continue
+			fi
+			break
+		done
 	else
 		# Multiple directories: pass them as arguments to fd (returns absolute paths)
 		selected_files_str=$("$fd_cmd" "${fd_flags[@]}" "${search_dirs[@]}" | fzf --multi --reverse --tiebreak=index --preview "$preview_cmd" || true)
