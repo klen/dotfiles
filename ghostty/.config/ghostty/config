@@ -54,6 +54,8 @@ keybind = super+[=esc:[
 keybind = super+/=esc:/
 # new window
 keybind = super+t=esc:t
+# new session
+keybind = super+n=esc:n
 # select session
 keybind = super+s=esc:s
 # split horizontally
