@@ -5,5 +5,6 @@
 # cwd set to the chosen directory and the window title = session name. Runs in
 # the first window's shell, with $s = session name.
 
-tmux split-window -h pi -c         # right pane runs `pi -c` (continue); closes when pi exits
-tmux select-pane -t "$TMUX_PANE"   # back to the pane that runs this file
+pane=$(tmux split-window -hP -F '#{pane_id}')  # a real shell in the right pane, so it survives pi exiting
+tmux send-keys -t "$pane" 'pi -c' C-m          # pi -c (continue) on top of that shell
+tmux select-pane -t "$TMUX_PANE"               # back to the pane that runs this file
