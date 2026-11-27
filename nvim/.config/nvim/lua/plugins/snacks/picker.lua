@@ -11,13 +11,24 @@ end, { desc = "Find files" })
 map("n", "<leader>/", function() picker.grep() end, { desc = "Grep word" })
 
 map('n', '<leader>f', '', { desc = "+find" }) -- Prefix for find commands
-map("n", "<leader>fb", function() picker.buffers() end, { desc = "Find buffers" })
-map("n", "<leader>fn", function() picker.notifications() end, { desc = "Find notifications" })
+map("n", "<leader>fb", function()
+  picker.buffers({ focus = "list", layout = { hidden = { "input" } } })
+end, { desc = "Find buffers" })
+map("n", "<leader>fn", function()
+  picker.notifications({ focus = "list", layout = { hidden = { "input" } } })
+end, { desc = "Find notifications" })
 map("n", "<leader>fh", function() picker.help() end, { desc = "Find help tags" })
 map('n', '<leader>fw', function() picker.grep_word() end, { desc = "Grep word under cursor" })
 map('n', '<leader>fm', function() picker.keymaps() end, { desc = "Find keymaps" })
 map('n', '<leader>fc', function() picker.highlights() end, { desc = "Find highlights" })
-map("n", "<leader>fr", function() picker.recent() end, { desc = "Find recent files" })
+-- Recent files limited to the current directory; no search input, just pick from the list.
+map("n", "<leader>fr", function()
+  picker.recent({
+    filter = { cwd = true },
+    focus = "list",
+    layout = { hidden = { "input" } },
+  })
+end, { desc = "Recent files (cwd)" })
 
 map('n', '<leader>gl', function() picker.git_log_file() end, { desc = "Git commits (file)" })
 map('n', '<leader>gL', function() picker.git_log() end, { desc = "Git commits (project)" })
