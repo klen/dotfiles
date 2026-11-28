@@ -17,6 +17,7 @@
   autocrlf = input  # Convert CRLF to LF on commit (recommended on Unix systems)
   preloadindex = true  # Speed up 'git status' by preloading index
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol  # Auto-fix whitespace issues
+  quotePath = false  # Print non-ASCII filenames as-is instead of octal escapes
 
 # HTTP settings
 [http]
@@ -39,7 +40,7 @@
 
 # Push settings
 [push]
-  followTags = true  # Typo: should be 'followTags'. Consider removing; 'git push --follow-tags' is explicit.
+  followTags = true  # Push annotated tags that point at pushed commits
   default = current  # Push current branch by default
   autoSetupRemote = true  # Automatically set upstream on push (added in newer git versions)
 
