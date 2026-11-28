@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
 
+# hotp <hexkey> <counter in hex> -> 6-digit code (RFC 6238, SHA1)
+hotp() {
+  local hash offset
+  hash="$(
+    printf '%s' "$2" |
+      xxd -r -p |
+      openssl dgst -sha1 -mac HMAC -macopt hexkey:"$1" -binary |
+      xxd -ps -c 128
+  )"
+  [[ "$hash" =~ ^[0-9a-fA-F]{40}$ ]] || return 1
+  offset="$((16#${hash:39:1}))"
+  printf '%06d' "$(((16#${hash:$((offset * 2)):8} & 16#7fffffff) % 1000000))"
+}
+
+# pass sources extensions into its own shell, so a plain script check cannot
+# tell "loaded by pass" from "loaded by a test": tests/otp.test.bash sets
+# OTP_LIB_ONLY to skip the command itself.
+if [[ -n "${OTP_LIB_ONLY:-}" ]]; then
+  return 0
+fi
+
 cmd="${2%/}"
 path="${1%/}"
 
@@ -63,22 +84,8 @@ hexkey="$(
 [[ -n "$hexkey" ]] || die "Failed to decode OTP secret. Make sure it is valid base32."
 
 count="$(printf '%.16x' "$(($(date +%s) / 30))")"
-
-hash="$(
-  printf '%s' "$count" |
-    xxd -r -p |
-    openssl dgst -sha1 -mac HMAC -macopt hexkey:"$hexkey" -binary |
-    xxd -ps -c 128
-)"
-
-if [[ -z "$hash" || ! "$hash" =~ ^[0-9a-fA-F]{40}$ ]]; then
+print="$(hotp "$hexkey" "$count")" ||
   die "Failed to generate TOTP code: OpenSSL HMAC calculation failed."
-fi
-
-offset="$((16#${hash:39:1}))"
-extracted="${hash:$((offset * 2)):8}"
-token="$(((16#$extracted & 16#7fffffff) % 1000000))"
-print="$(printf '%06d' "$token")"
 
 qrcode() {
   issuer="$(basename "$(dirname "$path")")"
