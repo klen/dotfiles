@@ -22,6 +22,14 @@ export default function (pi: ExtensionAPI) {
   let messageStartTime: number | null = null;
   let currentTokensPerSecond: number | null = null;
 
+  // Usage totals are cached: scanning every session entry on each render made
+  // long sessions lag while typing. Refreshed when entries can change.
+  let usageLine = "";
+
+  function refreshUsage() {
+    if (manager) usageLine = statsUsage(manager, currentTokensPerSecond);
+  }
+
   function refreshContext(ctx: { getContextUsage: () => { percent?: number | null; contextWindow?: number } | null | undefined; model?: { contextWindow?: number } | null }) {
     const usage = ctx.getContextUsage();
     currentContextPercent = usage?.percent ?? null;
@@ -33,6 +41,7 @@ export default function (pi: ExtensionAPI) {
     manager = ctx.sessionManager as any;
     currentModelId = ctx.model?.id || "no-model";
     refreshContext(ctx);
+    refreshUsage();
 
     ctx.ui.setFooter((tui, theme, footerData) => {
       return {
@@ -67,7 +76,7 @@ export default function (pi: ExtensionAPI) {
           let stats = contextPercent;
 
           // Get usage stats with tokens per second
-          const usageStats = statsUsage(manager!, currentTokensPerSecond);
+          const usageStats = usageLine;
 
           // Get the current model
           const model = currentModelId;
@@ -112,6 +121,10 @@ export default function (pi: ExtensionAPI) {
     currentContextWindow = event.model.contextWindow ?? 0;
   });
 
+  pi.on("session_compact", () => {
+    refreshUsage();
+  });
+
   pi.on("message_start", (event, _ctx) => {
     // Only track assistant messages for tokens/sec calculation
     if (event.message?.role === "assistant") {
@@ -136,6 +149,8 @@ export default function (pi: ExtensionAPI) {
 
       messageStartTime = null;
     }
+
+    refreshUsage();
   });
 
 }

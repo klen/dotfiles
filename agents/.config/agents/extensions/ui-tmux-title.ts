@@ -8,7 +8,7 @@
 
 import { type ExtensionAPI, type ExtensionContext } from "@mariozechner/pi-coding-agent";
 
-let activeFrame = 0
+let activeFrame = 0;
 let currentWindowId: string | undefined;
 let originalTitle: string | undefined;
 let originalAutoRename: string | undefined;
@@ -43,35 +43,37 @@ export default function(pi: ExtensionAPI) {
 
   pi.on("model_select", async (_event, ctx) => {
     title = getTitle(ctx, isWorking, activeTool)
-    updateTitle(pi, title, isWorking);
+    updateTitle(pi, title);
   });
 
   pi.on("tool_execution_start", async (event, ctx) => {
-    ctx.ui.notify("Tool started: " + event.toolName);
     activeTool = event.toolName;
     title = getTitle(ctx, isWorking, activeTool)
-    updateTitle(pi, title, isWorking);
+    updateTitle(pi, title);
   });
 
   pi.on("tool_execution_end", async (_event, ctx) => {
-    ctx.ui.notify("Tool finished");
     activeTool = undefined;
     title = getTitle(ctx, isWorking, activeTool)
-    updateTitle(pi, title, isWorking);
+    updateTitle(pi, title);
   });
 
   pi.on("agent_start", async (_event, ctx) => {
     isWorking = true;
     title = getTitle(ctx, isWorking, activeTool)
+    updateTitle(pi, title, isWorking);
+    // shortcut: one tmux process per frame (~8/s), fine for one agent per pane;
+    // move the animation into tmux itself if this ever runs dozens at once.
     loader = setInterval(() => {
       updateTitle(pi, title, true);
-    }, 80);
+    }, 120);
   });
 
   pi.on("agent_end", async (_event, ctx) => {
     isWorking = false;
     activeTool = undefined;
     loader && clearInterval(loader);
+    loader = undefined;
     title = getTitle(ctx, isWorking)
     await updateTitle(pi, title);
     // await tmuxExec(pi, ["display-message", "-d 2000", `     === Pi finished ===`]);
@@ -81,6 +83,8 @@ export default function(pi: ExtensionAPI) {
   });
 
   pi.on("session_shutdown", async (_event, ctx) => {
+    loader && clearInterval(loader);
+    loader = undefined;
     const curDir = getProjectName(ctx.cwd);
     await setTmuxWindowTitle(pi, originalTitle || curDir);
     if (currentWindowId && originalAutoRename === "1") {
