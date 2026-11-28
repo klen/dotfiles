@@ -5,20 +5,21 @@ if [ -z "$NAME" ]; then
   echo "Usage: $0 <name>"
   exit 1
 fi
-PIDS=$(ps -eo pid,ppid,command | grep "$NAME" | grep -v grep | awk '{print $1}')
+# pgrep -f matches this script's own command line (the name is in its argv), so skip our pid
+PIDS=$(pgrep -f -- "$NAME" | grep -vx "$$")
 
 echo "Force killing processes with name: $NAME"
 for PID in $PIDS; do
   echo "Killing $NAME --embed PID: $PID"
 
   # Убиваем детей сначала
-  CHILDREN=$(pgrep -P $PID)
+  CHILDREN=$(pgrep -P "$PID")
   for CPID in $CHILDREN; do
     echo "  Killing child PID: $CPID"
-    kill -9 $CPID
+    kill -9 "$CPID"
   done
 
-  kill -9 $PID
+  kill -9 "$PID"
 done
 
 echo "Done."

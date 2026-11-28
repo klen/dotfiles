@@ -8,7 +8,7 @@ help () {
     echo -e "${GREEN}Usage:$NC resize [SIZE] [FOLDER]"
 }
 
-command -v convert || {
+command -v mogrify || {
     echo "Imagemagic is not found. Exiting."
     exit 1
 }
@@ -26,9 +26,9 @@ case $1 in
         SIZE=${1:-1200}
         FOLDER=${2:-.}
         for image in $FOLDER/*.[jJ][pP][gG]; do
-            test -r $image && {
-                echo -e ${YELLOW}Convert $image to x$SIZE $NC
-                convert "$image" -geometry x$SIZE -quality 85
+            test -r "$image" && {
+                echo -e ${YELLOW}Resize $image to x$SIZE $NC
+                mogrify -resize x$SIZE -quality 85 "$image"
             }
         done
 
