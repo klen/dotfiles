@@ -10,8 +10,6 @@ all: build
 build:
 	@echo "Building TypeScript files..."
 	npx tsc -p tsconfig.test.json
-	@# Fix ESM imports in compiled JS (add .js extensions)
-	@sed -i '' 's|from "./utils"|from "./utils.js"|g; s|from "./types"|from "./types.js"|g' dist/index.js 2>/dev/null || true
 	@echo "Build complete."
 
 # Run tests (builds first)
