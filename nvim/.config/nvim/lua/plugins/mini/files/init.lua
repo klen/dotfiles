@@ -30,6 +30,7 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "MiniFilesBufferCreate",
   callback = function(args)
     local buf_id = args.data.buf_id
+    utils.reset_cache()
 
     -- Toggle hidden
     vim.keymap.set(

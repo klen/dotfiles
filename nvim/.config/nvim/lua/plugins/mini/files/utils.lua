@@ -47,11 +47,38 @@ M.toggle_filter = function(name)
 end
 
 M.cache = {
-  gitignore = {},
+  ignored = {}, -- dir -> set of ignored paths, one `git check-ignore` per dir
 }
 
 M.reset_cache = function()
-  M.cache.gitignore = {}
+  M.cache.ignored = {}
+end
+
+-- git answers for a whole directory at once; asking per entry spawned one
+-- process per file and froze the browser on big directories.
+local function ignored_paths(dir)
+  local cached = M.cache.ignored[dir]
+  if cached then
+    return cached
+  end
+
+  local prefix = dir == '/' and '' or dir
+  local paths = {}
+  for _, name in ipairs(vim.fn.readdir(dir)) do
+    paths[#paths + 1] = prefix .. '/' .. name
+  end
+
+  local ignored = {}
+  if #paths > 0 then
+    local cmd = 'git -C ' .. vim.fn.shellescape(prefix == '' and '/' or prefix) ..
+        ' check-ignore --stdin 2>/dev/null'
+    for _, path in ipairs(vim.fn.systemlist(cmd, table.concat(paths, '\n'))) do
+      ignored[path] = true
+    end
+  end
+
+  M.cache.ignored[dir] = ignored
+  return ignored
 end
 
 M.filters = {
@@ -64,15 +91,9 @@ M.filters = {
   ignore = {
     enabled = true,
     filter = function(entry)
-      -- vim.fn.system({ 'git', 'check-ignore', '--quiet', entry.path })
-      -- return vim.v.shell_error ~= 0
-      -- Cache results to avoid calling git for every file
-      if M.cache.gitignore[entry.path] == nil then
-        local result = vim.fn.system(
-          { 'git', 'check-ignore', '--quiet', entry.path })
-        M.cache.gitignore[entry.path] = vim.v.shell_error ~= 0
-      end
-      return M.cache.gitignore[entry.path]
+      local path = entry.path:gsub('/+$', '')
+      local dir = path:match('^(.*)/[^/]*$')
+      return not ignored_paths(dir == '' and '/' or dir)[path]
     end,
   },
 }
